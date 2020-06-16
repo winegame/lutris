@@ -4,6 +4,7 @@ import json
 import os
 import time
 from urllib.parse import parse_qsl, urlencode, urlparse
+from gettext import gettext as _
 
 # Lutris Modules
 from lutris import api, pga, settings
@@ -16,7 +17,7 @@ from lutris.util.http import HTTPError, Request
 from lutris.util.log import logger
 from lutris.util.resources import download_media
 
-NAME = "GOG"
+NAME = _("GOG")
 ICON = "gog"
 ONLINE = True
 

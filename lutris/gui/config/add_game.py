@@ -3,6 +3,7 @@ from lutris.config import LutrisConfig
 from lutris.gui.config import DIALOG_HEIGHT, DIALOG_WIDTH
 from lutris.gui.config.common import GameDialogCommon
 from lutris.gui.dialogs import Dialog
+from gettext import gettext as _
 
 
 class AddGameDialog(Dialog, GameDialogCommon):
@@ -10,7 +11,7 @@ class AddGameDialog(Dialog, GameDialogCommon):
     """Add game dialog class."""
 
     def __init__(self, parent, game=None, runner=None):
-        super().__init__("Add a new game", parent=parent)
+        super().__init__(_("Add a new game"), parent=parent)
         self.game = game
         self.saved = False
 
