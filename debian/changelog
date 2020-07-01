@@ -1,3 +1,13 @@
+net.winegame.client (0.5.9.1) plum; urgency=medium
+
+  * 全新界面，全新体验。
+  * Wine 游戏支持开启 FSR 和 DLSS。
+  * 客户端内置搜索功能更加简洁易用。
+  * 下载功能改进，可同时下载多个文件；可重试；无法下载时可用本地文件替换。
+  * 名词变更：“Wine 前缀”现在叫做“Wine 容器”。
+
+ -- 老虎会游泳 <hu60.cn@qq.com>  Sun, 29 Nov 2020 11:57:42 +0800
+
 lutris (0.5.9.1) hirsute; urgency=medium
 
   * Fix possible escaping error for gamescope option

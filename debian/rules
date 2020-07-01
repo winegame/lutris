@@ -8,4 +8,10 @@
 	dh $@ --buildsystem=meson
 
 override_dh_auto_configure:
-	dh_auto_configure -- -Dbindir=games
+	dh_auto_configure -- --prefix=/opt/apps/net.winegame.client/files
+
+override_dh_installdocs:
+	cp debian/copyright debian/net.winegame.client/opt/apps/net.winegame.client/files/
+
+override_dh_installchangelogs:
+	cp debian/changelog debian/net.winegame.client/opt/apps/net.winegame.client/files/

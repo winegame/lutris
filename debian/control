@@ -1,19 +1,19 @@
-Source: lutris
+Source: net.winegame.client
 Section: games
 Priority: optional
-Maintainer: Mathieu Comandon <strider@strycore.com>
+Maintainer: 老虎会游泳 <hu60.cn@qq.com>
 Build-Depends: debhelper-compat (= 12),
                appstream,
                dh-sequence-python3,
                meson,
 Rules-Requires-Root: no
 Standards-Version: 4.5.0
-Homepage: https://lutris.net
-Vcs-Browser: https://github.com/lutris/lutris
-Vcs-Git: https://github.com/lutris/lutris.git
+Homepage: https://winegame.net
+Vcs-Browser: https://gitee.com/winegame/lutris
+Vcs-Git: https://gitee.com/winegame/lutris.git
 
-Package: lutris
-Architecture: all
+Package: net.winegame.client
+Architecture: any
 Depends: ${misc:Depends},
          ${python3:Depends},
          python3-yaml,
@@ -42,8 +42,5 @@ Recommends: python3-evdev,
             libwine-development,
             winetricks,
 Suggests: gamemode,
-Description: video game preservation platform
- Lutris helps you install and play video games from all eras and from most
- gaming systems. By leveraging and combining existing emulators, engine
- re-implementations and compatibility layers, it gives you a central interface
- to launch all your games.
+Description: 开源游戏平台
+ 在 UOS/Deepin/Linux 上玩你喜欢的 Windows 游戏
