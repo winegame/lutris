@@ -5,12 +5,13 @@ project(
 )
 
 # Find Python installation
-python = import('python').find_installation()
+#python = import('python').find_installation()
 
 # Set folders
 prefix = get_option('prefix')
 bindir = get_option('bindir')
-pylibdir = python.get_install_dir()
+#pylibdir = python.get_install_dir()
+pylibdir = join_paths('lib', 'lutris')
 datadir = get_option('datadir')
 localedir = get_option('localedir')
 mandir = get_option('mandir')

@@ -1,3 +1,9 @@
+net.winegame.client (0.5.10.1) impish; urgency=medium
+
+  * 升级到 0.5.10.1
+
+ -- SwimmingTiger <hu60.cn@qq.com>  Sun, 1 May 2022 01:52:35 +0800
+
 lutris (0.5.10.1) impish; urgency=medium
 
   * Check for Steam executable in home folder for Flatpak
