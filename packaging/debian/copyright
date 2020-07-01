@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: lutris
-Upstream-Contact: Mathieu Comandon <strycore@gmail.com>
-Upstream-Source: https://github.com/lutris
+Upstream-Name: WineGame
+Upstream-Contact: 老虎会游泳 <hu60@hu60.cn>
+Upstream-Source: https://gitee.com/winegame
 
 Files: *
 Copyright: 2009-2020 Mathieu Comandon <strycore@gmail.com>

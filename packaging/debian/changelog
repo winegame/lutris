@@ -1,4 +1,4 @@
-lutris (0.5.7.1) focal; urgency=medium
+net.winegame.client (0.5.7.1) cn; urgency=medium
 
   * Provide D3D12.DLL, based on vkd3d3-proton project
     (https://github.com/HansKristian-Work/vkd3d-proton),
@@ -6,6 +6,14 @@ lutris (0.5.7.1) focal; urgency=medium
     Direct3D 12 titles such as World of Warcraft.
 
  -- Mathieu Comandon <strider@strycore.com>  Sat, 18 Jul 2020 14:35:23 -0700
+
+net.winegame.client (0.5.7) cn; urgency=medium
+
+  * 首个为中国定制的Linux游戏平台
+  * 具有中国境内的服务器，组件下载速度快
+  * 可一键安装中国玩家常见的游戏
+
+ -- 老虎会游泳 <hu60@hu60.cn>  Wed, 1 Jul 2020 18:58:25 +0800
 
 lutris (0.5.7) focal; urgency=medium
 
