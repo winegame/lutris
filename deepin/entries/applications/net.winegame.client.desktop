@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WineGame Helper
+Name[zh_CN]=Wine游戏助手
+Name[zh_TW]=Wine遊戲助手
+Comment=WineGame Helper
+Comment[zh_CN]=Wine游戏助手
+Comment[zh_TW]=Wine遊戲助手
+Icon=net.winegame.client
+Exec=/opt/apps/net.winegame.client/files/bin/lutris %U
+Categories=Game;
+Keywords=gaming;wine;emulator;
+Terminal=false
+MimeType=x-scheme-handler/lutris;
