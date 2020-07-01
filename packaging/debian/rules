@@ -12,6 +12,7 @@ override_dh_auto_configure:
 
 override_dh_installdocs:
 	cp debian/copyright debian/net.winegame.client/opt/apps/net.winegame.client/files/
+	cp -r deepin/* debian/net.winegame.client/opt/apps/net.winegame.client/
 
 override_dh_installchangelogs:
 	cp debian/changelog debian/net.winegame.client/opt/apps/net.winegame.client/files/

@@ -1,0 +1,17 @@
+{
+    "appid": "net.winegame.client",
+    "name": "Wine游戏助手",
+    "version": "0.5.7.0",
+    "arch": ["amd64"],
+    "permissions": {
+        "autostart": false,
+        "notification": true,
+        "trayicon": true,
+        "clipboard": true,
+        "account": false,
+        "bluetooth": true,
+        "camera": true,
+        "audio_record": true,
+        "installed_apps": false
+    }
+}
