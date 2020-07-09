@@ -114,7 +114,7 @@ class Downloader:
 
     def async_download(self, stop_request=None):
         headers = requests.utils.default_headers()
-        headers["User-Agent"] = "Lutris/%s" % __version__
+        headers["User-Agent"] = "WineGame/%s" % __version__
         if self.referer:
             headers["Referer"] = self.referer
         response = requests.get(self.url, headers=headers, stream=True)
