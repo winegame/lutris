@@ -14,8 +14,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: share/lutris/ui/about-dialog.ui:8 share/lutris/ui/lutris-window.ui:567
-msgid "About Lutris"
-msgstr "关于 Lutris"
+msgid "About WineGame"
+msgstr "关于Wine游戏助手"
 
 #: share/lutris/ui/about-dialog.ui:18
 msgid "Open Source Gaming Platform"
@@ -46,8 +46,8 @@ msgstr ""
 "<http://www.gnu.org/licenses/>。\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "登录 lutris.net"
+msgid "Connect to WineGame.net"
+msgstr "登录 WineGame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"
@@ -155,16 +155,16 @@ msgid "Show _Right Side Panel"
 msgstr "显示右侧边栏 (_R)"
 
 #: share/lutris/ui/lutris-window.ui:475
-msgid "Lutris forums"
-msgstr "Lutris 论坛"
+msgid "WineGame forums"
+msgstr "论坛"
 
 #: share/lutris/ui/lutris-window.ui:489 lutris/gui/views/generic_panel.py:177
-msgid "Discord"
-msgstr "Discord 讨论组"
+msgid "Find Softwares"
+msgstr "安装软件"
 
 #: share/lutris/ui/lutris-window.ui:503 lutris/gui/views/generic_panel.py:158
-msgid "Support Lutris!"
-msgstr "支持 Lutris !"
+msgid "WineGame Website"
+msgstr "Wine游戏助手官网"
 
 #: share/lutris/ui/lutris-window.ui:528
 msgid "Manage runners"
@@ -181,8 +181,8 @@ msgstr "显示托盘图标 (_T)"
 #: share/lutris/ui/lutris-window.ui:594 share/lutris/ui/lutris-window.ui:602
 #: lutris/gui/application.py:64 lutris/gui/widgets/status_icon.py:121
 #: lutris/settings.py:13
-msgid "Lutris"
-msgstr "Lutris"
+msgid "WineGame"
+msgstr "Wine游戏助手"
 
 #: share/lutris/ui/lutris-window.ui:615
 msgid "Manage Account"
@@ -345,8 +345,8 @@ msgid "Install another version"
 msgstr "安装其他版本"
 
 #: lutris/game_actions.py:92
-msgid "View on Lutris.net"
-msgstr "在 lutris.net 上查看"
+msgid "View on WineGame.net"
+msgstr "在 WineGame.net 上查看"
 
 #: lutris/game_actions.py:93
 msgid "Hide game from library"
@@ -1028,8 +1028,8 @@ msgstr "是否取消安装？"
 
 #: lutris/gui/lutriswindow.py:129 lutris/gui/lutriswindow.py:130
 #: lutris/gui/lutriswindow.py:733
-msgid "Search Lutris.net"
-msgstr "在 lutris.net 上搜索"
+msgid "Search WineGame.net"
+msgstr "在 WineGame.net 上搜索"
 
 #: lutris/gui/lutriswindow.py:552
 msgid "Synchronize library"
@@ -1040,8 +1040,8 @@ msgid "Synchronizing…"
 msgstr "同步中…"
 
 #: lutris/gui/lutriswindow.py:615
-msgid "Do you want to log out from Lutris?"
-msgstr "是否退出 Lutris 登录？"
+msgid "Do you want to log out from WineGame.net?"
+msgstr "是否退出 WineGame.net 登录？"
 
 #: lutris/gui/lutriswindow.py:616
 msgid "Log out?"
@@ -1054,8 +1054,8 @@ msgstr "登录失败，请重试。"
 #: lutris/gui/lutriswindow.py:913
 msgid ""
 "Failed to retrieve game library. There might be some problems contacting "
-"lutris.net"
-msgstr "检索游戏库失败。 到 lutris.net 服务器的连接可能存在一些问题"
+"winegame.net"
+msgstr "检索游戏库失败。 到 winegame.net 服务器的连接可能存在一些问题"
 
 #: lutris/gui/views/game_panel.py:102
 #, python-format
@@ -1084,8 +1084,8 @@ msgid "Forums"
 msgstr "论坛"
 
 #: lutris/gui/views/generic_panel.py:173
-msgid "IRC"
-msgstr "IRC 聊天室"
+msgid "Find Games"
+msgstr "安装游戏"
 
 #: lutris/gui/views/list.py:45 lutris/runners/dolphin.py:25
 #: lutris/runners/mame.py:100
@@ -4385,3 +4385,7 @@ msgid ""
 "Your kernel is not patched for fsync. Please get a patched kernel to use "
 "fsync."
 msgstr "你的内核没有打过 fsync 补丁。 请获取打过补丁的内核以使用 fsync。"
+
+######################
+msgid "_Connect"
+msgstr "登录 (_C)"

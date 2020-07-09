@@ -20,14 +20,14 @@ LINKS = {
         "https://winegame.net/games/?q=&all-free=on&free-filter=on&freetoplay-filter=on"
         "&pwyw-filter=on&sort-by-popularity=on"
     ),
-    "donate":
-    "https://winegame.net/donate",
+    "website":
+    "https://winegame.net/",
     "forums":
     "https://hu60.cn/q.php/bbs.forum.170.html",
-    "discord":
-    "https://discord.gg/Pnt5CuY",
-    "irc":
-    "irc://irc.freenode.org:6667/lutris",
+    "games":
+    "https://winegame.net/games",
+    "softwares":
+    "https://winegame.net/games?genres=26",
 }
 
 
@@ -153,8 +153,8 @@ class GenericPanel(Gtk.Fixed):
     def get_lutris_links(self):
         box = Gtk.VBox(spacing=6, visible=True)
 
-        donate_button = get_link_button(_("Support Lutris!"))
-        donate_button.connect("clicked", lambda *x: open_uri(LINKS["donate"]))
+        donate_button = get_link_button(_("WineGame Website"))
+        donate_button.connect("clicked", lambda *x: open_uri(LINKS["website"]))
         box.add(donate_button)
 
         help_label = Gtk.Label(visible=True)
@@ -168,13 +168,13 @@ class GenericPanel(Gtk.Fixed):
         forums_button.set_size_request(-1, -1)
         forums_button.connect("clicked", lambda *x: open_uri(LINKS["forums"]))
         help_box.add(forums_button)
-        irc_button = get_link_button(_("IRC"))
+        irc_button = get_link_button(_("Find Games"))
         irc_button.set_size_request(-1, -1)
-        irc_button.connect("clicked", lambda *x: open_uri(LINKS["irc"]))
+        irc_button.connect("clicked", lambda *x: open_uri(LINKS["games"]))
         help_box.add(irc_button)
-        discord_button = get_link_button(_("Discord"))
+        discord_button = get_link_button(_("Find Softwares"))
         discord_button.set_size_request(-1, -1)
-        discord_button.connect("clicked", lambda *x: open_uri(LINKS["discord"]))
+        discord_button.connect("clicked", lambda *x: open_uri(LINKS["softwares"]))
         help_box.add(discord_button)
         box.add(help_box)
         return box

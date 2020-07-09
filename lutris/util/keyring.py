@@ -7,7 +7,7 @@ KEYRING_NAME = "??"
 
 def store_credentials(username, password):
     try:
-        keyring.set_password("Lutris", username, password)
+        keyring.set_password("WineGame", username, password)
         return True
     except PasswordSetError:
         return False

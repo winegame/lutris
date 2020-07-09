@@ -472,7 +472,7 @@
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="action_name">win.open-forums</property>
-            <property name="text" translatable="yes">Lutris forums</property>
+            <property name="text" translatable="yes">WineGame forums</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -485,8 +485,8 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
-            <property name="action_name">win.open-discord</property>
-            <property name="text" translatable="yes">Discord</property>
+            <property name="action_name">win.open-games</property>
+            <property name="text" translatable="yes">Find Games</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -499,8 +499,8 @@
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
-            <property name="action_name">win.donate</property>
-            <property name="text" translatable="yes">Support Lutris!</property>
+            <property name="action_name">win.open-softwares</property>
+            <property name="text" translatable="yes">Find Softwares</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -564,7 +564,7 @@
             <property name="can_focus">True</property>
             <property name="receives_default">False</property>
             <property name="action_name">win.about</property>
-            <property name="text" translatable="yes">About Lutris</property>
+            <property name="text" translatable="yes">About WineGame</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -591,7 +591,7 @@
   </object>
   <template class="LutrisWindow" parent="GtkApplicationWindow">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Lutris</property>
+    <property name="title" translatable="yes">WineGame</property>
     <property name="icon_name">lutris</property>
     <signal name="destroy" handler="on_destroy" swapped="no"/>
     <signal name="size-allocate" handler="on_resize" swapped="no"/>
@@ -599,7 +599,7 @@
       <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="title" translatable="yes">Lutris</property>
+        <property name="title" translatable="yes">WineGame</property>
         <property name="has_subtitle">False</property>
         <property name="show_close_button">True</property>
         <child>

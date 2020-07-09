@@ -10,10 +10,10 @@ from gi.repository import GLib
 from lutris import __version__
 from lutris.util.settings import SettingsIO
 
-PROJECT = _("Lutris")
+PROJECT = _("WineGame")
 VERSION = __version__
-COPYRIGHT = _("(c) 2010-2020 Lutris Gaming Platform")
-AUTHORS = [_("The Lutris team")]
+COPYRIGHT = _("(c) 2010-2020 WineGame Gaming Platform")
+AUTHORS = [_("The Lutris team, The WineGame team")]
 
 # Paths
 CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "lutris")

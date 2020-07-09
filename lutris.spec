@@ -3,17 +3,17 @@
 %{!?py3_build: %global py3_build CFLAGS="%{optflags}" %{__python3} setup.py build}
 %{!?py3_install: %global py3_install %{__python3} setup.py install --skip-build --root %{buildroot}}
 
-%global appid net.lutris.Lutris
+%global appid net.winegame.client
 
-Name:           lutris
+Name:           winegame
 Version:        0.5.7.1
 Release:        7%{?dist}
 Summary:        Install and play any video game easily
 
 License:        GPL-3.0+
 Group:          Amusements/Games/Other
-URL:            http://lutris.net
-Source0:        http://lutris.net/releases/lutris_%{version}.tar.xz
+URL:            https://winegame.net
+Source0:        https://winegame.net/releases/winegame_%{version}.tar.xz
 
 BuildArch:      noarch
 
@@ -70,7 +70,7 @@ Requires:       mesa-libGL
 
 
 %description
-Lutris is a gaming platform for GNU/Linux. Its goal is to make
+WineGame is a gaming platform for GNU/Linux. Its goal is to make
 gaming on Linux as easy as possible by taking care of installing
 and setting up the game for the user. The only thing you have to
 do is play the game. It aims to support every game that is playable
@@ -131,6 +131,11 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{appid}.desktop
 %{python3_sitelib}/%{name}/
 
 %changelog
+* Wed Jul 01 2020 老虎会游泳 <hu60@hu60.cn>
+- 首个为中国定制的Linux游戏平台
+- 具有中国境内的服务器，组件下载速度快
+- 可一键安装中国玩家常见的游戏
+
 * Wed Feb 06 2019 Andrew Schott <andrew@schotty.com 0.5.0.1-6
 - Readability cleanup.
 

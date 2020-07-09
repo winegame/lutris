@@ -178,7 +178,7 @@ class GameStore(GObject.Object):
         return system.path_exists(get_icon_path(game_slug, media_type))
 
     def get_missing_media(self, slugs=None):
-        """Query the Lutris.net API for missing icons"""
+        """Query the WineGame.net API for missing icons"""
         slugs = slugs or self.game_slugs
         unavailable_banners = {slug for slug in slugs if not self.has_icon(slug, "banner")}
         unavailable_icons = {slug for slug in slugs if not self.has_icon(slug, "icon")}

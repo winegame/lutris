@@ -118,7 +118,7 @@ class LutrisTray(Gtk.StatusIcon):
 
     def __init__(self, application, **_kwargs):
         super().__init__()
-        self.set_tooltip_text(_("Lutris"))
+        self.set_tooltip_text(_("WineGame"))
         self.set_visible(True)
         self.application = application
         self.set_from_icon_name("lutris")

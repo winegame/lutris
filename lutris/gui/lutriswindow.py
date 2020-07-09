@@ -127,8 +127,8 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
         lutris_icon = Gtk.Image.new_from_icon_name("lutris", Gtk.IconSize.MENU)
         lutris_icon.set_margin_right(3)
         self.website_search_toggle.set_image(lutris_icon)
-        self.website_search_toggle.set_label(_("Search Lutris.net"))
-        self.website_search_toggle.set_tooltip_text(_("Search Lutris.net"))
+        self.website_search_toggle.set_label(_("Search WineGame.net"))
+        self.website_search_toggle.set_tooltip_text(_("Search WineGame.net"))
         self.sidebar_listbox = SidebarListBox(self.application)
         self.sidebar_listbox.set_size_request(250, -1)
         self.sidebar_listbox.connect("selected-rows-changed", self.on_sidebar_changed)
@@ -251,10 +251,10 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
             ),
             "open-forums":
             Action(lambda *x: open_uri("https://hu60.cn/q.php/bbs.forum.170.html")),
-            "open-discord":
-            Action(lambda *x: open_uri("https://discord.gg/Pnt5CuY")),
-            "donate":
-            Action(lambda *x: open_uri("https://winegame.net/donate")),
+            "open-games":
+            Action(lambda *x: open_uri("https://winegame.net/games")),
+            "open-softwares":
+            Action(lambda *x: open_uri("https://winegame.net/games?genres=26")),
         }
 
         self.actions = {}
@@ -613,7 +613,7 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
     def on_disconnect(self, *_args):
         """Callback from user disconnect"""
         dlg = dialogs.QuestionDialog({
-            "question": _("Do you want to log out from Lutris?"),
+            "question": _("Do you want to log out from WineGame.net?"),
             "title": _("Log out?"),
         })
         if dlg.result != Gtk.ResponseType.YES:
@@ -630,7 +630,7 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
         self.sync_button.props.visible = is_connected
         if is_connected:
             self.connection_label.set_text(username)
-            logger.info("Connected to lutris.net as %s", username)
+            logger.info("Connected to winegame.net as %s", username)
 
     @GtkTemplate.Callback
     def on_resize(self, widget, *_args):
@@ -731,7 +731,7 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
         self.search_terms = self.search_entry.props.text
         if toggle_button.props.active:
             self.search_mode = "website"
-            self.search_entry.set_placeholder_text(_("Search Lutris.net"))
+            self.search_entry.set_placeholder_text(_("Search WineGame.net"))
             self.search_entry.set_icon_from_icon_name(Gtk.EntryIconPosition.PRIMARY, "folder-download-symbolic")
             self.game_store.search_mode = True
             self.search_games(self.search_terms)
@@ -915,4 +915,4 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
         dialogs.ErrorDialog(_("Could not connect to your Lutris account. Please sign in again."))
 
     def show_library_sync_error(self):
-        dialogs.ErrorDialog(_("Failed to retrieve game library. There might be some problems contacting lutris.net"))
+        dialogs.ErrorDialog(_("Failed to retrieve game library. There might be some problems contacting winegame.net"))

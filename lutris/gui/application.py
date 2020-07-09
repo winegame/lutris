@@ -59,7 +59,7 @@ class Application(Gtk.Application):
         )
         init_lutris()
 
-        GLib.set_application_name(_("Lutris"))
+        GLib.set_application_name(_("WineGame"))
         self.running_games = Gio.ListStore.new(Game)
         self.window = None
         self.app_windows = {}

@@ -5,7 +5,7 @@
   <object class="GtkAboutDialog" id="about_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">About Lutris</property>
+    <property name="title" translatable="yes">About WineGame</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="destroy_with_parent">True</property>
@@ -13,8 +13,8 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="program_name">Lutris</property>
-    <property name="copyright">© 2010, 2020 Mathieu Comandon</property>
+    <property name="program_name">WineGame</property>
+    <property name="copyright">© 2010, 2020 Mathieu Comandon, SwimmingTiger</property>
     <property name="comments" translatable="yes">Open Source Gaming Platform</property>
     <property name="website">https://winegame.net</property>
     <property name="website_label">https://winegame.net</property>

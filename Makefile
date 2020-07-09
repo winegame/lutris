@@ -44,7 +44,7 @@ changelog-edit:
 	EDITOR=vim dch -e
 
 upload:
-	scp build/lutris_${VERSION}.tar.xz anaheim:~/volumes/releases/
+	scp build/lutris_${VERSION}.tar.xz winegame.net:/volumes/releases/
 
 upload-ppa:
 	dput ppa:lutris-team/lutris build/lutris_${VERSION}*_source.changes
