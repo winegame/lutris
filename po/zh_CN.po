@@ -18,8 +18,8 @@ msgid "About WineGame"
 msgstr "关于Wine游戏助手"
 
 #: share/lutris/ui/about-dialog.ui:18
-msgid "Open Source Gaming Platform"
-msgstr "开放源代码游戏平台"
+msgid "Open Source Gaming Platform based on Lutris"
+msgstr "开放源代码游戏平台Lutris的中国定制版"
 
 #: share/lutris/ui/about-dialog.ui:21
 msgid ""
@@ -4389,3 +4389,6 @@ msgstr "你的内核没有打过 fsync 补丁。 请获取打过补丁的内核�
 ######################
 msgid "_Connect"
 msgstr "登录 (_C)"
+
+msgid "WineGame (based on Lutris)"
+msgstr "Wine游戏助手 (基于Lutris)"
