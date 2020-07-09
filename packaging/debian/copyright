@@ -7,6 +7,12 @@ Files: *
 Copyright: 2009-2020 Mathieu Comandon <strycore@gmail.com>
 License: GPL-3
 
+Files: share/lutris/media/logo.svg
+ share/lutris/media/logo.png
+ deepin/entries/icons/hicolor/scalable/apps/net.winegame.client.svg
+Copyright: 2008 Ksiom
+License: GFDL-1.2
+
 Files: lutris/gui/application.py
 Copyright: 2016 Patrick Griffis <tingping@tingping.se>
 License: GPL-3
