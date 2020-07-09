@@ -31,7 +31,7 @@ ICON_PATH = os.path.join(GLib.get_user_data_dir(), "icons", "hicolor", "128x128"
 
 sio = SettingsIO(CONFIG_FILE)
 PGA_DB = sio.read_setting("pga_path") or os.path.join(DATA_DIR, "pga.db")
-SITE_URL = sio.read_setting("website") or "https://lutris.net"
+SITE_URL = sio.read_setting("website") or "https://winegame.net"
 
 INSTALLER_URL = SITE_URL + "/api/installers/%s"
 # XXX change this, should query on the installer, not the game.
@@ -39,7 +39,7 @@ INSTALLER_REVISION_URL = SITE_URL + "/api/installers/games/%s/revisions/%s"
 GAME_URL = SITE_URL + "/games/%s/"
 ICON_URL = SITE_URL + "/games/icon/%s.png"
 BANNER_URL = SITE_URL + "/games/banner/%s.jpg"
-RUNTIME_URL = "https://lutris.net/api/runtime"
+RUNTIME_URL = "https://winegame.net/api/runtime"
 
 DEFAULT_DISCORD_CLIENT_ID = "618290412402114570"
 

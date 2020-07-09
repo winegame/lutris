@@ -24,13 +24,13 @@ Installer scripts
 Lutris installations are fully automated through scripts, which can be written
 in either JSON or YAML.
 The scripting syntax is described in ``docs/installers.rst``, and is also
-available online at `lutris.net <https://lutris.net>`_.
+available online at `lutris.net <https://winegame.net>`_.
 
 Game library
 ============
 
 Optional accounts can be created at `lutris.net
-<https://lutris.net>`_ and linked with Lutris clients.
+<https://winegame.net>`_ and linked with Lutris clients.
 This enables your client to automatically sync fetch library from the website.
 **It is currently not possible to sync from the client to the cloud.**
 Via the website, it is also possible to sync your Steam library to your Lutris
@@ -65,7 +65,7 @@ Runners and the game database
 
 * ``pga.db``: An SQLite database tracking the game library, game installation status, various file locations, and some additional metadata
 
-* ``runners/*``: Runners downloaded from `lutris.net <https://lutris.net>`
+* ``runners/*``: Runners downloaded from `lutris.net <https://winegame.net>`
 
 * ``banners/*.jpg``: Game banners
 
@@ -114,7 +114,7 @@ Support the project
 Lutris is 100% community supported, to ensure a continuous development on the
 project, please consider donating to the project.
 Our main platform for supporting Lutris is Patreon: https://www.patreon.com/lutris
-but there are also other options available at https://lutris.net/donate
+but there are also other options available at https://winegame.net/donate
 
 Come with us!
 =============

@@ -55,7 +55,7 @@ setup(
     extras_require={
         'Discord': ['pypresence~=3.3.2']
     },
-    url='https://lutris.net',
+    url='https://winegame.net',
     description='Install and play any video game on Linux',
     long_description="""Lutris is a gaming platform for GNU/Linux. Its goal is
     to make gaming on Linux as easy as possible by taking care of installing

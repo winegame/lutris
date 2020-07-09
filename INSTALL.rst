@@ -54,7 +54,7 @@ If you use OpenSUSE, some dependencies are missing. You need to install python3-
 Installation
 ------------
 
-To install Lutris, please follow instructions listed on our `Downloads Page <https://lutris.net/downloads/>`_.
+To install Lutris, please follow instructions listed on our `Downloads Page <https://winegame.net/downloads/>`_.
 Getting Lutris from a PPA or a repository is the preferred way of installing
 it and we *strongly advise* to use this method if you can.
 

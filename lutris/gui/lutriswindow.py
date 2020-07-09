@@ -181,9 +181,9 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
 
         actions = {
             "browse-games":
-            Action(lambda *x: open_uri("https://lutris.net/games/")),
+            Action(lambda *x: open_uri("https://winegame.net/games/")),
             "register-account":
-            Action(lambda *x: open_uri("https://lutris.net/user/register/")),
+            Action(lambda *x: open_uri("https://winegame.net/user/register/")),
             "disconnect":
             Action(self.on_disconnect),
             "connect":
@@ -250,11 +250,11 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
                 accel="F10",
             ),
             "open-forums":
-            Action(lambda *x: open_uri("https://forums.lutris.net/")),
+            Action(lambda *x: open_uri("https://hu60.cn/q.php/bbs.forum.170.html")),
             "open-discord":
             Action(lambda *x: open_uri("https://discord.gg/Pnt5CuY")),
             "donate":
-            Action(lambda *x: open_uri("https://lutris.net/donate")),
+            Action(lambda *x: open_uri("https://winegame.net/donate")),
         }
 
         self.actions = {}

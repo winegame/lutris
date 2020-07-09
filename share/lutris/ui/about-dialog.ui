@@ -16,8 +16,8 @@
     <property name="program_name">Lutris</property>
     <property name="copyright">© 2010, 2020 Mathieu Comandon</property>
     <property name="comments" translatable="yes">Open Source Gaming Platform</property>
-    <property name="website">https://lutris.net</property>
-    <property name="website_label">https://lutris.net</property>
+    <property name="website">https://winegame.net</property>
+    <property name="website_label">https://winegame.net</property>
     <property name="license" translatable="yes">This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or

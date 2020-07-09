@@ -12,16 +12,16 @@
   <screenshots>
     <screenshot type="default">
       <caption>Main window</caption>
-      <image>https://lutris.net/static/images/lutris-window.png</image>
+      <image>https://winegame.net/static/images/lutris-window.png</image>
     </screenshot>
   </screenshots>
   <description>
     <p>Lutris helps you install and manage your games in a unified interface. Our goal is to support every game which runs on Linux, from native to Windows games (via Wine) to emulators and browser games. The desktop application and the website are libre software, your contributions are welcome!</p>
   </description>
-  <url type="homepage">https://lutris.net</url>
-  <url type="donation">https://lutris.net/donate</url>
-  <url type="help">https://forums.lutris.net</url>
-  <url type="faq">https://lutris.net/faq</url>
+  <url type="homepage">https://winegame.net</url>
+  <url type="donation">https://winegame.net/donate</url>
+  <url type="help">https://hu60.cn/q.php/bbs.forum.170.html</url>
+  <url type="faq">https://winegame.net/faq</url>
   <url type="translate">https://github.com/lutris/lutris/tree/master/po</url>
   <url type="bugtracker">https://github.com/lutris/lutris/issues</url>
   <launchable type="desktop-id">net.lutris.Lutris.desktop</launchable>

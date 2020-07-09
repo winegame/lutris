@@ -15,15 +15,15 @@ from lutris.util import system
 
 LINKS = {
     "floss":
-    "https://lutris.net/games/?q=&fully-libre-filter=on&sort-by-popularity=on",
+    "https://winegame.net/games/?q=&fully-libre-filter=on&sort-by-popularity=on",
     "f2p": (
-        "https://lutris.net/games/?q=&all-free=on&free-filter=on&freetoplay-filter=on"
+        "https://winegame.net/games/?q=&all-free=on&free-filter=on&freetoplay-filter=on"
         "&pwyw-filter=on&sort-by-popularity=on"
     ),
     "donate":
-    "https://lutris.net/donate",
+    "https://winegame.net/donate",
     "forums":
-    "https://forums.lutris.net/",
+    "https://hu60.cn/q.php/bbs.forum.170.html",
     "discord":
     "https://discord.gg/Pnt5CuY",
     "irc":
