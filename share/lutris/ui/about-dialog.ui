@@ -13,7 +13,7 @@
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
-    <property name="program_name">WineGame</property>
+    <property name="program_name" translatable="yes">WineGame</property>
     <property name="copyright">© 2010, 2020 Mathieu Comandon, SwimmingTiger</property>
     <property name="comments" translatable="yes">Open Source Gaming Platform</property>
     <property name="website">https://winegame.net</property>
@@ -31,7 +31,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 </property>
-    <property name="authors">The Lutris team</property>
+    <property name="authors" translatable="yes">The Lutris team, The WineGame team</property>
     <property name="logo">../media/logo.svg</property>
     <property name="wrap_license">True</property>
     <property name="license_type">gpl-3-0</property>

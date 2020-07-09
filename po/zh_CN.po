@@ -3887,8 +3887,8 @@ msgid "(c) 2010-2020 Lutris Gaming Platform"
 msgstr "(c) 2010-2020 Lutris 游戏平台"
 
 #: lutris/settings.py:16
-msgid "The Lutris team"
-msgstr "Lutris 团队"
+msgid "The Lutris team, The WineGame team"
+msgstr "Lutris 团队, Wine游戏助手团队"
 
 #: lutris/startup.py:84
 msgid "Your Nvidia driver is outdated."
