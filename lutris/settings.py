@@ -14,12 +14,12 @@ COPYRIGHT = _("(c) 2010-2021 Lutris Team")
 AUTHORS = [_("The Lutris team")]
 
 # Paths
-CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "lutris")
+CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "net.winegame.client")
 CONFIG_FILE = os.path.join(CONFIG_DIR, "lutris.conf")
-DATA_DIR = os.path.join(GLib.get_user_data_dir(), "lutris")
+DATA_DIR = os.path.join(GLib.get_user_data_dir(), "net.winegame.client")
 RUNNER_DIR = os.path.join(DATA_DIR, "runners")
 RUNTIME_DIR = os.path.join(DATA_DIR, "runtime")
-CACHE_DIR = os.path.join(GLib.get_user_cache_dir(), "lutris")
+CACHE_DIR = os.path.join(GLib.get_user_cache_dir(), "net.winegame.client")
 GAME_CONFIG_DIR = os.path.join(CONFIG_DIR, "games")
 
 TMP_PATH = os.path.join(CACHE_DIR, "tmp")
