@@ -16,3 +16,15 @@ override_dh_installdocs:
 
 override_dh_installchangelogs:
 	cp debian/changelog debian/net.winegame.client/opt/apps/net.winegame.client/files/
+
+override_dh_strip_nondeterminism:
+	echo "skip"
+
+override_dh_dwz:
+	echo "skip"
+
+override_dh_shlibdeps:
+	echo "skip"
+
+override_dh_strip:
+	echo "skip"

@@ -1,0 +1,45 @@
+#!/bin/sh
+
+mklink() {
+    src="$1"
+    dst="$2"
+
+    if [ "$(realpath "$dst" 2>/dev/null)" = "$src" ]; then
+        echo "exists: $dst -> $src"
+        return 0
+    fi
+
+    mkdir -p "$(dirname "$dst")"
+    rm -rf "$dst"
+    ln -sf "$src" "$dst"
+
+    if [ "$(realpath "$dst" 2>/dev/null)" = "$src" ]; then
+        echo "mklink: $dst -> $src"
+        return 0
+    else
+        echo "link failed, runner may not work: $dst -> $src"
+        return 1
+    fi
+}
+
+mklink_subdir() {
+    dir_src="$1"
+    dir_dst="$2"
+
+    ls "$dir_src" | while read d; do
+        mklink "$dir_src/$d" "$dir_dst/$d"
+    done
+}
+
+if [ "$XDG_DATA_HOME" = "" ]; then
+    XDG_DATA_HOME="$HOME/.local/share"
+fi
+
+PLUGINS_DIR="/opt/apps/net.winegame.client/files/plugins"
+DATA_DIR="$XDG_DATA_HOME/net.winegame.client"
+
+mklink_subdir "$PLUGINS_DIR/runners" "$DATA_DIR/runners"
+mklink_subdir "$PLUGINS_DIR/runtime" "$DATA_DIR/runtime"
+mklink_subdir "$PLUGINS_DIR/wine" "$DATA_DIR/runners/wine"
+
+exec /opt/apps/net.winegame.client/files/bin/lutris "$@"
