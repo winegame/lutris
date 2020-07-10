@@ -33,10 +33,10 @@ Depends: ${misc:Depends},
          fluid-soundfont-gs,
          x11-xserver-utils,
          mesa-utils,
-Recommends: python3-evdev,
-            gvfs-backends,
-            libwine-development,
-            winetricks,
-Suggests: gamemode,
+         python3-evdev,
+         gvfs-backends,
+         libwine-development
+         gamemode,
+Recommends: winetricks,
 Description: 开源游戏平台
  帮您在UOS/Linux系统中运行Windows游戏
