@@ -4392,3 +4392,6 @@ msgstr "登录 (_C)"
 
 msgid "WineGame (based on Lutris)"
 msgstr "Wine游戏助手 (基于Lutris)"
+
+msgid "Cannot uninstall pre-installed runner"
+msgstr "预装的运行环境不能卸载"

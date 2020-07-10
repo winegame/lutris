@@ -427,6 +427,11 @@ class Runner:  # pylint: disable=too-many-public-methods
         if os.path.isdir(runner_path):
             system.remove_folder(runner_path)
 
+    def is_preinstalled_runner(self):
+        """Determine if the runner is pre-installed"""
+        runner_path = os.path.join(settings.RUNNER_DIR, self.name)
+        return os.path.islink(runner_path)
+
     def find_option(self, options_group, option_name):
         """Retrieve an option dict if it exists in the group"""
         if options_group not in ['game_options', 'runner_options']:

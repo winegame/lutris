@@ -1079,3 +1079,7 @@ class wine(Runner):
 
         # Relative path
         return path
+
+    def is_preinstalled_runner(self):
+        """wine is always pre-installed"""
+        return True

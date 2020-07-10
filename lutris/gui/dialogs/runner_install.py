@@ -185,6 +185,9 @@ class RunnerInstallDialog(Dialog):
 
     def uninstall_runner(self, row):
         """Uninstall a runner version"""
+        if self.is_preinstalled_runner(row):
+            ErrorDialog(_("Cannot uninstall pre-installed runner"), parent=self)
+            return
         version = row[self.COL_VER]
         arch = row[self.COL_ARCH]
         system.remove_folder(self.get_runner_path(version, arch))
@@ -202,6 +205,13 @@ class RunnerInstallDialog(Dialog):
         GLib.timeout_add(100, self.get_progress, downloader, row)
         self.installing[row[self.COL_VER]] = downloader
         downloader.start()
+
+    def is_preinstalled_runner(self, row):
+        """Determine if the runner is pre-installed"""
+        version = row[self.COL_VER]
+        arch = row[self.COL_ARCH]
+        path = self.get_runner_path(version, arch)
+        return os.path.islink(path)
 
     def get_progress(self, downloader, row):
         """Update progress bar with download progress"""

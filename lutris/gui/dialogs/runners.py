@@ -158,6 +158,10 @@ class RunnersDialog(GtkBuilderDialog):
             logger.warning("Runner %s is not installed", runner)
             return
 
+        if runner.is_preinstalled_runner():
+            ErrorDialog(_("Cannot uninstall pre-installed runner"), parent=self.dialog)
+            return
+
         if runner.multiple_versions:
             logger.info("Removing multiple versions")
             builder = get_builder_from_file('runner-remove-all-versions-dialog.ui')
