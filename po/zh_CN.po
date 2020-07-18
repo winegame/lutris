@@ -4392,3 +4392,32 @@ msgstr "Wine游戏助手 (基于Lutris)"
 
 msgid "Cannot uninstall pre-installed runner"
 msgstr "预装的运行环境不能卸载"
+
+msgid "Vulkan is not installed or is not supported by your system"
+msgstr "您未安装支持Vulkan的显卡驱动"
+
+msgid ""
+"If you have compatible hardware, please follow "
+"the installation procedures as described in\n"
+"<a href='https://github.com/lutris/lutris/wiki/How-to:-DXVK'>"
+"How-to:-DXVK (https://github.com/lutris/lutris/wiki/How-to:-DXVK)</a>"
+msgstr ""
+"未安装支持Vulkan的显卡驱动，很多游戏都无法正常运行。\n"
+"请按照我们的<a href='https://hu60.cn/q.php/bbs.topic.94828.1.html'>显卡驱动安装教程</a>安装显卡驱动。"
+
+msgid ""
+"Your limits are not set correctly."
+" Please increase them as described here:"
+" <a href='https://github.com/lutris/lutris/wiki/How-to:-Esync'>"
+"How-to:-Esync (https://github.com/lutris/lutris/wiki/How-to:-Esync)</a>"
+msgstr ""
+"您的系统文件描述符限制过小，Esync可能不能正常运行。\n"
+"请参考以下链接（英文，待汉化）修改文件描述符限制:\n"
+" <a href='https://github.com/lutris/lutris/wiki/How-to:-Esync'>"
+"How-to:-Esync (https://github.com/lutris/lutris/wiki/How-to:-Esync)</a>"
+
+msgid "Launch anyway and do not show this message again."
+msgstr "强行启动，以后不再显示该警告"
+
+msgid "Enable anyway and do not show this message again."
+msgstr "强行启用，以后不再显示该警告"
