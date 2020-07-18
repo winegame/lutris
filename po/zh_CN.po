@@ -4421,3 +4421,6 @@ msgstr "强行启动，以后不再显示该警告"
 
 msgid "Enable anyway and do not show this message again."
 msgstr "强行启用，以后不再显示该警告"
+
+msgid "%s is already installed"
+msgstr "%s 已安装"
