@@ -3,6 +3,7 @@
 import json
 import os
 import time
+from gettext import gettext as _
 
 # Third Party Libraries
 import yaml
@@ -533,7 +534,7 @@ class ScriptInterpreter(CommandsMixin):
         if result == "STOP" or self.cancelled:
             return
 
-        self.parent.set_status("Installing game data")
+        self.parent.set_status(_("Installing game data"))
         self.parent.add_spinner()
         self.parent.continue_button.hide()
 
@@ -595,12 +596,12 @@ class ScriptInterpreter(CommandsMixin):
         self._save_game()
         if path and not os.path.isfile(path) and self.runner not in ("web", "browser"):
             self.parent.set_status(
-                "The executable at path %s can't be found, please check the destination folder.\n"
-                "Some parts of the installation process may have not completed successfully." % path
+                _("The executable at path %s can't be found, please check the destination folder.\n"
+                "Some parts of the installation process may have not completed successfully.") % path
             )
             logger.warning("No executable found at specified location %s", path)
         else:
-            install_complete_text = (self.script.get("install_complete_text") or "Installation completed!")
+            install_complete_text = (self.script.get("install_complete_text") or _("Installation completed!"))
             self.parent.set_status(install_complete_text)
         self.parent.on_install_finished()
 

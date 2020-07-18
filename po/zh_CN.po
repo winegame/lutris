@@ -4424,3 +4424,20 @@ msgstr "强行启用，以后不再显示该警告"
 
 msgid "%s is already installed"
 msgstr "%s 已安装"
+
+msgid "Installing game data"
+msgstr "安装游戏数据..."
+
+msgid "_Apply"
+msgstr "确定 (_A)"
+
+msgid ""
+"The executable at path %s can't be found, please check the destination folder.\n"
+"Some parts of the installation process may have not completed successfully."
+msgstr ""
+"可执行文件 %s 未找到，请检查安装文件夹。\n"
+"看起来某些安装步骤未顺利完成，可能是安装程序被提前关闭或者发生了错误。\n"
+"如果游戏无法启动，请尝试重新安装。"
+
+msgid "Installation completed!"
+msgstr "安装完成"
