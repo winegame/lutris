@@ -20,7 +20,7 @@ from lutris.util.strings import split_arguments
 from lutris.util.wine.registry import WineRegistry
 from lutris.util.wine.wine import WINE_DEFAULT_ARCH
 
-STEAM_INSTALLER_URL = ("https://lutris.nyc3.cdn.digitaloceanspaces.com/runners/winesteam/SteamSetup.exe")
+STEAM_INSTALLER_URL = ("https://file.winegame.net/runners/winesteam/SteamSetup.exe")
 
 
 def is_running():
