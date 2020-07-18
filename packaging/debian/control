@@ -36,7 +36,7 @@ Depends: ${misc:Depends},
          python3-evdev,
          gvfs-backends,
          libwine-development,
-         wine | deepin-wine | winehq-devel | winehq-stable | winehq-staging,
+         wine | wine-devel | wine-stable | wine-staging,
          gamemode,
 Recommends: winetricks,
 Description: 开源游戏平台
