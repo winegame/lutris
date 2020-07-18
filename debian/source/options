@@ -1,1 +1,3 @@
 tar-ignore = "deepin/files/plugins"
+tar-ignore = ".git"
+tar-ignore = ".vscode"
