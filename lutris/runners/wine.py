@@ -1082,4 +1082,4 @@ class wine(Runner):
 
     def is_preinstalled_runner(self):
         """wine is always pre-installed"""
-        return True
+        return os.path.isdir("/opt/apps/net.winegame.client/files/plugins/wine")
