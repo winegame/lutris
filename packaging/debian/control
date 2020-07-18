@@ -35,9 +35,9 @@ Depends: ${misc:Depends},
          mesa-utils,
          python3-evdev,
          gvfs-backends,
-         libwine-development,
          wine | wine-devel | wine-stable | wine-staging,
          gamemode,
 Recommends: winetricks,
+            libwine-development,
 Description: 开源游戏平台
  帮您在UOS/Linux系统中运行Windows游戏
