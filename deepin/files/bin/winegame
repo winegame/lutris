@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 mklink() {
     src="$1"
@@ -26,9 +26,22 @@ mklink_subdir() {
     dir_src="$1"
     dir_dst="$2"
 
-    ls "$dir_src" | while read d; do
-        mklink "$dir_src/$d" "$dir_dst/$d"
-    done
+    if [ -d "$dir_src" ]; then
+        ls "$dir_src" | while read d; do
+            mklink "$dir_src/$d" "$dir_dst/$d"
+        done
+    fi
+
+    # remove dead links
+    if [ -d "$dir_dst" ]; then
+        ls "$dir_dst" | while read d; do
+            path="$dir_dst/$d"
+            if [ -L "$path" ]  && ! [ -e "$path" ]; then
+                echo "remove dead link: $path -> $(realpath "$path" 2>/dev/null)"
+                rm -f "$path"
+            fi
+        done
+    fi
 }
 
 if [ "$XDG_DATA_HOME" = "" ]; then
