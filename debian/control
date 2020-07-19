@@ -1,0 +1,43 @@
+Source: net.winegame.client
+Section: games
+Priority: optional
+Maintainer: 老虎会游泳 <hu60@hu60.cn>
+Build-Depends: debhelper-compat (= 12),
+               dh-sequence-python3,
+               meson,
+Rules-Requires-Root: no
+Standards-Version: 4.5.0
+Homepage: https://winegame.net
+Vcs-Browser: https://gitee.com/winegame/lutris
+Vcs-Git: https://gitee.com/winegame/lutris.git
+
+Package: net.winegame.client
+Architecture: any
+Depends: ${misc:Depends},
+         ${python3:Depends},
+         python3-yaml,
+         python3-requests,
+         python3-pil,
+         python3-gi,
+         python3-setproctitle,
+         python3-distro,
+         gir1.2-gtk-3.0,
+         gir1.2-gnomedesktop-3.0,
+         gir1.2-webkit2-4.0,
+         gir1.2-notify-0.7,
+         psmisc,
+         cabextract,
+         unzip,
+         p7zip,
+         curl,
+         fluid-soundfont-gs,
+         x11-xserver-utils,
+         mesa-utils,
+         python3-evdev,
+         gvfs-backends,
+         wine | wine-devel | wine-stable | wine-staging,
+         gamemode,
+Recommends: winetricks,
+            libwine-development,
+Description: 开源游戏平台
+ 帮您在UOS/Linux系统中运行Windows游戏
