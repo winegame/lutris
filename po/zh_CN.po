@@ -4453,3 +4453,15 @@ msgstr "添加到收藏"
 
 msgid "Remove from favorites"
 msgstr "从收藏移除"
+
+msgid "Enable DXVK/VKD3D"
+msgstr "启用 DXVK/VKD3D"
+
+msgid ""
+"Use DXVK and VKD3D to enable support for Direct3D 12 and "
+"increase compatibility and performance in Direct3D 11, 10 "
+"and 9 applications by translating their calls to Vulkan."
+msgstr ""
+"通过 VKD3D 启用 DX12 支持，通过 DXVK 启用 DX9/10/11 支持。"
+"DXVK/VKD3D 将 DirectX 图形调用转换为 Vulkan，可以显著提高"
+"使用 DirectX 的游戏在 Wine 中的帧数，同时也可以改善兼容性。"
