@@ -145,7 +145,7 @@ class RunnersDialog(GtkBuilderDialog):
             runners.NonInstallableRunnerError,
         ) as ex:
             ErrorDialog(ex.message, parent=self)
-        if runner.is_installed():
+        if runner.is_installed(need_sleep=True):
             self.emit("runner-installed")
             self.refresh_button.emit("clicked")
 
