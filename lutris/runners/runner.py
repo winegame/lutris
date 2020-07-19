@@ -373,6 +373,8 @@ class Runner:  # pylint: disable=too-many-public-methods
             opts["dest"] = os.path.join(
                 settings.RUNNER_DIR, self.name, "{}-{}".format(runner["version"], runner["architecture"])
             )
+            if self.is_installed(runner["version"]): # installed
+                return
 
         if self.name == "libretro" and version:
             opts["merge_single"] = False
