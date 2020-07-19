@@ -299,8 +299,10 @@ class winesteam(wine.wine):
 
         downloader(STEAM_INSTALLER_URL, installer_path, on_steam_downloaded)
 
-    def is_installed(self, version=None, fallback=True, min_version=None):
+    def is_installed(self, version=None, fallback=True, min_version=None, need_sleep=False):
         """Checks if wine is installed and if the steam executable is on the drive"""
+        if need_sleep:
+            time.sleep(5)
         if not super().is_installed(version=version, fallback=fallback, min_version=min_version):
             return False
         if not system.path_exists(self.get_default_prefix(arch=self.default_arch)):
