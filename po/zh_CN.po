@@ -4441,3 +4441,15 @@ msgstr ""
 
 msgid "Installation completed!"
 msgstr "安装完成"
+
+msgid "Library"
+msgstr "游戏库"
+
+msgid "Favorites"
+msgstr "收藏"
+
+msgid "Add to favorites"
+msgstr "添加到收藏"
+
+msgid "Remove from favorites"
+msgstr "从收藏移除"
