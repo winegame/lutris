@@ -489,3 +489,7 @@ class winesteam(wine.wine):
             env=self.get_env(os_env=False),
         )
         uninstall_command.start()
+
+    def is_preinstalled_runner(self):
+        """winesteam is never pre-installed"""
+        return False
