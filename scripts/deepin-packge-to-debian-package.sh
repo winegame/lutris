@@ -5,8 +5,8 @@ set -e
 
 deb="$1"
 
-if [ "$deb" = "" ]; then
-    echo -e "Usage:\n\t$0 xxx.deb"
+if [ "$deb" = "" ] || ! [ "$UID" = "0" ]; then
+    echo -e "Usage:\n\tsudo $0 xxx.deb"
     exit
 fi
 
