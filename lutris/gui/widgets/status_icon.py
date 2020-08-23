@@ -35,7 +35,7 @@ class LutrisStatusIcon:
         """Create an appindicator"""
         if APP_INDICATOR_SUPPORTED:
             return AppIndicator.Indicator.new(
-                "net.lutris.Lutris", "lutris", AppIndicator.IndicatorCategory.APPLICATION_STATUS
+                "net.winegame.client", "net.winegame.client", AppIndicator.IndicatorCategory.APPLICATION_STATUS
             )
         return LutrisTray(self.application)
 
