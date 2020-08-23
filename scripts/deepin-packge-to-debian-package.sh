@@ -27,7 +27,7 @@ linkDir() {
         dst="$(echo "$src" | sed "s#^$1/#$2/#")"
         echo -e "\t$src -> $dst"
         mkdir -p "/tmp/deepin-packge-to-debian-package/extract$(dirname "$dst")"
-        ln -s "/tmp/deepin-packge-to-debian-package/extract$src" "/tmp/deepin-packge-to-debian-package/extract$dst"
+        ln -s "$src" "/tmp/deepin-packge-to-debian-package/extract$dst"
     done
 }
 
@@ -35,6 +35,9 @@ echo "Link entries:"
 ls "/tmp/deepin-packge-to-debian-package/extract/opt/apps/$packageName/entries/" | while read dir; do
     linkDir "/opt/apps/$packageName/entries/$dir" "/usr/share/$dir"
 done
+
+echo "Cleaning depends..."
+sed -i 's/deepin-elf-verify[^,]*,\s*//' /tmp/deepin-packge-to-debian-package/extract/DEBIAN/control
 
 echo "Repacking..."
 baseName="$(basename "$deb")"
