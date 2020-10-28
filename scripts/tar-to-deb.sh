@@ -3,6 +3,8 @@
 
 set -e
 
+TMP_DIR="/tmp/tar-to-deb/$$"
+
 tar="$1"
 debDir="$2"
 BASE_PACKAGE_NAME="net.winegame.tar"
@@ -17,18 +19,20 @@ fi
 
 typeset -l basename
 basename=`basename "$tar"`
-appName=`echo "$basename" | grep -P '^[a-z][a-z0-9]+(-[a-z][a-z0-9]+)*' -o`
-version=`echo "$basename" | grep -P '^[a-z][a-z0-9]+(-[a-z][a-z0-9]+)*-\K([0-9.]+)' -o || echo 1.0.0`
-arch="amd64"
 
+arch="amd64"
 if ! [ "$(echo "$basename" | grep -P 'i[36]86' -o)"  = "" ]; then
     arch="i386"
 fi
 
-rm -rf /tmp/tar-to-deb
-mkdir -p /tmp/tar-to-deb/extract/DEBIAN/
+basename=`echo "$basename" | sed 's/-x86_64//g' | sed 's/-i[36]86//g' | sed 's/.tar.[xg]z//g'`
+appName=`echo "$basename" | grep -P '^[a-z][a-z0-9]+(-[a-z][a-z0-9]+)*' -o`
+version=`echo "$basename" | grep -P '^[a-z][a-z0-9]+(-[a-z][a-z0-9]+)*-\K([0-9.]+)' -o || echo 1.0.0`
 
-cat <<EOF > /tmp/tar-to-deb/extract/DEBIAN/control
+rm -rf "$TMP_DIR"
+mkdir -p "$TMP_DIR/extract/DEBIAN/"
+
+cat <<EOF > "$TMP_DIR/extract/DEBIAN/control"
 Package: $BASE_PACKAGE_NAME.$appName
 Version: $version
 Architecture: $arch
@@ -40,18 +44,18 @@ Description: $basename
 EOF
 
 echo -------------------------------------
-cat /tmp/tar-to-deb/extract/DEBIAN/control
+cat "$TMP_DIR/extract/DEBIAN/control"
 echo -------------------------------------
 
-echo -e "Extract tar to:\n\t/tmp/tar-to-deb/extract/"
-tar xf "$tar" -C /tmp/tar-to-deb/extract
+echo -e "Extract tar to:\n\t$TMP_DIR/extract/"
+tar xf "$tar" -C "$TMP_DIR/extract"
 
 echo "Repacking..."
-dpkg-deb -b "/tmp/tar-to-deb/extract/" "$debDir/$appName-$version-$arch.deb"
+dpkg-deb -b "$TMP_DIR/extract/" "$debDir/$appName-$version-$arch.deb"
 
 echo "Cleaning..."
-echo -e "\trm -rf /tmp/tar-to-deb/"
-rm -rf /tmp/tar-to-deb/
+echo -e "\trm -rf $TMP_DIR/"
+rm -rf "$TMP_DIR/"
 
 echo -n -e "Package:\n\t"
 ls -lh "$debDir/$appName-$version-$arch.deb"
