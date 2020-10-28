@@ -4,9 +4,11 @@
 set -e
 
 deb="$1"
+debDir="$2"
 
-if [ "$deb" = "" ] || ! [ "$UID" = "0" ]; then
-    echo -e "Usage:\n\tsudo $0 xxx.deb"
+if [ "$deb" = "" ] || [ "$debDir" = "" ] || ! [ "$UID" = "0" ]; then
+    echo -e "Usage:\n\tsudo $0 <path-of-deb> <dir-to-save-converted-deb>"
+    echo -e "Example:\n\tsudo $0 /home/hu60/net.winegame.client_0.5.7.1_amd64.deb /home/hu60/debian"
     exit
 fi
 
@@ -41,11 +43,11 @@ sed -i 's/deepin-elf-verify[^,]*,\s*//' /tmp/deepin-packge-to-debian-package/ext
 
 echo "Repacking..."
 baseName="$(basename "$deb")"
-dpkg-deb -b "/tmp/deepin-packge-to-debian-package/extract" "/tmp/deepin-packge-to-debian-package/$baseName"
+dpkg-deb -b "/tmp/deepin-packge-to-debian-package/extract" "$debDir/$baseName"
 
 echo "Cleaning..."
-echo -e "\trm -rf /tmp/deepin-packge-to-debian-package/extract/"
-rm -rf /tmp/deepin-packge-to-debian-package/extract/
+echo -e "\trm -rf /tmp/deepin-packge-to-debian-package/"
+rm -rf /tmp/deepin-packge-to-debian-package/
 
 echo -n -e "Package:\n\t"
-ls -lh /tmp/deepin-packge-to-debian-package/*.deb
+ls -lh "$debDir/$baseName"

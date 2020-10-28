@@ -4,12 +4,14 @@
 set -e
 
 tar="$1"
+debDir="$2"
 BASE_PACKAGE_NAME="net.winegame.tar"
 MAINTAINER="老虎会游泳 <admin@winegame.net>"
 HOMEPAGE="https://winegame.net"
 
-if [ "$tar" = "" ] || ! [ "$UID" = "0" ]; then
-    echo -e "Usage:\n\tsudo $0 xxx.tar.xz"
+if [ "$tar" = "" ] || [ "$debDir" = "" ] || ! [ "$UID" = "0" ]; then
+    echo -e "Usage:\n\tsudo $0 <path-of-tar> <dir-to-save-deb>"
+    echo -e "Example:\n\tsudo $0 /home/hu60/winehq-staging-5.20-x86_64.tar.xz /home/hu60/deb"
     exit
 fi
 
@@ -41,17 +43,15 @@ echo -------------------------------------
 cat /tmp/tar-to-deb/extract/DEBIAN/control
 echo -------------------------------------
 
-cd /tmp/tar-to-deb/extract
-
 echo -e "Extract tar to:\n\t/tmp/tar-to-deb/extract/"
-tar xf "$tar"
+tar xf "$tar" -C /tmp/tar-to-deb/extract
 
 echo "Repacking..."
-dpkg-deb -b "/tmp/tar-to-deb/extract/" "/tmp/tar-to-deb/$appName-$version-$arch.deb"
+dpkg-deb -b "/tmp/tar-to-deb/extract/" "$debDir/$appName-$version-$arch.deb"
 
 echo "Cleaning..."
-echo -e "\trm -rf /tmp/tar-to-deb/extract/"
-rm -rf /tmp/tar-to-deb/extract/
+echo -e "\trm -rf /tmp/tar-to-deb/"
+rm -rf /tmp/tar-to-deb/
 
 echo -n -e "Package:\n\t"
-ls -lh /tmp/tar-to-deb/*.deb
+ls -lh "$debDir/$appName-$version-$arch.deb"
