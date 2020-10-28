@@ -15,14 +15,18 @@ HOMEPAGE="https://winegame.net"
 VERSION="1.0.0"
 ARCH="amd64"
 
-if [ "$tar" = "" ] || [ "$debDir" = "" ] || ! [ "$UID" = "0" ]; then
+if [ "$tar" = "" ] || [ "$debDir" = "" ]; then
     echo -e "Usage:\n\tsudo $0 <path-of-tar> <dir-to-save-deb>"
     echo -e "Example:\n\tsudo $0 /home/hu60/winehq-staging-5.20-x86_64.tar.xz /home/hu60/deb"
     exit
 fi
 
+if ! [ "$UID" = "0" ]; then
+    exec sudo "$0" "$@"
+fi
+
 typeset -l basename
-basename=`basename "$tar" | sed 's/.tar.[xg]z$//g'`
+basename=`basename "$tar" | sed 's/\.tar\.[gxb]z$//g' | sed 's/\.tar\.bz2$//g'`
 appName=`echo "$basename" | sed 's/-x86_64//g' | sed 's/-i[3456]86//g' | sed 's/[^a-z0-9.-]/-/g'`
 
 rm -rf "$TMP_DIR"
