@@ -23,7 +23,7 @@ fi
 
 typeset -l basename
 basename=`basename "$tar" | sed 's/.tar.[xg]z$//g'`
-appName=`echo "$basename" | sed 's/-x86_64//g' | sed 's/-i[3456]86//g'`
+appName=`echo "$basename" | sed 's/-x86_64//g' | sed 's/-i[3456]86//g' | sed 's/[^a-z0-9.-]/-/g'`
 
 rm -rf "$TMP_DIR"
 mkdir -p "$TMP_DIR/extract/DEBIAN/"
