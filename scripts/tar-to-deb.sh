@@ -31,7 +31,7 @@ mkdir -p /tmp/tar-to-deb/extract/DEBIAN/
 cat <<EOF > /tmp/tar-to-deb/extract/DEBIAN/control
 Package: $BASE_PACKAGE_NAME.$appName
 Version: $version
-Architecture: amd64
+Architecture: $arch
 Maintainer: $MAINTAINER
 Depends: tar
 Homepage: $HOMEPAGE
