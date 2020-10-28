@@ -5,6 +5,8 @@ set -e
 
 TMP_DIR="/tmp/tar-to-deb/$$"
 
+trap "rm -rf $TMP_DIR; exit" HUP INT PIPE QUIT TERM
+
 tar="$1"
 debDir="$2"
 BASE_PACKAGE_NAME="net.winegame.tar"
