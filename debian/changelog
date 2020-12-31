@@ -1,3 +1,9 @@
+net.winegame.client (0.5.7.2) cn; urgency=medium
+
+  * 修复安装yuzu模拟器等运行环境时出现的问题
+
+ -- 老虎会游泳 <hu60@hu60.cn>  Thu, 31 Dec 2020 19:30:18 +0800
+
 net.winegame.client (0.5.7.1) cn; urgency=medium
 
   * 在 DXVK 运行时中提供基于 vkd3d3-proton 项目的 D3D12.DLL
