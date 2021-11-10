@@ -40,6 +40,7 @@ done
 
 echo "Cleaning depends..."
 sed -i 's/deepin-elf-verify[^,]*,\s*//' /tmp/deepin-packge-to-debian-package/extract/DEBIAN/control
+sed -i '/^Depends: deepin-elf-verify[^,]*$/d' /tmp/deepin-packge-to-debian-package/extract/DEBIAN/control
 
 echo "Repacking..."
 baseName="$(basename "$deb")"
