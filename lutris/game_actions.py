@@ -85,7 +85,7 @@ class GameActions:
             ),
             ("install_more", _("Install another version"), self.on_install_clicked),
             ("remove", _("Remove"), self.on_remove_game),
-            ("view", _("View on Lutris.net"), self.on_view_game),
+            ("view", _("View on winegame.net"), self.on_view_game),
             ("hide", _("Hide game from library"), self.on_hide_game),
             ("unhide", _("Unhide game from library"), self.on_unhide_game),
         ]
@@ -231,8 +231,8 @@ class GameActions:
         xdgshortcuts.remove_launcher(self.game.slug, self.game.id, desktop=True)
 
     def on_view_game(self, _widget):
-        """Callback to open a game on lutris.net"""
-        open_uri("https://lutris.net/games/%s" % self.game.slug)
+        """Callback to open a game on winegame.net"""
+        open_uri("https://winegame.net/games/%s" % self.game.slug)
 
     def on_remove_game(self, *_args):
         """Callback that present the uninstall dialog to the user"""
