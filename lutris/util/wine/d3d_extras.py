@@ -15,4 +15,4 @@ class D3DExtrasManager(DLLManager):
                     "d3dx9_28", "d3dx9_29", "d3dx9_30", "d3dx9_31", "d3dx9_32", "d3dx9_33",
                     "d3dx9_34", "d3dx9_35", "d3dx9_36", "d3dx9_37", "d3dx9_38", "d3dx9_39",
                     "d3dx9_40", "d3dx9_41", "d3dx9_42", "d3dx9_43", )
-    releases_url = "https://gitee.com/api/v5/repos/winegame/d3d_extras/releases"
+    releases_url = "https://hu60.cn/q.php/lutris.release.d3d_extras.json"
