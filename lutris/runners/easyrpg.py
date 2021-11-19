@@ -13,7 +13,7 @@ class easyrpg(Runner):
     runnable_alone = True
     entry_point_option = "project_path"
     runner_executable = "easyrpg-player"
-    download_url = "https://easyrpg.org/downloads/player/0.6.2.3/easyrpg-player-0.6.2.3-linux.tar.gz"
+    download_url = "https://hu60.cn/q.php/lutris.download.easyrpg-player.url/easyrpg-player-0.6.2.3-linux.tar.gz"
 
     game_options = [
         {

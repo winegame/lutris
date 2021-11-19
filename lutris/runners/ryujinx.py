@@ -16,7 +16,7 @@ class ryujinx(Runner):
     description = _("Nintendo Switch emulator for LDN build visit https://ryujinx.org/")
     runnable_alone = True
     runner_executable = "ryujinx/publish/Ryujinx"
-    download_url = "https://lutris.nyc3.digitaloceanspaces.com/runners/ryujinx/ryujinx-1.0.7074-linux_x64.tar.gz"
+    download_url = "https://hu60.cn/q.php/lutris.download.ryujinx.url/ryujinx-1.0.7074-linux_x64.tar.gz"
 
     game_options = [
         {

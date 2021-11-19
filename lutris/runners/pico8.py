@@ -14,7 +14,7 @@ from lutris.util.downloader import Downloader
 from lutris.util.log import logger
 from lutris.util.strings import split_arguments
 
-DOWNLOAD_URL = "https://github.com/daniel-j/lutris-pico-8-runner/archive/master.tar.gz"
+DOWNLOAD_URL = "https://hu60.cn/q.php/lutris.download.pico8-runner.url/master.tar.gz"
 
 
 class pico8(Runner):

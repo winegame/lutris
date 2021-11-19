@@ -3,7 +3,7 @@
     "description": "ColecoVision / Coleco Adam emulator",
     "platforms": ["ColecoVision"],
     "runner_executable": "colem/colem",
-    "download_url": "https://fms.komkon.org/ColEm/ColEm56-Ubuntu-x86-bin.tgz",
+    "download_url": "https://hu60.cn/q.php/lutris.download.colem.url/ColEm56-Ubuntu-x86-bin.tgz",
     "game_options": [
         {
             "option": "main_file",

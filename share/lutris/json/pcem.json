@@ -4,7 +4,7 @@
     "platforms": ["MS-DOS"],
     "runnable_alone": "True",
     "runner_executable": "pcem/pcem",
-    "download_url": "http://pcem-emulator.co.uk/files/PCemV17Linux.tar.gz",
+    "download_url": "https://hu60.cn/q.php/lutris.download.pcem.url/PCemV17Linux.tar.gz",
     "game_options": [
         {
             "option": "main_file",
