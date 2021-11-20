@@ -16,10 +16,11 @@ msgstr ""
 
 #: share/applications/net.lutris.Lutris.desktop:3
 #: share/metainfo/net.lutris.Lutris.metainfo.xml:10
-#: share/lutris/ui/lutris-window.ui:25 lutris/gui/application.py:71
-#: lutris/gui/widgets/status_icon.py:116 lutris/services/lutris.py:40
+#: share/lutris/ui/about-dialog.ui:16 share/lutris/ui/lutris-window.ui:25
+#: lutris/gui/application.py:71 lutris/gui/widgets/status_icon.py:116
+#: lutris/services/lutris.py:40
 msgid "Lutris"
-msgstr "Lutris"
+msgstr "Wine游戏助手"
 
 #: share/applications/net.lutris.Lutris.desktop:4
 msgid "video game preservation platform"
@@ -31,7 +32,7 @@ msgstr "游戏;wine;模拟器;"
 
 #: share/metainfo/net.lutris.Lutris.metainfo.xml:8
 msgid "Lutris Team"
-msgstr "Lutris 团队"
+msgstr "Lutris 团队、老虎会游泳"
 
 #: share/metainfo/net.lutris.Lutris.metainfo.xml:11
 #: share/lutris/ui/about-dialog.ui:18
@@ -49,13 +50,13 @@ msgid ""
 "implementations and compatibility layers, it gives you a central interface "
 "to launch all your games."
 msgstr ""
-"Lutris 可帮您安装和运行大多数平台上几乎所有时代的电子游戏。通过对现有的模拟"
-"器、兼容层、第三方游戏引擎等进行整合利用，Lutris 可为您提供一个统一的界面来启"
-"动您的所有游戏。"
+"Wine游戏助手可帮您安装和运行大多数平台上几乎所有时代的电子游戏。通过对现有的"
+"模拟器、兼容层、第三方游戏引擎等进行整合利用，Wine游戏助手可为您提供一个统一"
+"的界面来启动您的所有游戏。"
 
 #: share/lutris/ui/about-dialog.ui:8 share/lutris/ui/lutris-window.ui:618
 msgid "About Lutris"
-msgstr "关于 Lutris"
+msgstr "关于Wine游戏助手"
 
 #: share/lutris/ui/about-dialog.ui:21
 msgid ""
@@ -80,6 +81,16 @@ msgstr ""
 "\n"
 "您应该已收到一份程序随付的GNU通用公共许可协议副本，如果没有，请查阅\n"
 "<http://www.gnu.org/licenses/>。\n"
+
+#: share/lutris/ui/about-dialog.ui:34 lutris/settings.py:14
+msgid "The Lutris team"
+msgstr ""
+"Lutris 团队（客户端和网站程序开发）；\n"
+"老虎会游泳（简体中文翻译，winegame.net 网站维护）；\n"
+"Ksiom（设计了客户端使用的虎头 Logo）。\n"
+"\n"
+"客户端使用的虎头 Logo 从以下地址获取，以 GFDL 版本 1.2 或以上许可：\n"
+"https://commons.wikimedia.org/wiki/File:Tiger_Icon.svg"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
 msgid "Connect to lutris.net"
@@ -116,7 +127,7 @@ msgstr "我的游戏库"
 
 #: share/lutris/ui/lutris-window.ui:93
 msgid "Community Installers"
-msgstr "社区贡献的安装脚本"
+msgstr "搜索游戏"
 
 #: share/lutris/ui/lutris-window.ui:204
 msgid "Search games"
@@ -176,16 +187,16 @@ msgid "Preferences"
 msgstr "首选项"
 
 #: share/lutris/ui/lutris-window.ui:576
-msgid "Discord"
-msgstr "Discord 讨论组"
+msgid "QQ/WeChat"
+msgstr "QQ群/微信群"
 
 #: share/lutris/ui/lutris-window.ui:590
 msgid "Lutris forums"
-msgstr "Lutris 论坛"
+msgstr "官方论坛"
 
 #: share/lutris/ui/lutris-window.ui:604
-msgid "Make a donation"
-msgstr "捐助"
+msgid "View game list"
+msgstr "浏览游戏列表"
 
 #: lutris/exceptions.py:27
 #, python-brace-format
@@ -194,8 +205,8 @@ msgid ""
 "system:\n"
 "{libs}"
 msgstr ""
-"系统内缺少以下必需的 {arch} 库，请使用软件包管理器安装它们，然后重新启动 "
-"Lutris：\n"
+"系统内缺少以下必需的 {arch} 库，请使用软件包管理器安装它们，然后重新启动Wine"
+"游戏助手：\n"
 "{libs}"
 
 #: lutris/game_actions.py:56 lutris/gui/widgets/game_bar.py:187
@@ -265,8 +276,8 @@ msgid "Remove"
 msgstr "卸载"
 
 #: lutris/game_actions.py:88
-msgid "View on Lutris.net"
-msgstr "在 lutris.net 上查看"
+msgid "View on winegame.net"
+msgstr "在 winegame.net 上查看"
 
 #: lutris/game_actions.py:89
 msgid "Hide game from library"
@@ -373,11 +384,11 @@ msgstr "<b>错误：该 Wine 容器正在被另一个不同版本的 Wine 使用
 #: lutris/gui/application.py:81
 msgid ""
 "Running Lutris as root is not recommended and may cause unexpected issues"
-msgstr "不建议以 root 用户身份运行 Lutris，这可能会导致未预期的问题"
+msgstr "不建议以 root 用户身份运行Wine游戏助手，这可能会导致未预期的问题"
 
 #: lutris/gui/application.py:91
 msgid "Your Linux distribution is too old. Lutris won't function properly."
-msgstr "您的 Linux 发行版太旧了，Lutris 无法正常运行。"
+msgstr "您的 Linux 发行版太旧了，Wine游戏助手无法正常运行。"
 
 #: lutris/gui/application.py:96
 msgid ""
@@ -394,7 +405,7 @@ msgstr ""
 
 #: lutris/gui/application.py:109
 msgid "Print the version of Lutris and exit"
-msgstr "打印 Lutris 版本后退出"
+msgstr "打印Wine游戏助手版本后退出"
 
 #: lutris/gui/application.py:117
 msgid "Show debug messages"
@@ -406,7 +417,7 @@ msgstr "从 yml 文件安装游戏"
 
 #: lutris/gui/application.py:133
 msgid "Generate a bash script to run a game without the client"
-msgstr "生成 bash 脚本以在没有 Lutris 客户端的情况下运行游戏"
+msgstr "生成 bash 脚本以在没有Wine游戏助手客户端的情况下运行游戏"
 
 #: lutris/gui/application.py:141
 msgid "Execute a program with the Lutris Runtime"
@@ -667,7 +678,7 @@ msgstr "配置 %s"
 
 #: lutris/gui/config/preferences_box.py:11 lutris/gui/config/sysinfo_box.py:11
 msgid "Minimize client when a game is launched"
-msgstr "游戏启动时最小化 Lutris 客户端"
+msgstr "游戏启动时最小化Wine游戏助手客户端"
 
 #: lutris/gui/config/preferences_box.py:12
 msgid "Hide text under icons (requires restart)"
@@ -687,7 +698,7 @@ msgstr "界面选项"
 
 #: lutris/gui/config/preferences_dialog.py:18
 msgid "Lutris settings"
-msgstr "Lutris 设置"
+msgstr "Wine游戏助手设置"
 
 #: lutris/gui/config/preferences_dialog.py:26
 msgid "Interface"
@@ -742,7 +753,7 @@ msgstr "启用游戏库整合"
 msgid ""
 "Access your game libraries from various sources. Changes require a restart "
 "to take effect."
-msgstr "将各个不同来源的游戏库整合显示在 Lutris 中（重启软件生效）"
+msgstr "将各个不同来源的游戏库整合显示在Wine游戏助手中（重启软件生效）"
 
 #: lutris/gui/config/sysinfo_box.py:12
 msgid "Hide text under icons"
@@ -846,7 +857,7 @@ msgid ""
 "Please follow the instructions given in the <a href='https://github.com/"
 "lutris/lutris/wiki/Wine-Dependencies'>Lutris Wiki</a> to install Wine."
 msgstr ""
-"在系统中安装 Wine 可以确保从 Lutris 下载的 Wine 具备运行所需的依赖包。\n"
+"在系统中安装 Wine 可以确保从Wine游戏助手下载的 Wine 具备运行所需的依赖包。\n"
 "\n"
 "请按照 <a href='https://github.com/lutris/lutris/wiki/Wine-"
 "Dependencies'>Lutris Wiki</a> 中给出的说明安装 Wine。"
@@ -866,8 +877,8 @@ msgid ""
 "will be sent the Lutris team along with your system information. You can "
 "also save this information locally if you are offline."
 msgstr ""
-"在下面的文本框中描述您遇到的问题，该信息将与您的系统信息一起发送给 Lutris 团"
-"队。如果您没有联网，也可以将该信息保存在本地。"
+"在下面的文本框中描述您遇到的问题，该信息将与您的系统信息一起发送给Wine游戏助"
+"手团队。如果您没有联网，也可以将该信息保存在本地。"
 
 #: lutris/gui/dialogs/issue.py:55
 msgid "_Save"
@@ -893,8 +904,8 @@ msgid "Unable to get runner versions: %s"
 msgstr "无法获取运行环境版本信息：%s"
 
 #: lutris/gui/dialogs/runner_install.py:71
-msgid "Unable to get runner versions from lutris.net"
-msgstr "无法从 lutris.net 获取运行环境版本信息"
+msgid "Unable to get runner versions from winegame.net"
+msgstr "无法从 winegame.net 获取运行环境版本信息"
 
 #: lutris/gui/dialogs/runner_install.py:80
 #, python-format
@@ -998,7 +1009,7 @@ msgid ""
 "All play time will be lost."
 msgstr ""
 "是否完全从游戏库中移除 %s？\n"
-"Lutris 记录的游戏游玩时间也会一并删除。"
+"Wine游戏助手记录的游戏游玩时间也会一并删除。"
 
 #: lutris/gui/dialogs/webconnect_dialog.py:88
 msgid "Loading..."
@@ -1143,8 +1154,8 @@ msgid "No games matching '%s' found "
 msgstr "未找到包含“%s”的游戏"
 
 #: lutris/gui/lutriswindow.py:437
-msgid "Use search to find games on lutris.net"
-msgstr "用搜索功能在 lutris.net 上寻找游戏"
+msgid "Use search to find games on winegame.net"
+msgstr "用搜索功能在 winegame.net 上寻找游戏"
 
 #: lutris/gui/lutriswindow.py:440
 msgid "Add games to your favorites to see them here."
@@ -1292,7 +1303,7 @@ msgstr "运行中"
 
 #: lutris/gui/widgets/status_icon.py:67
 msgid "Show Lutris"
-msgstr "显示 Lutris"
+msgstr "显示Wine游戏助手"
 
 #: lutris/gui/widgets/status_icon.py:72
 msgid "Quit"
@@ -1362,7 +1373,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Lutris 正在寻找包含以下文件或文件夹的已挂载磁盘驱动器或磁盘映像：\n"
+"Wine游戏助手正在寻找包含以下文件或文件夹的已挂载磁盘驱动器或磁盘映像：\n"
 "<i>%s</i>"
 
 #: lutris/installer/commands.py:258
@@ -1465,7 +1476,7 @@ msgstr "要使用此安装脚本，您需要将 %s 安装到您的系统中。"
 
 #: lutris/installer/interpreter.py:178
 msgid "Lutris does not have the necessary permissions to install to path:"
-msgstr "Lutris 没有安装到以下路径所需的权限："
+msgstr "Wine游戏助手没有安装到以下路径所需的权限："
 
 #: lutris/installer/interpreter.py:262
 #, python-format
@@ -1548,7 +1559,7 @@ msgid ""
 "They are provided by Lutris so you shouldn't have to change this."
 msgstr ""
 "包含 Atari 800 BIOS 文件的文件夹。\n"
-"由 Lutris 提供，您不必更改此设置。"
+"由Wine游戏助手提供，您不必更改此设置。"
 
 #: lutris/runners/atari800.py:70
 msgid "Emulate Atari 800"
@@ -1690,7 +1701,7 @@ msgid ""
 "By default, Lutris uses the directory of the executable."
 msgstr ""
 "游戏启动时的起始位置。\n"
-"如果留空，Lutris 使用可执行文件所在目录作为起始位置。"
+"如果留空，Wine游戏助手使用可执行文件所在目录作为起始位置。"
 
 #: lutris/runners/dosbox.py:61
 msgid "none"
@@ -3592,7 +3603,7 @@ msgid ""
 "(only if Steam was started by Lutris)"
 msgstr ""
 "游戏退出后关闭 Steam\n"
-"（仅当 Steam 由 Lutris 启动时才会关闭）"
+"（仅当 Steam 由 Wine 游戏助手启动时才会关闭）"
 
 #: lutris/runners/steam.py:97
 msgid "Start Steam in Big Picture mode"
@@ -3831,7 +3842,7 @@ msgid ""
 "If left blank, Lutris will launch your default browser (xdg-open)."
 msgstr ""
 "选择系统内浏览器的可执行文件。\n"
-"如果留空，Lutris 将启动您的默认浏览器（xdg-open）。"
+"如果留空，Wine游戏助手将启动您的默认浏览器（xdg-open）。"
 
 #: lutris/runners/web.py:163
 msgid "Web browser arguments"
@@ -3963,7 +3974,7 @@ msgstr "使用系统 winetricks"
 
 #: lutris/runners/wine.py:192
 msgid "Switch on to use /usr/bin/winetricks for winetricks."
-msgstr "使用 /usr/bin/winetricks 而不是 Lutris 附带的 winetricks。"
+msgstr "使用 /usr/bin/winetricks 而不是Wine游戏助手附带的 winetricks。"
 
 #: lutris/runners/wine.py:196
 msgid "Enable DXVK"
@@ -4313,8 +4324,8 @@ msgid ""
 "or will install it in its own custom Wine prefix."
 msgstr ""
 "选择一个包含 Steam.exe 的文件夹\n"
-"默认情况下，Lutris 将在 ~/.wine 中查找 Windows Steam 安装或将其安装在其自己的"
-"自定义 Wine 容器中。"
+"默认情况下，Wine游戏助手将在 ~/.wine 中查找 Windows Steam 安装或将其安装在其"
+"自己的自定义 Wine 容器中。"
 
 #: lutris/runners/winesteam.py:149
 msgid "Shut down Steam after the game has quit."
@@ -4483,11 +4494,7 @@ msgstr "育碧 Connect（未实现）"
 
 #: lutris/settings.py:13
 msgid "(c) 2010-2021 Lutris Team"
-msgstr "©2010-2021 Lutris 团队"
-
-#: lutris/settings.py:14
-msgid "The Lutris team"
-msgstr "Lutris 团队"
+msgstr "©2010-2021 Lutris 团队、老虎会游泳"
 
 #: lutris/startup.py:83
 msgid "Your NVIDIA driver is outdated."
@@ -4567,8 +4574,8 @@ msgid ""
 "When the runtime is enabled, prioritize the system libraries over the "
 "provided ones."
 msgstr ""
-"启用后，将优先使用本机 Linux 系统提供的共享库，而不是 Lutris 或运行环境自带的"
-"库。"
+"启用后，将优先使用本机 Linux 系统提供的共享库，而不是Wine游戏助手或运行环境自"
+"带的库。"
 
 #: lutris/sysoptions.py:131
 msgid "Restore resolution on game exit"
@@ -4580,8 +4587,8 @@ msgid ""
 "closed or when they crash. This is when this option comes \n"
 "into play to save your bacon."
 msgstr ""
-"某些游戏在关闭或意外崩溃时无法恢复屏幕分辨率，启用这个选项让 Lutris 帮您恢"
-"复。"
+"某些游戏在关闭或意外崩溃时无法恢复屏幕分辨率，启用这个选项让Wine游戏助手帮您"
+"恢复。"
 
 #: lutris/sysoptions.py:141
 msgid "Enable gamescope"
@@ -4629,7 +4636,7 @@ msgid ""
 "bright. Select this option to correct it."
 msgstr ""
 "某些游戏退出时无法正确恢复伽玛值（亮度阈值），从而使显示效果太亮或太暗。启用"
-"此项让 Lutris 帮您恢复。"
+"此项让Wine游戏助手帮您恢复。"
 
 #: lutris/sysoptions.py:185
 msgid "Disable desktop effects"
@@ -4829,7 +4836,7 @@ msgid ""
 msgstr ""
 "设置要与文本模式一起启动的终端模拟器。从检测到的终端应用列表中选择，或者输入"
 "终端的命令或路径。\n"
-"注意：不能保证所有终端模拟器都与 Lutris 兼容。"
+"注意：不能保证所有终端模拟器都与Wine游戏助手兼容。"
 
 #: lutris/sysoptions.py:366
 msgid "Environment variables"
@@ -4903,7 +4910,7 @@ msgid ""
 msgstr ""
 "指定进程监控要包括的进程。这会覆盖内置的排除列表。\n"
 "用空格分隔的列表，名称包括空格的进程可以用引号引起来。\n"
-"如果列表中的任一进程仍在运行，Lutris 就视为游戏仍在运行。"
+"如果列表中的任一进程仍在运行，Wine游戏助手就视为游戏仍在运行。"
 
 #: lutris/sysoptions.py:433
 msgid "Exclude processes"
@@ -4918,7 +4925,7 @@ msgid ""
 msgstr ""
 "指定进程监控要排除的进程，例如在游戏关闭后仍然存在的后台进程。\n"
 "用空格分隔的列表，名称包括空格的进程可以用引号引起来。\n"
-"如果只有排除列表中的进程在运行，Lutris 就视为游戏已停止运行。"
+"如果只有排除列表中的进程在运行，Wine游戏助手就视为游戏已停止运行。"
 
 #: lutris/sysoptions.py:448
 msgid "Killswitch file"
@@ -5048,6 +5055,12 @@ msgid ""
 msgstr ""
 "您选择的 Wine 版本不支持 Fsync。\n"
 "请选择支持 Fsync 的 Wine 版本，或者禁用 Fsync。"
+
+#~ msgid "Discord"
+#~ msgstr "Discord 讨论组"
+
+#~ msgid "Make a donation"
+#~ msgstr "捐助"
 
 #~ msgid "open source gaming platform"
 #~ msgstr "开放源代码游戏平台"
