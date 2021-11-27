@@ -1,4 +1,4 @@
-net.winegame.client (0.5.9.1) plum; urgency=medium
+net.winegame.client (0.5.9.2) plum; urgency=medium
 
   * 全新界面，全新体验。
   * Wine 游戏支持开启 FSR 和 DLSS。
