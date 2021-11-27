@@ -5,7 +5,7 @@
   <object class="GtkDialog" id="lutris-login">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="title" translatable="yes">Connect to lutris.net</property>
+    <property name="title" translatable="yes">Connect to winegame.net</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
@@ -30,7 +30,7 @@
                 <property name="has_tooltip">True</property>
                 <property name="valign">center</property>
                 <property name="relief">none</property>
-                <property name="uri">https://lutris.net/user/password/reset/</property>
+                <property name="uri">https://winegame.net/user/password/reset/</property>
               </object>
               <packing>
                 <property name="expand">False</property>
