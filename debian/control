@@ -49,6 +49,11 @@ Recommends: vulkan-utils,
             gvfs-backends,
             libwine-development,
             winetricks,
-Suggests: gamemode,
+            gamemode,
+            libgamemode0,
+            libgamemode0:i386,
+            libgamemodeauto0,
+            libgamemodeauto0:i386,
+Suggests:
 Description: 开源游戏平台
  在 UOS/Deepin/Linux 上玩你喜欢的 Windows 游戏
