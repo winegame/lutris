@@ -15,7 +15,7 @@ else:
     logger.warning("Notifications are disabled, please install GObject bindings for 'Notify' to enable them.")
 
 
-def send_notification(title, text, file_path_to_icon="lutris"):
+def send_notification(title, text, file_path_to_icon="net.winegame.client"):
     if NOTIFY_SUPPORT:
         notification = Notify.Notification.new(title, text, file_path_to_icon)
         notification.show()

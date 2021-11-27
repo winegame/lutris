@@ -66,7 +66,7 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
             default_height=height,
             window_position=Gtk.WindowPosition.NONE,
             name="lutris",
-            icon_name="lutris",
+            icon_name="net.winegame.client",
             application=application,
             **kwargs
         )
@@ -103,7 +103,7 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
 
         self.set_viewtype_icon(self.view_type)
 
-        lutris_icon = Gtk.Image.new_from_icon_name("lutris", Gtk.IconSize.MENU)
+        lutris_icon = Gtk.Image.new_from_icon_name("net.winegame.client", Gtk.IconSize.MENU)
         lutris_icon.set_margin_right(3)
 
         self.sidebar = LutrisSidebar(self.application, selected=self.selected_category)

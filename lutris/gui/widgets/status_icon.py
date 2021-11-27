@@ -32,7 +32,7 @@ class LutrisStatusIcon:
         """Create an appindicator"""
         if APP_INDICATOR_SUPPORTED:
             return AppIndicator.Indicator.new(
-                "net.lutris.Lutris", "lutris", AppIndicator.IndicatorCategory.APPLICATION_STATUS
+                "net.winegame.client", "net.winegame.client", AppIndicator.IndicatorCategory.APPLICATION_STATUS
             )
         return LutrisTray(self.application)
 
@@ -63,7 +63,7 @@ class LutrisStatusIcon:
         menu.append(Gtk.SeparatorMenuItem())
 
         present_menu = Gtk.ImageMenuItem()
-        present_menu.set_image(Gtk.Image.new_from_icon_name("lutris", Gtk.IconSize.MENU))
+        present_menu.set_image(Gtk.Image.new_from_icon_name("net.winegame.client", Gtk.IconSize.MENU))
         present_menu.set_label(_("Show Lutris"))
         present_menu.connect("activate", self.on_activate)
         menu.append(present_menu)
@@ -116,4 +116,4 @@ class LutrisTray(Gtk.StatusIcon):
         self.set_tooltip_text(_("Lutris"))
         self.set_visible(True)
         self.application = application
-        self.set_from_icon_name("lutris")
+        self.set_from_icon_name("net.winegame.client")
