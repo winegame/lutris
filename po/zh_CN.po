@@ -5013,9 +5013,7 @@ msgid ""
 "(https://github.com/lutris/lutris/wiki/How-to:-DXVK)</a>"
 msgstr ""
 "未安装支持Vulkan的显卡驱动，很多游戏都无法正常运行。\n"
-"请参考以下文档来安装显卡驱动：<a href='https://github.com/lutris/lutris/wiki/"
-"How-to:-DXVK'>How-to:-DXVK（https://github.com/lutris/lutris/wiki/How-to:-"
-"DXVK）</a>"
+"请按照我们的<a href='https://hu60.cn/q.php/bbs.topic.94828.1.html'>显卡驱动安装教程</a>安装显卡驱动。"
 
 #: lutris/util/wine/wine.py:363
 msgid ""
