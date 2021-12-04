@@ -1,4 +1,19 @@
-net.winegame.client (0.5.9.2) plum; urgency=medium
+net.winegame.client (0.5.9.3) hirsute; urgency=medium
+
+  * 更改显卡驱动安装教程的链接
+  * 修复安装时经常出现“命令以错误代码 xxx 退出”的问题
+
+ -- 老虎会游泳 <hu60.cn@qq.com>  Sat, 4 Dec 2021 23:10:02 +0800
+
+net.winegame.client (0.5.9.2) hirsute; urgency=medium
+
+  * 修复了生成的桌面快捷方式无法使用的问题。
+  * 修复了部分Logo依然显示为Lutris Logo的问题。
+  * 修复了部分网址链接依然为lutris.net的问题。
+
+ -- 老虎会游泳 <hu60.cn@qq.com>  Sun, 28 Nov 2021 02:04:38 +0800
+
+net.winegame.client (0.5.9.1) hirsute; urgency=medium
 
   * 全新界面，全新体验。
   * Wine 游戏支持开启 FSR 和 DLSS。
@@ -6,7 +21,7 @@ net.winegame.client (0.5.9.2) plum; urgency=medium
   * 下载功能改进，可同时下载多个文件；可重试；无法下载时可用本地文件替换。
   * 名词变更：“Wine 前缀”现在叫做“Wine 容器”。
 
- -- 老虎会游泳 <hu60.cn@qq.com>  Sun, 29 Nov 2020 11:57:42 +0800
+ -- 老虎会游泳 <hu60.cn@qq.com>  Sat, 20 Nov 2021 17:29:19 +0800
 
 lutris (0.5.9.1) hirsute; urgency=medium
 
