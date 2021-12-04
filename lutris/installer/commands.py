@@ -418,8 +418,9 @@ class CommandsMixin:
     def _monitor_task(self, command):
         if not command.is_running:
             logger.debug("Return code: %s", command.return_code)
-            if command.return_code != "0":
-                raise ScriptingError(_("Command exited with code %s") % command.return_code)
+            # 老虎会游泳：程序以非0代码退出时不中断安装，因为winetricks中有大量此类情况，并不影响实际使用
+            #if command.return_code != "0":
+            #    raise ScriptingError(_("Command exited with code %s") % command.return_code)
             self._iter_commands()
             return False
         return True
