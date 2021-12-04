@@ -18,6 +18,7 @@ SYSTEM_PROCESSES = {
     "plugplay.exe",
     "explorer.exe",
     "wineconsole",
+    "conhost.exe",
     "svchost.exe",
     "rpcss.exe",
     "rundll32.exe",
