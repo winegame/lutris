@@ -43,6 +43,7 @@ def execute(command, env=None, cwd=None, log_errors=False, quiet=False, shell=Fa
         Returns:
             str: stdout output
     """
+    print("[execute]", command, env, cwd, log_errors, quiet, shell, timeout)
 
     # Check if the executable exists
     if not command:

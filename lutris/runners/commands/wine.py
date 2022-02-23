@@ -93,6 +93,7 @@ def create_prefix(  # noqa: C901
         overrides = {}
     if not prefix:
         raise ValueError("No Wine prefix path given")
+    print("[create_prefix]", prefix, wine_path, arch, overrides, install_gecko, install_mono)
     logger.info("Creating a %s prefix in %s", arch, prefix)
 
     # Follow symlinks, don't delete existing ones as it would break some setups
