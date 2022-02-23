@@ -450,10 +450,22 @@ def gather_system_info_str():
     system_info_readable["System"] = system_dict
     # Add CPU information
     cpu_dict = {}
-    cpu_dict["Vendor"] = system_info["cpus"][0]["vendor_id"]
+    try:
+        cpu_dict["Vendor"] = system_info["cpus"][0]["vendor_id"]
+    except KeyError:
+        try:
+            cpu_dict["Vendor"] = system_info["cpus"][0]["CPU implementer"]
+        except KeyError:
+            cpu_dict["Vendor"] = ""
     cpu_dict["Model"] = system_info["cpus"][0]["model name"]
-    cpu_dict["Physical cores"] = system_info["cpus"][0]["cpu cores"]
-    cpu_dict["Logical cores"] = system_info["cpus"][0]["siblings"]
+    try:
+        cpu_dict["Physical cores"] = system_info["cpus"][0]["cpu cores"]
+    except KeyError:
+        cpu_dict["Physical cores"] = len(system_info["cpus"])
+    try:
+        cpu_dict["Logical cores"] = system_info["cpus"][0]["siblings"]
+    except KeyError:
+        cpu_dict["Physical cores"] = len(system_info["cpus"])
     system_info_readable["CPU"] = cpu_dict
     # Add memory information
     ram_dict = {}
