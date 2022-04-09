@@ -223,7 +223,9 @@ ARM架构的Wine目前写成 ``xxx-arm64-i386``，是因为Wine游戏助手客�
 * ``version: winehq-stable-7.0-x64only-x86_64``
 * ``version: winehq-stable-7.0-exagear32-i386``
 * ``version: winehq-stable-7.0-exagear64-x86_64``
-* ``version: winehq-devel-7.0-arm64-armv7``
+* ``version: winehq-devel-7.0-arm64-i386`` （实际是 ``-aarch64``，因客户端Bug被迫标记为 ``-i386``）
+
+可在此处看到所有Wine版本：https://winegame.net/api/runners，在 ``version`` 中引用的方法为 ``version-architecture``，不能省略 ``architecture`` （``-i386`` 或 ``-x86_64``）。
 
 ``Desktop``：在Wine虚拟桌面运行游戏。当游戏和Linux窗口管理器冲突，比如按Alt+Tab会崩溃时，可用此选项。
 例子：``Desktop: true``
