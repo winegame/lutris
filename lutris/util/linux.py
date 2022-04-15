@@ -69,6 +69,7 @@ SYSTEM_COMPONENTS = {
         "yuakuake",
         "qterminal",
         "alacritty",
+        "deepin-terminal",
     ],
     "LIBRARIES": {
         "OPENGL": ["libGL.so.1"],
