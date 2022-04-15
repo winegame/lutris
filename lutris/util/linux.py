@@ -234,6 +234,10 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
         """Return the architectures supported on this machine"""
         if self.arch == "x86_64":
             return ["i386", "x86_64"]
+        if self.arch == "aarch64":
+            return ["aarch64", "armv7", "i386", "x86_64"]
+        if self.arch == "loongarch64":
+            return ["loongarch64", "i386", "x86_64"]
         return ["i386"]
 
     @property
