@@ -468,6 +468,9 @@ class InstallerWindow(BaseApplicationWindow):  # pylint: disable=too-many-public
         self.interpreter.launch_installer_commands()
 
     def on_install_finished(self, game_id):
+        # 修复游戏安装完成后 Lutris 游戏列表视图未刷新，操作响应不正确的问题
+        self.application.window.emit("view-updated")
+
         self.clean_widgets()
 
         if self.config.get("create_desktop_shortcut"):
