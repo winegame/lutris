@@ -343,7 +343,7 @@ class Runner:  # pylint: disable=too-many-public-methods
         versions = runner_info.get("versions") or []
         arch = LINUX_SYSTEM.arch
         if version:
-            if version.endswith("-i386") or version.endswith("-x86_64"):
+            if version.endswith("-i386") or version.endswith("-x86_64") or version.endswith("-aarch64") or version.endswith("-armv7") or version.endswith("-loongarch64"):
                 version, arch = version.rsplit("-", 1)
             versions = [v for v in versions if v["version"] == version]
         versions_for_arch = [v for v in versions if v["architecture"] == arch]
