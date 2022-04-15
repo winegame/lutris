@@ -1,3 +1,13 @@
+net.winegame.client (0.5.9.4) hirsute; urgency=medium
+
+  * 修复系统装有Steam可能导致Wine游戏助手无法正常启动游戏的问题。
+  * 修复游戏安装完成后 Lutris 游戏列表视图未刷新，操作响应不正确的问题。
+  * 把Lutris删掉的自定义游戏名称功能加回来，多好的功能，Wine游戏助手特别需要。
+  * 把deepin-terminal加入终端列表，修复“Couldn't find a terminal emulator”报错。
+  * 尝试修复架构标为aarch64的wine版本无法从安装脚本正常安装的问题。
+
+ -- 老虎会游泳 <hu60.cn@qq.com>  Sat, 16 Apr 2022 03:13:35 +0800
+
 net.winegame.client (0.5.9.3) hirsute; urgency=medium
 
   * 更改显卡驱动安装教程的链接
