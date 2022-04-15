@@ -236,9 +236,9 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
         if self.arch == "x86_64":
             return ["i386", "x86_64"]
         if self.arch == "aarch64":
-            return ["aarch64", "armv7", "i386", "x86_64"]
+            return ["aarch64"]
         if self.arch == "loongarch64":
-            return ["loongarch64", "i386", "x86_64"]
+            return ["loongarch64"]
         return ["i386"]
 
     @property
@@ -381,12 +381,21 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
 class SharedLibrary:
     """Representation of a Linux shared library"""
 
-    default_arch = "i386"
-
     def __init__(self, name, flags, path):
         self.name = name
         self.flags = [flag.strip() for flag in flags.split(",")]
         self.path = path
+        self.default_arch = self.get_default_arch()
+
+    @staticmethod
+    def get_default_arch():
+        """Return the system default architecture"""
+        machine = platform.machine()
+        if machine in ("aarch64", "loongarch64"):
+            return machine
+        if "armv7" in machine:
+            return "armv7"
+        return "i386"
 
     @classmethod
     def new_from_ldconfig(cls, ldconfig_line):
@@ -399,10 +408,10 @@ class SharedLibrary:
     @property
     def arch(self):
         """Return the architecture for a shared library"""
-        detected_arch = ["x86-64", "x32"]
+        detected_arch = ["x86-64", "AArch64"]
         for arch in detected_arch:
             if arch in self.flags:
-                return arch.replace("-", "_")
+                return arch.replace("-", "_").lower()
         return self.default_arch
 
     @property
