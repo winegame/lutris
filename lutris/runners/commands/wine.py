@@ -137,7 +137,7 @@ def create_prefix(  # noqa: C901
         wineenv["WINE_SKIP_MONO_INSTALLATION"] = "1"
         overrides["mscoree"] = "disabled"
 
-    system.execute([wineboot_path], env=wineenv)
+    system.execute([wineboot_path], env=wineenv, log_errors=True)
     for loop_index in range(1000):
         time.sleep(0.5)
         if system.path_exists(os.path.join(prefix, "user.reg")):
