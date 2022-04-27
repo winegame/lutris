@@ -130,7 +130,7 @@ def create_prefix(  # noqa: C901
         "WINEDLLOVERRIDES": get_overrides_env(overrides),
     }
 
-    system.execute([wineboot_path], env=wineenv)
+    system.execute([wineboot_path], env=wineenv, log_errors=True)
     for loop_index in range(50):
         time.sleep(0.25)
         if system.path_exists(os.path.join(prefix, "user.reg")):

@@ -64,20 +64,18 @@ def execute(command, env=None, cwd=None, log_errors=False, quiet=False, shell=Fa
             command,
             shell=shell,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE if log_errors else subprocess.DEVNULL,
+            stderr=None if log_errors else subprocess.DEVNULL,
             env=existing_env,
             cwd=cwd,
             errors="replace"
         ) as command_process:
-            stdout, stderr = command_process.communicate(timeout=timeout)
+            stdout, _ = command_process.communicate(timeout=timeout)
     except (OSError, TypeError) as ex:
         logger.error("Could not run command %s (env: %s): %s", command, env, ex)
         return ""
     except subprocess.TimeoutExpired:
         logger.error("Command %s after %s seconds", command, timeout)
         return ""
-    if stderr and log_errors:
-        logger.error(stderr)
     return stdout.strip()
 
 
