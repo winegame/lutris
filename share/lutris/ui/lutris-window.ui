@@ -23,7 +23,7 @@
   <template class="LutrisWindow" parent="GtkApplicationWindow">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">WineGame</property>
-    <property name="icon-name">lutris</property>
+    <property name="icon-name">net.winegame.client</property>
     <signal name="destroy" handler="on_destroy" swapped="no"/>
     <signal name="size-allocate" handler="on_resize" swapped="no"/>
     <child>
@@ -536,7 +536,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
             <property name="action-name">win.open-discord</property>
-            <property name="text" translatable="yes">Discord</property>
+            <property name="text" translatable="yes">QQ/WeChat</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -550,7 +550,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
             <property name="action-name">win.open-forums</property>
-            <property name="text" translatable="yes">Lutris forums</property>
+            <property name="text" translatable="yes">WineGame forums</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -564,7 +564,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
             <property name="action-name">win.donate</property>
-            <property name="text" translatable="yes">Make a donation</property>
+            <property name="text" translatable="yes">View game list</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -578,7 +578,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
             <property name="action-name">win.about</property>
-            <property name="text" translatable="yes">About Lutris</property>
+            <property name="text" translatable="yes">About WineGame</property>
           </object>
           <packing>
             <property name="expand">False</property>

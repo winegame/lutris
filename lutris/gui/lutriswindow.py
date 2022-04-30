@@ -158,9 +158,9 @@ class LutrisWindow(Gtk.ApplicationWindow):  # pylint: disable=too-many-public-me
                 type="b",
                 default=self.show_hidden_games,
             ),
-            "open-forums": Action(lambda *x: open_uri("https://forums.winegame.net/")),
-            "open-discord": Action(lambda *x: open_uri("https://discord.gg/Pnt5CuY")),
-            "donate": Action(lambda *x: open_uri("https://winegame.net/donate")),
+            "open-forums": Action(lambda *x: open_uri("https://hu60.cn/q.php/bbs.forum.170.html")),
+            "open-discord": Action(lambda *x: open_uri("https://winegame.net/about")),
+            "donate": Action(lambda *x: open_uri("https://winegame.net/games")),
         }
 
         self.actions = {}
