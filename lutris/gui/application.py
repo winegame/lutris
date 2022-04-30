@@ -73,7 +73,7 @@ class Application(Gtk.Application):
         GObject.add_emission_hook(Game, "game-install-update", self.on_game_install_update)
         GObject.add_emission_hook(Game, "game-install-dlc", self.on_game_install_dlc)
 
-        GLib.set_application_name(_("Lutris"))
+        GLib.set_application_name(_("WineGame"))
         self.window = None
 
         self.running_games = Gio.ListStore.new(Game)

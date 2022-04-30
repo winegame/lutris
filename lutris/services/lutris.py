@@ -36,7 +36,7 @@ class LutrisService(OnlineService):
     """Service for Lutris games"""
 
     id = "lutris"
-    name = _("Lutris")
+    name = _("WineGame")
     icon = "lutris"
     online = True
     medias = {

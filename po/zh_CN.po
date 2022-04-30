@@ -18,8 +18,8 @@ msgstr ""
 #: share/metainfo/net.lutris.Lutris.metainfo.xml:10
 #: share/lutris/ui/lutris-window.ui:25 lutris/gui/application.py:76
 #: lutris/gui/widgets/status_icon.py:116 lutris/services/lutris.py:39
-msgid "Lutris"
-msgstr "Lutris"
+msgid "WineGame"
+msgstr "Wine游戏助手"
 
 #: share/applications/net.lutris.Lutris.desktop:4
 msgid "video game preservation platform"
