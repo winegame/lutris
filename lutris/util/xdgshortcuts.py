@@ -14,8 +14,8 @@ from lutris.util.log import logger
 
 def get_lutris_executable():
     if LINUX_SYSTEM.is_flatpak:
-        return "flatpak run net.lutris.Lutris"
-    return "lutris"
+        return "flatpak run net.winegame.client"
+    return "/opt/apps/net.winegame.client/files/bin/winegame"
 
 
 def get_xdg_entry(directory):
@@ -61,11 +61,11 @@ def create_launcher(game_slug, game_id, game_name, desktop=False, menu=False):
         Type=Application
         Name={}
         Icon={}
-        Exec=env LUTRIS_SKIP_INIT=1 {} lutris:rungameid/{}
+        Exec=env LUTRIS_SKIP_INIT=1 {} winegame:rungameid/{}
         Categories=Game
         """.format(
             game_name,
-            "lutris_{}".format(game_slug),
+            "winegame_{}".format(game_slug),
             lutris_executable,
             game_id
         )

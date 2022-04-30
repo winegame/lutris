@@ -9,7 +9,7 @@ from gi.repository import GLib
 # Used to store log buffers for games.
 LOG_BUFFERS = {}
 
-CACHE_DIR = os.path.realpath(os.path.join(GLib.get_user_cache_dir(), "lutris"))
+CACHE_DIR = os.path.realpath(os.path.join(GLib.get_user_cache_dir(), "net.winegame.client"))
 if not os.path.isdir(CACHE_DIR):
     os.makedirs(CACHE_DIR)
 

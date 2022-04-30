@@ -199,22 +199,22 @@ def get_bundle(bundle):
 
 def parse_installer_url(url):
     """
-    Parses `lutris:` urls, extracting any info necessary to install or run a game.
+    Parses `winegame:` urls, extracting any info necessary to install or run a game.
     """
     action = None
     try:
-        parsed_url = urllib.parse.urlparse(url, scheme="lutris")
+        parsed_url = urllib.parse.urlparse(url, scheme="winegame")
     except Exception:  # pylint: disable=broad-except
         logger.warning("Unable to parse url %s", url)
         return False
-    if parsed_url.scheme != "lutris":
+    if parsed_url.scheme != "winegame":
         return False
     url_path = parsed_url.path
     if not url_path:
         return False
     # urlparse can't parse if the path only contain numbers
     # workaround to remove the scheme manually:
-    if url_path.startswith("lutris:"):
+    if url_path.startswith("winegame:"):
         url_path = url_path[7:]
 
     url_parts = url_path.split("/")
@@ -224,7 +224,7 @@ def parse_installer_url(url):
     elif len(url_parts) == 1:
         game_slug = url_parts[0]
     else:
-        raise ValueError("Invalid lutris url %s" % url)
+        raise ValueError("Invalid winegame url %s" % url)
 
     # To link to service games, format a slug like <service>:<appid>
     if ":" in game_slug:

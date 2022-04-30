@@ -4,6 +4,7 @@ import os
 import shutil
 
 from lutris.util import resources
+from lutris.util.linux import LINUX_SYSTEM
 from lutris.util.log import logger
 from lutris.util.steam import vdf
 from lutris.util.steam.config import search_recursive_in_steam_dirs
@@ -125,15 +126,15 @@ def generate_shortcut(game):
     slug = game.slug
     gameId = game.id
     icon = resources.get_icon_path(slug)
-    lutris_binary = shutil.which("lutris")
-    launch_options = f'lutris:rungameid/{gameId}'
-    if lutris_binary == "/app/bin/lutris":
+    lutris_binary = "/opt/apps/net.winegame.client/files/bin/winegame"
+    launch_options = f'winegame:rungameid/{gameId}'
+    if LINUX_SYSTEM.is_flatpak:
         lutris_binary = "flatpak"
-        launch_options = "run net.lutris.Lutris " + launch_options
+        launch_options = "run net.winegame.client " + launch_options
     start_dir = os.path.dirname(lutris_binary)
 
     return {
-        'appid': "lutris-{}".format(slug),
+        'appid': "winegame-{}".format(slug),
         'AllowDesktopConfig': 1,
         'AllowOverlay': 1,
         'AppName': name,
@@ -148,7 +149,7 @@ def generate_shortcut(game):
         'StartDir': f'"{start_dir}"',
         'icon': icon,
         'tags': {  # has been replaced by "collections" in steam. Tags are not visible in the UI anymore.
-            '0': "Lutris"   # to identify generated shortcuts
+            '0': "WineGame"   # to identify generated shortcuts
         }
     }
 
@@ -160,7 +161,7 @@ def matches_appname(shortcut, game):
 
 
 def get_steam_shortcut_id(game):
-    lutris_binary = shutil.which("lutris")
+    lutris_binary = "/opt/apps/net.winegame.client/files/bin/winegame"
     exe = f'"{lutris_binary}"'
     appname = "{} ({})".format(game.name, game.runner_name)
     unique_id = ''.join([exe, appname])

@@ -7,7 +7,7 @@ class BaseApplicationWindow(Gtk.ApplicationWindow):
     """Window used to guide the user through a issue reporting process"""
 
     def __init__(self, application):
-        Gtk.ApplicationWindow.__init__(self, icon_name="lutris", application=application)
+        Gtk.ApplicationWindow.__init__(self, icon_name="net.winegame.client", application=application)
         self.application = application
         self.set_show_menubar(False)
 

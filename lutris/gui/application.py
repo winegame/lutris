@@ -61,7 +61,7 @@ class Application(Gtk.Application):
 
     def __init__(self):
         super().__init__(
-            application_id="net.lutris.Lutris",
+            application_id="net.winegame.client",
             flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
             register_session=True,
         )

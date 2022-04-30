@@ -37,7 +37,7 @@ class LutrisService(OnlineService):
 
     id = "lutris"
     name = _("WineGame")
-    icon = "lutris"
+    icon = "net.winegame.client"
     online = True
     medias = {
         "icon": LutrisIcon,
@@ -153,9 +153,9 @@ def sync_media():
     """Downlad all missing media"""
     banners_available = {fn.split(".")[0] for fn in os.listdir(settings.BANNER_PATH)}
     icons_available = {
-        fn.split(".")[0].replace("lutris_", "")
+        fn.split(".")[0].replace("winegame_", "")
         for fn in os.listdir(settings.ICON_PATH)
-        if fn.startswith("lutris_")
+        if fn.startswith("winegame_")
     }
     covers_available = {fn.split(".")[0] for fn in os.listdir(settings.COVERART_PATH)}
     complete_games = banners_available.intersection(icons_available).intersection(covers_available)

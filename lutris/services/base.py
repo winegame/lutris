@@ -36,7 +36,7 @@ class LutrisBanner(ServiceMedia):
 class LutrisIcon(LutrisBanner):
     size = (32, 32)
     dest_path = settings.ICON_PATH
-    file_pattern = "lutris_%s.png"
+    file_pattern = "winegame_%s.png"
     api_field = 'icon_url'
 
 

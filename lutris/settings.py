@@ -8,21 +8,21 @@ from gi.repository import GLib
 from lutris import __version__
 from lutris.util.settings import SettingsIO
 
-PROJECT = "Lutris"
+PROJECT = "WineGame"
 VERSION = __version__
 COPYRIGHT = _("(c) 2010-2022 Lutris Team")
 AUTHORS = [_("The Lutris team")]
 
 
 # Paths
-CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "lutris")
+CONFIG_DIR = os.path.join(GLib.get_user_config_dir(), "net.winegame.client")
 CONFIG_FILE = os.path.join(CONFIG_DIR, "lutris.conf")
 sio = SettingsIO(CONFIG_FILE)
 
-DATA_DIR = os.path.join(GLib.get_user_data_dir(), "lutris")
+DATA_DIR = os.path.join(GLib.get_user_data_dir(), "net.winegame.client")
 RUNNER_DIR = sio.read_setting("runner_dir") or os.path.join(DATA_DIR, "runners")
 RUNTIME_DIR = sio.read_setting("runtime_dir") or os.path.join(DATA_DIR, "runtime")
-CACHE_DIR = sio.read_setting("cache_dir") or os.path.join(GLib.get_user_cache_dir(), "lutris")
+CACHE_DIR = sio.read_setting("cache_dir") or os.path.join(GLib.get_user_cache_dir(), "net.winegame.client")
 GAME_CONFIG_DIR = os.path.join(CONFIG_DIR, "games")
 
 TMP_PATH = os.path.join(CACHE_DIR, "tmp")
