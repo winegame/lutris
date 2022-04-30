@@ -39,7 +39,7 @@ else:
 
 SITE_URL = sio.read_setting("website") or "https://winegame.net"
 
-DRIVER_HOWTO_URL = "https://github.com/lutris/docs/blob/master/InstallingDrivers.md"
+DRIVER_HOWTO_URL = "https://hu60.cn/q.php/bbs.topic.94828.html#nav"
 INSTALLER_URL = SITE_URL + "/api/installers/%s"
 # XXX change this, should query on the installer, not the game.
 INSTALLER_REVISION_URL = SITE_URL + "/api/installers/games/%s/revisions/%s"
