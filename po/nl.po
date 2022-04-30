@@ -5590,8 +5590,8 @@ msgstr ""
 #~ msgid "Enabled (OpenGL)"
 #~ msgstr "Ingeschakeld (OpenGL)"
 
-#~ msgid "Kill all Wine processes"
-#~ msgstr "Alle Wine-processen beëindigen"
+msgid "Kill all Wine processes"
+msgstr "Alle Wine-processen beëindigen"
 
 #~ msgid "Could not find GOG game"
 #~ msgstr "De GOG-game is niet aangetroffen"

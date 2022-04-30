@@ -5511,8 +5511,8 @@ msgstr ""
 #~ msgid "Nintendo Switch emulator for LDN build visit https://ryujinx.org/"
 #~ msgstr "任天堂 Switch 模拟器（可通过 LDN 联机，详见 https://ryujinx.org/）"
 
-#~ msgid "Kill all Wine processes"
-#~ msgstr "结束所有 Wine 进程"
+msgid "Kill all Wine processes"
+msgstr "结束所有 Wine 进程"
 
 #~ msgid "Runs Steam for Windows games"
 #~ msgstr "运行 Windows 版 Steam 上的游戏"

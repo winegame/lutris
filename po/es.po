@@ -5851,8 +5851,8 @@ msgstr ""
 #~ "Ajústelo a \"Y\" para permitir que Wine cambie la resolución utilizando "
 #~ "la extensión XVidMode."
 
-#~ msgid "Kill all Wine processes"
-#~ msgstr "Terminar todos los procesos de Wine"
+msgid "Kill all Wine processes"
+msgstr "Terminar todos los procesos de Wine"
 
 #~ msgid "Wine Steam"
 #~ msgstr "Wine Steam"
