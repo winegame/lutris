@@ -58,8 +58,8 @@ msgstr ""
 "动您的所有游戏。"
 
 #: share/lutris/ui/about-dialog.ui:8 share/lutris/ui/lutris-window.ui:581
-msgid "About Lutris"
-msgstr "关于 Lutris"
+msgid "About WineGame"
+msgstr "关于Wine游戏助手"
 
 #: share/lutris/ui/about-dialog.ui:21
 msgid ""
@@ -84,6 +84,22 @@ msgstr ""
 "\n"
 "您应该已收到一份程序随付的GNU通用公共许可协议副本，如果没有，请查阅\n"
 "<http://www.gnu.org/licenses/>。\n"
+
+#: share/lutris/ui/about-dialog.ui:34
+msgid ""
+"The Lutris team (the main developer of this client and its website);\n"
+"SwimmingTiger (Chinese customization of this client and the website);\n"
+"Ksiom (designer of the tiger icon used by this client).\n"
+"\n"
+"The tiger icon is licensed under GFDL 1.2 or above, available at\n"
+"https://commons.wikimedia.org/wiki/File:Tiger_Icon.svg"
+msgstr ""
+"Lutris团队（客户端和网站程序的主要开发者）；\n"
+"老虎会游泳（客户端和网站程序的中国版定制）；\n"
+"Ksiom（设计了客户端使用的虎头图标）。\n"
+"\n"
+"虎头图标可从以下地址获取，以1.2及以上版本的GFDL许可证进行许可：\n"
+"https://commons.wikimedia.org/wiki/File:Tiger_Icon.svg"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
 msgid "Connect to winegame.net"
@@ -176,16 +192,16 @@ msgid "Preferences"
 msgstr "首选项"
 
 #: share/lutris/ui/lutris-window.ui:539
-msgid "Discord"
-msgstr "Discord 讨论组"
+msgid "QQ/WeChat"
+msgstr "QQ群/微信群"
 
 #: share/lutris/ui/lutris-window.ui:553
-msgid "Lutris forums"
-msgstr "Lutris 论坛"
+msgid "WineGame forums"
+msgstr "官方论坛"
 
 #: share/lutris/ui/lutris-window.ui:567
-msgid "Make a donation"
-msgstr "捐助"
+msgid "View game list"
+msgstr "浏览游戏列表"
 
 #: lutris/exceptions.py:26
 #, python-brace-format
@@ -854,8 +870,8 @@ msgid "Interface options"
 msgstr "界面选项"
 
 #: lutris/gui/config/preferences_dialog.py:18
-msgid "Lutris settings"
-msgstr "Lutris 设置"
+msgid "WineGame settings"
+msgstr "Wine游戏助手设置"
 
 #: lutris/gui/config/preferences_dialog.py:26
 msgid "Interface"

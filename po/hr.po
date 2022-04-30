@@ -704,8 +704,8 @@ msgid "Interface options"
 msgstr "Mogućnosti sučelja"
 
 #: lutris/gui/config/preferences_dialog.py:18
-msgid "Lutris settings"
-msgstr "Lutris postavke"
+msgid "WineGame settings"
+msgstr "WineGame postavke"
 
 #: lutris/gui/config/preferences_dialog.py:26
 msgid "Interface"
