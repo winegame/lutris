@@ -18,7 +18,7 @@ class AddGamesWindow(BaseApplicationWindow):  # pylint: disable=too-many-public-
     sections = [
         (
             "system-search-symbolic",
-            _("Search the Lutris website for installers"),
+            _("Search the WineGame website for installers"),
             _("Query our website for community installers"),
             "search_installers"
         ),

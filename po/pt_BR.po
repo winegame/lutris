@@ -397,8 +397,8 @@ msgstr ""
 "</b>"
 
 #: lutris/gui/addgameswindow.py:21
-msgid "Search the Lutris website for installers"
-msgstr "Procure no site do Lutris por instaladores"
+msgid "Search the WineGame website for installers"
+msgstr "Procure no site do WineGame por instaladores"
 
 #: lutris/gui/addgameswindow.py:22
 msgid "Query our website for community installers"

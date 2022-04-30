@@ -410,8 +410,8 @@ msgid ""
 msgstr "<b>错误：该 Wine 容器正在被另一个不同版本的 Wine 使用。</b>"
 
 #: lutris/gui/addgameswindow.py:21
-msgid "Search the Lutris website for installers"
-msgstr "在 Lutris 网站上搜索游戏"
+msgid "Search the WineGame website for installers"
+msgstr "在 WineGame 网站上搜索游戏"
 
 #: lutris/gui/addgameswindow.py:22
 msgid "Query our website for community installers"

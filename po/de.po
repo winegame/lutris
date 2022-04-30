@@ -381,8 +381,8 @@ msgstr ""
 "<b>Fehler: Eine andere Wine-Version nutzt bereits denselben Präfix.</b>"
 
 #: lutris/gui/addgameswindow.py:21
-msgid "Search the Lutris website for installers"
-msgstr "Nach Installationsskripts auf der Lutris-Webseite suchen"
+msgid "Search the WineGame website for installers"
+msgstr "Nach Installationsskripts auf der WineGame-Webseite suchen"
 
 #: lutris/gui/addgameswindow.py:22
 msgid "Query our website for community installers"
