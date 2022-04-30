@@ -135,7 +135,7 @@ lutris (0.5.8) groovy; urgency=medium
   * Integration with the lutris website such as login and showing your
     library has been delegated to the 'lutris' service in the sidebar.
   * The lutris service gives the option of searching your library or the whole
-    lutris.net library.
+    winegame.net library.
   * Games from 3rd party services no longer depend on an install script to be
     present on the website. Lutris will automatically install games with an
     auto-generated script. Scripts from the website take precedence if available.
@@ -432,7 +432,7 @@ lutris (0.5.0) cosmic; urgency=medium
   * Game information and actions are now displayed in a panel on the right side.
     Coverart fetching for the panel will be added in a future release, until then
     cover art files can be placed in ~/.local/share/lutris/coverart/[game-identifier].jpg
-  * Games from lutris.net can be searched and installed from the client itself.
+  * Games from winegame.net can be searched and installed from the client itself.
   * New install_cab_component installer command for Media Foundation based games.
   * Add a download cache to re-use files between installations.
   * Print graphics drivers and GPU on startup
@@ -711,7 +711,7 @@ lutris (0.4.5) yakkety; urgency=medium
   * Remove Desura
   * Add --exec command line flag
   * Fix minor issues when switching between grid and list view
-  * Add "View on Lutris.net" to game context menus
+  * Add "View on WineGame.net" to game context menus
   * Add 64-bit support to Wine Steam runner
   * Make Lutris remember window maximized state and size
   * Sidepanel doesn't resize with the window
@@ -986,7 +986,7 @@ lutris (0.3.6) trusty; urgency=medium
     - Added a direct link to your Library in the menu
 
   * For contributors:
-    - New mailing list available at lists.lutris.net/cgi-bin/mailman/listinfo/lutris
+    - New mailing list available at lists.winegame.net/cgi-bin/mailman/listinfo/lutris
     - Fixed the game submission form
     - Improved feedback on submissions
     - New write_config installer directive to write into INI files
@@ -996,7 +996,7 @@ lutris (0.3.6) trusty; urgency=medium
 
 lutris (0.3.5) trusty; urgency=medium
 
-  * All runners now use the version hosted on lutris.net (auto-install!)
+  * All runners now use the version hosted on winegame.net (auto-install!)
   * Desura and Virtual Jaguar support
   * Browse installed games' files from the context menu
   * New "Connected" status indicator in the status bar
@@ -1044,7 +1044,7 @@ lutris (0.3.2) quantal; urgency=low
 lutris (0.3.1) quantal; urgency=low
 
   * Support for Wine installers
-  * Library sync with Lutris.net
+  * Library sync with WineGame.net
   * Misc bugfixes
 
  -- Mathieu Comandon <strycore@gmail.com>  Sat, 20 Jul 2013 21:55:37 +0200
@@ -1053,7 +1053,7 @@ lutris (0.3.0) quantal; urgency=low
 
   * Initial release of Lutris 0.3
   * Support for game installers
-  * Support for lutris.net authentication
+  * Support for winegame.net authentication
   * Games are now stored in SQLite database
   * Basic support for Personnal Game Archives
 

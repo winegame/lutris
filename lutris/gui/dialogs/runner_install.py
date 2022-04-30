@@ -98,7 +98,7 @@ class RunnerInstallDialog(Dialog):
             })
 
         if not self.runner_info:
-            ErrorDialog(_("Unable to get runner versions from lutris.net"))
+            ErrorDialog(_("Unable to get runner versions from winegame.net"))
             return
 
         for child_widget in self.vbox.get_children():

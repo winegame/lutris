@@ -50,8 +50,8 @@ msgstr ""
 "이 프로그램과 함께. 그렇지 않은 경우 <http://www.gnu.org/licenses/>를 참조하십시오.\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "lutris.net 에 연결"
+msgid "Connect to winegame.net"
+msgstr "winegame.net 에 연결"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"

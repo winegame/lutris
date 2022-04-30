@@ -93,8 +93,8 @@ msgstr ""
 ">.\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "Подключиться к lutris.net"
+msgid "Connect to winegame.net"
+msgstr "Подключиться к winegame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"
@@ -376,8 +376,8 @@ msgid "Install another version"
 msgstr "Установить другую версию"
 
 #: lutris/game_actions.py:90
-msgid "View on Lutris.net"
-msgstr "Посмотреть на Lutris.net"
+msgid "View on WineGame.net"
+msgstr "Посмотреть на WineGame.net"
 
 #: lutris/game_actions.py:91
 msgid "Hide game from library"
@@ -939,8 +939,8 @@ msgid "Unable to get runner versions: %s"
 msgstr "Не удалось получить версии раннера: "
 
 #: lutris/gui/dialogs/runner_install.py:74
-msgid "Unable to get runner versions from lutris.net"
-msgstr "Не удалось получить версии раннера с lutris.net"
+msgid "Unable to get runner versions from winegame.net"
+msgstr "Не удалось получить версии раннера с winegame.net"
 
 #: lutris/gui/dialogs/runner_install.py:83
 #, python-format
@@ -1133,8 +1133,8 @@ msgid "No games matching '%s' found "
 msgstr "Не найдено игр соответствующих %s"
 
 #: lutris/gui/lutriswindow.py:425
-msgid "Use search to find games on lutris.net"
-msgstr "Используйте строку поиска чтобы искать игры на lutris.net"
+msgid "Use search to find games on winegame.net"
+msgstr "Используйте строку поиска чтобы искать игры на winegame.net"
 
 #: lutris/gui/lutriswindow.py:428
 msgid "Add games to your favorites to see them here."

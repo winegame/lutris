@@ -86,8 +86,8 @@ msgstr ""
 "program.  Ako niste, posjetite <http://www.gnu.org/licenses/>.\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "Poveži se sa lutris.net"
+msgid "Connect to winegame.net"
+msgstr "Poveži se sa winegame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"
@@ -269,8 +269,8 @@ msgid "Remove"
 msgstr "Ukloni"
 
 #: lutris/game_actions.py:88
-msgid "View on Lutris.net"
-msgstr "Pogledaj na lutris.net"
+msgid "View on WineGame.net"
+msgstr "Pogledaj na winegame.net"
 
 #: lutris/game_actions.py:89
 msgid "Hide game from library"
@@ -919,8 +919,8 @@ msgid "Unable to get runner versions: %s"
 msgstr "Nemoguće dobivanje inačice pokretača: %s"
 
 #: lutris/gui/dialogs/runner_install.py:71
-msgid "Unable to get runner versions from lutris.net"
-msgstr "Nemoguće dobivanje inačice pokretača s lutris.net"
+msgid "Unable to get runner versions from winegame.net"
+msgstr "Nemoguće dobivanje inačice pokretača s winegame.net"
 
 #: lutris/gui/dialogs/runner_install.py:80
 #, python-format
@@ -1171,8 +1171,8 @@ msgid "No games matching '%s' found "
 msgstr "Nema podudarajućih igra '%s' pronađenih "
 
 #: lutris/gui/lutriswindow.py:446
-msgid "Use search to find games on lutris.net"
-msgstr "Koristite pretragu za pronalazak igra na lutris.net"
+msgid "Use search to find games on winegame.net"
+msgstr "Koristite pretragu za pronalazak igra na winegame.net"
 
 #: lutris/gui/lutriswindow.py:449
 msgid "Add games to your favorites to see them here."
@@ -5319,8 +5319,8 @@ msgstr ""
 #~ msgid "Configure m_anually"
 #~ msgstr "Prilagodi r_učno"
 
-#~ msgid "Search Lutris.net"
-#~ msgstr "Pretraži Lutris.net"
+#~ msgid "Search WineGame.net"
+#~ msgstr "Pretraži WineGame.net"
 
 #~ msgid "Synchronize library"
 #~ msgstr "Uskladi igroteku"
@@ -5339,10 +5339,10 @@ msgstr ""
 
 #~ msgid ""
 #~ "Failed to retrieve game library. There might be some problems contacting "
-#~ "lutris.net"
+#~ "winegame.net"
 #~ msgstr ""
 #~ "Neuspjelo preuzimanje biblioteke igre. Možda postoji problem u "
-#~ "povezivanje s lutris.net"
+#~ "povezivanje s winegame.net"
 
 #~ msgid "<b>Playing:</b>"
 #~ msgstr "<b>Igranje:</b>"
@@ -5779,7 +5779,7 @@ msgstr ""
 #~ "Please consider making a donation if you can. This will greatly help "
 #~ "cover the costs of hosting the project and fund new features like cloud "
 #~ "saves or a full-screen interface for the TV!\n"
-#~ "<a href='https://lutris.net/donate'>SUPPORT US! https://lutris.net/"
+#~ "<a href='https://winegame.net/donate'>SUPPORT US! https://winegame.net/"
 #~ "donate</a>"
 #~ msgstr ""
 #~ "Lutris je u potpunosti osnovan od strane svoje zajednice i ostat će "
@@ -5788,5 +5788,5 @@ msgstr ""
 #~ "Razmotrite donaciju ako ste u mogućnosti. To će pomoći u pokrivanju "
 #~ "troškova web smještaja projekta i financirati nove značajke poput "
 #~ "spremanja u oblaku ili cjelozaslonskog sučelje za TV!\n"
-#~ "<a href='https://lutris.net/donate'>PODRŽITE NAS! https://lutris.net/"
+#~ "<a href='https://winegame.net/donate'>PODRŽITE NAS! https://winegame.net/"
 #~ "donate</a>"

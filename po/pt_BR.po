@@ -77,8 +77,8 @@ msgid ""
 msgstr ""
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "Conectar ao lutris.net"
+msgid "Connect to winegame.net"
+msgstr "Conectar ao winegame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"
@@ -264,8 +264,8 @@ msgid "Remove"
 msgstr "Remover"
 
 #: lutris/game_actions.py:95
-msgid "View on Lutris.net"
-msgstr "Veja em Lutris.net "
+msgid "View on WineGame.net"
+msgstr "Veja em WineGame.net "
 
 #: lutris/game_actions.py:96
 msgid "Hide game from library"
@@ -1061,8 +1061,8 @@ msgid "Unable to get runner versions: %s"
 msgstr "Incapaz de obter versões do runner: %s"
 
 #: lutris/gui/dialogs/runner_install.py:101
-msgid "Unable to get runner versions from lutris.net"
-msgstr "Incapaz de obter versões do runner de lutris.net"
+msgid "Unable to get runner versions from winegame.net"
+msgstr "Incapaz de obter versões do runner de winegame.net"
 
 #: lutris/gui/dialogs/runner_install.py:108
 #, python-format

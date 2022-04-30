@@ -86,8 +86,8 @@ msgstr ""
 "<http://www.gnu.org/licenses/>。\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "登录 lutris.net"
+msgid "Connect to winegame.net"
+msgstr "登录 winegame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"
@@ -282,8 +282,8 @@ msgid "Remove"
 msgstr "卸载"
 
 #: lutris/game_actions.py:105
-msgid "View on Lutris.net"
-msgstr "在 lutris.net 上查看"
+msgid "View on WineGame.net"
+msgstr "在 winegame.net 上查看"
 
 #: lutris/game_actions.py:106
 msgid "Hide game from library"
@@ -454,8 +454,8 @@ msgid "Add games to Lutris"
 msgstr "添加游戏"
 
 #: lutris/gui/addgameswindow.py:126
-msgid "<b>Search Lutris.net</b>"
-msgstr "<b>在 Lutris.net 上搜索</b>"
+msgid "<b>Search WineGame.net</b>"
+msgstr "<b>在 WineGame.net 上搜索</b>"
 
 #: lutris/gui/addgameswindow.py:149
 msgid "Select folder to scan"
@@ -1071,8 +1071,8 @@ msgid "Unable to get runner versions: %s"
 msgstr "无法获取运行环境版本信息：%s"
 
 #: lutris/gui/dialogs/runner_install.py:101
-msgid "Unable to get runner versions from lutris.net"
-msgstr "无法从 lutris.net 获取运行环境版本信息"
+msgid "Unable to get runner versions from winegame.net"
+msgstr "无法从 winegame.net 获取运行环境版本信息"
 
 #: lutris/gui/dialogs/runner_install.py:108
 #, python-format
@@ -5486,8 +5486,8 @@ msgstr ""
 #~ msgid "Use cache"
 #~ msgstr "使用缓存"
 
-#~ msgid "Use search to find games on lutris.net"
-#~ msgstr "用搜索功能在 lutris.net 上寻找游戏"
+#~ msgid "Use search to find games on winegame.net"
+#~ msgstr "用搜索功能在 winegame.net 上寻找游戏"
 
 #~ msgid "Usage of $WINESTEAM location is deprecated"
 #~ msgstr "变量“$WINESTEAM”已被废弃，无法使用"
@@ -5943,8 +5943,8 @@ msgstr ""
 
 #~ msgid ""
 #~ "Failed to retrieve game library. There might be some problems contacting "
-#~ "lutris.net"
-#~ msgstr "检索游戏库失败。 到 lutris.net 服务器的连接可能存在一些问题"
+#~ "winegame.net"
+#~ msgstr "检索游戏库失败。 到 winegame.net 服务器的连接可能存在一些问题"
 
 #~ msgid "<b>Playing:</b>"
 #~ msgstr "<b>正在游玩:</b>"
@@ -6156,12 +6156,12 @@ msgstr ""
 #~ "Please consider making a donation if you can. This will greatly help "
 #~ "cover the costs of hosting the project and fund new features like cloud "
 #~ "saves or a full-screen interface for the TV!\n"
-#~ "<a href='https://lutris.net/donate'>SUPPORT US! https://lutris.net/"
+#~ "<a href='https://winegame.net/donate'>SUPPORT US! https://winegame.net/"
 #~ "donate</a>"
 #~ msgstr ""
 #~ "Lutris 完全由其社区提供资金，并将保持独立游戏平台的地位。\n"
 #~ "为了让 Lutris 生存和成长，该项目需要您的帮助。\n"
 #~ "如果可以的话，请考虑捐款。 这将极大地帮助我们支付托管项目的费用，\n"
 #~ "并为新功能（如云存储或电视上的全屏界面）提供资金！\n"
-#~ "<a href='https://lutris.net/donate'>支持我们！https://lutris.net/donate</"
+#~ "<a href='https://winegame.net/donate'>支持我们！https://winegame.net/donate</"
 #~ "a>"

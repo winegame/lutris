@@ -37,7 +37,7 @@ if "nosetests" in sys.argv[0] or "nose2" in sys.argv[0] or "pytest" in sys.argv[
 else:
     PGA_DB = sio.read_setting("pga_path") or os.path.join(DATA_DIR, "pga.db")
 
-SITE_URL = sio.read_setting("website") or "https://lutris.net"
+SITE_URL = sio.read_setting("website") or "https://winegame.net"
 
 DRIVER_HOWTO_URL = "https://github.com/lutris/docs/blob/master/InstallingDrivers.md"
 INSTALLER_URL = SITE_URL + "/api/installers/%s"

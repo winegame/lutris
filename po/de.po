@@ -84,8 +84,8 @@ msgstr ""
 ">.\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "Verbinde mit Lutris.net"
+msgid "Connect to winegame.net"
+msgstr "Verbinde mit WineGame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"
@@ -263,8 +263,8 @@ msgid "Remove"
 msgstr "Entfernen"
 
 #: lutris/game_actions.py:88
-msgid "View on Lutris.net"
-msgstr "Auf Lutris.net schauen"
+msgid "View on WineGame.net"
+msgstr "Auf WineGame.net schauen"
 
 #: lutris/game_actions.py:89
 msgid "Hide game from library"
@@ -1008,8 +1008,8 @@ msgid "Unable to get runner versions: %s"
 msgstr "Nicht in der Lage die Version des Starters zu ermitteln: %s"
 
 #: lutris/gui/dialogs/runner_install.py:71
-msgid "Unable to get runner versions from lutris.net"
-msgstr "Nicht in der Lage die Version des Starters auf lutris.net zu ermitteln"
+msgid "Unable to get runner versions from winegame.net"
+msgstr "Nicht in der Lage die Version des Starters auf winegame.net zu ermitteln"
 
 #: lutris/gui/dialogs/runner_install.py:80
 #, python-format
@@ -5358,8 +5358,8 @@ msgstr ""
 #~ msgid "Use cache"
 #~ msgstr "Nutze Zwischenspeicher"
 
-#~ msgid "Use search to find games on lutris.net"
-#~ msgstr "Nutze die Suchleiste um Spiele auf lutris.net zu finden"
+#~ msgid "Use search to find games on winegame.net"
+#~ msgstr "Nutze die Suchleiste um Spiele auf winegame.net zu finden"
 
 #~ msgid "Downloading {}"
 #~ msgstr "Herunterladen {}"

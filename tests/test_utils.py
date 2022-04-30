@@ -69,16 +69,16 @@ class TestStringUtils(TestCase):
     def test_add_url_tags(self):
         self.assertEqual(strings.add_url_tags("foo bar"), "foo bar")
         self.assertEqual(
-            strings.add_url_tags("foo http://lutris.net bar"),
-            "foo <a href=\"http://lutris.net\">http://lutris.net</a> bar"
+            strings.add_url_tags("foo http://winegame.net bar"),
+            "foo <a href=\"http://winegame.net\">http://winegame.net</a> bar"
         )
         self.assertEqual(
-            strings.add_url_tags("http://lutris.net"),
-            "<a href=\"http://lutris.net\">http://lutris.net</a>"
+            strings.add_url_tags("http://winegame.net"),
+            "<a href=\"http://winegame.net\">http://winegame.net</a>"
         )
-        text = "foo http://lutris.net bar http://strycore.com"
+        text = "foo http://winegame.net bar http://strycore.com"
         expected = (
-            'foo <a href="http://lutris.net">http://lutris.net</a> '
+            'foo <a href="http://winegame.net">http://winegame.net</a> '
             'bar <a href="http://strycore.com">http://strycore.com</a>'
         )
         self.assertEqual(strings.add_url_tags(text), expected)

@@ -48,8 +48,8 @@ msgstr ""
 "voir <http://www.gnu.org/licenses/>.\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "Se connecter à lutris.net"
+msgid "Connect to winegame.net"
+msgstr "Se connecter à winegame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"

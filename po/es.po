@@ -87,8 +87,8 @@ msgstr ""
 "licenses/>.\n"
 
 #: share/lutris/ui/dialog-lutris-login.ui:8
-msgid "Connect to lutris.net"
-msgstr "Conectar a lutris.net"
+msgid "Connect to winegame.net"
+msgstr "Conectar a winegame.net"
 
 #: share/lutris/ui/dialog-lutris-login.ui:26
 msgid "Forgot password?"
@@ -282,8 +282,8 @@ msgid "Remove"
 msgstr "Eliminar"
 
 #: lutris/game_actions.py:105
-msgid "View on Lutris.net"
-msgstr "Ver en Lutris.net"
+msgid "View on WineGame.net"
+msgstr "Ver en WineGame.net"
 
 #: lutris/game_actions.py:106
 msgid "Hide game from library"
@@ -1087,8 +1087,8 @@ msgid "Unable to get runner versions: %s"
 msgstr "No se pueden obtener las versiones del ejecutor: %s"
 
 #: lutris/gui/dialogs/runner_install.py:101
-msgid "Unable to get runner versions from lutris.net"
-msgstr "No se pueden obtener versiones de ejecutores desde lutris.net"
+msgid "Unable to get runner versions from winegame.net"
+msgstr "No se pueden obtener versiones de ejecutores desde winegame.net"
 
 #: lutris/gui/dialogs/runner_install.py:108
 #, python-format
@@ -5708,8 +5708,8 @@ msgstr ""
 #~ msgid "Use cache"
 #~ msgstr "Usar caché"
 
-#~ msgid "Use search to find games on lutris.net"
-#~ msgstr "Use la búsqueda para encontrar juegos en lutris.net"
+#~ msgid "Use search to find games on winegame.net"
+#~ msgstr "Use la búsqueda para encontrar juegos en winegame.net"
 
 #~ msgid "Downloading {}"
 #~ msgstr "Descargando {}"

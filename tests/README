@@ -64,7 +64,7 @@ Scenario 1: Launching Lutris
   ~/.cache/lutris and ~/.local/share/lutris directories
 
 Scenario 2: Installing teeworlds from the website (64bit only ATM)
-- Using Chrome or Chromium open http://lutris.net/games/teeworlds/
+- Using Chrome or Chromium open http://winegame.net/games/teeworlds/
 - Click the install button
 - The lutris installer dialog should open and the install process can begin
 - Follow the install process and click "Play"
