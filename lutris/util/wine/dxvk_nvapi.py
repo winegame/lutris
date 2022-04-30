@@ -11,7 +11,7 @@ class DXVKNVAPIManager(DLLManager):
     base_dir = os.path.join(RUNTIME_DIR, "dxvk-nvapi")
     versions_path = os.path.join(base_dir, "dxvk-nvapi_versions.json")
     managed_dlls = ("nvapi", "nvapi64", "nvml")
-    releases_url = "https://api.github.com/repos/lutris/dxvk-nvapi/releases"
+    releases_url = "https://hu60.cn/q.php/lutris.release.dxvk-nvapi.json"
     dlss_dlls = ("nvngx", "_nvngx")
 
     def disable_dll(self, system_dir, _arch, dll):  # pylint: disable=unused-argument

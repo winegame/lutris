@@ -10,7 +10,7 @@ class DXVKManager(DLLManager):
     base_dir = os.path.join(RUNTIME_DIR, "dxvk")
     versions_path = os.path.join(base_dir, "dxvk_versions.json")
     managed_dlls = ("dxgi", "d3d11", "d3d10core", "d3d9", )
-    releases_url = "https://api.github.com/repos/lutris/dxvk/releases"
+    releases_url = "https://hu60.cn/q.php/lutris.release.dxvk.json"
 
     @staticmethod
     def is_managed_dll(dll_path):

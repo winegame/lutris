@@ -17,4 +17,4 @@ class D3DExtrasManager(DLLManager):
                     "d3dcompiler_34", "d3dcompiler_35", "d3dcompiler_36", "d3dcompiler_37",
                     "d3dcompiler_38", "d3dcompiler_39", "d3dcompiler_40", "d3dcompiler_41",
                     "d3dcompiler_42", "d3dcompiler_43", "d3dcompiler_46", "d3dcompiler_47",)
-    releases_url = "https://api.github.com/repos/lutris/d3d_extras/releases"
+    releases_url = "https://hu60.cn/q.php/lutris.release.d3d_extras.json"
