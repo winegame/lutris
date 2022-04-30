@@ -952,9 +952,9 @@ class wine(Runner):
             if not is_esync_limit_set():
                 esync_display_limit_warning()
                 return {"error": "ESYNC_LIMIT_NOT_SET"}
-            if not wine_ver:
-                if not esync_display_version_warning(True):
-                    return {"error": "NON_ESYNC_WINE_VERSION"}
+            #if not wine_ver:
+            #    if not esync_display_version_warning(True):
+            #        return {"error": "NON_ESYNC_WINE_VERSION"}
 
         if launch_info["env"].get("WINEFSYNC") == "1":
             fsync_supported = is_fsync_supported()
@@ -967,9 +967,9 @@ class wine(Runner):
             if not fsync_supported:
                 fsync_display_support_warning()
                 return {"error": "FSYNC_NOT_SUPPORTED"}
-            if not wine_ver:
-                if not fsync_display_version_warning(True):
-                    return {"error": "NON_FSYNC_WINE_VERSION"}
+            #if not wine_ver:
+            #    if not fsync_display_version_warning(True):
+            #        return {"error": "NON_FSYNC_WINE_VERSION"}
 
         command = [self.get_executable()]
 
