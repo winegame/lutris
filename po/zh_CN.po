@@ -53,8 +53,8 @@ msgid ""
 "implementations and compatibility layers, it gives you a central interface "
 "to launch all your games."
 msgstr ""
-"Lutris 可帮您安装和运行大多数平台上几乎所有时代的电子游戏。通过对现有的模拟"
-"器、兼容层、第三方游戏引擎等进行整合利用，Lutris 可为您提供一个统一的界面来启"
+"Wine游戏助手可帮您安装和运行大多数平台上几乎所有时代的电子游戏。通过对现有的模拟"
+"器、兼容层、第三方游戏引擎等进行整合利用，Wine游戏助手可为您提供一个统一的界面来启"
 "动您的所有游戏。"
 
 #: share/lutris/ui/about-dialog.ui:8 share/lutris/ui/lutris-window.ui:581
@@ -210,8 +210,8 @@ msgid ""
 "system:\n"
 "{libs}"
 msgstr ""
-"系统内缺少以下必需的 {arch} 库，请使用软件包管理器安装它们，然后重新启动 "
-"Lutris：\n"
+"系统内缺少以下必需的 {arch} 库，请使用软件包管理器安装它们，然后重新启动"
+"Wine游戏助手：\n"
 "{libs}"
 
 #. Local services don't show an install dialog, they can be launched directly
@@ -431,7 +431,7 @@ msgstr "在 WineGame 网站上搜索游戏"
 
 #: lutris/gui/addgameswindow.py:22
 msgid "Query our website for community installers"
-msgstr "从 Lutris 网站查找社区贡献的游戏安装脚本"
+msgstr "从 winegame.net 查找社区贡献的游戏安装脚本"
 
 #: lutris/gui/addgameswindow.py:27
 msgid "Scan a folder for games"
@@ -518,11 +518,11 @@ msgstr "选择安装脚本文件"
 #: lutris/gui/application.py:87
 msgid ""
 "Running Lutris as root is not recommended and may cause unexpected issues"
-msgstr "不建议以 root 用户身份运行 Lutris，这可能会导致未预期的问题"
+msgstr "不建议以 root 用户身份运行Wine游戏助手，这可能会导致未预期的问题"
 
 #: lutris/gui/application.py:97
 msgid "Your Linux distribution is too old. Lutris won't function properly."
-msgstr "您的 Linux 发行版太旧了，Lutris 无法正常运行。"
+msgstr "您的 Linux 发行版太旧了，Wine游戏助手无法正常运行。"
 
 #: lutris/gui/application.py:102
 msgid ""
@@ -539,7 +539,7 @@ msgstr ""
 
 #: lutris/gui/application.py:115
 msgid "Print the version of Lutris and exit"
-msgstr "打印 Lutris 版本后退出"
+msgstr "打印Wine游戏助手版本后退出"
 
 #: lutris/gui/application.py:123
 msgid "Show debug messages"
@@ -551,7 +551,7 @@ msgstr "从 yml 文件安装游戏"
 
 #: lutris/gui/application.py:139
 msgid "Generate a bash script to run a game without the client"
-msgstr "生成 bash 脚本以在没有 Lutris 客户端的情况下运行游戏"
+msgstr "生成 bash 脚本以在没有Wine游戏助手客户端的情况下运行游戏"
 
 #: lutris/gui/application.py:147
 msgid "Execute a program with the Lutris Runtime"
@@ -851,7 +851,7 @@ msgstr "配置 %s"
 
 #: lutris/gui/config/preferences_box.py:11 lutris/gui/config/sysinfo_box.py:11
 msgid "Minimize client when a game is launched"
-msgstr "游戏启动时最小化 Lutris 客户端"
+msgstr "游戏启动时最小化Wine游戏助手客户端"
 
 #: lutris/gui/config/preferences_box.py:12
 msgid "Hide text under icons (requires restart)"
@@ -926,7 +926,7 @@ msgstr "启用游戏库整合"
 msgid ""
 "Access your game libraries from various sources. Changes require a restart "
 "to take effect."
-msgstr "将各个不同来源的游戏库整合显示在 Lutris 中（重启软件生效）"
+msgstr "将各个不同来源的游戏库整合显示在Wine游戏助手中（重启软件生效）"
 
 #: lutris/gui/config/sysinfo_box.py:12
 msgid "Hide text under icons"
@@ -1198,7 +1198,7 @@ msgid ""
 "All play time will be lost."
 msgstr ""
 "是否完全从游戏库中移除 %s？\n"
-"Lutris 记录的游戏游玩时间也会一并删除。"
+"Wine游戏助手记录的游戏游玩时间也会一并删除。"
 
 #: lutris/gui/dialogs/webconnect_dialog.py:92
 msgid "Loading..."
@@ -1564,7 +1564,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Lutris 正在寻找包含以下文件或文件夹的已挂载磁盘驱动器或磁盘映像：\n"
+"Wine游戏助手正在寻找包含以下文件或文件夹的已挂载磁盘驱动器或磁盘映像：\n"
 "<i>%s</i>"
 
 #: lutris/installer/commands.py:280
@@ -1667,7 +1667,7 @@ msgstr "需要先安装 {}"
 
 #: lutris/installer/interpreter.py:186
 msgid "Lutris does not have the necessary permissions to install to path:"
-msgstr "Lutris 没有安装到以下路径所需的权限："
+msgstr "Wine游戏助手没有安装到以下路径所需的权限："
 
 #: lutris/installer/interpreter.py:270
 #, python-format
@@ -1750,7 +1750,7 @@ msgid ""
 "They are provided by Lutris so you shouldn't have to change this."
 msgstr ""
 "包含 Atari 800 BIOS 文件的文件夹。\n"
-"由 Lutris 提供，您不必更改此设置。"
+"由Wine游戏助手提供，您不必更改此设置。"
 
 #: lutris/runners/atari800.py:70
 msgid "Emulate Atari 800"
@@ -1896,7 +1896,7 @@ msgid ""
 "By default, Lutris uses the directory of the executable."
 msgstr ""
 "游戏启动时的起始位置。\n"
-"如果留空，Lutris 使用可执行文件所在目录作为起始位置。"
+"如果留空，Wine游戏助手使用可执行文件所在目录作为起始位置。"
 
 #: lutris/runners/dosbox.py:61
 msgid "none"
@@ -4244,7 +4244,7 @@ msgid ""
 "If left blank, Lutris will launch your default browser (xdg-open)."
 msgstr ""
 "选择系统内浏览器的可执行文件。\n"
-"如果留空，Lutris 将启动您的默认浏览器（xdg-open）。"
+"如果留空，Wine游戏助手将启动您的默认浏览器（xdg-open）。"
 
 #: lutris/runners/web.py:163
 msgid "Web browser arguments"
@@ -4376,7 +4376,7 @@ msgstr "使用系统 winetricks"
 
 #: lutris/runners/wine.py:193
 msgid "Switch on to use /usr/bin/winetricks for winetricks."
-msgstr "使用 /usr/bin/winetricks 而不是 Lutris 附带的 winetricks。"
+msgstr "使用 /usr/bin/winetricks 而不是Wine游戏助手附带的 winetricks。"
 
 #: lutris/runners/wine.py:197
 msgid "Enable DXVK"
@@ -4570,7 +4570,7 @@ msgid ""
 "If blank or 'auto', Lutris will auto-detect this."
 msgstr ""
 "设置启用 DPI 缩放后要使用的 DPI 数值。\n"
-"如果留空或填写 auto，Lutris 将自动设置合适的数值。"
+"如果留空或填写 auto，Wine游戏助手将自动设置合适的数值。"
 
 #: lutris/runners/wine.py:394
 msgid "Mouse Warp Override"
@@ -4948,7 +4948,7 @@ msgid ""
 "When the runtime is enabled, prioritize the system libraries over the "
 "provided ones."
 msgstr ""
-"启用后，将优先使用本机 Linux 系统提供的共享库，而不是 Lutris 或运行环境自带的"
+"启用后，将优先使用本机 Linux 系统提供的共享库，而不是Wine游戏助手或运行环境自带的"
 "库。"
 
 #: lutris/sysoptions.py:175
@@ -4961,7 +4961,7 @@ msgid ""
 "closed or when they crash. This is when this option comes \n"
 "into play to save your bacon."
 msgstr ""
-"某些游戏在关闭或意外崩溃时无法恢复屏幕分辨率，启用这个选项让 Lutris 帮您恢"
+"某些游戏在关闭或意外崩溃时无法恢复屏幕分辨率，启用这个选项让Wine游戏助手帮您恢"
 "复。"
 
 #: lutris/sysoptions.py:184
@@ -5022,7 +5022,7 @@ msgid ""
 "bright. Select this option to correct it."
 msgstr ""
 "某些游戏退出时无法正确恢复伽玛值（亮度阈值），从而使显示效果太亮或太暗。启用"
-"此项让 Lutris 帮您恢复。"
+"此项让Wine游戏助手帮您恢复。"
 
 #: lutris/sysoptions.py:236
 msgid "Disable desktop effects"
@@ -5210,7 +5210,7 @@ msgid ""
 msgstr ""
 "设置要与文本模式一起启动的终端模拟器。从检测到的终端应用列表中选择，或者输入"
 "终端的命令或路径。\n"
-"注意：不能保证所有终端模拟器都与 Lutris 兼容。"
+"注意：不能保证所有终端模拟器都与Wine游戏助手兼容。"
 
 #: lutris/sysoptions.py:412
 msgid "Environment variables"
@@ -5284,7 +5284,7 @@ msgid ""
 msgstr ""
 "指定进程监控要包括的进程。这会覆盖内置的排除列表。\n"
 "用空格分隔的列表，名称包括空格的进程可以用引号引起来。\n"
-"如果列表中的任一进程仍在运行，Lutris 就视为游戏仍在运行。"
+"如果列表中的任一进程仍在运行，Wine游戏助手就视为游戏仍在运行。"
 
 #: lutris/sysoptions.py:472
 msgid "Exclude processes"
@@ -5299,7 +5299,7 @@ msgid ""
 msgstr ""
 "指定进程监控要排除的进程，例如在游戏关闭后仍然存在的后台进程。\n"
 "用空格分隔的列表，名称包括空格的进程可以用引号引起来。\n"
-"如果只有排除列表中的进程在运行，Lutris 就视为游戏已停止运行。"
+"如果只有排除列表中的进程在运行，Wine游戏助手就视为游戏已停止运行。"
 
 #: lutris/sysoptions.py:483
 msgid "Killswitch file"
