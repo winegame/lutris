@@ -1447,8 +1447,8 @@ msgid "Running"
 msgstr "Executando"
 
 #: lutris/gui/widgets/status_icon.py:67
-msgid "Show Lutris"
-msgstr "Mostrar Lutris"
+msgid "Show WineGame"
+msgstr "Mostrar WineGame"
 
 #: lutris/gui/widgets/status_icon.py:72
 msgid "Quit"

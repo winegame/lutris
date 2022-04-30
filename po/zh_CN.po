@@ -1493,8 +1493,8 @@ msgid "Running"
 msgstr "运行中"
 
 #: lutris/gui/widgets/status_icon.py:67
-msgid "Show Lutris"
-msgstr "显示 Lutris"
+msgid "Show WineGame"
+msgstr "显示Wine游戏助手"
 
 #: lutris/gui/widgets/status_icon.py:72
 msgid "Quit"

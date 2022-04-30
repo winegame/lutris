@@ -64,7 +64,7 @@ class LutrisStatusIcon:
 
         present_menu = Gtk.ImageMenuItem()
         present_menu.set_image(Gtk.Image.new_from_icon_name("net.winegame.client", Gtk.IconSize.MENU))
-        present_menu.set_label(_("Show Lutris"))
+        present_menu.set_label(_("Show WineGame"))
         present_menu.connect("activate", self.on_activate)
         menu.append(present_menu)
 

@@ -1474,8 +1474,8 @@ msgid "Running"
 msgstr "Actief"
 
 #: lutris/gui/widgets/status_icon.py:67
-msgid "Show Lutris"
-msgstr "Lutris tonen"
+msgid "Show WineGame"
+msgstr "WineGame tonen"
 
 #: lutris/gui/widgets/status_icon.py:72
 msgid "Quit"
