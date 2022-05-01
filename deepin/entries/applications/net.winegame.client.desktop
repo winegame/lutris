@@ -12,4 +12,4 @@ Exec=/opt/apps/net.winegame.client/files/bin/winegame %U
 Categories=Game;
 Keywords=gaming;wine;emulator;
 Terminal=false
-MimeType=x-scheme-handler/lutris;
+MimeType=x-scheme-handler/winegame;
