@@ -76,7 +76,7 @@ except Exception as e:
     exit()
 
 args = ['zenity', '--width=800', '--height=600', '--list',
-        '--title=选择要加速的游戏', '--column=序号', '--column=名称', '--column=位置']
+        '--title=选择游戏', '--column=序号', '--column=名称', '--column=位置']
 for index, game in enumerate(games):
     args.append(str(index + 1))
     args.append(game[0])
@@ -95,7 +95,7 @@ while True:
         exit()
 
 game = games[int(text) - 1]
-print('要加速的游戏：', game)
+print('选择的游戏：', game)
 
 # 读取YAML
 wine_yaml = read_yaml_from_file(WINE_YAML)
