@@ -297,7 +297,8 @@ def wineexec(  # noqa: C901
         command_parameters.append(executable)
     command_parameters += split_arguments(args)
 
-    wine.prelaunch()
+    # Avoid accidentally creating the wine prefix ~/.wine
+    #wine.prelaunch()
 
     if blocking:
         return system.execute(command_parameters, env=baseenv, cwd=working_dir)
