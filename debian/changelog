@@ -1,3 +1,8 @@
+net.winegame.client (0.5.10.3) impish; urgency=medium
+
+  * 修复了开启“自动DPI缩放”功能会导致游戏启动报错的问题。
+  * 修复了导入注册表会创建默认Wine前缀“~/.wine”的问题。
+
 net.winegame.client (0.5.10.2) impish; urgency=medium
 
   * 修复了点网站上的安装链接没效果的问题
