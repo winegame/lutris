@@ -64,7 +64,7 @@ class RunnerInstallDialog(Dialog):
         self.runner = runner
         self.runner_info = {}
         self.installing = {}
-        self.set_default_size(640, 480)
+        self.set_default_size(720, 540)
         self.runners = []
         self.listbox = None
 
@@ -135,8 +135,8 @@ class RunnerInstallDialog(Dialog):
             row.chk_installed = chk_installed
 
             lbl_version = Gtk.Label(runner[self.COL_VER])
-            lbl_version.set_max_width_chars(20)
-            lbl_version.set_property("width-chars", 20)
+            lbl_version.set_max_width_chars(30)
+            lbl_version.set_property("width-chars", 30)
             lbl_version.set_halign(Gtk.Align.START)
             hbox.pack_start(lbl_version, False, False, 5)
 
