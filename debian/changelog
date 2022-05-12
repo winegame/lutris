@@ -1,7 +1,17 @@
+net.winegame.client (0.5.10.4) impish; urgency=medium
+
+  * 修复了Wine版本管理页面排版混乱的问题。
+  * 修复了不下载任何文件的安装脚本无法正常运行的问题。
+  * 兼容NVIDIA专有驱动的开源内核模块（https://github.com/NVIDIA/open-gpu-kernel-modules）。
+
+ -- SwimmingTiger <hu60.cn@qq.com>  Fri, 13 May 2022 00:33:24 +0800
+
 net.winegame.client (0.5.10.3) impish; urgency=medium
 
   * 修复了开启“自动DPI缩放”功能会导致游戏启动报错的问题。
   * 修复了导入注册表会创建默认Wine前缀“~/.wine”的问题。
+
+ -- SwimmingTiger <hu60.cn@qq.com>  Tue, 3 May 2022 22:31:00 +0800
 
 net.winegame.client (0.5.10.2) impish; urgency=medium
 
