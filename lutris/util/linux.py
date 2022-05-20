@@ -488,10 +488,10 @@ def gather_system_info_str():
     system_info_readable["System"] = system_dict
     # Add CPU information
     cpu_dict = {}
-    cpu_dict["Vendor"] = system_info["cpus"][0].get("vendor_id", "Vendor unavailable")
+    cpu_dict["Vendor"] = system_info["cpus"][0].get("vendor_id", system_info["cpus"][0].get("CPU implementer", system_info["cpus"][0].get("cpu family", "Vendor unavailable")))
     cpu_dict["Model"] = system_info["cpus"][0].get("model name", "Model unavailable")
-    cpu_dict["Physical cores"] = system_info["cpus"][0].get("cpu cores", "Physical cores unavailable")
-    cpu_dict["Logical cores"] = system_info["cpus"][0].get("siblings", "Logical cores unavailable")
+    cpu_dict["Physical cores"] = system_info["cpus"][0].get("cpu cores", len(system_info["cpus"]))
+    cpu_dict["Logical cores"] = system_info["cpus"][0].get("siblings", len(system_info["cpus"]))
     system_info_readable["CPU"] = cpu_dict
     # Add memory information
     ram_dict = {}
