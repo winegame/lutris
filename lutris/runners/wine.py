@@ -376,8 +376,7 @@ class wine(Runner):
                 "default": False,
                 "help": _(
                     "Enables the Windows application's DPI scaling.\n"
-                    "Otherwise, disables DPI scaling by using 96 DPI.\n"
-                    "This corresponds to Wine's Screen Resolution option."
+                    "Otherwise, the Screen Resolution option in 'Wine configuration' controls this."
                 ),
             },
             {
@@ -767,8 +766,8 @@ class wine(Runner):
         prefix_manager.set_dpi(self.get_dpi())
 
     def get_dpi(self):
-        """Return the DPI to be used by Wine; returns 96 to disable scaling,
-        as this is Window's unscaled default DPI."""
+        """Return the DPI to be used by Wine; returns None to allow Wine's own
+        setting to govern."""
         if bool(self.runner_config.get("Dpi")):
             explicit_dpi = self.runner_config.get("ExplicitDpi")
             if explicit_dpi == "auto":
@@ -779,7 +778,7 @@ class wine(Runner):
                 explicit_dpi = None
             return explicit_dpi or get_default_dpi()
 
-        return 96
+        return None
 
     def setup_dlls(self, manager_class, enable, version):
         """Enable or disable DLLs"""
@@ -839,7 +838,6 @@ class wine(Runner):
             bool(self.runner_config.get("dgvoodoo2")),
             self.runner_config.get("dgvoodoo2_version")
         )
-        return True
 
     def get_dll_overrides(self):
         """Return the DLLs overriden at runtime"""
