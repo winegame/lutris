@@ -1,3 +1,10 @@
+net.winegame.client (0.5.10.5) impish; urgency=medium
+
+  * 修复了Steam已安装但未登录时Wine游戏助手启动后弹出错误提示的问题。
+  * 优化了DPI缩放选项的处理方式。
+
+ -- SwimmingTiger <hu60.cn@qq.com>  Fri, 13 May 2022 00:33:24 +0800
+
 net.winegame.client (0.5.10.4) impish; urgency=medium
 
   * 修复了Wine版本管理页面排版混乱的问题。
