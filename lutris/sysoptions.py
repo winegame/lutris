@@ -172,7 +172,7 @@ system_options = [  # pylint: disable=invalid-name
         "option": "reset_desktop",
         "type": "bool",
         "label": _("Restore resolution on game exit"),
-        "default": False,
+        "default": True,
         "help": _("Some games don't restore your screen resolution when \n"
                   "closed or when they crash. This is when this option comes \n"
                   "into play to save your bacon."),
@@ -224,9 +224,9 @@ system_options = [  # pylint: disable=invalid-name
     {
         "option": "restore_gamma",
         "type": "bool",
-        "default": False,
+        "default": True,
         "label": _("Restore gamma on game exit"),
-        "advanced": True,
+        "advanced": False,
         "help": _("Some games don't correctly restores gamma on exit, making "
                   "your display too bright. Select this option to correct it."),
     },
@@ -323,7 +323,7 @@ system_options = [  # pylint: disable=invalid-name
     {
         "option": "gamemode",
         "type": "bool",
-        "default": linux.LINUX_SYSTEM.gamemode_available(),
+        "default": False,
         "condition": linux.LINUX_SYSTEM.gamemode_available(),
         "label": _("Enable Feral GameMode"),
         "help": _("Request a set of optimisations be temporarily applied to the host OS"),
