@@ -74,12 +74,13 @@ class Application(Gtk.Application):
         GObject.add_emission_hook(Game, "game-install-dlc", self.on_game_install_dlc)
 
         GLib.set_application_name(_("WineGame"))
+        self.css_provider = Gtk.CssProvider.new()
         self.window = None
 
         self.running_games = Gio.ListStore.new(Game)
         self.app_windows = {}
         self.tray = None
-        self.css_provider = Gtk.CssProvider.new()
+
         self.quit_on_game_exit = False
         self.style_manager = None
 
@@ -274,17 +275,10 @@ class Application(Gtk.Application):
         self.style_manager = StyleManager()
 
     def do_activate(self):  # pylint: disable=arguments-differ
-        Application.show_update_runtime_dialog()
         if not self.window:
             self.window = LutrisWindow(application=self)
             screen = self.window.props.screen  # pylint: disable=no-member
             Gtk.StyleContext.add_provider_for_screen(screen, self.css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
-        if not self.quit_on_game_exit:
-            self.window.present()
-        else:
-            # Reset quit on game exit to False. Future calls will set it
-            # accordingly
-            self.quit_on_game_exit = False
 
     @staticmethod
     def show_update_runtime_dialog():
@@ -306,7 +300,7 @@ class Application(Gtk.Application):
         return str(kwargs)
 
     def show_window(self, window_class, **kwargs):
-        """Instanciate a window keeping 1 instance max
+        """Instantiate a window keeping 1 instance max
 
         Params:
             window_class (Gtk.Window): class to create the instance from
@@ -381,7 +375,7 @@ class Application(Gtk.Application):
             # Switch back the log output to stderr (the default in Python)
             # to avoid messing with any output from command line options.
 
-            # Use when targetting Python 3.7 minimum
+            # Use when targeting Python 3.7 minimum
             # console_handler.setStream(sys.stderr)
 
             # Until then...
@@ -563,8 +557,8 @@ class Application(Gtk.Application):
             return 0
 
         # Graphical commands
-        self.activate()
         self.set_tray_icon()
+        self.activate()
 
         if not action:
             if db_game and db_game["installed"]:
@@ -605,6 +599,11 @@ class Application(Gtk.Application):
                 return 0
             game = Game(db_game["id"])
             self.on_game_launch(game)
+        else:
+            Application.show_update_runtime_dialog()
+            self.window.present()
+            # If the Lutris GUI is started by itself, don't quit it when a game stops
+            self.quit_on_game_exit = False
         return 0
 
     def on_game_launch(self, game):
@@ -695,7 +694,8 @@ class Application(Gtk.Application):
             self.window.show()  # Show launcher window
         elif not self.window.is_visible():
             if self.running_games.get_n_items() == 0:
-                self.do_shutdown()
+                if self.quit_on_game_exit or not self.has_tray_icon():
+                    self.do_shutdown()
         return True
 
     @staticmethod
@@ -768,7 +768,6 @@ class Application(Gtk.Application):
         """Execute an arbitrary command in a Lutris context
         with the runtime enabled and monitored by a MonitoredCommand
         """
-        Application.show_update_runtime_dialog()
         logger.info("Running command '%s'", command)
         monitored_command = exec_command(command)
         try:
@@ -895,3 +894,6 @@ Also, check that the version specified is in the correct format.
             self.tray = LutrisStatusIcon(application=self)
         if self.tray:
             self.tray.set_visible(active)
+
+    def has_tray_icon(self):
+        return self.tray and self.tray.is_visible()

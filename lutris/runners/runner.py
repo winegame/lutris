@@ -105,6 +105,12 @@ class Runner:  # pylint: disable=too-many-public-methods
             return os.path.dirname(os.path.expanduser(entry_point))
         return ""
 
+    def resolve_game_path(self):
+        """Returns the path where the game is found; if game_path does not
+        provide a path, this may try to resolve the path by runner-specific means,
+        which can find things like /usr/games when applicable."""
+        return self.game_path
+
     @property
     def library_folders(self):
         """Return a list of paths where a game might be installed"""
@@ -438,7 +444,8 @@ class Runner:  # pylint: disable=too-many-public-methods
         if callback:
             callback()
 
-    def remove_game_data(self, app_id=None, game_path=None):
+    @staticmethod
+    def remove_game_data(app_id=None, game_path=None):
         system.remove_folder(game_path)
 
     def can_uninstall(self):

@@ -22,7 +22,7 @@ from lutris.exceptions import GameConfigError, watch_lutris_errors
 from lutris.gui import dialogs
 from lutris.runner_interpreter import export_bash_script, get_launch_parameters
 from lutris.runners import InvalidRunner, import_runner, wine
-from lutris.util import audio, extract, jobs, linux, strings, system, xdgshortcuts
+from lutris.util import audio, discord, extract, jobs, linux, strings, system, xdgshortcuts
 from lutris.util.display import (
     DISPLAY_MANAGER, SCREEN_SAVER_INHIBITOR, disable_compositing, enable_compositing, restore_gamma
 )
@@ -31,6 +31,7 @@ from lutris.util.graphics.xrandr import turn_off_except
 from lutris.util.linux import LINUX_SYSTEM
 from lutris.util.log import LOG_BUFFERS, logger
 from lutris.util.process import Process
+from lutris.util.savesync import sync_saves
 from lutris.util.timer import Timer
 from lutris.util.yaml import write_yaml_to_file
 
@@ -123,11 +124,11 @@ class Game(GObject.Object):
     @property
     def is_favorite(self):
         """Return whether the game is in the user's favorites"""
-        categories = categories_db.get_categories_in_game(self.id)
-        for category in categories:
-            if category == "favorite":
-                return True
-        return False
+        return "favorite" in self.get_categories()
+
+    def get_categories(self):
+        """Return the categories the game is in."""
+        return categories_db.get_categories_in_game(self.id)
 
     def add_to_favorites(self):
         """Add the game to the 'favorite' category"""
@@ -195,7 +196,7 @@ class Game(GObject.Object):
 
     def get_browse_dir(self):
         """Return the path to open with the Browse Files action."""
-        return self.runner.game_path
+        return self.runner.resolve_game_path()
 
     def _get_runner(self):
         """Return the runner instance for this game's configuration"""
@@ -235,7 +236,7 @@ class Game(GObject.Object):
             self.config.remove()
         xdgshortcuts.remove_launcher(self.slug, self.id, desktop=True, menu=True)
         if delete_files and self.runner:
-            self.runner.remove_game_data(game_path=self.directory)
+            self.runner.remove_game_data(app_id=self.appid, game_path=self.directory)
         self.is_installed = False
         self.runner = None
         if no_signal:
@@ -357,15 +358,6 @@ class Game(GObject.Object):
         self.antimicro_thread = MonitoredCommand(antimicro_command)
         self.antimicro_thread.start()
 
-    @staticmethod
-    def set_keyboard_layout(layout):
-        setxkbmap_command = ["setxkbmap", "-model", "pc101", layout, "-print"]
-        xkbcomp_command = ["xkbcomp", "-", os.environ.get("DISPLAY", ":0")]
-        with subprocess.Popen(xkbcomp_command, stdin=subprocess.PIPE) as xkbcomp:
-            with subprocess.Popen(setxkbmap_command, env=os.environ, stdout=xkbcomp.stdin) as setxkbmap:
-                setxkbmap.communicate()
-                xkbcomp.communicate()
-
     def start_prelaunch_command(self, wait_for_completion=False):
         """Start the prelaunch command specified in the system options"""
         prelaunch_command = self.runner.system_config.get("prelaunch_command")
@@ -465,7 +457,7 @@ class Game(GObject.Object):
 
         # Input control
         if self.runner.system_config.get("use_us_layout"):
-            self.set_keyboard_layout("us")
+            system.set_keyboard_layout("us")
 
         # Display control
         self.original_outputs = DISPLAY_MANAGER.get_config()
@@ -509,7 +501,11 @@ class Game(GObject.Object):
             logger.error("Game is not launchable")
             return False
 
+
         self.load_config()  # Reload the config before launching it.
+        saves = self.config.game_level["game"].get("saves")
+        if saves:
+            sync_saves(self)
 
         if str(self.id) in LOG_BUFFERS:  # Reset game logs on each launch
             log_buffer = LOG_BUFFERS[str(self.id)]
@@ -517,6 +513,9 @@ class Game(GObject.Object):
 
         self.state = self.STATE_LAUNCHING
         self.prelaunch_pids = system.get_running_pid_list()
+        discord_token = settings.read_setting('discord_token')
+        if discord_token:
+            discord.set_discord_status(discord_token, "Playing %s" % self.name)
         self.emit("game-start")
         jobs.AsyncCall(self.runner.prelaunch, self.configure_game)
         return True
@@ -598,7 +597,7 @@ class Game(GObject.Object):
         """Return a list of processes belonging to the Lutris game"""
         new_pids = self.get_new_pids()
         game_pids = []
-        game_folder = self.runner.game_path or ""
+        game_folder = self.runner.resolve_game_path()
         for pid in new_pids:
             cmdline = Process(pid).cmdline or ""
             # pressure-vessel: This could potentially pick up PIDs not started by lutris?
@@ -629,13 +628,13 @@ class Game(GObject.Object):
             self.timer.end()
             self.playtime += self.timer.duration / 3600
 
+    @watch_lutris_errors(game_stop_result=False)
     def beat(self):
         """Watch the game's process(es)."""
         if self.game_thread.error:
-            dialogs.ErrorDialog(_("<b>Error lauching the game:</b>\n") + self.game_thread.error)
             self.on_game_quit()
-            return False
-
+            raise RuntimeError(_("<b>Error lauching the game:</b>\n") + self.game_thread.error)
+            
         # The killswitch file should be set to a device (ie. /dev/input/js0)
         # When that device is unplugged, the game is forced to quit.
         killswitch_engage = self.killswitch and not system.path_exists(self.killswitch)
@@ -715,6 +714,10 @@ class Game(GObject.Object):
         if self.runner.system_config.get("restore_gamma"):
             restore_gamma()
 
+        discord_token = settings.read_setting('discord_token')
+        if discord_token:
+            discord.set_discord_status(discord_token, "")
+
         self.process_return_codes()
 
     def process_return_codes(self):
@@ -724,13 +727,13 @@ class Game(GObject.Object):
             error = "error while loading shared lib"
             error_line = strings.lookup_string_in_text(error, self.game_thread.stdout)
             if error_line:
-                dialogs.ErrorDialog(_("<b>Error: Missing shared library.</b>\n\n%s") % error_line)
+                raise RuntimeError(_("<b>Error: Missing shared library.</b>\n\n%s") % error_line)
 
         if self.game_thread.return_code == 1:
             # Error Wine version conflict
             error = "maybe the wrong wineserver"
             if strings.lookup_string_in_text(error, self.game_thread.stdout):
-                dialogs.ErrorDialog(_("<b>Error: A different Wine version is already using the same Wine prefix.</b>"))
+                raise RuntimeError(_("<b>Error: A different Wine version is already using the same Wine prefix.</b>"))
 
     def write_script(self, script_path):
         """Output the launch argument in a bash script"""
@@ -782,7 +785,6 @@ class Game(GObject.Object):
 
 def export_game(slug, dest_dir):
     """Export a full game folder along with some lutris metadata"""
-
     # List of runner where we know for sure that 1 folder = 1 game.
     # For runners that handle ROMs, we have to handle this more finely.
     # There is likely more than one game in a ROM folder but a ROM
@@ -793,7 +795,6 @@ def export_game(slug, dest_dir):
         "dosbox",
         "scummvm",
     ]
-
     db_game = games_db.get_game_by_field(slug, "slug")
     if db_game["runner"] not in exportable_runners:
         raise RuntimeError("Game %s can't be exported." % db_game["name"])
@@ -828,7 +829,14 @@ def import_game(file_path, dest_dir):
     game_config = [f for f in os.listdir(game_dir) if f.endswith(".lutris")][0]
     with open(os.path.join(game_dir, game_config), encoding="utf-8") as config_file:
         lutris_config = json.load(config_file)
-    # old_dir = lutris_config["directory"]
+    old_dir = lutris_config["directory"]
+    with open(os.path.join(game_dir, game_config), 'r') as config_file :
+        config_data = config_file.read()
+    config_data = config_data.replace(old_dir, game_dir)
+    with open(os.path.join(game_dir, game_config), 'w') as config_file:
+        config_file.write(config_data)
+    with open(os.path.join(game_dir, game_config), encoding="utf-8") as config_file:
+        lutris_config = json.load(config_file)
     config_filename = os.path.join(settings.CONFIG_DIR, "games/%s.yml" % lutris_config["configpath"])
     write_yaml_to_file(lutris_config["config"], config_filename)
     game_id = games_db.add_or_update(

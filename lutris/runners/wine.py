@@ -487,10 +487,9 @@ class wine(Runner):
     @property
     def context_menu_entries(self):
         """Return the contexual menu entries for wine"""
-        menu_entries = [("wineexec", _("Run EXE inside Wine prefix"), self.run_wineexec)]
-        if "Proton" not in self.get_version():
-            menu_entries.append(("winecfg", _("Wine configuration"), self.run_winecfg))
-        menu_entries += [
+        return [
+            ("wineexec", _("Run EXE inside Wine prefix"), self.run_wineexec),
+            ("winecfg", _("Wine configuration"), self.run_winecfg),
             ("wineshell", _("Open Bash terminal"), self.run_wine_terminal),
             ("wineconsole", _("Open Wine console"), self.run_wineconsole),
             ("wine-regedit", _("Wine registry"), self.run_regedit),
@@ -498,7 +497,6 @@ class wine(Runner):
             ("winetricks", _("Winetricks"), self.run_winetricks),
             ("winecpl", _("Wine Control Panel"), self.run_winecpl),
         ]
-        return menu_entries
 
     @property
     def prefix_path(self):
@@ -855,9 +853,7 @@ class wine(Runner):
         # Always false to runner.get_env, the default value
         # of os_env is inverted in the wine class,
         # the OS env is read later.
-        env = super().get_env(False, disable_runtime=disable_runtime)
-        if os_env:
-            env.update(os.environ.copy())
+        env = super().get_env(os_env, disable_runtime=disable_runtime)
         show_debug = self.runner_config.get("show_debug", "-all")
         if show_debug != "inherit":
             env["WINEDEBUG"] = show_debug
@@ -947,7 +943,7 @@ class wine(Runner):
             # Set this to 1 to enable access to more RAM for 32bit applications
             launch_info["env"]["WINE_LARGE_ADDRESS_AWARE"] = "1"
             if not is_vulkan_supported():
-                if not display_vulkan_error(True):
+                if not display_vulkan_error(on_launch=True):
                     return {"error": "VULKAN_NOT_FOUND"}
 
         if not game_exe or not system.path_exists(game_exe):
