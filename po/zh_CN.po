@@ -6179,3 +6179,6 @@ msgstr "结束所有 Wine 进程"
 #~ "并为新功能（如云存储或电视上的全屏界面）提供资金！\n"
 #~ "<a href='https://winegame.net/donate'>支持我们！https://winegame.net/donate</"
 #~ "a>"
+
+msgid "Unspecified (Use System Default)"
+msgstr "不指定（使用系统默认值）"
