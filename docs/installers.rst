@@ -66,6 +66,12 @@ Wine游戏助手使用的“Lutris游戏安装脚本”（简称“安装脚本�
 
 你还可以通过文件标识符引用 ``files`` 部分下载的文件，安装时会转换为下载好的文件的绝对路径。引用时通常不需要加 ``$`` 前缀，但是如果在 ``command`` 命令中引用，或者要进行字符串拼接，则需要加 ``$`` 前缀。
 
+此外还可以在 `variables` 部分添加自定义变量，例如::
+
+    variables:
+      VERSION: 1.3
+    files:
+      stk: https://github.com/supertuxkart/stk-code/releases/download/$VERSION/SuperTuxKart-$VERSION-linux-64bit.tar.xz
 
 安装脚本元数据
 ===================

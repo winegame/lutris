@@ -48,7 +48,9 @@ class ScriptInterpreter(GObject.Object, CommandsMixin):
         self.user_inputs = []
         self.current_command = 0  # Current installer command when iterating through them
         self.runners_to_install = []
+        self.current_resolution = DISPLAY_MANAGER.get_current_resolution()
         self.installer = LutrisInstaller(installer, self, service=self.service, appid=_appid)
+
         if not self.installer.script:
             raise ScriptingError(_("This installer doesn't have a 'script' section"))
         script_errors = self.installer.get_errors()
@@ -57,11 +59,14 @@ class ScriptInterpreter(GObject.Object, CommandsMixin):
                 _("Invalid script: \n{}").format("\n".join(script_errors)), self.installer.script
             )
 
-        self.current_resolution = DISPLAY_MANAGER.get_current_resolution()
         self._check_binary_dependencies()
         self._check_dependency()
         if self.installer.creates_game_folder:
             self.target_path = self.get_default_target()
+
+        # Run variable substitution on the URLs
+        for file in self.installer.files:
+            file.set_url(self._substitute(file.url))
 
     @property
     def appid(self):
@@ -300,7 +305,7 @@ class ScriptInterpreter(GObject.Object, CommandsMixin):
         commands = self.installer.script.get("installer", [])
         if exception:
             logger.error("Last install command failed, show error")
-            self.parent.on_install_error(repr(exception))
+            self.parent.show_install_error_message(repr(exception))
         elif self.current_command < len(commands):
             try:
                 command = commands[self.current_command]
@@ -368,7 +373,7 @@ class ScriptInterpreter(GObject.Object, CommandsMixin):
             install_complete_text = (self.installer.script.get("install_complete_text") or _("Installation completed!"))
             self.parent.set_status(install_complete_text)
         download_lutris_media(self.installer.game_slug)
-        self.parent.on_install_finished(game_id)
+        self.parent.finish_install(game_id)
 
     def cleanup(self):
         """Clean up install dir after a successful install"""

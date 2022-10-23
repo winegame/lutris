@@ -239,7 +239,7 @@ def remove_folder(path):
     """
     if not os.path.exists(path):
         logger.warning("Non existent path: %s", path)
-        return
+        return False
     logger.debug("Removing folder %s", path)
     if os.path.samefile(os.path.expanduser("~"), path):
         raise RuntimeError("Lutris tried to erase home directory!")
@@ -429,9 +429,16 @@ def get_disk_size(path):
 
 def get_locale_list():
     """Return list of available locales"""
-    locale_getter = subprocess.Popen(['locale', '-a'], stdout=subprocess.PIPE)
-    output = locale_getter.communicate()
-    locales = output[0].decode('ASCII').split() # locale names use only ascii characters
+    try:
+        with subprocess.Popen(['locale', '-a'], stdout=subprocess.PIPE) as locale_getter:
+            output = locale_getter.communicate()
+        locales = output[0].decode('ASCII').split()  # locale names use only ascii characters
+    except FileNotFoundError:
+        lang = os.environ.get('LANG', '')
+        if lang:
+            locales = [lang]
+        else:
+            locales = []
     return locales
 
 

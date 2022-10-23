@@ -22,6 +22,7 @@ class FlathubBanner(ServiceMedia):
     size = (128, 128)
     dest_path = os.path.join(settings.CACHE_DIR, "flathub/banners")
     file_pattern = "%s.png"
+    file_format = "png"
     url_field = 'iconDesktopUrl'
 
     def get_media_url(self, details):
@@ -38,10 +39,12 @@ class FlathubGame(ServiceGame):
         service_game = FlathubGame()
         service_game.appid = flathub_game["flatpakAppId"]
         service_game.slug = slugify(flathub_game["name"])
-        service_game.game_slug = slugify(flathub_game["name"])
+        service_game.lutris_slug = slugify(flathub_game["name"])
         service_game.name = flathub_game["name"]
-        service_game.summary = flathub_game["summary"]
-        service_game.version = flathub_game["currentReleaseVersion"]
+        service_game.details = {
+            "summary": flathub_game["summary"],
+            "version": flathub_game["currentReleaseVersion"]
+        }
         service_game.runner = "flatpak"
         service_game.details = json.dumps(flathub_game)
         return service_game

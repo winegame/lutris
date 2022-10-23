@@ -42,6 +42,7 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
         self.extends = self.script.get("extends")
         self.game_id = self.get_game_id()
         self.is_gog = False
+        self.discord_id = installer.get('discord_id')
 
     def get_service(self, initial=None):
         if initial:
@@ -181,15 +182,16 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
             if str(value).lower() == 'false':
                 value = False
             if key == "launch_configs":
-                # launch configuration don't need substitutions at least for now.
-                config[key] = value
+                config[key] = [
+                    {k: self.interpreter._substitute(v) for (k, v) in _conf.items()}
+                    for _conf in value
+                ]
             elif isinstance(value, list):
                 config[key] = [self.interpreter._substitute(i) for i in value]
             elif isinstance(value, dict):
                 config[key] = {k: self.interpreter._substitute(v) for (k, v) in value.items()}
             elif isinstance(value, bool):
                 config[key] = value
-
             else:
                 config[key] = self.interpreter._substitute(value)
         return config
@@ -280,6 +282,7 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
             service=service_id,
             service_id=self.service_appid,
             id=self.game_id,
+            discord_id=self.discord_id,
         )
         return self.game_id
 
