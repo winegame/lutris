@@ -1,3 +1,11 @@
+net.winegame.client (0.5.12.1) jammy; urgency=medium
+
+  * Vulkan ICD加载器里添加一个“不指定（使用系统默认值）”的选项
+  * 添加从 Windows 可执行文件中提取图标的功能
+  * 重新设计首选项对话框
+
+ -- SwimmingTiger <hu60.cn@qq.com>  Sun, 23 Oct 2022 21:08:51 +0800
+
 net.winegame.client (0.5.10.5) impish; urgency=medium
 
   * 修复了Steam已安装但未登录时Wine游戏助手启动后弹出错误提示的问题。
