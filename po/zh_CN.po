@@ -3,22 +3,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lutris\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-19 10:32+0800\n"
-"PO-Revision-Date: 2022-09-19 10:33+0800\n"
+"POT-Creation-Date: 2022-10-23 21:26+0800\n"
+"PO-Revision-Date: 2022-10-23 21:49+0800\n"
 "Last-Translator: Yidaozhan Ya <yidaozhan_ya@outlook.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: share/applications/net.lutris.Lutris.desktop:3
-#: share/lutris/ui/lutris-window.ui:25 lutris/gui/application.py:76
-#: lutris/gui/widgets/status_icon.py:127 lutris/services/lutris.py:39
-msgid "WineGame"
-msgstr "Wine游戏助手"
+#: share/metainfo/net.lutris.Lutris.metainfo.xml:10
+msgid "Lutris"
+msgstr "Lutris"
 
 #: share/applications/net.lutris.Lutris.desktop:4
 msgid "Video Game Preservation Platform"
@@ -31,6 +30,10 @@ msgstr "游戏;wine;模拟器;"
 #: share/applications/net.lutris.Lutris.desktop:8
 msgid "lutris"
 msgstr "lutris"
+
+#: share/metainfo/net.lutris.Lutris.metainfo.xml:8
+msgid "Lutris Team"
+msgstr "Lutris 团队"
 
 #: share/metainfo/net.lutris.Lutris.metainfo.xml:11
 #: share/lutris/ui/about-dialog.ui:18
@@ -48,13 +51,19 @@ msgid ""
 "implementations and compatibility layers, it gives you a central interface "
 "to launch all your games."
 msgstr ""
-"Wine游戏助手可帮您安装和运行大多数平台上几乎所有时代的电子游戏。通过对现有的模拟"
-"器、兼容层、第三方游戏引擎等进行整合利用，Wine游戏助手可为您提供一个统一的界面来启"
-"动您的所有游戏。"
+"Wine游戏助手可帮您安装和运行大多数平台上几乎所有时代的电子游戏。通过对现有的"
+"模拟器、兼容层、第三方游戏引擎等进行整合利用，Wine游戏助手可为您提供一个统一"
+"的界面来启动您的所有游戏。"
 
 #: share/lutris/ui/about-dialog.ui:8 share/lutris/ui/lutris-window.ui:582
 msgid "About WineGame"
 msgstr "关于Wine游戏助手"
+
+#: share/lutris/ui/about-dialog.ui:16 share/lutris/ui/lutris-window.ui:25
+#: lutris/gui/application.py:77 lutris/gui/widgets/status_icon.py:127
+#: lutris/services/lutris.py:39
+msgid "WineGame"
+msgstr "Wine游戏助手"
 
 #: share/lutris/ui/about-dialog.ui:21
 msgid ""
@@ -121,7 +130,7 @@ msgstr "密码"
 msgid "Username"
 msgstr "用户名"
 
-#: share/lutris/ui/log-window.ui:37
+#: share/lutris/ui/log-window.ui:36
 msgid "Search..."
 msgstr "搜索..."
 
@@ -145,7 +154,7 @@ msgstr "缩放 "
 msgid "Sort Ascending"
 msgstr "升序/降序"
 
-#: share/lutris/ui/lutris-window.ui:367 lutris/gui/config/common.py:98
+#: share/lutris/ui/lutris-window.ui:367 lutris/gui/config/common.py:114
 #: lutris/gui/views/list.py:45 lutris/gui/views/list.py:159
 msgid "Name"
 msgstr "名称"
@@ -205,8 +214,8 @@ msgid ""
 "system:\n"
 "{libs}"
 msgstr ""
-"系统内缺少以下必需的 {arch} 库，请使用软件包管理器安装它们，然后重新启动"
-"Wine游戏助手：\n"
+"系统内缺少以下必需的 {arch} 库，请使用软件包管理器安装它们，然后重新启动Wine"
+"游戏助手：\n"
 "{libs}"
 
 #. Local services don't show an install dialog, they can be launched directly
@@ -219,7 +228,7 @@ msgstr "启动"
 msgid "Stop"
 msgstr "停止"
 
-#: lutris/game_actions.py:62 lutris/gui/dialogs/runner_install.py:194
+#: lutris/game_actions.py:62 lutris/gui/dialogs/runner_install.py:210
 #: lutris/gui/installer/script_box.py:62 lutris/gui/widgets/game_bar.py:210
 msgid "Install"
 msgstr "安装"
@@ -260,7 +269,7 @@ msgstr "执行维护脚本"
 msgid "Browse files"
 msgstr "打开安装目录"
 
-#: lutris/game_actions.py:75 lutris/gui/installerwindow.py:180
+#: lutris/game_actions.py:75 lutris/gui/installerwindow.py:178
 msgid "Create desktop shortcut"
 msgstr "创建桌面快捷方式"
 
@@ -268,7 +277,7 @@ msgstr "创建桌面快捷方式"
 msgid "Delete desktop shortcut"
 msgstr "删除桌面快捷方式"
 
-#: lutris/game_actions.py:85 lutris/gui/installerwindow.py:184
+#: lutris/game_actions.py:85 lutris/gui/installerwindow.py:182
 msgid "Create application menu shortcut"
 msgstr "创建应用列表快捷方式"
 
@@ -276,7 +285,7 @@ msgstr "创建应用列表快捷方式"
 msgid "Delete application menu shortcut"
 msgstr "删除应用列表快捷方式"
 
-#: lutris/game_actions.py:95 lutris/gui/installerwindow.py:189
+#: lutris/game_actions.py:95 lutris/gui/installerwindow.py:187
 msgid "Create steam shortcut"
 msgstr "创建 Steam 快捷方式"
 
@@ -288,7 +297,7 @@ msgstr "删除 Steam 快捷方式"
 msgid "Install another version"
 msgstr "安装其他版本"
 
-#: lutris/game_actions.py:104 lutris/gui/dialogs/uninstall_game.py:139
+#: lutris/game_actions.py:104 lutris/gui/dialogs/uninstall_game.py:109
 msgid "Remove"
 msgstr "卸载"
 
@@ -335,59 +344,63 @@ msgstr ""
 "无法打开 %s \n"
 "目录不存在。"
 
-#: lutris/game.py:182
+#: lutris/game.py:188
 msgid "Error the runner is not installed"
 msgstr "错误：运行环境未安装"
 
-#: lutris/game.py:184
+#: lutris/game.py:190
 msgid "A bios file is required to run this game"
 msgstr "该游戏需要载入一个 BIOS 文件才能运行"
 
-#: lutris/game.py:188
+#: lutris/game.py:194
 msgid "The file {} could not be found"
 msgstr "找不到文件 {}"
 
-#: lutris/game.py:190
+#: lutris/game.py:196
 msgid ""
 "This game has no executable set. The install process didn't finish properly."
 msgstr "该游戏没有可执行文件。安装过程没有正确完成。"
 
-#: lutris/game.py:193
+#: lutris/game.py:199
 #, python-format
 msgid "The file %s is not executable"
 msgstr "文件 %s 不是可执行文件或者没有执行权限"
 
-#: lutris/game.py:195
+#: lutris/game.py:201
 #, python-format
 msgid "The path '%s' is not set. please set it in the options."
 msgstr "路径“%s”未设置，请在选项中进行设置。"
 
-#: lutris/game.py:197
+#: lutris/game.py:203
 #, python-format
 msgid "Unhandled error: %s"
 msgstr "未处理的错误：%s"
 
-#: lutris/game.py:314
+#: lutris/game.py:269
+msgid "Uninstall the game before deleting"
+msgstr "删除前请先卸载游戏"
+
+#: lutris/game.py:325
 msgid "Tried to launch a game that isn't installed."
 msgstr "游戏尚未安装，无法启动。"
 
-#: lutris/game.py:316 lutris/game.py:424
+#: lutris/game.py:327 lutris/game.py:435
 msgid "Invalid game configuration: Missing runner"
 msgstr "无效游戏配置：缺少运行环境"
 
-#: lutris/game.py:325
+#: lutris/game.py:336
 msgid "Runtime currently updating"
 msgstr "正在更新运行库"
 
-#: lutris/game.py:325
+#: lutris/game.py:336
 msgid "Game might not work as expected"
 msgstr "更新完成前游戏可能无法正常启动"
 
-#: lutris/game.py:358
+#: lutris/game.py:369
 msgid "Unable to find Xephyr, install it or disable the Xephyr option"
 msgstr "找不到 Xephyr，请先安装 Xephyr 或禁用 Xephyr 选项"
 
-#: lutris/game.py:405
+#: lutris/game.py:416
 #, python-format
 msgid ""
 "The selected terminal application could not be launched:\n"
@@ -397,17 +410,17 @@ msgstr ""
 "%s"
 
 #. The 'file' sort of gameplay_info cannot be made to use a configuration
-#: lutris/game.py:441
+#: lutris/game.py:452
 msgid "The runner could not find a command to apply the configuration to."
 msgstr ""
 "当前运行环境中找不到可应用该配置的指令。\n"
 "file 类型的 gameplay_info 不能应用配置。"
 
-#: lutris/game.py:657
+#: lutris/game.py:668
 msgid "<b>Error lauching the game:</b>\n"
 msgstr "<b>启动游戏出错：</b>\n"
 
-#: lutris/game.py:752
+#: lutris/game.py:767
 #, python-format
 msgid ""
 "<b>Error: Missing shared library.</b>\n"
@@ -418,7 +431,7 @@ msgstr ""
 "\n"
 "%s"
 
-#: lutris/game.py:758
+#: lutris/game.py:773
 msgid ""
 "<b>Error: A different Wine version is already using the same Wine prefix.</b>"
 msgstr "<b>错误：该 Wine 容器正在被另一个不同版本的 Wine 使用。</b>"
@@ -513,16 +526,16 @@ msgstr "请选择安装包"
 msgid "Select a Lutris installer"
 msgstr "选择安装脚本文件"
 
-#: lutris/gui/application.py:88
+#: lutris/gui/application.py:89
 msgid ""
 "Running Lutris as root is not recommended and may cause unexpected issues"
 msgstr "不建议以 root 用户身份运行Wine游戏助手，这可能会导致未预期的问题"
 
-#: lutris/gui/application.py:98
+#: lutris/gui/application.py:99
 msgid "Your Linux distribution is too old. Lutris won't function properly."
 msgstr "您的 Linux 发行版太旧了，Wine游戏助手无法正常运行。"
 
-#: lutris/gui/application.py:103
+#: lutris/gui/application.py:104
 msgid ""
 "Run a game directly by adding the parameter lutris:rungame/game-identifier.\n"
 "If several games share the same identifier you can use the numerical ID "
@@ -535,116 +548,116 @@ msgstr ""
 "数字ID），参数为 lutris:rungameid/数字ID。\n"
 "要安装游戏，请使用参数 lutris:install/游戏标识符。"
 
-#: lutris/gui/application.py:116
+#: lutris/gui/application.py:117
 msgid "Print the version of Lutris and exit"
 msgstr "打印Wine游戏助手版本后退出"
 
-#: lutris/gui/application.py:124
+#: lutris/gui/application.py:125
 msgid "Show debug messages"
 msgstr "显示调试信息"
 
-#: lutris/gui/application.py:132
+#: lutris/gui/application.py:133
 msgid "Install a game from a yml file"
 msgstr "从 yml 文件安装游戏"
 
-#: lutris/gui/application.py:140
+#: lutris/gui/application.py:141
 msgid "Generate a bash script to run a game without the client"
 msgstr "生成 bash 脚本以在没有Wine游戏助手客户端的情况下运行游戏"
 
-#: lutris/gui/application.py:148
+#: lutris/gui/application.py:149
 msgid "Execute a program with the Lutris Runtime"
 msgstr "在 Lutris 运行库中运行程序"
 
-#: lutris/gui/application.py:156
+#: lutris/gui/application.py:157
 msgid "List all games in database"
 msgstr "列出数据库里的所有游戏"
 
-#: lutris/gui/application.py:164
+#: lutris/gui/application.py:165
 msgid "Only list installed games"
 msgstr "仅列出已安装的游戏"
 
-#: lutris/gui/application.py:172
+#: lutris/gui/application.py:173
 msgid "List available Steam games"
 msgstr "列出可用的 Steam 游戏"
 
-#: lutris/gui/application.py:180
+#: lutris/gui/application.py:181
 msgid "List all known Steam library folders"
 msgstr "列出所有已知的 Steam 库文件夹"
 
-#: lutris/gui/application.py:188
+#: lutris/gui/application.py:189
 msgid "List all known runners"
 msgstr "列出所有已知的运行环境"
 
-#: lutris/gui/application.py:196
+#: lutris/gui/application.py:197
 msgid "List all known Wine versions"
 msgstr "列出所有已知的 Wine 版本"
 
-#: lutris/gui/application.py:204
+#: lutris/gui/application.py:205
 msgid "Install a Runner"
 msgstr "安装运行环境"
 
-#: lutris/gui/application.py:212
+#: lutris/gui/application.py:213
 msgid "Uninstall a Runner"
 msgstr "卸载运行环境"
 
-#: lutris/gui/application.py:220
+#: lutris/gui/application.py:221
 msgid "Export a game"
 msgstr "导出游戏"
 
-#: lutris/gui/application.py:228
+#: lutris/gui/application.py:229
 msgid "Import a game"
 msgstr "导入游戏"
 
-#: lutris/gui/application.py:236
+#: lutris/gui/application.py:237
 msgid "Destination path for export"
 msgstr "导出路径"
 
-#: lutris/gui/application.py:244
+#: lutris/gui/application.py:245
 msgid "Display the list of games in JSON format"
 msgstr "以 JSON 格式显示游戏列表"
 
-#: lutris/gui/application.py:252
+#: lutris/gui/application.py:253
 msgid "Reinstall game"
 msgstr "重装游戏"
 
-#: lutris/gui/application.py:255
+#: lutris/gui/application.py:256
 msgid "Submit an issue"
 msgstr "提交反馈"
 
-#: lutris/gui/application.py:261
+#: lutris/gui/application.py:262
 msgid "URI to open"
 msgstr "要打开的 URI"
 
-#: lutris/gui/application.py:483
+#: lutris/gui/application.py:485
 #, python-format
 msgid "%s is not a valid URI"
 msgstr "URI 格式不正确：%s"
 
-#: lutris/gui/application.py:503
+#: lutris/gui/application.py:505
 #, python-format
 msgid "Failed to download %s"
 msgstr "无法下载 %s"
 
-#: lutris/gui/application.py:511
+#: lutris/gui/application.py:513
 #, python-brace-format
 msgid "download {url} to {file} started"
 msgstr "开始下载 {url}，保存至 {file}"
 
-#: lutris/gui/application.py:522
+#: lutris/gui/application.py:524
 #, python-format
 msgid "No such file: %s"
 msgstr "文件不存在：%s"
 
-#: lutris/gui/application.py:644
+#: lutris/gui/application.py:674
 #, python-format
 msgid "There is no installer available for %s."
 msgstr "%s 没有可用的安装脚本。"
 
-#: lutris/gui/application.py:654
+#: lutris/gui/application.py:685
 msgid "No updates found"
 msgstr "未找到更新"
 
-#: lutris/gui/application.py:664
+#: lutris/gui/application.py:696
 msgid "No DLC found"
 msgstr "未找到 DLC"
 
@@ -652,157 +665,174 @@ msgstr "未找到 DLC"
 msgid "Add a new game"
 msgstr "添加新游戏"
 
-#: lutris/gui/config/boxes.py:59
+#: lutris/gui/config/boxes.py:61
 msgid "No options available"
 msgstr "没有可用的选项"
 
-#: lutris/gui/config/boxes.py:105
+#: lutris/gui/config/boxes.py:109
 msgid "Reset option to global or default config"
 msgstr "将选项重置为全局或默认状态"
 
-#: lutris/gui/config/boxes.py:126
+#: lutris/gui/config/boxes.py:130
 msgid "<b>Default</b>: "
 msgstr "<b>默认</b>："
 
-#: lutris/gui/config/boxes.py:130
+#: lutris/gui/config/boxes.py:134
 msgid ""
 "<i>(Italic indicates that this option is modified in a lower configuration "
 "level.)</i>"
 msgstr "<i>（斜体表示此选项在较低的配置级别被修改。）</i>"
 
-#: lutris/gui/config/boxes.py:307
+#: lutris/gui/config/boxes.py:315
 #, python-format
 msgid "%s (default)"
 msgstr "%s（默认）"
 
-#: lutris/gui/config/boxes.py:391 lutris/gui/widgets/common.py:45
+#: lutris/gui/config/boxes.py:399 lutris/gui/widgets/common.py:45
 msgid "Select file"
 msgstr "选择文件"
 
-#: lutris/gui/config/boxes.py:433
+#: lutris/gui/config/boxes.py:446
 msgid "Select folder"
 msgstr "选择目录"
 
-#: lutris/gui/config/boxes.py:473
+#: lutris/gui/config/boxes.py:491
 msgid "Add files"
 msgstr "添加文件"
 
-#: lutris/gui/config/boxes.py:491
+#: lutris/gui/config/boxes.py:509
 msgid "Files"
 msgstr "文件"
 
-#: lutris/gui/config/boxes.py:508
+#: lutris/gui/config/boxes.py:526
 msgid "Select files"
 msgstr "批量选择文件"
 
-#: lutris/gui/config/boxes.py:511
+#: lutris/gui/config/boxes.py:529
 msgid "_Add"
 msgstr "添加 (_A)"
 
-#: lutris/gui/config/boxes.py:512 lutris/gui/dialogs/__init__.py:165
-#: lutris/gui/dialogs/__init__.py:192 lutris/gui/dialogs/issue.py:72
-#: lutris/gui/widgets/common.py:98
+#: lutris/gui/config/boxes.py:530 lutris/gui/dialogs/__init__.py:187
+#: lutris/gui/dialogs/__init__.py:214 lutris/gui/dialogs/issue.py:72
+#: lutris/gui/widgets/common.py:100
 #: lutris/gui/widgets/download_progress_box.py:47
 msgid "_Cancel"
 msgstr "取消 (_C)"
 
-#: lutris/gui/config/boxes.py:640
+#: lutris/gui/config/boxes.py:658
 msgid ""
 "If modified, these options supersede the same options from the base runner "
 "configuration."
 msgstr "如果修改，这些选项将取代基本运行环境配置中的相同选项。"
 
-#: lutris/gui/config/boxes.py:661
+#: lutris/gui/config/boxes.py:679
 msgid ""
 "If modified, these options supersede the same options from the base runner "
 "configuration, which themselves supersede the global preferences."
 msgstr ""
 "如果修改，这些选项将取代基本运行环境配置中的相同选项，也将取代全局首选项。"
 
-#: lutris/gui/config/boxes.py:667
+#: lutris/gui/config/boxes.py:685
 msgid ""
 "If modified, these options supersede the same options from the global "
 "preferences."
 msgstr "如果修改，这些选项将取代全局首选项中的相同选项。"
 
-#: lutris/gui/config/common.py:28
+#: lutris/gui/config/common.py:27
 msgid "Select a runner in the Game Info tab"
 msgstr "在“游戏信息”选项卡中选择一个运行环境"
 
-#: lutris/gui/config/common.py:94
+#: lutris/gui/config/common.py:110
 msgid "Game info"
 msgstr "游戏信息"
 
-#: lutris/gui/config/common.py:110
+#: lutris/gui/config/common.py:126
 msgid "Identifier"
 msgstr "标识符"
 
-#: lutris/gui/config/common.py:119 lutris/gui/config/common.py:245
+#: lutris/gui/config/common.py:135 lutris/gui/config/common.py:265
 msgid "Change"
 msgstr "修改"
 
-#: lutris/gui/config/common.py:128
+#: lutris/gui/config/common.py:144
 msgid "Directory"
 msgstr "所在文件夹"
 
-#: lutris/gui/config/common.py:134
+#: lutris/gui/config/common.py:150
 msgid "Move"
 msgstr "移动"
 
-#: lutris/gui/config/common.py:142 lutris/gui/views/list.py:47
+#: lutris/gui/config/common.py:158 lutris/gui/views/list.py:47
 msgid "Runner"
 msgstr "运行环境"
 
-#: lutris/gui/config/common.py:163
+#: lutris/gui/config/common.py:172
+msgid "Set custom cover art"
+msgstr "设置自定义封面"
+
+#: lutris/gui/config/common.py:172
+msgid "Remove custom cover art"
+msgstr "移除自定义封面"
+
+#: lutris/gui/config/common.py:173
+msgid "Set custom banner"
+msgstr "设置自定义横幅"
+
+#: lutris/gui/config/common.py:173
 msgid "Remove custom banner"
 msgstr "移除自定义封面"
+
+#: lutris/gui/config/common.py:174
+msgid "Set custom icon"
+msgstr "设置自定义图标"
 
 #: lutris/gui/config/common.py:174
 msgid "Remove custom icon"
 msgstr "移除自定义图标"
 
-#: lutris/gui/config/common.py:183
+#: lutris/gui/config/common.py:199
 msgid "Release year"
 msgstr "发行年份"
 
-#: lutris/gui/config/common.py:226
+#: lutris/gui/config/common.py:241
 msgid "Select a runner from the list"
 msgstr "从列表中选择一个运行环境"
 
-#: lutris/gui/config/common.py:234
+#: lutris/gui/config/common.py:249
 msgid "Apply"
 msgstr "应用"
 
-#: lutris/gui/config/common.py:282
+#: lutris/gui/config/common.py:302
 msgid "Game options"
 msgstr "游戏选项"
 
-#: lutris/gui/config/common.py:290
+#: lutris/gui/config/common.py:310
 msgid "Runner options"
 msgstr "运行环境选项"
 
-#: lutris/gui/config/common.py:298
+#: lutris/gui/config/common.py:319
 msgid "System options"
 msgstr "系统选项"
 
-#. Advanced settings checkbox
-#: lutris/gui/config/common.py:308
-msgid "Show advanced options"
-msgstr "显示高级选项"
-
-#: lutris/gui/config/common.py:316 lutris/gui/dialogs/__init__.py:299
-#: lutris/gui/dialogs/runner_install.py:187
-#: lutris/gui/dialogs/uninstall_game.py:60
-#: lutris/gui/dialogs/uninstall_game.py:135
+#. Buttons
+#: lutris/gui/config/common.py:331 lutris/gui/dialogs/runner_install.py:201
 #: lutris/gui/widgets/download_progress_box.py:95
 msgid "Cancel"
 msgstr "取消"
 
-#: lutris/gui/config/common.py:320
+#: lutris/gui/config/common.py:334
 msgid "Save"
 msgstr "保存"
 
-#: lutris/gui/config/common.py:354
+#: lutris/gui/config/common.py:347 lutris/gui/config/common.py:364
+msgid "Show advanced options"
+msgstr "显示高级选项"
+
+#: lutris/gui/config/common.py:349
+msgid "Advanced"
+msgstr "高级选项"
+
+#: lutris/gui/config/common.py:400
 msgid ""
 "Are you sure you want to change the runner for this game ? This will reset "
 "the full configuration for this game and is not reversible."
@@ -810,35 +840,35 @@ msgstr ""
 "您确定要更改此游戏的运行环境吗？\n"
 "这将重置此游戏的所有配置，并且不可逆。"
 
-#: lutris/gui/config/common.py:358
+#: lutris/gui/config/common.py:404
 msgid "Confirm runner change"
 msgstr "运行环境变更确认"
 
-#: lutris/gui/config/common.py:406
+#: lutris/gui/config/common.py:455
 msgid "Runner not provided"
 msgstr "未选择运行环境"
 
-#: lutris/gui/config/common.py:409
+#: lutris/gui/config/common.py:458
 msgid "Please fill in the name"
 msgstr "请填写游戏名称"
 
-#: lutris/gui/config/common.py:412
+#: lutris/gui/config/common.py:461
 msgid "Steam AppID not provided"
 msgstr "未提供 Steam 应用 ID"
 
-#: lutris/gui/config/common.py:430
+#: lutris/gui/config/common.py:479
 msgid "The following fields have invalid values: "
 msgstr "以下字段的值无效："
 
-#: lutris/gui/config/common.py:437
+#: lutris/gui/config/common.py:486
 msgid "Current configuration is not valid, ignoring save request"
 msgstr "当前配置无效，无法保存"
 
-#: lutris/gui/config/common.py:472
+#: lutris/gui/config/common.py:525
 msgid "Please choose a custom image"
 msgstr "请选择一个自定义图片"
 
-#: lutris/gui/config/common.py:480
+#: lutris/gui/config/common.py:533
 msgid "Images"
 msgstr "映像文件"
 
@@ -942,19 +972,19 @@ msgstr "复制到剪贴板"
 msgid "<b>System information</b>"
 msgstr "<b>系统信息</b>"
 
-#: lutris/gui/dialogs/cache.py:11
+#: lutris/gui/dialogs/cache.py:13
 msgid "Cache configuration"
 msgstr "缓存配置"
 
-#: lutris/gui/dialogs/cache.py:26
+#: lutris/gui/dialogs/cache.py:40
 msgid "Cache path"
 msgstr "缓存目录"
 
-#: lutris/gui/dialogs/cache.py:30
+#: lutris/gui/dialogs/cache.py:43
 msgid "Set the folder for the cache path"
 msgstr "设置缓存文件夹路径"
 
-#: lutris/gui/dialogs/cache.py:39
+#: lutris/gui/dialogs/cache.py:55
 msgid ""
 "If provided, this location will be used by installers to cache downloaded "
 "files locally for future re-use. \n"
@@ -964,7 +994,7 @@ msgstr ""
 "设置缓存目录后，安装程序将把安装过程中下载的文件缓存到此处以备将来使用。\n"
 "如果缓存目录为空，安装程序下载的文件在安装完成后会被自动删除。"
 
-#: lutris/gui/dialogs/download.py:12
+#: lutris/gui/dialogs/download.py:13
 msgid "Downloading file"
 msgstr "文件下载中"
 
@@ -973,59 +1003,53 @@ msgstr "文件下载中"
 msgid "Downloading %s"
 msgstr "正在下载 %s"
 
-#: lutris/gui/dialogs/__init__.py:164 lutris/gui/dialogs/__init__.py:191
-#: lutris/gui/dialogs/issue.py:71 lutris/gui/dialogs/runner_install.py:64
-#: lutris/gui/widgets/common.py:98
+#: lutris/gui/dialogs/__init__.py:186 lutris/gui/dialogs/__init__.py:213
+#: lutris/gui/dialogs/issue.py:71 lutris/gui/widgets/common.py:100
 msgid "_OK"
 msgstr "确定 (_O)"
 
-#: lutris/gui/dialogs/__init__.py:182
+#: lutris/gui/dialogs/__init__.py:204
 msgid "Please choose a file"
 msgstr "选择一个文件"
 
-#: lutris/gui/dialogs/__init__.py:212
+#: lutris/gui/dialogs/__init__.py:236
 msgid "Checking for runtime updates, please wait…"
 msgstr "正在检查运行库更新，请稍候..."
 
-#: lutris/gui/dialogs/__init__.py:243
+#: lutris/gui/dialogs/__init__.py:270
 #, python-format
 msgid "%s is already installed"
 msgstr "%s 已安装"
 
-#: lutris/gui/dialogs/__init__.py:252
+#: lutris/gui/dialogs/__init__.py:281
 msgid "Launch game"
 msgstr "启动游戏"
 
-#: lutris/gui/dialogs/__init__.py:256
+#: lutris/gui/dialogs/__init__.py:285
 msgid "Install the game again"
 msgstr "再次安装游戏"
 
-#: lutris/gui/dialogs/__init__.py:260 lutris/gui/dialogs/__init__.py:303
-#: lutris/gui/dialogs/__init__.py:391
-msgid "OK"
-msgstr "确定"
-
-#: lutris/gui/dialogs/__init__.py:279
+#: lutris/gui/dialogs/__init__.py:305
 msgid "Select game to launch"
 msgstr "选择要启动的游戏"
 
-#: lutris/gui/dialogs/__init__.py:364
+#: lutris/gui/dialogs/__init__.py:378
 msgid "Login failed"
 msgstr "登录失败"
 
-#: lutris/gui/dialogs/__init__.py:375
+#: lutris/gui/dialogs/__init__.py:389
 msgid "Install script for {}"
 msgstr "{} 的安装脚本"
 
-#: lutris/gui/dialogs/__init__.py:427
+#: lutris/gui/dialogs/__init__.py:441
 msgid "Do not display this message again."
 msgstr "不再显示此信息。"
 
-#: lutris/gui/dialogs/__init__.py:448
+#: lutris/gui/dialogs/__init__.py:462
 msgid "Wine is not installed on your system."
 msgstr "您需要将 Wine 安装到您的系统中。"
 
-#: lutris/gui/dialogs/__init__.py:450
+#: lutris/gui/dialogs/__init__.py:464
 msgid ""
 "Having Wine installed on your system guarantees that Wine builds from Lutris "
 "will have all required dependencies.\n"
@@ -1035,9 +1059,10 @@ msgid ""
 msgstr ""
 "在系统中安装 Wine 可以确保从 Lutris 下载的 Wine 具备运行所需的依赖包。\n"
 "\n"
-"请按照<a href='https://hu60.cn/q.php/bbs.topic.102999.html#nav'>依赖安装教程</a>中给出的说明安装 Wine。"
+"请按照<a href='https://hu60.cn/q.php/bbs.topic.102999.html#nav'>依赖安装教程"
+"</a>中给出的说明安装 Wine。"
 
-#: lutris/gui/dialogs/__init__.py:476
+#: lutris/gui/dialogs/__init__.py:489
 #, python-format
 msgid "Moving %s to %s..."
 msgstr "正在移动 %s 到 %s ..."
@@ -1068,99 +1093,99 @@ msgstr "选择一个位置来保存反馈信息"
 msgid "Issue saved in %s"
 msgstr "反馈已保存到 %s"
 
-#: lutris/gui/dialogs/runner_install.py:30
+#: lutris/gui/dialogs/runner_install.py:28
 #, python-format
 msgid "Showing games using %s"
 msgstr "查看使用 %s 的游戏"
 
-#: lutris/gui/dialogs/runner_install.py:72
+#: lutris/gui/dialogs/runner_install.py:74
 #, python-format
 msgid "Waiting for response from %s"
 msgstr "等待 %s 响应"
 
-#: lutris/gui/dialogs/runner_install.py:88
+#: lutris/gui/dialogs/runner_install.py:90
 #, python-format
 msgid "Unable to get runner versions: %s"
 msgstr "无法获取运行环境版本信息：%s"
 
-#: lutris/gui/dialogs/runner_install.py:102
+#: lutris/gui/dialogs/runner_install.py:104
 msgid "Unable to get runner versions from winegame.net"
 msgstr "无法从 winegame.net 获取运行环境版本信息"
 
-#: lutris/gui/dialogs/runner_install.py:109
+#: lutris/gui/dialogs/runner_install.py:111
 #, python-format
 msgid "%s version management"
 msgstr "%s 版本管理器"
 
-#: lutris/gui/dialogs/runner_install.py:159
+#: lutris/gui/dialogs/runner_install.py:165
 #, python-format
-msgid "_View %d game"
-msgid_plural "_View %d games"
+msgid "View %d game"
+msgid_plural "View %d games"
 msgstr[0] "被 %d 个游戏使用"
 
-#: lutris/gui/dialogs/runner_install.py:191
-#: lutris/gui/dialogs/uninstall_game.py:34
+#: lutris/gui/dialogs/runner_install.py:206
+#: lutris/gui/dialogs/uninstall_game.py:22
 msgid "Uninstall"
 msgstr "卸载"
 
-#: lutris/gui/dialogs/runner_install.py:215
+#: lutris/gui/dialogs/runner_install.py:231
 msgid "Wine version usage"
 msgstr "Wine 版本使用情况"
 
-#: lutris/gui/dialogs/runner_install.py:274
+#: lutris/gui/dialogs/runner_install.py:289
 msgid "Do you want to cancel the download?"
 msgstr "是否取消下载？"
 
-#: lutris/gui/dialogs/runner_install.py:275
+#: lutris/gui/dialogs/runner_install.py:290
 msgid "Download starting"
 msgstr "下载开始"
 
-#: lutris/gui/dialogs/runner_install.py:325
+#: lutris/gui/dialogs/runner_install.py:340
 #, python-format
 msgid "Version %s is not longer available"
 msgstr "版本 %s 不再可用"
 
-#: lutris/gui/dialogs/runner_install.py:350
+#: lutris/gui/dialogs/runner_install.py:365
 msgid "Downloading…"
 msgstr "正在下载..."
 
-#: lutris/gui/dialogs/runner_install.py:353
+#: lutris/gui/dialogs/runner_install.py:368
 msgid "Extracting…"
 msgstr "正在解压..."
 
-#: lutris/gui/dialogs/runner_install.py:395
+#: lutris/gui/dialogs/runner_install.py:410
 msgid "Failed to retrieve the runner archive"
 msgstr "下载运行环境安装包失败"
 
-#: lutris/gui/dialogs/uninstall_game.py:27
+#: lutris/gui/dialogs/uninstall_game.py:33
 #, python-format
 msgid "<span font_desc='14'><b>Uninstall %s</b></span>"
 msgstr "<span font_desc='14'><b>卸载 %s</b></span>"
 
-#: lutris/gui/dialogs/uninstall_game.py:38
+#: lutris/gui/dialogs/uninstall_game.py:41
 msgid "No file will be deleted"
 msgstr "没有可删除的文件"
 
-#: lutris/gui/dialogs/uninstall_game.py:41
+#: lutris/gui/dialogs/uninstall_game.py:44
 #, python-format
 msgid "The folder %s is used by other games and will be kept."
 msgstr "目录 %s 已被其他游戏使用，所以将被保留。"
 
-#: lutris/gui/dialogs/uninstall_game.py:44
+#: lutris/gui/dialogs/uninstall_game.py:47
 msgid "<i>Calculating size…</i>"
 msgstr "<i>正在计算文件大小...</i>"
 
-#: lutris/gui/dialogs/uninstall_game.py:48
+#: lutris/gui/dialogs/uninstall_game.py:51
 #, python-format
 msgid "Content of %s are protected and will not be deleted."
 msgstr "目录 %s 中的内容受到保护，无法被删除。"
 
-#: lutris/gui/dialogs/uninstall_game.py:75
+#: lutris/gui/dialogs/uninstall_game.py:68
 #, python-format
 msgid "Delete %s (%s)"
 msgstr "删除 %s (%s)"
 
-#: lutris/gui/dialogs/uninstall_game.py:93
+#: lutris/gui/dialogs/uninstall_game.py:84
 #, python-format
 msgid ""
 "Please confirm.\n"
@@ -1171,24 +1196,24 @@ msgstr ""
 "<b>所有</b>位于 <b>%s</b>\n"
 "的内容<b>都将被删除</b>（<b>您的游戏存档可能在里面</b>）！"
 
-#: lutris/gui/dialogs/uninstall_game.py:96
+#: lutris/gui/dialogs/uninstall_game.py:87
 msgid "Permanently delete files?"
 msgstr "彻底删除文件夹？！"
 
-#: lutris/gui/dialogs/uninstall_game.py:103
+#: lutris/gui/dialogs/uninstall_game.py:95
 msgid "Uninstalling game and deleting files..."
 msgstr "正在卸载游戏并删除文件..."
 
-#: lutris/gui/dialogs/uninstall_game.py:105
+#: lutris/gui/dialogs/uninstall_game.py:97
 msgid "Uninstalling game..."
 msgstr "正在卸载游戏..."
 
-#: lutris/gui/dialogs/uninstall_game.py:122
+#: lutris/gui/dialogs/uninstall_game.py:120
 #, python-format
 msgid "<span font_desc='14'><b>Remove %s</b></span>"
 msgstr "<span font_desc='14'><b>从游戏库中移除 %s</b></span>"
 
-#: lutris/gui/dialogs/uninstall_game.py:128
+#: lutris/gui/dialogs/uninstall_game.py:126
 #, python-format
 msgid ""
 "Completely remove %s from the library?\n"
@@ -1197,7 +1222,7 @@ msgstr ""
 "是否完全从游戏库中移除 %s？\n"
 "Wine游戏助手记录的游戏游玩时间也会一并删除。"
 
-#: lutris/gui/dialogs/webconnect_dialog.py:103
+#: lutris/gui/dialogs/webconnect_dialog.py:107
 msgid "Loading..."
 msgstr "载入中..."
 
@@ -1214,8 +1239,8 @@ msgstr "下载"
 msgid "Use Cache"
 msgstr "使用缓存"
 
-#: lutris/gui/installer/file_box.py:112 lutris/runners/steam.py:29
-#: lutris/services/steam.py:73
+#: lutris/gui/installer/file_box.py:112 lutris/runners/steam.py:30
+#: lutris/services/steam.py:76
 msgid "Steam"
 msgstr "Steam"
 
@@ -1263,6 +1288,10 @@ msgstr "启动 (_L)"
 msgid "_Close"
 msgstr "关闭 (_C)"
 
+#: lutris/gui/installerwindow.py:117
+msgid "No installer available"
+msgstr "没有可用的安装脚本"
+
 #: lutris/gui/installerwindow.py:124
 #, python-format
 msgid "Missing field \"%s\" in install script"
@@ -1273,41 +1302,41 @@ msgstr "安装脚本缺少字段“%s”"
 msgid "<b>Install %s</b>"
 msgstr "<b>安装 %s</b>"
 
-#: lutris/gui/installerwindow.py:164
+#: lutris/gui/installerwindow.py:165
 #, python-format
 msgid "This game requires %s. Do you want to install it?"
 msgstr "该游戏需要 %s，您要安装吗？"
 
-#: lutris/gui/installerwindow.py:165
+#: lutris/gui/installerwindow.py:166
 msgid "Missing dependency"
 msgstr "缺少依赖"
 
-#: lutris/gui/installerwindow.py:177
+#: lutris/gui/installerwindow.py:175
 msgid "<b>Installing {}</b>"
 msgstr "<b>安装 {}</b>"
 
-#: lutris/gui/installerwindow.py:198
+#: lutris/gui/installerwindow.py:196
 msgid "Select installation directory"
 msgstr "选择安装目录"
 
-#: lutris/gui/installerwindow.py:248
+#: lutris/gui/installerwindow.py:263
 msgid "Autodetect"
 msgstr "自动检测"
 
-#: lutris/gui/installerwindow.py:254
+#: lutris/gui/installerwindow.py:269
 msgid "Browse…"
 msgstr "浏览..."
 
-#: lutris/gui/installerwindow.py:261
+#: lutris/gui/installerwindow.py:277
 msgid "Select the folder where the disc is mounted"
 msgstr "选择安装光盘的挂载文件夹"
 
-#: lutris/gui/installerwindow.py:322
+#: lutris/gui/installerwindow.py:344
 msgid ""
 "Please review the files needed for the installation then click 'Continue'"
 msgstr "请检查安装所需的文件，然后点击“继续”"
 
-#: lutris/gui/installerwindow.py:360
+#: lutris/gui/installerwindow.py:382
 msgid ""
 "This game has extra content. \n"
 "Select which one you want and they will be available in the 'extras' folder "
@@ -1316,34 +1345,34 @@ msgstr ""
 "该游戏包含附加内容。\n"
 "请选择您想下载的附加内容，这些内容将被安装至游戏的“extras”文件夹。"
 
-#: lutris/gui/installerwindow.py:462
+#: lutris/gui/installerwindow.py:487
 #, python-format
 msgid "Unable to get files: %s"
 msgstr "无法读取文件：%s"
 
-#: lutris/gui/installerwindow.py:559
+#: lutris/gui/installerwindow.py:588
 msgid "Remove game files"
 msgstr "删除游戏文件"
 
-#: lutris/gui/installerwindow.py:569
+#: lutris/gui/installerwindow.py:599
 msgid "Are you sure you want to cancel the installation?"
 msgstr "确定要取消安装吗？"
 
-#: lutris/gui/installerwindow.py:570
+#: lutris/gui/installerwindow.py:600
 msgid "Cancel installation?"
 msgstr "是否取消安装？"
 
-#: lutris/gui/lutriswindow.py:344
+#: lutris/gui/lutriswindow.py:346
 #, python-format
 msgid "Connect your %s account to access your games"
 msgstr "关联您的 %s 账户来查看您的游戏"
 
-#: lutris/gui/lutriswindow.py:417
+#: lutris/gui/lutriswindow.py:419
 #, python-format
 msgid "Add a game matching '%s' to your favorites to see it here."
 msgstr "将匹配“%s”的游戏添加到收藏夹以在此处查看。"
 
-#: lutris/gui/lutriswindow.py:420
+#: lutris/gui/lutriswindow.py:422
 #, python-format
 msgid ""
 "No installed games matching '%s' found. Press Ctrl+I to show uninstalled "
@@ -1351,31 +1380,31 @@ msgid ""
 msgstr "找不到与“%s”匹配的已安装游戏。按 Ctrl+I 显示已卸载的游戏。"
 
 #. but not if missing!
-#: lutris/gui/lutriswindow.py:422
+#: lutris/gui/lutriswindow.py:424
 #, python-format
 msgid ""
 "No visible games matching '%s' found. Press Ctrl+H to show hidden games."
 msgstr "找不到与“%s”匹配的可见游戏。按 Ctrl+H 显示隐藏游戏。"
 
-#: lutris/gui/lutriswindow.py:425
+#: lutris/gui/lutriswindow.py:427
 #, python-format
 msgid "No games matching '%s' found "
 msgstr "未找到包含“%s”的游戏"
 
-#: lutris/gui/lutriswindow.py:428
+#: lutris/gui/lutriswindow.py:430
 msgid "Add games to your favorites to see them here."
 msgstr "将游戏添加到收藏夹就能在这里看到"
 
-#: lutris/gui/lutriswindow.py:430
+#: lutris/gui/lutriswindow.py:432
 msgid "No installed games found. Press Ctrl+I to show uninstalled games."
 msgstr "未找到已安装的游戏。按 Ctrl+I 显示已卸载的游戏。"
 
 #. but not if missing!
-#: lutris/gui/lutriswindow.py:432
+#: lutris/gui/lutriswindow.py:434
 msgid "No visible games found. Press Ctrl+H to show hidden games."
 msgstr "找不到可见的游戏。按 Ctrl+H 显示隐藏游戏。"
 
-#: lutris/gui/lutriswindow.py:440
+#: lutris/gui/lutriswindow.py:442
 msgid "No games found"
 msgstr "未找到游戏"
 
@@ -1384,11 +1413,11 @@ msgstr "未找到游戏"
 msgid "Platform"
 msgstr "平台"
 
-#: lutris/gui/widgets/common.py:72
+#: lutris/gui/widgets/common.py:74
 msgid "Browse..."
 msgstr "浏览..."
 
-#: lutris/gui/widgets/common.py:136
+#: lutris/gui/widgets/common.py:144
 msgid ""
 "<b>Warning!</b> The selected path is located on a drive formatted by "
 "Windows.\n"
@@ -1398,7 +1427,7 @@ msgstr ""
 "NTFS 分区上安装的游戏和程序可能<b>无法在 Linux 中正常运行</b>，\n"
 "或者<b>运行速度较慢</b>。建议将游戏转移到 Linux 分区。"
 
-#: lutris/gui/widgets/common.py:144
+#: lutris/gui/widgets/common.py:152
 msgid ""
 "<b>Warning!</b> The selected path contains files. Installation might not "
 "work properly."
@@ -1406,16 +1435,16 @@ msgstr ""
 "<b>警告！</b> 所选文件夹非空，安装可能无法正常进行。\n"
 "建议选择空文件夹，或者先手动删除该文件夹再进行安装。"
 
-#: lutris/gui/widgets/common.py:152
+#: lutris/gui/widgets/common.py:160
 msgid ""
 "<b>Warning</b> The destination folder is not writable by the current user."
 msgstr "<b>警告！</b> 当前用户无法写入目标文件夹。"
 
-#: lutris/gui/widgets/common.py:254
+#: lutris/gui/widgets/common.py:253
 msgid "Add"
 msgstr "添加"
 
-#: lutris/gui/widgets/common.py:258
+#: lutris/gui/widgets/common.py:257
 msgid "Delete"
 msgstr "删除"
 
@@ -1516,52 +1545,52 @@ msgstr "显示Wine游戏助手"
 msgid "Quit"
 msgstr "退出"
 
-#: lutris/installer/commands.py:66
+#: lutris/installer/commands.py:67
 #, python-brace-format
 msgid "One of {params} parameter is mandatory for the {cmd} command"
 msgstr "{cmd} 命令必须有以下参数之一：{params}"
 
-#: lutris/installer/commands.py:67 lutris/installer/interpreter.py:128
+#: lutris/installer/commands.py:68 lutris/installer/interpreter.py:128
 #: lutris/installer/interpreter.py:151
 msgid " or "
 msgstr " 或 "
 
-#: lutris/installer/commands.py:73
+#: lutris/installer/commands.py:74
 #, python-brace-format
 msgid "The {param} parameter is mandatory for the {cmd} command"
 msgstr "{cmd} 命令必须有 {param} 参数"
 
-#: lutris/installer/commands.py:90
+#: lutris/installer/commands.py:91
 #, python-format
 msgid "Invalid file '%s'. Can't make it executable"
 msgstr "文件 %s 没有可执行权限，尝试添加可执行权限失败"
 
-#: lutris/installer/commands.py:103
+#: lutris/installer/commands.py:104
 msgid ""
 "Parameters file and command can't be used at the same time for the execute "
 "command"
 msgstr "“execute”命令不能同时有“file”和“command”参数"
 
-#: lutris/installer/commands.py:138
+#: lutris/installer/commands.py:139
 msgid "No parameters supplied to execute command."
 msgstr "“execute”命令缺少“file”或“command”参数"
 
-#: lutris/installer/commands.py:152
+#: lutris/installer/commands.py:153
 #, python-format
 msgid "Unable to find executable %s"
 msgstr "无法找到可执行文件 %s"
 
-#: lutris/installer/commands.py:186
+#: lutris/installer/commands.py:187
 #, python-format
 msgid "%s does not exist"
 msgstr "%s 不存在"
 
-#: lutris/installer/commands.py:192
+#: lutris/installer/commands.py:193
 #, python-format
 msgid "Extracting %s"
 msgstr "正在解压 %s"
 
-#: lutris/installer/commands.py:234
+#: lutris/installer/commands.py:235
 msgid ""
 "Insert or mount game disc and click Autodetect or\n"
 "use Browse if the disc is mounted on a non standard location."
@@ -1569,7 +1598,7 @@ msgstr ""
 "插入或挂载游戏光盘，然后点击“自动检测”。\n"
 "如果光盘挂载在非标准位置，请使用“浏览”。"
 
-#: lutris/installer/commands.py:238
+#: lutris/installer/commands.py:239
 #, python-format
 msgid ""
 "\n"
@@ -1583,17 +1612,17 @@ msgstr ""
 "Wine游戏助手正在寻找包含以下文件或文件夹的已挂载磁盘驱动器或磁盘映像：\n"
 "<i>%s</i>"
 
-#: lutris/installer/commands.py:280
+#: lutris/installer/commands.py:281
 #, python-format
 msgid "Source does not exist: %s"
 msgstr "原文件不存在：%s"
 
-#: lutris/installer/commands.py:306
+#: lutris/installer/commands.py:307
 #, python-format
 msgid "Invalid source for 'move' operation: %s"
 msgstr "“move”操作的原文件无效：%s"
 
-#: lutris/installer/commands.py:325
+#: lutris/installer/commands.py:326
 #, python-brace-format
 msgid ""
 "Can't move {src} \n"
@@ -1602,34 +1631,29 @@ msgstr ""
 "无法把 {src}\n"
 "移动到目标位置 {dst}"
 
-#: lutris/installer/commands.py:332
+#: lutris/installer/commands.py:333
 #, python-format
 msgid "Rename error, source path does not exist: %s"
 msgstr "重命名失败，原文件不存在：%s"
 
-#: lutris/installer/commands.py:339
+#: lutris/installer/commands.py:340
 #, python-format
 msgid "Rename error, destination already exists: %s"
 msgstr "重命名失败，目标文件已存在：%s"
 
-#: lutris/installer/commands.py:355
+#: lutris/installer/commands.py:356
 msgid "Missing parameter src"
 msgstr "缺少参数“src”"
 
-#: lutris/installer/commands.py:358
+#: lutris/installer/commands.py:359
 msgid "Wrong value for 'src' param"
 msgstr "“src”参数的值不正确"
 
-#: lutris/installer/commands.py:362
+#: lutris/installer/commands.py:363
 msgid "Wrong value for 'dst' param"
 msgstr "“dst”参数的值不正确"
 
-#: lutris/installer/commands.py:451
-#, python-format
-msgid "Command exited with code %s"
-msgstr "命令以错误代码 %s 退出"
-
-#: lutris/installer/commands.py:469
+#: lutris/installer/commands.py:475
 #, python-format
 msgid "Wrong value for write_file mode: '%s'"
 msgstr "“write_file”命令的“mode”参数值“%s”不正确"
@@ -1807,6 +1831,7 @@ msgstr "机型"
 #: lutris/runners/redream.py:25 lutris/runners/reicast.py:42
 #: lutris/runners/residualvm.py:39 lutris/runners/scummvm.py:76
 #: lutris/runners/snes9x.py:36 lutris/runners/vice.py:57
+#: lutris/runners/yuzu.py:40
 msgid "Fullscreen"
 msgstr "全屏模式"
 
@@ -1818,11 +1843,15 @@ msgstr "全屏模式分辨率"
 msgid "Could not download Atari 800 BIOS archive"
 msgstr "下载 Atari 800 BIOS 文件失败"
 
+#: lutris/runners/commands/wine.py:253 lutris/util/wine/wine.py:223
+msgid "Wine is not installed"
+msgstr "Wine 尚未安装"
+
 #: lutris/runners/dolphin.py:10
 msgid "GameCube and Wii emulator"
 msgstr "GameCube 和 Wii 模拟器"
 
-#: lutris/runners/dolphin.py:11 lutris/services/dolphin.py:27
+#: lutris/runners/dolphin.py:11 lutris/services/dolphin.py:28
 msgid "Dolphin"
 msgstr "Dolphin"
 
@@ -1905,13 +1934,13 @@ msgstr "命令行参数"
 msgid "Command line arguments used when launching DOSBox"
 msgstr "启动 DOSBox 时使用的命令行参数"
 
-#: lutris/runners/dosbox.py:51 lutris/runners/flatpak.py:74
-#: lutris/runners/linux.py:39 lutris/runners/wine.py:61
+#: lutris/runners/dosbox.py:51 lutris/runners/flatpak.py:73
+#: lutris/runners/linux.py:39 lutris/runners/wine.py:62
 msgid "Working directory"
 msgstr "工作目录"
 
 #: lutris/runners/dosbox.py:53 lutris/runners/linux.py:41
-#: lutris/runners/wine.py:63
+#: lutris/runners/wine.py:64
 msgid ""
 "The location where the game is run from.\n"
 "By default, Lutris uses the directory of the executable."
@@ -1960,7 +1989,7 @@ msgstr "运行 RPG Maker 2000/2003 游戏"
 #: lutris/runners/easyrpg.py:12 lutris/runners/flatpak.py:18
 #: lutris/runners/linux.py:14 lutris/runners/linux.py:16
 #: lutris/runners/residualvm.py:15 lutris/runners/scummvm.py:14
-#: lutris/runners/steam.py:30 lutris/runners/zdoom.py:15
+#: lutris/runners/steam.py:31 lutris/runners/zdoom.py:15
 msgid "Linux"
 msgstr "Linux"
 
@@ -1992,9 +2021,9 @@ msgstr "游戏引擎"
 msgid "Disable auto detection of the simulated engine."
 msgstr "选择要模拟的游戏引擎"
 
-#: lutris/runners/easyrpg.py:41 lutris/runners/fsuae.py:155
-#: lutris/runners/mame.py:173 lutris/runners/wine.py:82
-#: lutris/runners/wine.py:416
+#: lutris/runners/easyrpg.py:41 lutris/runners/fsuae.py:156
+#: lutris/runners/mame.py:173 lutris/runners/wine.py:83
+#: lutris/runners/wine.py:417
 msgid "Auto"
 msgstr "自动检测"
 
@@ -2172,7 +2201,7 @@ msgstr ""
 "一定支持垂直同步。\n"
 "禁用垂直同步后，下方的帧率限制选项才会生效。"
 
-#: lutris/runners/easyrpg.py:196 lutris/sysoptions.py:345
+#: lutris/runners/easyrpg.py:196 lutris/sysoptions.py:346
 msgid "FPS limit"
 msgstr "帧率限制"
 
@@ -2185,7 +2214,7 @@ msgstr ""
 "设置自定义 FPS，如果不指定，则默认为 60 FPS。设为“0”禁用帧率限制。注意您的系"
 "统不一定支持此功能。"
 
-#: lutris/runners/easyrpg.py:206 lutris/runners/wine.py:442
+#: lutris/runners/easyrpg.py:206 lutris/runners/wine.py:443
 msgid "Show FPS"
 msgstr "显示帧率"
 
@@ -2194,7 +2223,7 @@ msgid "Enable frames per second counter."
 msgstr "显示 FPS 指示器。"
 
 #: lutris/runners/easyrpg.py:209 lutris/runners/mednafen.py:85
-#: lutris/runners/wine.py:439
+#: lutris/runners/wine.py:440
 msgid "Disabled"
 msgstr "禁用"
 
@@ -2276,255 +2305,255 @@ msgstr "运行 Flatpak 应用"
 msgid "Flatpak"
 msgstr "Flatpak"
 
-#: lutris/runners/flatpak.py:33 lutris/runners/steam.py:35
+#: lutris/runners/flatpak.py:32 lutris/runners/steam.py:36
 msgid "Application ID"
 msgstr "应用 ID"
 
-#: lutris/runners/flatpak.py:34
+#: lutris/runners/flatpak.py:33
 msgid "The application's unique three-part identifier (tld.domain.app)."
 msgstr "应用程序的唯一三元标识符 (tld.domain.app)。"
 
-#: lutris/runners/flatpak.py:39
+#: lutris/runners/flatpak.py:38
 msgid "Architecture"
 msgstr "架构"
 
-#: lutris/runners/flatpak.py:40
+#: lutris/runners/flatpak.py:39
 msgid ""
 "The architecture to run. See flatpak --supported-arches for architectures "
 "supported by the host."
 msgstr ""
 "要运行的架构。主机支持的架构可通过 flatpak --supported-arches 命令获取。"
 
-#: lutris/runners/flatpak.py:47
+#: lutris/runners/flatpak.py:46
 msgid "Branch"
 msgstr "分支"
 
-#: lutris/runners/flatpak.py:48
+#: lutris/runners/flatpak.py:47
 msgid "The branch to use."
 msgstr "要使用的分支（Branch），相当于版本。"
 
-#: lutris/runners/flatpak.py:54
+#: lutris/runners/flatpak.py:53
 msgid "Install type"
 msgstr "安装位置"
 
-#: lutris/runners/flatpak.py:55
+#: lutris/runners/flatpak.py:54
 msgid "Can be system or user."
 msgstr ""
 "可以是 system（安装到系统目录 /var/lib/flatpak）或 user（安装到用户主目录 ~/."
 "local/share/flatpak/）。"
 
-#: lutris/runners/flatpak.py:61
+#: lutris/runners/flatpak.py:60
 msgid "Args"
 msgstr "启动参数"
 
-#: lutris/runners/flatpak.py:62
+#: lutris/runners/flatpak.py:61
 msgid "Arguments to be passed to the application."
 msgstr "传递给应用的启动参数。"
 
-#: lutris/runners/flatpak.py:67
+#: lutris/runners/flatpak.py:66
 msgid "Command"
 msgstr "启动命令"
 
-#: lutris/runners/flatpak.py:68
+#: lutris/runners/flatpak.py:67
 msgid ""
 "The command to run instead of the one listed in the application metadata."
 msgstr "要运行的命令，代替应用程序元数据中列出的命令。"
 
-#: lutris/runners/flatpak.py:75
+#: lutris/runners/flatpak.py:74
 msgid ""
 "The directory to run the command in. Note that this must be a directory "
 "inside the sandbox."
 msgstr "运行命令的目录。请注意，必须是Flatpak沙箱内的目录。"
 
-#: lutris/runners/flatpak.py:82 lutris/sysoptions.py:449
+#: lutris/runners/flatpak.py:81 lutris/sysoptions.py:450
 msgid "Environment variables"
 msgstr "环境变量"
 
-#: lutris/runners/flatpak.py:83
+#: lutris/runners/flatpak.py:82
 msgid ""
 "Set an environment variable in the application. This overrides to the "
 "Context section from the application metadata."
 msgstr "向应用程序传递环境变量，这将覆盖应用程序元数据中的 Context 部分。"
 
-#: lutris/runners/flatpak.py:97
+#: lutris/runners/flatpak.py:98
 msgid ""
 "Flatpak installation is not handled by Lutris.\n"
 "Install Flatpak with the package provided by your distribution."
 msgstr ""
-"Lutris 无法自动帮你安装 Flatpak。\n"
+"Lutris 无法自动帮您安装 Flatpak。\n"
 "请从您的发行版软件源安装 Flatpak，或参考以下网址：\n"
 "https://www.flatpak.org/setup/"
 
-#: lutris/runners/fsuae.py:11
+#: lutris/runners/fsuae.py:12
 msgid "Amiga 500"
 msgstr "Amiga 500"
 
-#: lutris/runners/fsuae.py:19
+#: lutris/runners/fsuae.py:20
 msgid "Amiga 500+"
 msgstr "Amiga 500+"
 
-#: lutris/runners/fsuae.py:25
+#: lutris/runners/fsuae.py:26
 msgid "Amiga 600"
 msgstr "Amiga 600"
 
-#: lutris/runners/fsuae.py:31
+#: lutris/runners/fsuae.py:32
 msgid "Amiga 1200"
 msgstr "Amiga 1200"
 
-#: lutris/runners/fsuae.py:37
+#: lutris/runners/fsuae.py:38
 msgid "Amiga 3000"
 msgstr "Amiga 3000"
 
-#: lutris/runners/fsuae.py:43
+#: lutris/runners/fsuae.py:44
 msgid "Amiga 4000"
 msgstr "Amiga 4000"
 
-#: lutris/runners/fsuae.py:50
+#: lutris/runners/fsuae.py:51
 msgid "Amiga 1000"
 msgstr "Amiga 1000"
 
-#: lutris/runners/fsuae.py:56
+#: lutris/runners/fsuae.py:57
 msgid "Amiga CD32"
 msgstr "Amiga CD32"
 
-#: lutris/runners/fsuae.py:65
+#: lutris/runners/fsuae.py:66
 msgid "Commodore CDTV"
 msgstr "Commodore CDTV"
 
-#: lutris/runners/fsuae.py:124
+#: lutris/runners/fsuae.py:125
 msgid "FS-UAE"
 msgstr "FS-UAE"
 
-#: lutris/runners/fsuae.py:125
+#: lutris/runners/fsuae.py:126
 msgid "Amiga emulator"
 msgstr "Amiga 模拟器"
 
-#: lutris/runners/fsuae.py:141
+#: lutris/runners/fsuae.py:142
 msgid "68000"
 msgstr "68000"
 
-#: lutris/runners/fsuae.py:142
+#: lutris/runners/fsuae.py:143
 msgid "68010"
 msgstr "68010"
 
-#: lutris/runners/fsuae.py:143
+#: lutris/runners/fsuae.py:144
 msgid "68020 with 24-bit addressing"
 msgstr "68020 带24位寻址"
 
-#: lutris/runners/fsuae.py:144
+#: lutris/runners/fsuae.py:145
 msgid "68020"
 msgstr "68020"
 
-#: lutris/runners/fsuae.py:145
+#: lutris/runners/fsuae.py:146
 msgid "68030 without internal MMU"
 msgstr "68030 不带内部 MMU"
 
-#: lutris/runners/fsuae.py:146
+#: lutris/runners/fsuae.py:147
 msgid "68030"
 msgstr "68030"
 
-#: lutris/runners/fsuae.py:147
+#: lutris/runners/fsuae.py:148
 msgid "68040 without internal FPU and MMU"
 msgstr "68040 不带内部 FPU 和 MMU"
 
-#: lutris/runners/fsuae.py:148
+#: lutris/runners/fsuae.py:149
 msgid "68040 without internal FPU"
 msgstr "68040 不带内部 FPU"
 
-#: lutris/runners/fsuae.py:149
+#: lutris/runners/fsuae.py:150
 msgid "68040 without internal MMU"
 msgstr "68040 不带内部 MMU"
 
-#: lutris/runners/fsuae.py:150
+#: lutris/runners/fsuae.py:151
 msgid "68040"
 msgstr "68040"
 
-#: lutris/runners/fsuae.py:151
+#: lutris/runners/fsuae.py:152
 msgid "68060 without internal FPU and MMU"
 msgstr "68060 不带内部 FPU 和 MMU"
 
-#: lutris/runners/fsuae.py:152
+#: lutris/runners/fsuae.py:153
 msgid "68060 without internal FPU"
 msgstr "68060 不带内部 FPU"
 
-#: lutris/runners/fsuae.py:153
+#: lutris/runners/fsuae.py:154
 msgid "68060 without internal MMU"
 msgstr "68060 不带内部 MMU"
 
-#: lutris/runners/fsuae.py:154
+#: lutris/runners/fsuae.py:155
 msgid "68060"
 msgstr "68060"
 
-#: lutris/runners/fsuae.py:158 lutris/runners/fsuae.py:165
-#: lutris/runners/fsuae.py:199
+#: lutris/runners/fsuae.py:159 lutris/runners/fsuae.py:166
+#: lutris/runners/fsuae.py:200
 msgid "0"
 msgstr "0"
 
-#: lutris/runners/fsuae.py:159 lutris/runners/fsuae.py:166
-#: lutris/runners/fsuae.py:200
+#: lutris/runners/fsuae.py:160 lutris/runners/fsuae.py:167
+#: lutris/runners/fsuae.py:201
 msgid "1 MB"
 msgstr "1 MB"
 
-#: lutris/runners/fsuae.py:160 lutris/runners/fsuae.py:167
-#: lutris/runners/fsuae.py:201
+#: lutris/runners/fsuae.py:161 lutris/runners/fsuae.py:168
+#: lutris/runners/fsuae.py:202
 msgid "2 MB"
 msgstr "2 MB"
 
-#: lutris/runners/fsuae.py:161 lutris/runners/fsuae.py:168
-#: lutris/runners/fsuae.py:202
+#: lutris/runners/fsuae.py:162 lutris/runners/fsuae.py:169
+#: lutris/runners/fsuae.py:203
 msgid "4 MB"
 msgstr "4 MB"
 
-#: lutris/runners/fsuae.py:162 lutris/runners/fsuae.py:169
-#: lutris/runners/fsuae.py:203
+#: lutris/runners/fsuae.py:163 lutris/runners/fsuae.py:170
+#: lutris/runners/fsuae.py:204
 msgid "8 MB"
 msgstr "8 MB"
 
-#: lutris/runners/fsuae.py:170 lutris/runners/fsuae.py:204
+#: lutris/runners/fsuae.py:171 lutris/runners/fsuae.py:205
 msgid "16 MB"
 msgstr "16 MB"
 
-#: lutris/runners/fsuae.py:171 lutris/runners/fsuae.py:205
+#: lutris/runners/fsuae.py:172 lutris/runners/fsuae.py:206
 msgid "32 MB"
 msgstr "32 MB"
 
-#: lutris/runners/fsuae.py:172 lutris/runners/fsuae.py:206
+#: lutris/runners/fsuae.py:173 lutris/runners/fsuae.py:207
 msgid "64 MB"
 msgstr "64 MB"
 
-#: lutris/runners/fsuae.py:173 lutris/runners/fsuae.py:207
+#: lutris/runners/fsuae.py:174 lutris/runners/fsuae.py:208
 msgid "128 MB"
 msgstr "128 MB"
 
-#: lutris/runners/fsuae.py:174 lutris/runners/fsuae.py:208
+#: lutris/runners/fsuae.py:175 lutris/runners/fsuae.py:209
 msgid "256 MB"
 msgstr "256 MB"
 
-#: lutris/runners/fsuae.py:175
+#: lutris/runners/fsuae.py:176
 msgid "384 MB"
 msgstr "384 MB"
 
-#: lutris/runners/fsuae.py:176
+#: lutris/runners/fsuae.py:177
 msgid "512 MB"
 msgstr "512 MB"
 
-#: lutris/runners/fsuae.py:177
+#: lutris/runners/fsuae.py:178
 msgid "768 MB"
 msgstr "768 MB"
 
-#: lutris/runners/fsuae.py:178
+#: lutris/runners/fsuae.py:179
 msgid "1 GB"
 msgstr "1 GB"
 
-#: lutris/runners/fsuae.py:211
+#: lutris/runners/fsuae.py:212
 msgid "Turbo"
 msgstr "Turbo 模式"
 
-#: lutris/runners/fsuae.py:222
+#: lutris/runners/fsuae.py:223
 msgid "Boot disk"
 msgstr "启动盘"
 
-#: lutris/runners/fsuae.py:225
+#: lutris/runners/fsuae.py:226
 msgid ""
 "The main floppy disk file with the game data. \n"
 "FS-UAE supports floppy images in multiple file formats: ADF, IPF, DMS are "
@@ -2539,35 +2568,35 @@ msgstr ""
 "以 .hdf 结尾的文件将作为硬盘驱动器安装，ISO 光盘映像可以用于 Amiga CD32 和 "
 "CDTV 型号。"
 
-#: lutris/runners/fsuae.py:235
+#: lutris/runners/fsuae.py:236
 msgid "Additionnal floppies"
 msgstr "额外软盘"
 
-#: lutris/runners/fsuae.py:237
+#: lutris/runners/fsuae.py:238
 msgid "The additional floppy disk image(s)."
 msgstr "额外的软盘映像。"
 
-#: lutris/runners/fsuae.py:240
+#: lutris/runners/fsuae.py:241
 msgid "CD-ROM image"
 msgstr "光盘映像"
 
-#: lutris/runners/fsuae.py:242
+#: lutris/runners/fsuae.py:243
 msgid "CD-ROM image to use on non CD32/CDTV models"
 msgstr "在非 CD32/CDTV 机型上使用的光盘映像"
 
-#: lutris/runners/fsuae.py:249
+#: lutris/runners/fsuae.py:250
 msgid "Amiga model"
 msgstr "Amiga 型号"
 
-#: lutris/runners/fsuae.py:253
+#: lutris/runners/fsuae.py:254
 msgid "Specify the Amiga model you want to emulate."
 msgstr "指定要模拟的 Amiga 机型。"
 
-#: lutris/runners/fsuae.py:257
+#: lutris/runners/fsuae.py:258
 msgid "Kickstart ROMs location"
 msgstr "Kickstart ROM 位置"
 
-#: lutris/runners/fsuae.py:260
+#: lutris/runners/fsuae.py:261
 msgid ""
 "Choose the folder containing original Amiga Kickstart ROMs. Refer to FS-UAE "
 "documentation to find how to acquire them. Without these, FS-UAE uses a "
@@ -2577,33 +2606,33 @@ msgstr ""
 "如果未设置，FS-UAE 将使用自带的内置 ROM，该内置 ROM 与 Amiga 软件的兼容性较"
 "差。"
 
-#: lutris/runners/fsuae.py:269
+#: lutris/runners/fsuae.py:270
 msgid "Extended Kickstart location"
 msgstr "扩展 Kickstart 路径"
 
-#: lutris/runners/fsuae.py:272
+#: lutris/runners/fsuae.py:273
 msgid "Location of extended Kickstart used for CD32"
 msgstr "用于 CD32 的扩展 Kickstart 位置"
 
-#: lutris/runners/fsuae.py:276
+#: lutris/runners/fsuae.py:277
 msgid "Fullscreen (F12 + S to switch)"
 msgstr "全屏模式（可用 F12 + S 切换）"
 
-#: lutris/runners/fsuae.py:282 lutris/runners/o2em.py:81
+#: lutris/runners/fsuae.py:283 lutris/runners/o2em.py:81
 msgid "Scanlines display style"
 msgstr "显示模拟扫描线"
 
-#: lutris/runners/fsuae.py:285 lutris/runners/o2em.py:83
+#: lutris/runners/fsuae.py:286 lutris/runners/o2em.py:83
 msgid ""
 "Activates a display filter adding scanlines to imitate the displays of "
 "yesteryear."
 msgstr "启用显示滤镜，添加扫描线来模仿以前的 CRT 显像管显示效果。"
 
-#: lutris/runners/fsuae.py:290
+#: lutris/runners/fsuae.py:291
 msgid "CPU"
 msgstr "CPU"
 
-#: lutris/runners/fsuae.py:295
+#: lutris/runners/fsuae.py:296
 msgid ""
 "Use this option to override the CPU model in the emulated Amiga. All Amiga "
 "models imply a default CPU model, so you only need to use this option if you "
@@ -2612,19 +2641,19 @@ msgstr ""
 "此选项可更改 Amiga 模拟器的 CPU 型号。模拟器中的所有 Amiga 机型都使用同一个默"
 "认 CPU 型号，使用此选项可选择其他 CPU 型号。"
 
-#: lutris/runners/fsuae.py:301
+#: lutris/runners/fsuae.py:302
 msgid "Fast Memory"
 msgstr "快速内存"
 
-#: lutris/runners/fsuae.py:306
+#: lutris/runners/fsuae.py:307
 msgid "Specify how much Fast Memory the Amiga model should have."
 msgstr "指定 Amiga 机型拥有的快速内存。"
 
-#: lutris/runners/fsuae.py:310
+#: lutris/runners/fsuae.py:311
 msgid "Zorro III RAM"
 msgstr "Zorro III 内存"
 
-#: lutris/runners/fsuae.py:315
+#: lutris/runners/fsuae.py:316
 msgid ""
 "Override the amount of Zorro III Fast memory, specified in KB. Must be a "
 "multiple of 1024. The default value depends on [amiga_model]. Requires a "
@@ -2634,21 +2663,21 @@ msgstr ""
 "于模拟的 Amiga 机型。需要选择具有32位地址总线的处理器（例如 A1200/020 型号）"
 "才能使用该选项。"
 
-#: lutris/runners/fsuae.py:321
+#: lutris/runners/fsuae.py:322
 msgid "Floppy Drive Volume"
 msgstr "软驱响声音量"
 
-#: lutris/runners/fsuae.py:326
+#: lutris/runners/fsuae.py:327
 msgid ""
 "Set volume to 0 to disable floppy drive clicks when the drive is empty. Max "
 "volume is 100."
 msgstr "将音量设为 0 可禁用驱动器为空时的软盘驱动器卡嗒声。最大音量为 100。"
 
-#: lutris/runners/fsuae.py:331
+#: lutris/runners/fsuae.py:332
 msgid "Floppy Drive Speed"
 msgstr "软驱速度"
 
-#: lutris/runners/fsuae.py:337
+#: lutris/runners/fsuae.py:338
 msgid ""
 "Set the speed of the emulated floppy drives, in percent. For example, you "
 "can specify 800 to get an 8x increase in speed. Use 0 to specify turbo mode. "
@@ -2659,53 +2688,53 @@ msgstr ""
 "倍。您也可以选择 Turbo 模式，Turbo 模式意味着所有软盘操作都将立即完成。对于大"
 "多数型号，默认值为 100。"
 
-#: lutris/runners/fsuae.py:345
+#: lutris/runners/fsuae.py:346
 msgid "Graphics Card"
 msgstr "显卡"
 
-#: lutris/runners/fsuae.py:351
+#: lutris/runners/fsuae.py:352
 msgid ""
 "Use this option to enable a graphics card. This option is none by default, "
 "in which case only chipset graphics (OCS/ECS/AGA) support is available."
 msgstr ""
 "使用此选项启用独显。默认情况下此选项为空，此时仅板载显卡（OCS/ECS/AGA）可用。"
 
-#: lutris/runners/fsuae.py:357
+#: lutris/runners/fsuae.py:358
 msgid "Graphics Card RAM"
 msgstr "显存"
 
-#: lutris/runners/fsuae.py:363
+#: lutris/runners/fsuae.py:364
 msgid ""
 "Override the amount of graphics memory on the graphics card. The 0 MB option "
 "is not really valid, but exists for user interface reasons."
 msgstr "修改显卡上的显存容量。默认值 0 表示不修改显存容量。"
 
-#: lutris/runners/fsuae.py:369
+#: lutris/runners/fsuae.py:370
 msgid "JIT Compiler"
 msgstr "启用 JIT 即时编译器"
 
-#: lutris/runners/fsuae.py:376
+#: lutris/runners/fsuae.py:377
 msgid "Feral GameMode"
 msgstr "禁用游戏性能优先模式"
 
-#: lutris/runners/fsuae.py:380
+#: lutris/runners/fsuae.py:381
 msgid ""
 "Automatically uses Feral GameMode daemon if available. Set to true to "
 "disable the feature."
 msgstr "如果游戏性能优先模式可用，默认会自动启用，您可以在此处禁用该功能。"
 
-#: lutris/runners/fsuae.py:385
+#: lutris/runners/fsuae.py:386
 msgid "CPU governor warning"
 msgstr "禁用 CPU调速器警告"
 
-#: lutris/runners/fsuae.py:390
+#: lutris/runners/fsuae.py:391
 msgid ""
 "Warn if running with a CPU governor other than performance. Set to true to "
 "disable the warning."
 msgstr ""
 "如果 CPU 调速器设置过头，性能不好，则启动时会发出警告。您可以在此处禁用警告。"
 
-#: lutris/runners/fsuae.py:395
+#: lutris/runners/fsuae.py:396
 msgid "UAE bsdsocket.library"
 msgstr "UAE bsdsocket.library"
 
@@ -2890,7 +2919,7 @@ msgstr "未指定游戏文件"
 msgid "Runs native games"
 msgstr "运行原生 Linux 游戏"
 
-#: lutris/runners/linux.py:24 lutris/runners/wine.py:48
+#: lutris/runners/linux.py:24 lutris/runners/wine.py:49
 msgid "Executable"
 msgstr "主程序"
 
@@ -2899,8 +2928,8 @@ msgid "The game's main executable file"
 msgstr "用于启动游戏的可执行文件"
 
 #: lutris/runners/linux.py:30 lutris/runners/mame.py:124
-#: lutris/runners/scummvm.py:31 lutris/runners/steam.py:47
-#: lutris/runners/steam.py:99 lutris/runners/wine.py:54
+#: lutris/runners/scummvm.py:31 lutris/runners/steam.py:48
+#: lutris/runners/steam.py:100 lutris/runners/wine.py:55
 #: lutris/runners/zdoom.py:27
 msgid "Arguments"
 msgstr "启动参数"
@@ -3389,7 +3418,7 @@ msgstr "Phillips Videopac+"
 msgid "Brandt Jopac"
 msgstr "Brandt Jopac"
 
-#: lutris/runners/o2em.py:36 lutris/runners/wine.py:397
+#: lutris/runners/o2em.py:36 lutris/runners/wine.py:398
 msgid "Disable"
 msgstr "禁用"
 
@@ -3731,11 +3760,11 @@ msgstr "索尼 PS3（PlayStation 3）"
 msgid "Path to EBOOT.BIN"
 msgstr "EBOOT.BIN 路径"
 
-#: lutris/runners/runner.py:154
+#: lutris/runners/runner.py:165
 msgid "Custom executable for the runner"
 msgstr "自定义运行环境可执行文件"
 
-#: lutris/runners/runner.py:299
+#: lutris/runners/runner.py:310
 msgid ""
 "The required runner is not installed.\n"
 "Do you wish to install it now?"
@@ -3743,9 +3772,21 @@ msgstr ""
 "所需的运行环境未安装。\n"
 "是否立即安装？"
 
-#: lutris/runners/runner.py:301
+#: lutris/runners/runner.py:312
 msgid "Required runner unavailable"
 msgstr "所需的运行环境不可用"
+
+#: lutris/runners/runner.py:403
+msgid "Failed to retrieve {} ({}) information"
+msgstr "未能检索到 {} ({}) 的信息"
+
+#: lutris/runners/runner.py:437
+msgid "Failed to extract {}"
+msgstr "无法解压 {}"
+
+#: lutris/runners/runner.py:442
+msgid "Failed to extract {}: {}"
+msgstr "无法解压 {}: {}"
 
 #: lutris/runners/ryujinx.py:14
 msgid "Ryujinx"
@@ -4052,11 +4093,11 @@ msgstr ""
 msgid "Sound driver"
 msgstr "音频驱动"
 
-#: lutris/runners/steam.py:28
+#: lutris/runners/steam.py:29
 msgid "Runs Steam for Linux games"
 msgstr "运行 Linux 版 Steam 上的游戏"
 
-#: lutris/runners/steam.py:38
+#: lutris/runners/steam.py:39
 msgid ""
 "The application ID can be retrieved from the game's page at steampowered."
 "com. Example: 235320 is the app ID for <i>Original War</i> in: \n"
@@ -4066,7 +4107,7 @@ msgstr ""
 "出，<i>Original War</i> 的应用 ID 是 235320：\n"
 "http://store.steampowered.com/app/<b>235320</b>/"
 
-#: lutris/runners/steam.py:49
+#: lutris/runners/steam.py:50
 msgid ""
 "Command line arguments used when launching the game.\n"
 "Ignored when Steam Big Picture mode is enabled."
@@ -4074,28 +4115,28 @@ msgstr ""
 "启动游戏时使用的命令行参数。\n"
 "启用 Steam 大屏幕模式时被忽略。"
 
-#: lutris/runners/steam.py:55
+#: lutris/runners/steam.py:56
 msgid "DRM free mode (Do not launch Steam)"
 msgstr "DRM free 模式（不启动 Steam）"
 
-#: lutris/runners/steam.py:60
+#: lutris/runners/steam.py:61
 msgid ""
 "Run the game directly without Steam, requires the game binary path to be set"
 msgstr "在不启动 Steam 的情况下直接运行游戏，需要设置游戏程序路径"
 
-#: lutris/runners/steam.py:66
+#: lutris/runners/steam.py:67
 msgid "Game binary path"
 msgstr "游戏程序路径"
 
-#: lutris/runners/steam.py:68
+#: lutris/runners/steam.py:69
 msgid "Path to the game executable (Required by DRM free mode)"
 msgstr "游戏启动程序（可执行文件）的路径，DRM free 模式必填"
 
-#: lutris/runners/steam.py:74
+#: lutris/runners/steam.py:75
 msgid "Start Steam in Big Picture mode"
 msgstr "启动 Steam 大屏幕模式"
 
-#: lutris/runners/steam.py:78
+#: lutris/runners/steam.py:79
 msgid ""
 "Launches Steam in Big Picture mode.\n"
 "Only works if Steam is not running or already running in Big Picture mode.\n"
@@ -4105,11 +4146,11 @@ msgstr ""
 "仅在 Steam 未运行或已在大屏幕模式下运行时才有效。\n"
 "用手柄玩时很有用。"
 
-#: lutris/runners/steam.py:86
+#: lutris/runners/steam.py:87
 msgid "Start Steam with LSI"
 msgstr "启动 Steam LSI（Linux 桌面整合）支持"
 
-#: lutris/runners/steam.py:90
+#: lutris/runners/steam.py:91
 msgid ""
 "Launches steam with LSI patches enabled. Make sure Lutris Runtime is "
 "disabled and you have LSI installed. https://github.com/solus-project/linux-"
@@ -4119,13 +4160,27 @@ msgstr ""
 "库，并且已安装 LSI。\n"
 "参阅 https://github.com/solus-project/linux-steam-integration"
 
-#: lutris/runners/steam.py:101
+#: lutris/runners/steam.py:102
 msgid "Extra command line arguments used when launching Steam"
 msgstr "启动 Steam 时使用的额外命令行参数"
 
-#: lutris/runners/steam.py:108
+#: lutris/runners/steam.py:109
 msgid "Remove game data (through Steam)"
 msgstr "删除游戏数据（通过 Steam）"
+
+#: lutris/runners/steam.py:243
+msgid ""
+"Steam for Linux installation is not handled by Lutris.\n"
+"Please go to <a href='http://steampowered.com'>http://steampowered.com</a> "
+"or install Steam with the package provided by your distribution."
+msgstr ""
+"Lutris 无法自动帮您安装 Steam。\n"
+"请前往 <a href='http://steampowered.com'>http://steampowered.com</a> 获取 "
+"Steam 安装包，或通过您的发行版包管理器安装 Steam。"
+
+#: lutris/runners/steam.py:256
+msgid "Could not find Steam path, is Steam installed?"
+msgstr "找不到 Steam 路径，请确认 Steam 已安装。"
 
 #: lutris/runners/vice.py:13
 msgid "Commodore Emulator"
@@ -4362,31 +4417,31 @@ msgstr ""
 "文件 %s 不存在，\n"
 "请检查您的游戏配置。"
 
-#: lutris/runners/wine.py:38
+#: lutris/runners/wine.py:39
 msgid "Runs Windows games"
 msgstr "运行 Windows 游戏"
 
-#: lutris/runners/wine.py:39
+#: lutris/runners/wine.py:40
 msgid "Wine"
 msgstr "Wine"
 
-#: lutris/runners/wine.py:40
+#: lutris/runners/wine.py:41
 msgid "Windows"
 msgstr "Windows"
 
-#: lutris/runners/wine.py:49
+#: lutris/runners/wine.py:50
 msgid "The game's main EXE file"
 msgstr "要运行的 EXE 可执行文件或 LNK 快捷方式"
 
-#: lutris/runners/wine.py:55
+#: lutris/runners/wine.py:56
 msgid "Windows command line arguments used when launching the game"
 msgstr "启动游戏时使用的 Windows 命令行参数"
 
-#: lutris/runners/wine.py:71
+#: lutris/runners/wine.py:72
 msgid "Wine prefix"
 msgstr "容器目录"
 
-#: lutris/runners/wine.py:73
+#: lutris/runners/wine.py:74
 msgid ""
 "The prefix used by Wine.\n"
 "It's a directory containing a set of files and folders making up a confined "
@@ -4395,47 +4450,47 @@ msgstr ""
 "Wine 使用的“容器”（也称为“Wine 前缀”）。\n"
 "它是一个目录，其中包含构成 Windows 兼容环境的一系列文件和文件夹。"
 
-#: lutris/runners/wine.py:81
+#: lutris/runners/wine.py:82
 msgid "Prefix architecture"
 msgstr "容器架构"
 
-#: lutris/runners/wine.py:82
+#: lutris/runners/wine.py:83
 msgid "32-bit"
 msgstr "32位"
 
-#: lutris/runners/wine.py:82
+#: lutris/runners/wine.py:83
 msgid "64-bit"
 msgstr "64位"
 
-#: lutris/runners/wine.py:84
+#: lutris/runners/wine.py:85
 msgid "The architecture of the Windows environment"
 msgstr "Windows 兼容环境的体系结构（32位或64位）"
 
-#: lutris/runners/wine.py:112
+#: lutris/runners/wine.py:113
 msgid "Custom (select executable below)"
 msgstr "自定义（在下方指定 Wine 路径）"
 
-#: lutris/runners/wine.py:114
+#: lutris/runners/wine.py:115
 msgid "WineHQ Devel ({})"
 msgstr "WineHQ 开发版 {}"
 
-#: lutris/runners/wine.py:115
+#: lutris/runners/wine.py:116
 msgid "WineHQ Staging ({})"
 msgstr "WineHQ staging 补丁版 {}"
 
-#: lutris/runners/wine.py:116
+#: lutris/runners/wine.py:117
 msgid "Wine Development ({})"
 msgstr "Wine 开发版 {}"
 
-#: lutris/runners/wine.py:117
+#: lutris/runners/wine.py:118
 msgid "System ({})"
 msgstr "系统自带 Wine {}"
 
-#: lutris/runners/wine.py:169
+#: lutris/runners/wine.py:170
 msgid "Wine version"
 msgstr "Wine 版本"
 
-#: lutris/runners/wine.py:174
+#: lutris/runners/wine.py:175
 msgid ""
 "The version of Wine used to launch the game.\n"
 "Using the last version is generally recommended, but some games work better "
@@ -4444,29 +4499,29 @@ msgstr ""
 "用于启动游戏的 Wine 版本。\n"
 "通常建议使用最新版本，但是某些游戏可能在旧版本上运行的更好。"
 
-#: lutris/runners/wine.py:181
+#: lutris/runners/wine.py:182
 msgid "Custom Wine executable"
 msgstr "自定义 Wine 路径"
 
-#: lutris/runners/wine.py:184
+#: lutris/runners/wine.py:185
 msgid ""
 "The Wine executable to be used if you have selected \"Custom\" as the Wine "
 "version."
 msgstr "如果您选择“自定义”作为 Wine 版本，则将使用这里指定的 Wine 可执行文件。"
 
-#: lutris/runners/wine.py:189
+#: lutris/runners/wine.py:190
 msgid "Use system winetricks"
 msgstr "使用系统 winetricks"
 
-#: lutris/runners/wine.py:193
+#: lutris/runners/wine.py:194
 msgid "Switch on to use /usr/bin/winetricks for winetricks."
 msgstr "使用 /usr/bin/winetricks 而不是Wine游戏助手附带的 winetricks。"
 
-#: lutris/runners/wine.py:197
+#: lutris/runners/wine.py:198
 msgid "Enable DXVK"
 msgstr "启用 DXVK"
 
-#: lutris/runners/wine.py:204
+#: lutris/runners/wine.py:205
 msgid ""
 "Use DXVK to increase compatibility and performance in Direct3D 11, 10 and 9 "
 "applications by translating their calls to Vulkan."
@@ -4474,30 +4529,30 @@ msgstr ""
 "通过 DXVK 将 DX9/10/11 调用转换为 Vulkan，可以显著提高 DX9/10/11 游戏在 Wine "
 "中的帧率，也可以修复某些崩溃问题。"
 
-#: lutris/runners/wine.py:210
+#: lutris/runners/wine.py:211
 msgid "DXVK version"
 msgstr "DXVK 版本"
 
-#: lutris/runners/wine.py:219
+#: lutris/runners/wine.py:220
 msgid "Enable VKD3D"
 msgstr "启用 VKD3D"
 
-#: lutris/runners/wine.py:226
+#: lutris/runners/wine.py:227
 msgid ""
 "Use VKD3D to enable support for Direct3D 12 applications by translating "
 "their calls to Vulkan."
 msgstr ""
 "通过 VKD3D 将 DX12 调用转换为 Vulkan，可以使 DX12 游戏在 Wine 中顺利运行。"
 
-#: lutris/runners/wine.py:231
+#: lutris/runners/wine.py:232
 msgid "VKD3D version"
 msgstr "VKD3D 版本"
 
-#: lutris/runners/wine.py:239
+#: lutris/runners/wine.py:240
 msgid "Enable D3D Extras"
 msgstr "启用 D3D 附加运行库"
 
-#: lutris/runners/wine.py:244
+#: lutris/runners/wine.py:245
 msgid ""
 "Replace Wine's D3DX and D3DCOMPILER libraries with alternative ones. Needed "
 "for proper functionality of DXVK with some games."
@@ -4505,28 +4560,28 @@ msgstr ""
 "将 Wine 内建的 D3DX，D3DCOMPILER 等库替换为原生版本。有些游戏启用 DXVK 时需要"
 "替换这些库才能正常显示。"
 
-#: lutris/runners/wine.py:250
+#: lutris/runners/wine.py:251
 msgid "D3D Extras version"
 msgstr "D3D 附加运行库版本"
 
-#: lutris/runners/wine.py:258
+#: lutris/runners/wine.py:259
 msgid "Enable DXVK-NVAPI / DLSS"
 msgstr "启用 DXVK-NVAPI / DLSS"
 
-#: lutris/runners/wine.py:263
+#: lutris/runners/wine.py:264
 msgid "Enable emulation of Nvidia's NVAPI and add DLSS support, if available."
 msgstr ""
 "启用来自 dxvk-nvapi 项目的 NVIDIA NVAPI 仿真，从而支持 DLSS（如果显卡支持）。"
 
-#: lutris/runners/wine.py:268
+#: lutris/runners/wine.py:269
 msgid "DXVK NVAPI version"
 msgstr "DXVK NVAPI 版本"
 
-#: lutris/runners/wine.py:276
+#: lutris/runners/wine.py:277
 msgid "Enable dgvoodoo2"
 msgstr "启用 dgvoodoo2"
 
-#: lutris/runners/wine.py:281
+#: lutris/runners/wine.py:282
 msgid ""
 "dgvoodoo2 is an alternative translation layer for rendering old games that "
 "utilize D3D1-7 and Glide APIs. As it translates to D3D11, it's recommended "
@@ -4535,15 +4590,15 @@ msgstr ""
 "dgvoodoo2 是一种替代翻译层，用于渲染使用 D3D1-7 和 Glide API 的旧游戏。由于它"
 "转换为 D3D11，因此建议将其与 DXVK 结合使用。仅支持 32 位应用程序。"
 
-#: lutris/runners/wine.py:288
+#: lutris/runners/wine.py:289
 msgid "dgvoodoo2 version"
 msgstr "dgvoodoo2 版本"
 
-#: lutris/runners/wine.py:296
+#: lutris/runners/wine.py:297
 msgid "Enable Esync"
 msgstr "启用 Esync"
 
-#: lutris/runners/wine.py:303
+#: lutris/runners/wine.py:304
 msgid ""
 "Enable eventfd-based synchronization (esync). This will increase performance "
 "in applications that take advantage of multi-core processors."
@@ -4551,11 +4606,11 @@ msgstr ""
 "在 EXE 与 wineserver 进程（Wine 的内核）通信时启用基于事件通知（eventfd）的同"
 "步（esync），可以提升多核游戏的性能。"
 
-#: lutris/runners/wine.py:310
+#: lutris/runners/wine.py:311
 msgid "Enable Fsync"
 msgstr "启用 Fsync"
 
-#: lutris/runners/wine.py:317
+#: lutris/runners/wine.py:318
 msgid ""
 "Enable futex-based synchronization (fsync). This will increase performance "
 "in applications that take advantage of multi-core processors. Requires "
@@ -4565,11 +4620,11 @@ msgstr ""
 "（futex）的同步（fsync），可以提升多核游戏的性能。需要安装 5.16 或更高版本的 "
 "Linux 内核。"
 
-#: lutris/runners/wine.py:325
+#: lutris/runners/wine.py:326
 msgid "Enable AMD FidelityFX Super Resolution (FSR)"
 msgstr "启用 AMD 超级分辨率锐画技术（FSR）"
 
-#: lutris/runners/wine.py:329
+#: lutris/runners/wine.py:330
 msgid ""
 "Use FSR to upscale the game window to native resolution.\n"
 "Requires Lutris Wine FShack >= 6.13 and setting the game to a lower "
@@ -4581,11 +4636,11 @@ msgstr ""
 "需要 Lutris Wine FShack >= 6.13 版本并将游戏设置为较低的分辨率。\n"
 "对无边框窗口模式运行的游戏或自带分辨率提升功能的游戏无效。"
 
-#: lutris/runners/wine.py:336
+#: lutris/runners/wine.py:337
 msgid "Enable BattlEye Anti-Cheat"
 msgstr "启用 BattlEye 反作弊支持"
 
-#: lutris/runners/wine.py:340
+#: lutris/runners/wine.py:341
 msgid ""
 "Enable support for BattlEye Anti-Cheat in supported games\n"
 "Requires Lutris Wine 6.21-2 and newer or any other compatible Wine build.\n"
@@ -4595,11 +4650,11 @@ msgstr ""
 "需要使用 Lutris Wine 6.21-2 及后续版本，或者其他与 BattlEye 兼容的 Wine 版"
 "本。\n"
 
-#: lutris/runners/wine.py:346
+#: lutris/runners/wine.py:347
 msgid "Enable Easy Anti-Cheat"
 msgstr "启用 EAC（小蓝熊）反作弊支持"
 
-#: lutris/runners/wine.py:350
+#: lutris/runners/wine.py:351
 msgid ""
 "Enable support for Easy Anti-Cheat in supported games\n"
 "Requires Lutris Wine 7.2 and newer or any other compatible Wine build.\n"
@@ -4608,11 +4663,11 @@ msgstr ""
 "容性支持，否则不会生效）。\n"
 "需要使用 Lutris Wine 7.2 及后续版本，或者其他与 EAC 兼容的 Wine 版本。\n"
 
-#: lutris/runners/wine.py:356
+#: lutris/runners/wine.py:357
 msgid "Windowed (virtual desktop)"
 msgstr "窗口化（虚拟桌面）"
 
-#: lutris/runners/wine.py:360
+#: lutris/runners/wine.py:361
 msgid ""
 "Run the whole Windows desktop in a window.\n"
 "Otherwise, run it fullscreen.\n"
@@ -4622,19 +4677,19 @@ msgstr ""
 "如果未启用则全屏运行。\n"
 "对应 Wine 的“虚拟桌面”选项。"
 
-#: lutris/runners/wine.py:367
+#: lutris/runners/wine.py:368
 msgid "Virtual desktop resolution"
 msgstr "虚拟桌面分辨率"
 
-#: lutris/runners/wine.py:370
+#: lutris/runners/wine.py:371
 msgid "The size of the virtual desktop in pixels."
 msgstr "虚拟桌面的大小（以像素为单位）。"
 
-#: lutris/runners/wine.py:374
+#: lutris/runners/wine.py:375
 msgid "Enable DPI Scaling"
 msgstr "启用 DPI 缩放"
 
-#: lutris/runners/wine.py:378
+#: lutris/runners/wine.py:379
 msgid ""
 "Enables the Windows application's DPI scaling.\n"
 "Otherwise, the Screen Resolution option in 'Wine configuration' controls "
@@ -4643,11 +4698,11 @@ msgstr ""
 "为 Windows 应用程序启用 DPI 缩放。\n"
 "如果不启用，则 Wine 设置中的“屏幕分辨率”选项将被采用。"
 
-#: lutris/runners/wine.py:384
+#: lutris/runners/wine.py:385
 msgid "DPI"
 msgstr "指定 DPI"
 
-#: lutris/runners/wine.py:387
+#: lutris/runners/wine.py:388
 msgid ""
 "The DPI to be used if 'Enable DPI Scaling' is turned on.\n"
 "If blank or 'auto', Lutris will auto-detect this."
@@ -4655,19 +4710,19 @@ msgstr ""
 "设置启用 DPI 缩放后要使用的 DPI 数值。\n"
 "如果留空或填写 auto，Wine游戏助手将自动设置合适的数值。"
 
-#: lutris/runners/wine.py:393
+#: lutris/runners/wine.py:394
 msgid "Mouse Warp Override"
 msgstr "鼠标捕获行为"
 
-#: lutris/runners/wine.py:396
+#: lutris/runners/wine.py:397
 msgid "Enable"
 msgstr "启用"
 
-#: lutris/runners/wine.py:398
+#: lutris/runners/wine.py:399
 msgid "Force"
 msgstr "强制启用"
 
-#: lutris/runners/wine.py:403
+#: lutris/runners/wine.py:404
 msgid ""
 "Override the default mouse pointer warping behavior\n"
 "<b>Enable</b>: (Wine default) warp the pointer when the mouse is exclusively "
@@ -4680,11 +4735,11 @@ msgstr ""
 "<b>禁用</b>：从不捕获鼠标指针\n"
 "<b>强制启用</b>：总是捕获鼠标指针"
 
-#: lutris/runners/wine.py:412
+#: lutris/runners/wine.py:413
 msgid "Audio driver"
 msgstr "音频驱动"
 
-#: lutris/runners/wine.py:423
+#: lutris/runners/wine.py:424
 msgid ""
 "Which audio backend to use.\n"
 "By default, Wine automatically picks the right one for your system."
@@ -4692,53 +4747,53 @@ msgstr ""
 "使用哪个音频后端。\n"
 "默认情况下，Wine 会自动选择合适的后端。"
 
-#: lutris/runners/wine.py:431
+#: lutris/runners/wine.py:432
 msgid "DLL overrides"
 msgstr "DLL 函数库顶替"
 
-#: lutris/runners/wine.py:432
+#: lutris/runners/wine.py:433
 msgid "Sets WINEDLLOVERRIDES when launching the game."
 msgstr "启动游戏时设置 WINEDLLOVERRIDES（相当于 winecfg 中的“函数库顶替”）。"
 
-#: lutris/runners/wine.py:436
+#: lutris/runners/wine.py:437
 msgid "Output debugging info"
 msgstr "输出调试信息"
 
-#: lutris/runners/wine.py:440
+#: lutris/runners/wine.py:441
 msgid "Enabled"
 msgstr "启用"
 
-#: lutris/runners/wine.py:441
+#: lutris/runners/wine.py:442
 msgid "Inherit from environment"
 msgstr "根据环境变量"
 
-#: lutris/runners/wine.py:443
+#: lutris/runners/wine.py:444
 msgid "Full (CAUTION: Will cause MASSIVE slowdown)"
 msgstr "全部（注意：运行速度会非常慢！）"
 
-#: lutris/runners/wine.py:446
+#: lutris/runners/wine.py:447
 msgid "Output debugging information in the game log (might affect performance)"
 msgstr "在游戏日志中输出调试信息（可能会影响性能）"
 
-#: lutris/runners/wine.py:451
+#: lutris/runners/wine.py:452
 msgid "Show crash dialogs"
 msgstr "显示崩溃对话框"
 
-#: lutris/runners/wine.py:459
+#: lutris/runners/wine.py:460
 msgid "Autoconfigure joypads"
 msgstr "自动配置游戏手柄"
 
-#: lutris/runners/wine.py:463
+#: lutris/runners/wine.py:464
 msgid ""
 "Automatically disables one of Wine's detected joypad to avoid having 2 "
 "controllers detected"
 msgstr "自动禁用 Wine 检测到的其中一个手柄，以避免游戏检测到两个手柄"
 
-#: lutris/runners/wine.py:469
+#: lutris/runners/wine.py:470
 msgid "Create a sandbox for Wine folders"
 msgstr "为 Wine 文件夹创建沙箱"
 
-#: lutris/runners/wine.py:473
+#: lutris/runners/wine.py:474
 msgid ""
 "Do not use $HOME for desktop integration folders.\n"
 "By default, it use the directories in the confined Windows environment."
@@ -4748,43 +4803,47 @@ msgstr ""
 "默认情况下，启用该选项会使这些文件夹创建在 Wine 容器所在目录中，您也可以自行"
 "指定其他位置。"
 
-#: lutris/runners/wine.py:481
+#: lutris/runners/wine.py:482
 msgid "Sandbox directory"
 msgstr "对主目录启用沙箱"
 
-#: lutris/runners/wine.py:482
+#: lutris/runners/wine.py:483
 msgid "Custom directory for desktop integration folders."
 msgstr "自定义“文档”、“下载”、“视频”等文件夹的存放位置。"
 
-#: lutris/runners/wine.py:491
+#: lutris/runners/wine.py:492
 msgid "Run EXE inside Wine prefix"
 msgstr "在 Wine 容器中运行 EXE"
 
-#: lutris/runners/wine.py:492
+#: lutris/runners/wine.py:493
 msgid "Wine configuration"
 msgstr "Wine 设置"
 
-#: lutris/runners/wine.py:493
+#: lutris/runners/wine.py:494
 msgid "Open Bash terminal"
 msgstr "Linux 终端"
 
-#: lutris/runners/wine.py:494
+#: lutris/runners/wine.py:495
 msgid "Open Wine console"
 msgstr "Wine CMD"
 
-#: lutris/runners/wine.py:495
+#: lutris/runners/wine.py:496
 msgid "Wine registry"
 msgstr "Wine 注册表编辑器"
 
-#: lutris/runners/wine.py:496
+#: lutris/runners/wine.py:497
+msgid "Kill all Wine processes"
+msgstr "结束所有 Wine 进程"
+
+#: lutris/runners/wine.py:498
 msgid "Winetricks"
 msgstr "Winetricks"
 
-#: lutris/runners/wine.py:497
+#: lutris/runners/wine.py:499
 msgid "Wine Control Panel"
 msgstr "Wine 控制面板"
 
-#: lutris/runners/wine.py:659
+#: lutris/runners/wine.py:661
 msgid "Select an EXE or MSI file"
 msgstr "选择一个 EXE、MSI 或 LNK 文件"
 
@@ -4879,16 +4938,62 @@ msgstr ""
 "用于加载用户创建的配置文件。如果指定，文件必须包含 wad 目录列表，否则启动将失"
 "败。"
 
-#: lutris/services/amazon.py:58 lutris/services/amazon.py:637
+#: lutris/services/amazon.py:59 lutris/services/amazon.py:638
 msgid "Amazon Prime Gaming"
 msgstr "亚马逊Prime游戏"
 
-#: lutris/services/amazon.py:624
+#: lutris/services/amazon.py:180
+msgid "No Amazon user data available, please log in again"
+msgstr "亚马逊用户数据不可用，请重新登录"
+
+#: lutris/services/amazon.py:245
+msgid "Unable to register device, please log in again"
+msgstr "无法注册设备，请重新登录"
+
+#: lutris/services/amazon.py:260
+msgid "Invalid token info found, please log in again"
+msgstr "令牌信息无效，请重新登录"
+
+#: lutris/services/amazon.py:294
+msgid "Unable to refresh token, please log in again"
+msgstr "令牌更新失败，请重新登录"
+
+#: lutris/services/amazon.py:440
+msgid ""
+"Unable to get game manifest info, please check your Amazon credentials and "
+"internet connectivity"
+msgstr "无法获取游戏清单信息，请检查您的亚马逊登录状态和互联网连接"
+
+#: lutris/services/amazon.py:459
+msgid ""
+"Unable to get game manifest, please check your Amazon credentials and "
+"internet connectivity"
+msgstr "无法获取游戏清单，请检查您的亚马逊登录状态和互联网连接"
+
+#: lutris/services/amazon.py:475
+msgid ""
+"Unknown compression algorithm found in manifest, please check your Amazon "
+"credentials and internet connectivity"
+msgstr "清单中发现未知压缩算法，请检查您的亚马逊登录状态和互联网连接"
+
+#: lutris/services/amazon.py:506
+msgid ""
+"Unable to get the patches of game, please check your Amazon credentials and "
+"internet connectivity"
+msgstr "无法获取游戏补丁，请检查您的亚马逊登录状态和互联网连接"
+
+#: lutris/services/amazon.py:565
+msgid ""
+"Unable to get fuel.json file, please check your Amazon credentials and "
+"internet connectivity"
+msgstr "无法获取 fuel.json 文件，请检查您的亚马逊登录状态和互联网连接"
+
+#: lutris/services/amazon.py:625
 #, python-format
 msgid "Installing file: %s"
 msgstr "正在安装：%s"
 
-#: lutris/services/base.py:310
+#: lutris/services/base.py:325
 #, python-format
 msgid ""
 "This service requires a game launcher. The following steps will install it.\n"
@@ -4901,31 +5006,56 @@ msgstr ""
 msgid "Battle.net"
 msgstr "暴雪战网"
 
-#: lutris/services/egs.py:134
+#: lutris/services/egs.py:136
 msgid "Epic Games Store"
 msgstr "Epic 游戏商城"
 
-#: lutris/services/flathub.py:56
+#: lutris/services/flathub.py:57
 msgid "Flathub"
 msgstr "Flathub"
 
-#: lutris/services/gog.py:68
+#: lutris/services/gog.py:69
 msgid "GOG"
 msgstr "GOG"
 
-#: lutris/services/humblebundle.py:57
+#: lutris/services/gog.py:305 lutris/services/gog.py:307
+#, python-format
+msgid "The download of '%s' failed."
+msgstr "下载 '%s' 失败。"
+
+#: lutris/services/gog.py:435
+msgid "Couldn't load the download links for this game"
+msgstr "无法加载此游戏的下载链接"
+
+#: lutris/services/gog.py:481
+msgid "Unable to determine correct file to launch installer"
+msgstr "找不到游戏安装程序"
+
+#: lutris/services/gog.py:488
+msgid "Couldn't load the downloads for this game"
+msgstr "无法加载此游戏的下载条目"
+
+#: lutris/services/humblebundle.py:58
 msgid "Humble Bundle"
 msgstr "Humble Bundle"
+
+#: lutris/services/humblebundle.py:224
+msgid "The download URL for the game could not be determined."
+msgstr "找不到此游戏的下载地址。"
+
+#: lutris/services/humblebundle.py:226
+msgid "No game found on Humble Bundle"
+msgstr "在 Humble Bundle 上找不到游戏"
 
 #: lutris/services/itchio.py:13
 msgid "Itch.io (Not implemented)"
 msgstr "Itch.io（未实现）"
 
-#: lutris/services/origin.py:128
+#: lutris/services/origin.py:129
 msgid "Origin"
 msgstr "Origin"
 
-#: lutris/services/steam.py:102
+#: lutris/services/steam.py:105
 msgid ""
 "Failed to load games. Check that your profile is set to public during the "
 "sync."
@@ -4939,11 +5069,11 @@ msgstr "Wine Steam"
 msgid "TOSEC"
 msgstr "TOSEC"
 
-#: lutris/services/ubisoft.py:81
+#: lutris/services/ubisoft.py:82
 msgid "Ubisoft Connect"
 msgstr "Ubisoft Connect"
 
-#: lutris/services/xdg.py:43
+#: lutris/services/xdg.py:44
 msgid "Local"
 msgstr "本地文件"
 
@@ -4955,11 +5085,11 @@ msgstr "©2010-2021 Lutris 团队"
 msgid "The Lutris team"
 msgstr "Lutris 团队"
 
-#: lutris/startup.py:87
+#: lutris/startup.py:86
 msgid "Your NVIDIA driver is outdated."
 msgstr "您的 NVIDIA 显卡驱动已过时。"
 
-#: lutris/startup.py:89
+#: lutris/startup.py:88
 #, python-format
 msgid ""
 "You are currently running driver %s which does not fully support all "
@@ -4971,11 +5101,11 @@ msgstr ""
 "请按照我们的<a href='%s'>安装指南</a>升级驱动程序。\n"
 "如果您的显卡太老，不支持安装新版显卡驱动，您可以勾选“不再显示此信息”。"
 
-#: lutris/startup.py:120
+#: lutris/startup.py:119
 msgid "Missing vulkan libraries"
 msgstr "缺少 Vulkan 支持库"
 
-#: lutris/startup.py:122
+#: lutris/startup.py:121
 #, python-format
 msgid ""
 "Lutris was unable to detect Vulkan support for the %s architecture.\n"
@@ -4987,9 +5117,16 @@ msgstr ""
 "缺少 Vulkan 支持库会使许多游戏和程序无法运行。\n"
 "请参考以下指南进行安装：<a href='%s'>安装图形驱动程序</a>。"
 
-#: lutris/startup.py:128
+#: lutris/startup.py:127
 msgid " and "
 msgstr "、"
+
+#: lutris/startup.py:183
+#, python-format
+msgid ""
+"Failed to open database file in %s. Try renaming this file and relaunch "
+"Lutris"
+msgstr "无法打开数据库文件 '%s'，请重命名该文件并重启Lutris"
 
 #: lutris/sysoptions.py:29
 msgid "Keep current"
@@ -5004,7 +5141,7 @@ msgid "System"
 msgstr "系统默认"
 
 #: lutris/sysoptions.py:55 lutris/sysoptions.py:64 lutris/sysoptions.py:75
-#: lutris/sysoptions.py:539
+#: lutris/sysoptions.py:540
 msgid "Off"
 msgstr "关闭"
 
@@ -5028,19 +5165,23 @@ msgstr "自动：AMD RADV Open Source (MESA: RADV)"
 msgid "Auto: Nvidia Proprietary"
 msgstr "自动：Nvidia Proprietary"
 
-#: lutris/sysoptions.py:172
+#: lutris/sysoptions.py:165
+msgid "Unspecified (Use System Default)"
+msgstr "不指定（使用系统默认值）"
+
+#: lutris/sysoptions.py:173
 msgid "Default installation folder"
 msgstr "默认安装目录"
 
-#: lutris/sysoptions.py:175
+#: lutris/sysoptions.py:176
 msgid "The default folder where you install your games."
 msgstr "安装游戏的默认文件夹。"
 
-#: lutris/sysoptions.py:183
+#: lutris/sysoptions.py:184
 msgid "Disable Lutris Runtime"
 msgstr "禁用 Lutris 运行库"
 
-#: lutris/sysoptions.py:186
+#: lutris/sysoptions.py:187
 msgid ""
 "The Lutris Runtime loads some libraries before running the game, which can "
 "cause some incompatibilities in some cases. Check this option to disable it."
@@ -5048,36 +5189,36 @@ msgstr ""
 "Lutris 运行库是在游戏运行前加载的一系列共享库。在某些情况下，这可能会导致不兼"
 "容。选中此选项可将其禁用。"
 
-#: lutris/sysoptions.py:193
+#: lutris/sysoptions.py:194
 msgid "Prefer system libraries"
 msgstr "优先使用系统库"
 
-#: lutris/sysoptions.py:195
+#: lutris/sysoptions.py:196
 msgid ""
 "When the runtime is enabled, prioritize the system libraries over the "
 "provided ones."
 msgstr ""
-"启用后，将优先使用本机 Linux 系统提供的共享库，而不是Wine游戏助手或运行环境自带的"
-"库。"
+"启用后，将优先使用本机 Linux 系统提供的共享库，而不是Wine游戏助手或运行环境自"
+"带的库。"
 
-#: lutris/sysoptions.py:201
+#: lutris/sysoptions.py:202
 msgid "Restore resolution on game exit"
 msgstr "游戏退出时恢复分辨率"
 
-#: lutris/sysoptions.py:203
+#: lutris/sysoptions.py:204
 msgid ""
 "Some games don't restore your screen resolution when \n"
 "closed or when they crash. This is when this option comes \n"
 "into play to save your bacon."
 msgstr ""
-"某些游戏在关闭或意外崩溃时无法恢复屏幕分辨率，启用这个选项让Wine游戏助手帮您恢"
-"复。"
+"某些游戏在关闭或意外崩溃时无法恢复屏幕分辨率，启用这个选项让Wine游戏助手帮您"
+"恢复。"
 
-#: lutris/sysoptions.py:210
+#: lutris/sysoptions.py:211
 msgid "Enable gamescope"
 msgstr "启用 gamescope 游戏窗口隔离"
 
-#: lutris/sysoptions.py:214
+#: lutris/sysoptions.py:215
 msgid ""
 "Use gamescope to draw the game window isolated from your desktop.\n"
 "Use Ctrl+Super+F to toggle fullscreen"
@@ -5085,35 +5226,35 @@ msgstr ""
 "使用 gamescope 绘制与当前桌面隔离的游戏窗口。\n"
 "可按 Ctrl+Super+F 组合键切换全屏与窗口模式。"
 
-#: lutris/sysoptions.py:220
+#: lutris/sysoptions.py:221
 msgid "Gamescope output resolution"
 msgstr "gamescope 输出分辨率"
 
-#: lutris/sysoptions.py:224
+#: lutris/sysoptions.py:225
 msgid "Resolution of the window on your desktop"
 msgstr "窗口在桌面上显示的分辨率"
 
-#: lutris/sysoptions.py:229
+#: lutris/sysoptions.py:230
 msgid "Gamescope game resolution"
 msgstr "gamescope 游戏分辨率"
 
-#: lutris/sysoptions.py:233
+#: lutris/sysoptions.py:234
 msgid "Resolution of the screen visible to the game"
 msgstr "游戏读取到的屏幕分辨率"
 
-#: lutris/sysoptions.py:238
+#: lutris/sysoptions.py:239
 msgid "Restrict number of cores used"
 msgstr "限制 CPU 核数"
 
-#: lutris/sysoptions.py:241
+#: lutris/sysoptions.py:242
 msgid "Restrict the game to a maximum number of CPU cores."
 msgstr "限制游戏可用的最大 CPU 核数。"
 
-#: lutris/sysoptions.py:246
+#: lutris/sysoptions.py:247
 msgid "Restrict number of cores to"
 msgstr "最大可用核数"
 
-#: lutris/sysoptions.py:249
+#: lutris/sysoptions.py:250
 msgid ""
 "Maximum number of CPU cores to be used, if 'Restrict number of cores used' "
 "is turned on."
@@ -5121,11 +5262,11 @@ msgstr ""
 "如果启用了“限制 CPU 核数”，则在此处设置要使用的最大 CPU 核数，默认为 1（单"
 "核）。"
 
-#: lutris/sysoptions.py:255
+#: lutris/sysoptions.py:256
 msgid "Restore gamma on game exit"
 msgstr "游戏退出时恢复伽玛值（亮度阈值）"
 
-#: lutris/sysoptions.py:257
+#: lutris/sysoptions.py:258
 msgid ""
 "Some games don't correctly restores gamma on exit, making your display too "
 "bright. Select this option to correct it."
@@ -5133,58 +5274,58 @@ msgstr ""
 "某些游戏退出时无法正确恢复伽玛值（亮度阈值），从而使显示效果太亮或太暗。启用"
 "此项让Wine游戏助手帮您恢复。"
 
-#: lutris/sysoptions.py:262
+#: lutris/sysoptions.py:263
 msgid "Disable desktop effects"
 msgstr "禁用桌面特效"
 
-#: lutris/sysoptions.py:266
+#: lutris/sysoptions.py:267
 msgid ""
 "Disable desktop effects while game is running, reducing stuttering and "
 "increasing performance"
 msgstr "在游戏运行时禁用桌面特效（桌面合成），可减少卡顿、提高性能"
 
-#: lutris/sysoptions.py:271
+#: lutris/sysoptions.py:272
 msgid "Disable screen saver"
 msgstr "禁用屏幕保护程序"
 
-#: lutris/sysoptions.py:276
+#: lutris/sysoptions.py:277
 msgid ""
 "Disable the screen saver while a game is running. Requires the screen "
 "saver's functionality to be exposed over DBus."
 msgstr ""
 "在游戏运行时禁用屏幕保护程序。屏幕保护程序需要向 DBus 注册，否则该选项无效。"
 
-#: lutris/sysoptions.py:283
+#: lutris/sysoptions.py:284
 msgid "Reset PulseAudio"
 msgstr "重置 PulseAudio 声音服务"
 
-#: lutris/sysoptions.py:287
+#: lutris/sysoptions.py:288
 msgid "Restart PulseAudio before launching the game."
 msgstr "启动游戏前重启 PulseAudio 声音服务。"
 
-#: lutris/sysoptions.py:292
+#: lutris/sysoptions.py:293
 msgid "Reduce PulseAudio latency"
 msgstr "减少 PulseAudio 延迟"
 
-#: lutris/sysoptions.py:296
+#: lutris/sysoptions.py:297
 msgid ""
 "Set the environment variable PULSE_LATENCY_MSEC=60 to improve audio quality "
 "on some games"
 msgstr "设置环境变量 PULSE_LATENCY_MSEC=60 以提高某些游戏的音频质量"
 
-#: lutris/sysoptions.py:302
+#: lutris/sysoptions.py:303
 msgid "Switch to US keyboard layout"
 msgstr "切换到美式键盘布局"
 
-#: lutris/sysoptions.py:305
+#: lutris/sysoptions.py:306
 msgid "Switch to US keyboard QWERTY layout while game is running"
 msgstr "游戏运行时切换到美式键盘 QWERTY 布局"
 
-#: lutris/sysoptions.py:312
+#: lutris/sysoptions.py:313
 msgid "Optimus launcher (NVIDIA Optimus laptops)"
 msgstr "Optimus 启动器（NVIDIA Optimus 笔记本电脑）"
 
-#: lutris/sysoptions.py:314
+#: lutris/sysoptions.py:315
 msgid ""
 "If you have installed the primus or bumblebee packages, select what launcher "
 "will run the game with the command, activating your NVIDIA graphic chip for "
@@ -5196,11 +5337,11 @@ msgstr ""
 "活 NVIDIA 独显以实现较高的3D性能。primusrun 通常性能更佳，但 optirun 和 "
 "virtualgl 的兼容性更好。Primus VK 通过 bumblebee 软件包提供 vulkan 支持。"
 
-#: lutris/sysoptions.py:326
+#: lutris/sysoptions.py:327
 msgid "Vulkan ICD loader"
 msgstr "Vulkan ICD 加载器"
 
-#: lutris/sysoptions.py:328
+#: lutris/sysoptions.py:329
 msgid ""
 "The ICD loader is a library that is placed between a Vulkan application and "
 "any number of Vulkan drivers, in order to support multiple drivers and the "
@@ -5209,34 +5350,34 @@ msgstr ""
 "ICD 加载器是一个库，它位于 Vulkan 应用程序和任意数量的 Vulkan 驱动程序之间，"
 "以便支持多个驱动程序以及跨这些驱动程序工作的实例级功能。"
 
-#: lutris/sysoptions.py:336
+#: lutris/sysoptions.py:337
 msgid "FPS counter (MangoHud)"
 msgstr "显示帧率（MangoHud）"
 
-#: lutris/sysoptions.py:339
+#: lutris/sysoptions.py:340
 msgid ""
 "Display the game's FPS + other information. Requires MangoHud to be "
 "installed."
 msgstr "显示游戏的 FPS 和其他信息。需要安装MangoHud。"
 
-#: lutris/sysoptions.py:348
+#: lutris/sysoptions.py:349
 msgid "Limit the game's FPS to desired number"
 msgstr "限制游戏最大帧率不超过指定数值"
 
-#: lutris/sysoptions.py:355
+#: lutris/sysoptions.py:356
 msgid "Enable Feral GameMode"
 msgstr "启用游戏性能优先模式"
 
-#: lutris/sysoptions.py:356
+#: lutris/sysoptions.py:357
 msgid "Request a set of optimisations be temporarily applied to the host OS"
 msgstr ""
 "在游戏运行时，请求将一组优化临时应用于主机 Linux 操作系统，以提升游戏性能"
 
-#: lutris/sysoptions.py:363
+#: lutris/sysoptions.py:364
 msgid "Enable NVIDIA Prime Render Offload"
 msgstr "启用 NVIDIA Prime 渲染卸载"
 
-#: lutris/sysoptions.py:364
+#: lutris/sysoptions.py:365
 msgid ""
 "If you have the latest NVIDIA driver and the properly patched xorg-server "
 "(see https://download.nvidia.com/XFree86/Linux-x86_64/435.17/README/"
@@ -5250,11 +5391,11 @@ msgstr ""
 "Render Offload）功能。这将应用 __NV_PRIME_RENDER_OFFLOAD=1 和 "
 "__GLX_VENDOR_LIBRARY_NAME=nvidia 环境变量。"
 
-#: lutris/sysoptions.py:375
+#: lutris/sysoptions.py:376
 msgid "Use discrete graphics"
 msgstr "使用独立显卡"
 
-#: lutris/sysoptions.py:377
+#: lutris/sysoptions.py:378
 msgid ""
 "If you have open source graphic drivers (Mesa), selecting this option will "
 "run the game with the 'DRI_PRIME=1' environment variable, activating your "
@@ -5263,11 +5404,11 @@ msgstr ""
 "如果您具有开源图形驱动程序（Mesa），则选择此选项将使用环境变量“DRI_PRIME=1”来"
 "运行游戏，从而激活您的独显以获得更高的3D性能。"
 
-#: lutris/sysoptions.py:385
+#: lutris/sysoptions.py:386
 msgid "SDL 1.2 Fullscreen Monitor"
 msgstr "指定 SDL 1.2 程序使用的显示器"
 
-#: lutris/sysoptions.py:389
+#: lutris/sysoptions.py:390
 msgid ""
 "Hint SDL 1.2 games to use a specific monitor when going fullscreen by "
 "setting the SDL_VIDEO_FULLSCREEN environment variable"
@@ -5275,11 +5416,11 @@ msgstr ""
 "通过设置 SDL_VIDEO_FULLSCREEN 环境变量，让 SDL 1.2 游戏在进入全屏模式时使用特"
 "定的显示器"
 
-#: lutris/sysoptions.py:396
+#: lutris/sysoptions.py:397
 msgid "Turn off monitors except"
 msgstr "关闭除指定显示器外的其他显示器"
 
-#: lutris/sysoptions.py:401
+#: lutris/sysoptions.py:402
 msgid ""
 "Only keep the selected screen active while the game is running. \n"
 "This is useful if you have a dual-screen setup, and are \n"
@@ -5288,19 +5429,19 @@ msgstr ""
 "游戏运行时仅使选定的屏幕保持活动状态。\n"
 "如果您有多块显示器，并且在全屏模式下运行游戏时出现显示问题，可以试试该选项。"
 
-#: lutris/sysoptions.py:409
+#: lutris/sysoptions.py:410
 msgid "Switch resolution to"
 msgstr "切换分辨率为"
 
-#: lutris/sysoptions.py:413
+#: lutris/sysoptions.py:414
 msgid "Switch to this screen resolution while the game is running."
 msgstr "在游戏运行时切换到此屏幕分辨率。"
 
-#: lutris/sysoptions.py:417
+#: lutris/sysoptions.py:418
 msgid "CLI mode"
 msgstr "文本模式"
 
-#: lutris/sysoptions.py:421
+#: lutris/sysoptions.py:422
 msgid ""
 "Enable a terminal for text-based games. Only useful for ASCII based games. "
 "May cause issues with graphical games."
@@ -5308,11 +5449,11 @@ msgstr ""
 "为基于文本的游戏打开终端，仅对基于 ASCII 的游戏有用。可能会导致使用图形的游戏"
 "出现问题。"
 
-#: lutris/sysoptions.py:426
+#: lutris/sysoptions.py:427
 msgid "Text based games emulator"
 msgstr "基于文本的游戏模拟器"
 
-#: lutris/sysoptions.py:431
+#: lutris/sysoptions.py:432
 msgid ""
 "The terminal emulator used with the CLI mode. Choose from the list of "
 "detected terminal apps or enter the terminal's command or path."
@@ -5321,76 +5462,76 @@ msgstr ""
 "终端的命令或路径。\n"
 "注意：不能保证所有终端模拟器都与Wine游戏助手兼容。"
 
-#: lutris/sysoptions.py:438
+#: lutris/sysoptions.py:439
 msgid "Locale"
 msgstr "区域设置"
 
-#: lutris/sysoptions.py:444
+#: lutris/sysoptions.py:445
 msgid ""
 "Can be used to force certain locale for an app. Fixes encoding issues in "
 "legacy software."
 msgstr "强制指定应用程序的某些区域设置，可用于修复旧版软件中的乱码问题。"
 
-#: lutris/sysoptions.py:450
+#: lutris/sysoptions.py:451
 msgid "Environment variables loaded at run time"
 msgstr "游戏运行时加载的环境变量"
 
-#: lutris/sysoptions.py:455
+#: lutris/sysoptions.py:456
 msgid "AntiMicroX Profile"
 msgstr "AntiMicroX 配置"
 
-#: lutris/sysoptions.py:457
+#: lutris/sysoptions.py:458
 msgid "Path to an AntiMicroX profile file"
 msgstr "AntiMicroX 配置文件的路径"
 
-#: lutris/sysoptions.py:462
+#: lutris/sysoptions.py:463
 msgid "Command prefix"
 msgstr "命令前缀"
 
-#: lutris/sysoptions.py:464
+#: lutris/sysoptions.py:465
 msgid ""
 "Command line instructions to add in front of the game's execution command."
 msgstr "添加到游戏启动命令之前的命令行指令。"
 
-#: lutris/sysoptions.py:470
+#: lutris/sysoptions.py:471
 msgid "Manual script"
 msgstr "维护脚本"
 
-#: lutris/sysoptions.py:472
+#: lutris/sysoptions.py:473
 msgid "Script to execute from the game's contextual menu"
 msgstr ""
 "设置该选项后，游戏的右键菜单中将出现“执行维护脚本”菜单项，点击可快速执行该脚"
 "本。"
 
-#: lutris/sysoptions.py:477
+#: lutris/sysoptions.py:478
 msgid "Pre-launch script"
 msgstr "预启动脚本"
 
-#: lutris/sysoptions.py:479
+#: lutris/sysoptions.py:480
 msgid "Script to execute before the game starts"
 msgstr "游戏开始前执行的脚本"
 
-#: lutris/sysoptions.py:484
+#: lutris/sysoptions.py:485
 msgid "Wait for pre-launch script completion"
 msgstr "等待预启动脚本完成"
 
-#: lutris/sysoptions.py:487
+#: lutris/sysoptions.py:488
 msgid "Run the game only once the pre-launch script has exited"
 msgstr "等待预启动脚本退出后才运行游戏"
 
-#: lutris/sysoptions.py:492
+#: lutris/sysoptions.py:493
 msgid "Post-exit script"
 msgstr "退出脚本"
 
-#: lutris/sysoptions.py:494
+#: lutris/sysoptions.py:495
 msgid "Script to execute when the game exits"
 msgstr "游戏退出时执行的脚本"
 
-#: lutris/sysoptions.py:499
+#: lutris/sysoptions.py:500
 msgid "Include processes"
 msgstr "包括进程"
 
-#: lutris/sysoptions.py:501
+#: lutris/sysoptions.py:502
 msgid ""
 "What processes to include in process monitoring. This is to override the "
 "built-in exclude list.\n"
@@ -5401,11 +5542,11 @@ msgstr ""
 "用空格分隔的列表，名称包括空格的进程可以用引号引起来。\n"
 "如果列表中的任一进程仍在运行，Wine游戏助手就视为游戏仍在运行。"
 
-#: lutris/sysoptions.py:509
+#: lutris/sysoptions.py:510
 msgid "Exclude processes"
 msgstr "排除进程"
 
-#: lutris/sysoptions.py:511
+#: lutris/sysoptions.py:512
 msgid ""
 "What processes to exclude in process monitoring. For example background "
 "processes that stick around after the game has been closed.\n"
@@ -5416,11 +5557,11 @@ msgstr ""
 "用空格分隔的列表，名称包括空格的进程可以用引号引起来。\n"
 "如果只有排除列表中的进程在运行，Wine游戏助手就视为游戏已停止运行。"
 
-#: lutris/sysoptions.py:520
+#: lutris/sysoptions.py:521
 msgid "Killswitch file"
 msgstr "Killswitch 文件"
 
-#: lutris/sysoptions.py:522
+#: lutris/sysoptions.py:523
 msgid ""
 "Path to a file which will stop the game when deleted \n"
 "(usually /dev/input/js0 to stop the game on joystick unplugging)"
@@ -5428,11 +5569,11 @@ msgstr ""
 "设置一个文件，如果该文件被删除则停止游戏\n"
 "（通常是 /dev/input/js0，用于在拔下摇杆时停止游戏）"
 
-#: lutris/sysoptions.py:529
+#: lutris/sysoptions.py:530
 msgid "SDL2 gamepad mapping"
 msgstr "SDL2 游戏手柄映射"
 
-#: lutris/sysoptions.py:531
+#: lutris/sysoptions.py:532
 msgid ""
 "SDL_GAMECONTROLLERCONFIG mapping string or path to a custom gamecontrollerdb."
 "txt file containing mappings."
@@ -5440,39 +5581,39 @@ msgstr ""
 "SDL_GAMECONTROLLERCONFIG 映射字符串或包含映射的自定义 gamecontrollerdb.txt 文"
 "件路径。"
 
-#: lutris/sysoptions.py:536
+#: lutris/sysoptions.py:537
 msgid "Use Xephyr"
 msgstr "使用 Xephyr"
 
-#: lutris/sysoptions.py:540
+#: lutris/sysoptions.py:541
 msgid "8BPP (256 colors)"
 msgstr "8位（256色）"
 
-#: lutris/sysoptions.py:541
+#: lutris/sysoptions.py:542
 msgid "16BPP (65536 colors)"
 msgstr "16位（6万色）"
 
-#: lutris/sysoptions.py:542
+#: lutris/sysoptions.py:543
 msgid "24BPP (16M colors)"
 msgstr "24位（1600万色）"
 
-#: lutris/sysoptions.py:546
+#: lutris/sysoptions.py:547
 msgid "Run program in Xephyr to support 8BPP and 16BPP color modes"
 msgstr "在 Xephyr 中运行程序以支持8位和16位色彩模式"
 
-#: lutris/sysoptions.py:551
+#: lutris/sysoptions.py:552
 msgid "Xephyr resolution"
 msgstr "Xephyr 分辨率"
 
-#: lutris/sysoptions.py:553
+#: lutris/sysoptions.py:554
 msgid "Screen resolution of the Xephyr server"
 msgstr "Xephyr 服务器的屏幕分辨率"
 
-#: lutris/sysoptions.py:558
+#: lutris/sysoptions.py:559
 msgid "Xephyr Fullscreen"
 msgstr "Xephyr 全屏模式"
 
-#: lutris/sysoptions.py:561
+#: lutris/sysoptions.py:562
 msgid "Open Xephyr in fullscreen (at the desktop resolution)"
 msgstr "以桌面分辨率全屏打开 Xephyr"
 
@@ -5509,21 +5650,21 @@ msgstr "育碧身份验证已失效：%s"
 msgid "Manual"
 msgstr "手动指定"
 
-#: lutris/util/wine/wine.py:346 lutris/util/wine/wine.py:384
-#: lutris/util/wine/wine.py:404
+#: lutris/util/wine/wine.py:350 lutris/util/wine/wine.py:388
+#: lutris/util/wine/wine.py:408
 msgid "Launch anyway and do not show this message again."
 msgstr "强行启动，以后不再显示该警告（游戏可能无法运行）"
 
-#: lutris/util/wine/wine.py:348 lutris/util/wine/wine.py:386
-#: lutris/util/wine/wine.py:406
+#: lutris/util/wine/wine.py:352 lutris/util/wine/wine.py:390
+#: lutris/util/wine/wine.py:410
 msgid "Enable anyway and do not show this message again."
 msgstr "强行启用，以后不再显示该警告（游戏可能无法运行）"
 
-#: lutris/util/wine/wine.py:353
+#: lutris/util/wine/wine.py:357
 msgid "Vulkan is not installed or is not supported by your system"
 msgstr "您未安装支持 Vulkan 的显卡驱动"
 
-#: lutris/util/wine/wine.py:355
+#: lutris/util/wine/wine.py:359
 msgid ""
 "If you have compatible hardware, please follow the installation procedures "
 "as described in\n"
@@ -5533,16 +5674,17 @@ msgstr ""
 "如果您的显卡支持 Vulkan，请参考以下文档来安装 Vulkan 驱动：\n"
 "<a href='https://hu60.cn/q.php/bbs.topic.94828.html#nav'>显卡驱动安装教程</a>"
 
-#: lutris/util/wine/wine.py:367
+#: lutris/util/wine/wine.py:371
 msgid ""
 "Your limits are not set correctly. Please increase them as described here: "
 "<a href='https://github.com/lutris/docs/blob/master/HowToEsync.md'>How-to:-"
 "Esync (https://github.com/lutris/docs/blob/master/HowToEsync.md)</a>"
 msgstr ""
 "您的系统文件描述符上限太小。请参考以下文档来增大文件描述符上限，否则 Esync 可"
-"能不能正常工作：<a href='https://hu60.cn/q.php/bbs.topic.103001.html#nav'>如何为Esync增大系统文件描述符上限</a>"
+"能不能正常工作：<a href='https://hu60.cn/q.php/bbs.topic.103001.html#nav'>如"
+"何为Esync增大系统文件描述符上限</a>"
 
-#: lutris/util/wine/wine.py:376
+#: lutris/util/wine/wine.py:380
 msgid ""
 "Your kernel is not patched for fsync. Please get a patched kernel to use "
 "fsync."
@@ -5550,11 +5692,11 @@ msgstr ""
 "您的 Linux 内核没有打过 fsync 补丁。请获取打过补丁的 Linux 内核以使用 fsync，"
 "或者关闭 fsync 开关。此外，5.16 及以上版本的内核默认支持 fsync。"
 
-#: lutris/util/wine/wine.py:390 lutris/util/wine/wine.py:410
+#: lutris/util/wine/wine.py:394 lutris/util/wine/wine.py:414
 msgid "Incompatible Wine version detected"
 msgstr "检测到不兼容的 Wine 版本"
 
-#: lutris/util/wine/wine.py:392
+#: lutris/util/wine/wine.py:396
 msgid ""
 "The Wine build you have selected does not support Esync.\n"
 "Please switch to an Esync-capable version."
@@ -5562,13 +5704,19 @@ msgstr ""
 "您选择的 Wine 版本不支持 Esync。\n"
 "请选择支持 Esync 的 Wine 版本，或者禁用 Esync。"
 
-#: lutris/util/wine/wine.py:412
+#: lutris/util/wine/wine.py:416
 msgid ""
 "The Wine build you have selected does not support Fsync.\n"
 "Please switch to an Fsync-capable version."
 msgstr ""
 "您选择的 Wine 版本不支持 Fsync。\n"
 "请选择支持 Fsync 的 Wine 版本，或者禁用 Fsync。"
+
+#~ msgid "OK"
+#~ msgstr "确定"
+
+#~ msgid "Command exited with code %s"
+#~ msgstr "命令以错误代码 %s 退出"
 
 #~ msgid "video game preservation platform"
 #~ msgstr "电子游戏保管平台"
@@ -5597,14 +5745,8 @@ msgstr ""
 #~ msgid "Bethesda"
 #~ msgstr "Bethesda"
 
-#~ msgid "Lutris Team"
-#~ msgstr "Lutris 团队"
-
 #~ msgid "An error prevented the game from running"
 #~ msgstr "启动游戏时出错"
-
-#~ msgid "Runner not installed."
-#~ msgstr "运行环境未安装。"
 
 #~ msgid "In use by %d game"
 #~ msgid_plural "In use by %d games"
@@ -5638,9 +5780,6 @@ msgstr ""
 #~ msgid "Community Installers"
 #~ msgstr "社区贡献的安装脚本"
 
-#~ msgid "Could not retrieve game installer."
-#~ msgstr "无法获取游戏安装脚本。"
-
 #~ msgid "Services"
 #~ msgstr "游戏库整合"
 
@@ -5655,9 +5794,6 @@ msgstr ""
 
 #~ msgid "Nintendo Switch emulator for LDN build visit https://ryujinx.org/"
 #~ msgstr "任天堂 Switch 模拟器（可通过 LDN 联机，详见 https://ryujinx.org/）"
-
-msgid "Kill all Wine processes"
-msgstr "结束所有 Wine 进程"
 
 #~ msgid "Runs Steam for Windows games"
 #~ msgstr "运行 Windows 版 Steam 上的游戏"
@@ -6318,11 +6454,5 @@ msgstr "结束所有 Wine 进程"
 #~ "为了让 Lutris 生存和成长，该项目需要您的帮助。\n"
 #~ "如果可以的话，请考虑捐款。 这将极大地帮助我们支付托管项目的费用，\n"
 #~ "并为新功能（如云存储或电视上的全屏界面）提供资金！\n"
-#~ "<a href='https://winegame.net/donate'>支持我们！https://winegame.net/donate</"
-#~ "a>"
-
-msgid "Unspecified (Use System Default)"
-msgstr "不指定（使用系统默认值）"
-
-msgid "Advanced"
-msgstr "高级选项"
+#~ "<a href='https://winegame.net/donate'>支持我们！https://winegame.net/"
+#~ "donate</a>"
