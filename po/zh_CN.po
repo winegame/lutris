@@ -6323,3 +6323,6 @@ msgstr "结束所有 Wine 进程"
 
 msgid "Unspecified (Use System Default)"
 msgstr "不指定（使用系统默认值）"
+
+msgid "Advanced"
+msgstr "高级选项"
