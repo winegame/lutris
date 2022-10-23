@@ -6,7 +6,8 @@ PIP:=$(PYTHON) -m pip
 all:
 	find . -name __pycache__ | xargs rm -rf
 	export GITBRANCH=master
-	debuild || debclean
+	debuild -uc -us
+	debclean >/dev/null 2>&1
 
 build:
 	gbp buildpackage --git-debian-branch=${GITBRANCH}
