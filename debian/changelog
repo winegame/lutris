@@ -1,3 +1,9 @@
+net.winegame.client (0.5.12.2) jammy; urgency=medium
+
+  * 改善wine版本的排序。
+
+ -- SwimmingTiger <hu60.cn@qq.com>  Wed, 15 Feb 2023 13:02:20 +0800
+
 net.winegame.client (0.5.12.1) jammy; urgency=medium
 
   * Vulkan ICD加载器里添加一个“不指定（使用系统默认值）”的选项
