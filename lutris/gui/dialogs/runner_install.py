@@ -255,7 +255,11 @@ class RunnerInstallDialog(ModelessDialog):
         # Extract version numbers from the end of the version string.
         # We look for things like xx-7.2 or xxx-4.3-2. A leading period
         # will be part of the version, but a leading hyphen will not.
-        match = re.search(r"^(.*?)\-?(\d[.\-\d]*)$", raw_version)
+        # 老虎会游泳：第一个正则表达式匹配 overwatch2-caffe-7.18 中的 7.18，以及 lutris-7.2-2 中的 7.2-2。
+        #           第二个正则表达式匹配 lutris-GE-Proton7-32 中的 7-32。
+        #           表达式不能合并或交换顺序，否则 lutris-mk11-4.18 的匹配结果可能是 11，而不是我们想要的 4.18。
+        #           表达式也不能以 $ 结束，否则匹配不到 winehq-staging-7.19-ubuntu20.04 里的 7.19。
+        match = re.search(r"^(.*?)\-(\d+(\.\d+){1,}(-\d+)?)", raw_version) or re.search(r"^(.*?)(\d[.\-\d]*)", raw_version)
         if match:
             version_parts = [int(p) for p in match.group(2).replace("-", ".").split(".") if p]
             return version_parts, raw_version, version["architecture"]
