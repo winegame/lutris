@@ -70,6 +70,7 @@ class RunnerInstallDialog(ModelessDialog):
         self.set_default_size(720, 540)
         self.runners = []
         self.listbox = None
+        self.search_text = None
 
         label = Gtk.Label.new(_("Waiting for response from %s") % settings.SITE_URL)
         self.vbox.pack_start(label, False, False, 18)
@@ -110,12 +111,18 @@ class RunnerInstallDialog(ModelessDialog):
 
         label = Gtk.Label.new(_("%s version management") % self.runner_info["name"])
         self.vbox.add(label)
+        # 搜索框
+        entry = Gtk.SearchEntry()
+        entry.connect("search-changed", self.on_search_changed)
+        self.vbox.add(entry)
         self.installing = {}
         self.connect("response", self.on_destroy)
 
         scrolled_listbox = Gtk.ScrolledWindow()
         self.listbox = Gtk.ListBox()
         self.listbox.set_selection_mode(Gtk.SelectionMode.NONE)
+        # 设置过滤器
+        self.listbox.set_filter_func(self.entry_filter_func)
         scrolled_listbox.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scrolled_listbox.set_shadow_type(Gtk.ShadowType.ETCHED_OUT)
         scrolled_listbox.add(self.listbox)
@@ -259,7 +266,8 @@ class RunnerInstallDialog(ModelessDialog):
         #           第二个正则表达式匹配 lutris-GE-Proton7-32 中的 7-32。
         #           表达式不能合并或交换顺序，否则 lutris-mk11-4.18 的匹配结果可能是 11，而不是我们想要的 4.18。
         #           表达式也不能以 $ 结束，否则匹配不到 winehq-staging-7.19-ubuntu20.04 里的 7.19。
-        match = re.search(r"^(.*?)\-(\d+(\.\d+){1,}(-\d+)?)", raw_version) or re.search(r"^(.*?)(\d[.\-\d]*)", raw_version)
+        match = re.search(r"^(.*?)\-(\d+(\.\d+){1,}(-\d+)?)", raw_version) or re.search(r"^(.*?)(\d[.\-\d]*)",
+                                                                                        raw_version)
         if match:
             version_parts = [int(p) for p in match.group(2).replace("-", ".").split(".") if p]
             return version_parts, raw_version, version["architecture"]
@@ -434,3 +442,13 @@ class RunnerInstallDialog(ModelessDialog):
             return True
         self.destroy()
         return True
+
+    def on_search_changed(self, entry):
+        self.search_text = entry.props.text
+        self.listbox.invalidate_filter()
+
+    def entry_filter_func(self, model):
+        if self.search_text is None or len(self.search_text.strip()) == 0:
+            return True
+        else:
+            return self.search_text in model.runner[self.COL_VER] or self.search_text in model.runner[self.COL_ARCH]
