@@ -105,8 +105,11 @@ class wine(Runner):
         "wineboot.exe",
     )
 
-    def __init__(self, config=None):  # noqa: C901
+    def __init__(self, config=None, prefix=None, working_dir=None, wine_arch=None):  # noqa: C901
         super().__init__(config)
+        self._prefix = prefix
+        self._working_dir = working_dir
+        self._wine_arch = wine_arch
         self.dll_overrides = DEFAULT_DLL_OVERRIDES.copy()  # we'll modify this, so we better copy it
 
         def get_wine_version_choices():
@@ -502,8 +505,7 @@ class wine(Runner):
     @property
     def prefix_path(self):
         """Return the absolute path of the Wine prefix"""
-        _prefix_path = self.game_config.get("prefix") \
-            or os.environ.get("WINEPREFIX")
+        _prefix_path = self._prefix or self.game_config.get("prefix") or os.environ.get("WINEPREFIX")
         if not _prefix_path and self.game_config.get("exe"):
             # Find prefix from game if we have one
             _prefix_path = find_prefix(self.game_exe)
@@ -529,9 +531,9 @@ class wine(Runner):
     @property
     def working_dir(self):
         """Return the working directory to use when running the game."""
-        option = self.game_config.get("working_dir")
-        if option:
-            return option
+        _working_dir = self._working_dir or self.game_config.get("working_dir")
+        if _working_dir:
+            return _working_dir
         if self.game_exe:
             game_dir = os.path.dirname(self.game_exe)
             if os.path.isdir(game_dir):
@@ -548,7 +550,7 @@ class wine(Runner):
         """Return the wine architecture.
 
         Get it from the config or detect it from the prefix"""
-        arch = self.game_config.get("arch") or "auto"
+        arch = self._wine_arch or self.game_config.get("arch") or "auto"
         if arch not in ("win32", "win64"):
             arch = detect_arch(self.prefix_path, self.get_executable())
         return arch
