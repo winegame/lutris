@@ -1,3 +1,10 @@
+net.winegame.client (0.5.13.1) jammy; urgency=medium
+
+  * Wine版本列表添加了一个搜索框。
+  * 修复注册表导入功能总是导入到默认Wine容器的问题。
+
+ -- SwimmingTiger <hu60.cn@gmail.com>  Sat, 29 Jul 2023 13:58:39 +0800
+
 net.winegame.client (0.5.12.2) jammy; urgency=medium
 
   * 改善wine版本的排序。
