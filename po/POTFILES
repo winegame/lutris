@@ -1,4 +1,4 @@
-# generated on 2023-06-01T10:48:40+00:00
+# generated on 2023-07-29T06:02:46+00:00
 
 share/applications/net.lutris.Lutris.desktop
 share/metainfo/net.lutris.Lutris.metainfo.xml
@@ -28,6 +28,8 @@ lutris/gui/config/add_game_dialog.py
 lutris/gui/config/base_config_box.py
 lutris/gui/config/boxes.py
 lutris/gui/config/common.py
+lutris/gui/config/edit_category_games.py
+lutris/gui/config/edit_game_categories.py
 lutris/gui/config/edit_game.py
 lutris/gui/config/__init__.py
 lutris/gui/config/preferences_box.py
@@ -143,6 +145,7 @@ lutris/services/amazon.py
 lutris/services/base.py
 lutris/services/battlenet.py
 lutris/services/dolphin.py
+lutris/services/ea_app.py
 lutris/services/egs.py
 lutris/services/flathub.py
 lutris/services/gog.py
