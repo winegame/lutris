@@ -217,7 +217,7 @@ class AddGamesWindow(ModelessDialog):  # pylint: disable=too-many-public-methods
         self.search_entry.connect("changed", self._on_search_updated)
 
         explanation = _(
-            "Lutris will search Lutris.net for games matching the terms you enter, and any "
+            "WineGame will search WineGame.net for games matching the terms you enter, and any "
             "that it finds will appear here.\n\n"
             "When you click on a game that it found, the installer window will appear to "
             "perform the installation."
@@ -238,7 +238,7 @@ class AddGamesWindow(ModelessDialog):  # pylint: disable=too-many-public-methods
         return vbox
 
     def present_search_installers_page(self):
-        self.set_page_title_markup(_("<b>Search Lutris.net</b>"))
+        self.set_page_title_markup(_("<b>Search WineGame.net</b>"))
         self.stack.present_page("search_installers")
         self.search_entry.grab_focus()
         self.display_cancel_button()
@@ -538,9 +538,9 @@ class AddGamesWindow(ModelessDialog):  # pylint: disable=too-many-public-methods
         self.install_script_file_chooser.set_hexpand(True)
 
         explanation = _(
-            "Lutris install scripts are YAML files that guide Lutris through "
+            "Lutris install scripts are YAML files that guide WineGame through "
             "the installation process.\n\n"
-            "They can be obtained on Lutris.net, or written by hand.\n\n"
+            "They can be obtained on WineGame.net, or written by hand.\n\n"
             "When you click 'Install' below, the installer window will "
             "appear and load the script, and it will guide the process from there."
         )
@@ -580,8 +580,8 @@ class AddGamesWindow(ModelessDialog):  # pylint: disable=too-many-public-methods
         self.import_rom_file_chooser.set_hexpand(True)
 
         explanation = _(
-            "Lutris will identify a ROM via its MD5 hash and download game "
-            "information from Lutris.net.\n\n"
+            "WineGame will identify a ROM via its MD5 hash and download game "
+            "information from WineGame.net.\n\n"
             "The ROM data used for this comes from the TOSEC project.\n\n"
             "When you click 'Install' below, the process of installing the game will "
             "begin."

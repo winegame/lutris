@@ -141,7 +141,7 @@ class ImportGameDialog(ModelessDialog):
             if self.search_stopping:
                 return None
 
-            show_progress(filename, _("Looking up checksum on Lutris.net..."))
+            show_progress(filename, _("Looking up checksum on WineGame.net..."))
             result = search_tosec_by_md5(md5)
             if not result:
                 raise RuntimeError(_("This ROM could not be identified."))

@@ -79,7 +79,7 @@ class BattleNetGame(ServiceGame):
             "name": blizzard_game[1],
             "slug": blizzard_game[3],
             "product_code": blizzard_game[2],
-            "coverart": "https://lutris.net/games/cover/%s.jpg" % blizzard_game[3]
+            "coverart": "https://winegame.net/games/cover/%s.jpg" % blizzard_game[3]
         })
         return service_game
 
@@ -98,7 +98,7 @@ class BattleNetService(BaseService):
     client_installer = "battlenet"
     cookies_path = os.path.join(settings.CACHE_DIR, ".bnet.auth")
     cache_path = os.path.join(settings.CACHE_DIR, "bnet-library.json")
-    redirect_uri = "https://lutris.net"
+    redirect_uri = "https://winegame.net"
 
     @property
     def battlenet_config_path(self):
