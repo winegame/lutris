@@ -1,10 +1,26 @@
+import re
+
 from lutris import settings
 from lutris.database import sql
 
 
+def strip_category_name(name):
+    """"This strips the name given, and also removes extra internal whitespace."""
+    name = (name or "").strip()
+    if not is_reserved_category(name):
+        name = re.sub(' +', ' ', name)  # Remove excessive whitespaces
+    return name
+
+
+def is_reserved_category(name):
+    """True of name is None, blank or is a name Lutris uses internally, or
+    starts with '.' for future expansion."""
+    return not name or name[0] == "." or name in ["all", "favorite"]
+
+
 def get_categories():
     """Get the list of every category in database."""
-    return sql.db_select(settings.PGA_DB, "categories",)
+    return sql.db_select(settings.PGA_DB, "categories", )
 
 
 def get_category(name):
@@ -17,20 +33,20 @@ def get_category(name):
 def get_game_ids_for_category(category_name):
     """Get the ids of games in database."""
     query = (
-        "select game_id from games_categories "
+        "SELECT game_id FROM games_categories "
         "JOIN categories ON categories.id = games_categories.category_id "
         "WHERE categories.name=?"
     )
     return [
         game["game_id"]
-        for game in sql.db_query(settings.PGA_DB, query, (category_name, ))
+        for game in sql.db_query(settings.PGA_DB, query, (category_name,))
     ]
 
 
 def get_categories_in_game(game_id):
     """Get the categories of a game in database."""
     query = (
-        "select categories.name from categories "
+        "SELECT categories.name FROM categories "
         "JOIN games_categories ON categories.id = games_categories.category_id "
         "JOIN games ON games.id = games_categories.game_id "
         "WHERE games.id=?"
@@ -56,3 +72,21 @@ def remove_category_from_game(game_id, category_id):
     query = "DELETE FROM games_categories WHERE category_id=? AND game_id=?"
     with sql.db_cursor(settings.PGA_DB) as cursor:
         sql.cursor_execute(cursor, query, (category_id, game_id))
+
+
+def remove_unused_categories():
+    """Remove all categories that have no games associated with them"""
+    query = (
+        "SELECT categories.* FROM categories "
+        "LEFT JOIN games_categories ON categories.id = games_categories.category_id "
+        "WHERE games_categories.category_id IS NULL"
+    )
+
+    empty_categories = sql.db_query(settings.PGA_DB, query)
+    for category in empty_categories:
+        if category['name'] == 'favorite':
+            continue
+
+        query = "DELETE FROM categories WHERE categories.id=?"
+        with sql.db_cursor(settings.PGA_DB) as cursor:
+            sql.cursor_execute(cursor, query, (category['id'],))

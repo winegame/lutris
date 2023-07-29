@@ -134,6 +134,8 @@ class EpicGamesStoreService(OnlineService):
 
     id = "egs"
     name = _("Epic Games Store")
+    login_window_width = 500
+    login_window_height = 850
     icon = "egs"
     online = True
     runner = "wine"
@@ -159,7 +161,6 @@ class EpicGamesStoreService(OnlineService):
     oauth_url = 'https://account-public-service-prod03.ol.epicgames.com'
     catalog_url = 'https://catalog-public-service-prod06.ol.epicgames.com'
     library_url = 'https://library-service.live.use1a.on.epicgames.com'
-    is_loading = False
 
     user_agent = (
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
@@ -222,18 +223,23 @@ class EpicGamesStoreService(OnlineService):
 
     def start_session(self, exchange_code=None, authorization_code=None):
         if exchange_code:
-            params = dict(grant_type='exchange_code',
-                          exchange_code=exchange_code,
-                          token_type='eg1')
+            params = {
+                'grant_type': 'exchange_code',
+                'exchange_code': exchange_code,
+                'token_type': 'eg1'
+            }
         elif authorization_code:
-            params = dict(grant_type='authorization_code',
-                          code=authorization_code,
-                          token_type='eg1')
+            params = {
+                'grant_type': 'authorization_code',
+                'code': authorization_code,
+                'token_type': 'eg1'
+            }
         else:
-            params = dict(grant_type='refresh_token',
-                          refresh_token=self.session_data["refresh_token"],
-
-                          token_type='eg1')
+            params = {
+                'grant_type': 'refresh_token',
+                'refresh_token': self.session_data["refresh_token"],
+                'token_type': 'eg1'
+            }
 
         response = self.session.post(
             'https://account-public-service-prod03.ol.epicgames.com/account/api/oauth/token',
@@ -299,14 +305,9 @@ class EpicGamesStoreService(OnlineService):
 
     def load(self):
         """Load the list of games"""
-        if self.is_loading:
-            logger.warning("EGS games are already loading")
-            return
-        self.is_loading = True
         try:
             library = self.get_library()
         except Exception as ex:  # pylint=disable:broad-except
-            self.is_loading = False
             logger.warning("EGS Token expired")
             raise AuthTokenExpired from ex
         egs_games = []
@@ -314,7 +315,6 @@ class EpicGamesStoreService(OnlineService):
             egs_game = EGSGame.new_from_api(game)
             egs_game.save()
             egs_games.append(egs_game)
-        self.is_loading = False
         return egs_games
 
     def install_from_egs(self, egs_game, manifest):

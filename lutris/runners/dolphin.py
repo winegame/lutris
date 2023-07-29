@@ -5,14 +5,17 @@ from gettext import gettext as _
 from lutris.runners.runner import Runner
 from lutris.util import system
 
+PLATFORMS = [_("Nintendo GameCube"), _("Nintendo Wii")]
+
 
 class dolphin(Runner):
     description = _("GameCube and Wii emulator")
     human_name = _("Dolphin")
-    platforms = [_("Nintendo GameCube"), _("Nintendo Wii")]
+    platforms = PLATFORMS
     require_libs = ["libOpenGL.so.0", ]
     runnable_alone = True
     runner_executable = "dolphin/dolphin-emu"
+    flatpak_id = "org.DolphinEmu.dolphin-emu"
     game_options = [
         {
             "option": "main_file",
@@ -28,13 +31,6 @@ class dolphin(Runner):
         },
     ]
     runner_options = [
-        {
-            "option": "nogui",
-            "type": "bool",
-            "label": _("No GUI"),
-            "default": False,
-            "help": _("Disable the graphical user interface."),
-        },
         {
             "option": "batch",
             "type": "bool",
@@ -58,11 +54,7 @@ class dolphin(Runner):
         return ""
 
     def play(self):
-        # Find the executable
-        executable = self.get_executable()
-        if self.runner_config.get("nogui"):
-            executable += "-nogui"
-        command = [executable]
+        command = self.get_command()
 
         # Batch isn't available in nogui
         if self.runner_config.get("batch") and not self.runner_config.get("nogui"):

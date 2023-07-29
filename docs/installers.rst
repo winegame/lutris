@@ -139,7 +139,7 @@ Wine游戏助手支持以下游戏标识符：
 例如 https://store.steampowered.com/app/238960/Path_of_Exile/
 这个路径里的 ``appid`` 是 ``238960``。该ID用于调用Steam安装和启动游戏。
 
-``game_id``：ScummVM / ResidualVM 的游戏标识符。在 https://www.scummvm.org/compatibility/ 和 https://www.residualvm.org/compatibility/ 页面可以查找游戏兼容列表。
+``game_id``：ScummVM 的游戏标识符。在 https://www.scummvm.org/compatibility/ 页面可以查找游戏兼容列表。
 
 ``gogid``：GOG的游戏标识符. 查看 https://www.gogdb.org/products，确保引用的是基础游戏而非它的数据包或可下载内容（DLC）。
 例如：《Darksiders III》的 ``gogid`` 是 ``1246703238``。
@@ -155,7 +155,7 @@ game部分包含的公共指令
 例子：``exe: exult``
 
 ``main_file``：用于模拟器运行环境里引用ROM或磁盘文件。
-例子: ``main_file: game.rom``
+例子：``main_file: game.rom``
 
 对于网页运行环境，``main_file`` 用于指定网址：``main_file: https://winegame.com/xxx``
 
@@ -241,6 +241,8 @@ ARM架构的Wine目前写成 ``xxx-arm64-i386``，是因为Wine游戏助手客�
 
 ``dxvk``：如果需要，用来禁用DXVK（默认启用）。（``dxvk: false``）
 
+``dxvk_version``: 指定要使用的DXVK版本。（``dxvk_version: 1.10.3``）
+
 ``esync``：用于启用esync。（``esync: true``）
 
 ``overrides``：DLL函数库顶替，值为键值对映射，其中键为要覆盖的dll，值为以下条目：
@@ -313,6 +315,15 @@ ARM架构的Wine目前写成 ``xxx-arm64-i386``，是因为Wine游戏助手客�
 上面的例子中，``file1``、``file2``、``file3`` 和 ``setup`` 都是文件标识符，可以在后续的 ``installer`` 部分引用。
 
 如果游戏想引用Steam游戏目录里的文件，可以使用以下变量：``$STEAM:appid:path/to/data``。它会检查文件是否存在，没有就要求Steam安装。
+
+如果游戏或文件托管在 moddb.com 上，需要注意该平台有防盗链机制，所以实际下载链接会在几小时后失效。
+Wine游戏助手支持自动解析 ModDB 的实际下载链接，所以在引用 ModDB 文件时，
+只需提供文件详情页面的 URL（带有红色“立即下载”按钮的页面）。
+
+ModDB 文件 URL 示例::
+
+    https://www.moddb.com/games/{game-title}/downloads/{file-title}
+    https://www.moddb.com/mods/{mod-title}/downloads/{file-title}
 
 
 编写安装步骤
@@ -401,14 +412,8 @@ ARM架构的Wine目前写成 ``xxx-arm64-i386``，是因为Wine游戏助手客�
 例子::
 
     - execute:
-        args: --argh
+        args: --arg
         file: great_id
-        terminal: true
-        exclude_processes: process_not_to_monitor "Process Not To Monitor"
-        include_processes: excluded_process_from_the_list
-        disable_runtime: true
-        env:
-          key: value
 
 如果想运行Shell命令，你可以用 ``command`` 参数代替 ``file`` 和 ``args`` 参数。
 ``bash`` 将被调用，并被添加到内部的 ``include_processes`` 里。

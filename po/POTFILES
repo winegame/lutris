@@ -1,4 +1,4 @@
-# generated on 2022-09-19T02:53:10+00:00
+# generated on 2023-06-01T10:48:40+00:00
 
 share/applications/net.lutris.Lutris.desktop
 share/metainfo/net.lutris.Lutris.metainfo.xml
@@ -24,7 +24,7 @@ lutris/game_actions.py
 lutris/game.py
 lutris/gui/addgameswindow.py
 lutris/gui/application.py
-lutris/gui/config/add_game.py
+lutris/gui/config/add_game_dialog.py
 lutris/gui/config/base_config_box.py
 lutris/gui/config/boxes.py
 lutris/gui/config/common.py
@@ -38,7 +38,9 @@ lutris/gui/config/runners_box.py
 lutris/gui/config/services_box.py
 lutris/gui/config/sysinfo_box.py
 lutris/gui/dialogs/cache.py
+lutris/gui/dialogs/delegates.py
 lutris/gui/dialogs/download.py
+lutris/gui/dialogs/game_import.py
 lutris/gui/dialogs/__init__.py
 lutris/gui/dialogs/issue.py
 lutris/gui/dialogs/log.py
@@ -69,7 +71,9 @@ lutris/gui/widgets/game_bar.py
 lutris/gui/widgets/gi_composites.py
 lutris/gui/widgets/__init__.py
 lutris/gui/widgets/log_text_view.py
+lutris/gui/widgets/navigation_stack.py
 lutris/gui/widgets/notifications.py
+lutris/gui/widgets/scaled_image.py
 lutris/gui/widgets/searchable_combobox.py
 lutris/gui/widgets/sidebar.py
 lutris/gui/widgets/status_icon.py
@@ -92,6 +96,7 @@ lutris/migrations/migrate_steam_appids.py
 lutris/migrations/retrieve_discord_appids.py
 lutris/runner_interpreter.py
 lutris/runners/atari800.py
+lutris/runners/cemu.py
 lutris/runners/commands/dosbox.py
 lutris/runners/commands/__init__.py
 lutris/runners/commands/wine.py
@@ -116,7 +121,6 @@ lutris/runners/pcsx2.py
 lutris/runners/pico8.py
 lutris/runners/redream.py
 lutris/runners/reicast.py
-lutris/runners/residualvm.py
 lutris/runners/rpcs3.py
 lutris/runners/runner.py
 lutris/runners/ryujinx.py
@@ -126,12 +130,15 @@ lutris/runners/steam.py
 lutris/runners/vice.py
 lutris/runners/web.py
 lutris/runners/wine.py
+lutris/runners/xemu.py
 lutris/runners/yuzu.py
 lutris/runners/zdoom.py
 lutris/runtime.py
+lutris/scanners/default_installers.py
 lutris/scanners/__init__.py
 lutris/scanners/lutris.py
 lutris/scanners/retroarch.py
+lutris/scanners/tosec.py
 lutris/services/amazon.py
 lutris/services/base.py
 lutris/services/battlenet.py
@@ -150,7 +157,6 @@ lutris/services/service_game.py
 lutris/services/service_media.py
 lutris/services/steam.py
 lutris/services/steamwindows.py
-lutris/services/tosec.py
 lutris/services/ubisoft.py
 lutris/services/xdg.py
 lutris/settings.py
@@ -161,6 +167,9 @@ lutris/util/amazon/__init__.py
 lutris/util/amazon/protobuf_decoder.py
 lutris/util/amazon/sds_proto2.py
 lutris/util/audio.py
+lutris/util/battlenet/definitions.py
+lutris/util/battlenet/__init__.py
+lutris/util/battlenet/product_db_pb2.py
 lutris/util/cookies.py
 lutris/util/datapath.py
 lutris/util/discord/base.py
@@ -176,6 +185,7 @@ lutris/util/egs/egs_launcher.py
 lutris/util/egs/__init__.py
 lutris/util/extract.py
 lutris/util/fileio.py
+lutris/util/flatpak.py
 lutris/util/gamecontrollerdb.py
 lutris/util/game_finder.py
 lutris/util/gog.py
@@ -198,6 +208,7 @@ lutris/util/magic.py
 lutris/util/mame/database.py
 lutris/util/mame/ini.py
 lutris/util/mame/__init__.py
+lutris/util/moddb.py
 lutris/util/nvidia.py
 lutris/util/process.py
 lutris/util/process_watcher.py
@@ -231,6 +242,7 @@ lutris/util/wine/dgvoodoo2.py
 lutris/util/wine/dll_manager.py
 lutris/util/wine/dxvk_nvapi.py
 lutris/util/wine/dxvk.py
+lutris/util/wine/extract_icon.py
 lutris/util/wine/fsync.py
 lutris/util/wine/__init__.py
 lutris/util/wine/prefix.py

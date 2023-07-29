@@ -9,118 +9,92 @@ from gi.repository import Gio, Gtk
 
 from lutris.command import MonitoredCommand
 from lutris.config import duplicate_game_config
-from lutris.database.games import add_game, get_game_by_field, get_unusued_game_name
+from lutris.database.games import add_game, get_game_by_field
 from lutris.game import Game
 from lutris.gui import dialogs
-from lutris.gui.config.add_game import AddGameDialog
+from lutris.gui.config.add_game_dialog import AddGameDialog
 from lutris.gui.config.edit_game import EditGameConfigDialog
-from lutris.gui.dialogs import QuestionDialog
+from lutris.gui.config.edit_game_categories import EditGameCategoriesDialog
+from lutris.gui.dialogs import InputDialog
 from lutris.gui.dialogs.log import LogWindow
 from lutris.gui.dialogs.uninstall_game import RemoveGameDialog, UninstallGameDialog
 from lutris.gui.widgets.utils import open_uri
+from lutris.services.lutris import download_lutris_media
 from lutris.util import xdgshortcuts
 from lutris.util.log import logger
 from lutris.util.steam import shortcut as steam_shortcut
-from lutris.util.strings import gtk_safe
+from lutris.util.strings import gtk_safe, slugify
 from lutris.util.system import path_exists
+from lutris.util.wine.dxvk import update_shader_cache
 
 
 class GameActions:
     """Regroup a list of callbacks for a game"""
 
-    def __init__(self, application=None, window=None):
+    def __init__(self, game, window, application=None):
         self.application = application or Gio.Application.get_default()
-        self.window = window
-        self.game_id = None
-        self._game = None
-
-    @property
-    def game(self):
-        if not self._game:
-            self._game = self.application.get_game_by_id(self.game_id)
-            if not self._game:
-                self._game = Game(self.game_id)
-        return self._game
+        self.window = window  # also used as a LaunchUIDelegate
+        self.game = game
 
     @property
     def is_game_running(self):
-        return bool(self.application.get_game_by_id(self.game_id))
+        return self.game and self.game.is_db_stored and bool(self.application.get_running_game_by_id(self.game.id))
 
-    def set_game(self, game=None, game_id=None):
-        if game:
-            self._game = game
-            self.game_id = game.id
-        else:
-            self._game = None
-            self.game_id = game_id
+    def on_game_state_changed(self, game):
+        """Handler called when the game has changed state"""
+        if self.game and game.id == self.game.get_safe_id():
+            self.game = game
 
     def get_game_actions(self):
         """Return a list of game actions and their callbacks"""
         return [
             ("play", _("Play"), self.on_game_launch),
             ("stop", _("Stop"), self.on_game_stop),
-            ("install", _("Install"), self.on_install_clicked),
-            ("update", _("Install updates"), self.on_update_clicked),
-            ("install_dlcs", "Install DLCs", self.on_install_dlc_clicked),
+            ("execute-script", _("Execute script"), self.on_execute_script_clicked),
             ("show_logs", _("Show logs"), self.on_show_logs),
-            ("add", _("Add installed game"), self.on_add_manually),
-            ("duplicate", _("Duplicate"), self.on_game_duplicate),
+            (None, "-", None),
             ("configure", _("Configure"), self.on_edit_game_configuration),
+            ("category", _("Categories"), self.on_edit_game_categories),
+            ("browse", _("Browse files"), self.on_browse_files),
             ("favorite", _("Add to favorites"), self.on_add_favorite_game),
             ("deletefavorite", _("Remove from favorites"), self.on_delete_favorite_game),
-            ("execute-script", _("Execute script"), self.on_execute_script_clicked),
-            ("browse", _("Browse files"), self.on_browse_files),
-            (
-                "desktop-shortcut",
-                _("Create desktop shortcut"),
-                self.on_create_desktop_shortcut,
-            ),
-            (
-                "rm-desktop-shortcut",
-                _("Delete desktop shortcut"),
-                self.on_remove_desktop_shortcut,
-            ),
-            (
-                "menu-shortcut",
-                _("Create application menu shortcut"),
-                self.on_create_menu_shortcut,
-            ),
-            (
-                "rm-menu-shortcut",
-                _("Delete application menu shortcut"),
-                self.on_remove_menu_shortcut,
-            ),
-            (
-                "steam-shortcut",
-                _("Create steam shortcut"),
-                self.on_create_steam_shortcut,
-            ),
-            (
-                "rm-steam-shortcut",
-                _("Delete steam shortcut"),
-                self.on_remove_steam_shortcut,
-            ),
-            ("install_more", _("Install another version"), self.on_install_clicked),
-            ("remove", _("Remove"), self.on_remove_game),
-            ("view", _("View on WineGame.net"), self.on_view_game),
             ("hide", _("Hide game from library"), self.on_hide_game),
             ("unhide", _("Unhide game from library"), self.on_unhide_game),
+            ("update-shader-cache", _("Update shader cache"), self.on_update_shader_cache),
+            (None, "-", None),
+            ("install", _("Install"), self.on_install_clicked),
+            ("install_more", _("Install another version"), self.on_install_clicked),
+            ("install_dlcs", "Install DLCs", self.on_install_dlc_clicked),
+            ("update", _("Install updates"), self.on_update_clicked),
+            ("add", _("Add installed game"), self.on_add_manually),
+            ("desktop-shortcut", _("Create desktop shortcut"), self.on_create_desktop_shortcut),
+            ("rm-desktop-shortcut", _("Delete desktop shortcut"), self.on_remove_desktop_shortcut),
+            ("menu-shortcut", _("Create application menu shortcut"), self.on_create_menu_shortcut),
+            ("rm-menu-shortcut", _("Delete application menu shortcut"), self.on_remove_menu_shortcut),
+            ("steam-shortcut", _("Create steam shortcut"), self.on_create_steam_shortcut),
+            ("rm-steam-shortcut", _("Delete steam shortcut"), self.on_remove_steam_shortcut),
+            ("view", _("View on WineGame.net"), self.on_view_game),
+            ("duplicate", _("Duplicate"), self.on_game_duplicate),
+            (None, "-", None),
+            ("remove", _("Remove"), self.on_remove_game),
         ]
 
     def get_displayed_entries(self):
         """Return a dictionary of actions that should be shown for a game"""
         return {
             "add": not self.game.is_installed,
-            "duplicate": True,
+            "duplicate": self.game.is_installed,
             "install": not self.game.is_installed,
             "play": self.game.is_installed and not self.is_game_running,
             "update": self.game.is_updatable,
+            "update-shader-cache": self.game.is_cache_managed,
             "install_dlcs": self.game.is_updatable,
             "stop": self.is_game_running,
             "configure": bool(self.game.is_installed),
             "browse": self.game.is_installed and self.game.runner_name != "browser",
             "show_logs": self.game.is_installed,
-            "favorite": not self.game.is_favorite,
+            "favorite": not self.game.is_favorite and self.game.is_installed,
+            "category": self.game.is_installed,
             "deletefavorite": self.game.is_favorite,
             "install_more": not self.game.service and self.game.is_installed,
             "execute-script": bool(
@@ -137,6 +111,7 @@ class GameActions:
             ),
             "steam-shortcut": (
                 self.game.is_installed
+                and steam_shortcut.vdf_file_exists()
                 and not steam_shortcut.shortcut_exists(self.game)
                 and not steam_shortcut.is_steam_game(self.game)
             ),
@@ -150,10 +125,11 @@ class GameActions:
             ),
             "rm-steam-shortcut": bool(
                 self.game.is_installed
+                and steam_shortcut.vdf_file_exists()
                 and steam_shortcut.shortcut_exists(self.game)
                 and not steam_shortcut.is_steam_game(self.game)
             ),
-            "remove": True,
+            "remove": self.game.is_installed or self.game.is_db_stored,
             "view": True,
             "hide": self.game.is_installed and not self.game.is_hidden,
             "unhide": self.game.is_hidden,
@@ -161,14 +137,17 @@ class GameActions:
 
     def on_game_launch(self, *_args):
         """Launch a game"""
-        self.game.launch()
+        self.game.launch(self.window)
 
     def get_running_game(self):
-        ids = self.application.get_running_game_ids()
-        for game_id in ids:
-            if str(game_id) == str(self.game.id):
-                return self.game
-        logger.warning("Game %s not in %s", self.game_id, ids)
+        if self.game and self.game.is_db_stored:
+            ids = self.application.get_running_game_ids()
+            for game_id in ids:
+                if str(game_id) == str(self.game.id):
+                    return self.game
+            logger.warning("Game %s not in %s", self.game.id, ids)
+
+        return None
 
     def on_game_stop(self, _caller):
         """Stops the game"""
@@ -182,7 +161,7 @@ class GameActions:
         if not _buffer:
             logger.info("No log for game %s", self.game)
         return LogWindow(
-            title=_("Log for {}").format(self.game),
+            game=self.game,
             buffer=_buffer,
             application=self.application
         )
@@ -191,7 +170,7 @@ class GameActions:
         """Install a game"""
         # Install the currently selected game in the UI
         if not self.game.slug:
-            raise RuntimeError("No game to install: %s" % self.game.id)
+            raise RuntimeError("No game to install: %s" % self.game.get_safe_id())
         self.game.emit("game-install")
 
     def on_update_clicked(self, _widget):
@@ -199,6 +178,9 @@ class GameActions:
 
     def on_install_dlc_clicked(self, _widget):
         self.game.emit("game-install-dlc")
+
+    def on_update_shader_cache(self, _widget):
+        update_shader_cache(self.game)
 
     def on_locate_installed_game(self, _button, game):
         """Show the user a dialog to import an existing install to a DRM free service
@@ -213,28 +195,34 @@ class GameActions:
         return AddGameDialog(self.window, game=self.game, runner=self.game.runner_name)
 
     def on_game_duplicate(self, _widget):
-        confirm_dlg = QuestionDialog(
+        duplicate_game_dialog = InputDialog(
             {
                 "parent": self.window,
                 "question": _(
                     "Do you wish to duplicate %s?\nThe configuration will be duplicated, "
-                    "but the games files will <b>not be duplicated</b>."
+                    "but the games files will <b>not be duplicated</b>.\n"
+                    "Please enter the new name for the copy:"
                 ) % gtk_safe(self.game.name),
                 "title": _("Duplicate game?"),
             }
         )
-        if confirm_dlg.result != Gtk.ResponseType.YES:
+        result = duplicate_game_dialog.run()
+        if result != Gtk.ResponseType.OK:
+            duplicate_game_dialog.destroy()
             return
+        new_name = duplicate_game_dialog.user_value
 
-        assigned_name = get_unusued_game_name(self.game.name)
         old_config_id = self.game.game_config_id
         if old_config_id:
             new_config_id = duplicate_game_config(self.game.slug, old_config_id)
         else:
             new_config_id = None
-
+        duplicate_game_dialog.destroy()
         db_game = get_game_by_field(self.game.id, "id")
-        db_game["name"] = assigned_name
+        db_game["name"] = new_name
+        db_game["slug"] = slugify(new_name)
+        db_game["lastplayed"] = None
+        db_game["playtime"] = 0.0
         db_game["configpath"] = new_config_id
         db_game.pop("id")
         # Disconnect duplicate from service- there should be at most
@@ -243,6 +231,7 @@ class GameActions:
         db_game.pop("service_id", None)
 
         game_id = add_game(**db_game)
+        download_lutris_media(db_game["slug"])
         new_game = Game(game_id)
         new_game.save()
 
@@ -257,6 +246,10 @@ class GameActions:
     def on_delete_favorite_game(self, _widget):
         """delete from favorites"""
         self.game.remove_from_favorites()
+
+    def on_edit_game_categories(self, _widget):
+        """Edit game categories"""
+        self.application.show_window(EditGameCategoriesDialog, game=self.game, parent=self.window)
 
     def on_hide_game(self, _widget):
         """Add a game to the list of hidden games"""
@@ -289,15 +282,21 @@ class GameActions:
 
     def on_create_menu_shortcut(self, *_args):
         """Add the selected game to the system's Games menu."""
-        xdgshortcuts.create_launcher(self.game.slug, self.game.id, self.game.name, menu=True)
+        launch_config_name = self._select_game_launch_config_name(self.game)
+        if launch_config_name is not None:
+            xdgshortcuts.create_launcher(self.game.slug, self.game.id, self.game.name, menu=True)
 
     def on_create_steam_shortcut(self, *_args):
         """Add the selected game to steam as a nonsteam-game."""
-        steam_shortcut.create_shortcut(self.game)
+        launch_config_name = self._select_game_launch_config_name(self.game)
+        if launch_config_name is not None:
+            steam_shortcut.create_shortcut(self.game, launch_config_name)
 
     def on_create_desktop_shortcut(self, *_args):
         """Create a desktop launcher for the selected game."""
-        xdgshortcuts.create_launcher(self.game.slug, self.game.id, self.game.name, desktop=True)
+        launch_config_name = self._select_game_launch_config_name(self.game)
+        if launch_config_name is not None:
+            xdgshortcuts.create_launcher(self.game.slug, self.game.id, self.game.name, launch_config_name, desktop=True)
 
     def on_remove_menu_shortcut(self, *_args):
         """Remove an XDG menu shortcut"""
@@ -311,9 +310,23 @@ class GameActions:
         """Remove a .desktop shortcut"""
         xdgshortcuts.remove_launcher(self.game.slug, self.game.id, desktop=True)
 
+    def _select_game_launch_config_name(self, game):
+        game_config = game.config.game_level.get("game", {})
+        configs = game_config.get("launch_configs")
+
+        if not configs:
+            return ""  # use primary configuration
+
+        dlg = dialogs.LaunchConfigSelectDialog(game, configs, title=_("Select shortcut target"), parent=self.window)
+        if not dlg.confirmed:
+            return None  # no error here- the user cancelled out
+
+        config_index = dlg.config_index
+        return configs[config_index - 1]["name"] if config_index > 0 else ""
+
     def on_view_game(self, _widget):
         """Callback to open a game on winegame.net"""
-        open_uri("https://winegame.net/games/%s" % self.game.slug)
+        open_uri("https://winegame.net/games/%s" % self.game.slug.replace("_", "-"))
 
     def on_remove_game(self, *_args):
         """Callback that present the uninstall dialog to the user"""

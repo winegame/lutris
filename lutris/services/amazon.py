@@ -8,8 +8,11 @@ import secrets
 import struct
 import time
 import uuid
+from collections import defaultdict
 from gettext import gettext as _
 from urllib.parse import parse_qs, urlencode, urlparse
+
+import yaml
 
 from lutris import settings
 from lutris.exceptions import AuthenticationError, UnavailableGameError
@@ -87,8 +90,6 @@ class AmazonService(OnlineService):
 
     locale = "en-US"
 
-    is_loading = False
-
     @property
     def credential_files(self):
         return [self.user_path, self.cookies_path]
@@ -149,22 +150,12 @@ class AmazonService(OnlineService):
 
     def load(self):
         """Load the user game library from the Amazon API"""
-        if self.is_loading:
-            logger.warning("Amazon games are already loading")
-            return
         if not self.is_connected():
             logger.error("User not connected to Amazon")
             return
-        self.is_loading = True
-        try:
-            games = [AmazonGame.new_from_amazon_game(game) for game in self.get_library()]
-            for game in games:
-                game.save()
-        except:
-            logger.error("Unable to get games library")
-            games = None
-
-        self.is_loading = False
+        games = [AmazonGame.new_from_amazon_game(game) for game in self.get_library()]
+        for game in games:
+            game.save()
         return games
 
     def save_user_data(self, user_data):
@@ -245,7 +236,7 @@ class AmazonService(OnlineService):
             raise AuthenticationError(_("Unable to register device, please log in again")) from ex
 
         res_json = request.json
-        logger.info("Succesfully registered a device")
+        logger.info("Successfully registered a device")
         user_data = res_json["response"]["success"]
         return user_data
 
@@ -350,7 +341,7 @@ class AmazonService(OnlineService):
         user_data = self.load_user_data()
         serial = user_data["extensions"]["device_info"]["device_serial_number"]
 
-        games = []
+        games_by_asin = defaultdict(list)
         nextToken = None
         while True:
             request_data = self.get_sync_request_data(serial, nextToken)
@@ -366,13 +357,23 @@ class AmazonService(OnlineService):
             if not json_data:
                 return
 
-            games.extend(json_data["entitlements"])
+            for game_json in json_data["entitlements"]:
+                product = game_json["product"]
+
+                asin = product["asin"]
+                games_by_asin[asin].append(game_json)
 
             if "nextToken" not in json_data:
                 break
 
             logger.info("Got next token in response, making next request")
             nextToken = json_data["nextToken"]
+
+        # If Amazon gives is the same game with different ids we'll pick the
+        # least ID. Probably we should just use ASIN as the ID, but since we didn't
+        # do this in the first release of the Amazon integration, we'll maintain compatibility
+        # by using the top level ID whenever we can.
+        games = [sorted(gl, key=lambda g: g["id"])[0] for gl in games_by_asin.values()]
 
         with open(self.cache_path, "w", encoding='utf-8') as amazon_cache:
             json.dump(games, amazon_cache)
@@ -398,7 +399,6 @@ class AmazonService(OnlineService):
             "X-Amz-Target": target,
             "x-amzn-token": token,
             "User-Agent": self.user_agent,
-            "UserAgent": self.user_agent,
             "Content-Type": "application/json",
             "Content-Encoding": "amz-1.0",
         }
@@ -408,9 +408,9 @@ class AmazonService(OnlineService):
 
         try:
             request.post(json.dumps(body).encode())
-        except HTTPError:
+        except HTTPError as ex:
             # Do not raise exception here, should be managed from the caller
-            logger.error("Failed http request %s", url)
+            logger.error("Failed http request %s: %s", url, ex)
             return
 
         return request.json
@@ -437,7 +437,7 @@ class AmazonService(OnlineService):
         if not response:
             logger.error("There was an error getting game manifest: %s", game_id)
             raise UnavailableGameError(_(
-                "Unable to get game manifest info, please check your Amazon credentials and internet connectivity"))
+                "Unable to get game manifest info"))
 
         return response
 
@@ -445,7 +445,6 @@ class AmazonService(OnlineService):
         """Get a game manifest"""
         headers = {
             "User-Agent": self.user_agent,
-            "UserAgent": self.user_agent
         }
 
         url = manifest_info["downloadUrls"][0]
@@ -456,7 +455,7 @@ class AmazonService(OnlineService):
         except HTTPError as ex:
             logger.error("Failed http request %s", url)
             raise UnavailableGameError(_(
-                "Unable to get game manifest, please check your Amazon credentials and internet connectivity")) from ex
+                "Unable to get game manifest")) from ex
 
         content = request.content
 
@@ -472,8 +471,7 @@ class AmazonService(OnlineService):
         else:
             logger.error("Unknown compression algorithm found in manifest")
             raise UnavailableGameError(_(
-                "Unknown compression algorithm found in manifest, "
-                "please check your Amazon credentials and internet connectivity"))
+                "Unknown compression algorithm found in manifest"))
 
         manifest = Manifest()
         manifest.decode(raw_manifest)
@@ -484,29 +482,41 @@ class AmazonService(OnlineService):
         """Get game files"""
         access_token = self.get_access_token()
 
-        request_data = {
-            "Operation": "GetPatches",
-            "versionId": version,
-            "fileHashes": file_list,
-            "deltaEncodings": ["FUEL_PATCH", "NONE"],
-            "adgGoodId": game_id,
-        }
+        def get_batches(to_batch, batch_size):
+            i = 0
+            while i < len(to_batch):
+                yield to_batch[i:i + batch_size]
+                i += batch_size
 
-        response = self.request_sds(
-            "com.amazonaws.gearbox."
-            "softwaredistribution.service.model."
-            "SoftwareDistributionService.GetPatches",
-            access_token,
-            request_data,
-        )
+        batches = get_batches(file_list, 500)
+        patches = []
 
-        if not response:
-            logger.error("There was an error getting patches: %s", game_id)
-            raise UnavailableGameError(_(
-                "Unable to get the patches of game, "
-                "please check your Amazon credentials and internet connectivity"), game_id)
+        for batch in batches:
+            request_data = {
+                "Operation": "GetPatches",
+                "versionId": version,
+                "fileHashes": batch,
+                "deltaEncodings": ["FUEL_PATCH", "NONE"],
+                "adgGoodId": game_id,
+            }
 
-        return response["patches"]
+            response = self.request_sds(
+                "com.amazonaws.gearbox."
+                "softwaredistribution.service.model."
+                "SoftwareDistributionService.GetPatches",
+                access_token,
+                request_data,
+            )
+
+            if not response:
+                logger.error("There was an error getting patches: %s", game_id)
+                raise UnavailableGameError(_(
+                    "Unable to get the patches of game, "
+                    "please check your Amazon credentials and internet connectivity"), game_id)
+
+            patches += response["patches"]
+
+        return patches
 
     def structure_manifest_data(self, manifest):
         """Transform the manifest to more convenient data structures"""
@@ -521,11 +531,13 @@ class AmazonService(OnlineService):
                 hashes.append(file_hash)
                 files.append({"path": file.path.decode().replace("\\", "/"), "size": file.size, "url": None})
 
-                hashpairs.append(dict(
-                    sourceHash=None,
-                    targetHash=dict(value=file_hash,
-                                    algorithm=HashAlgorithm.get_name(file.hash.algorithm)),
-                ))
+                hashpairs.append({
+                    'sourceHash': None,
+                    'targetHash': {
+                        'value': file_hash,
+                        'algorithm': HashAlgorithm.get_name(file.hash.algorithm)
+                    }
+                })
             for __, directory in enumerate(package.dirs):
                 if directory.path is not None:
                     directories.append(directory.path.decode().replace("\\", "/"))
@@ -543,7 +555,7 @@ class AmazonService(OnlineService):
         file_dict, directories, hashpairs = self.structure_manifest_data(manifest)
 
         game_patches = self.get_game_patches(game_id, manifest_info["versionId"], hashpairs)
-        for __, patch in enumerate(game_patches):
+        for patch in game_patches:
             file_dict[patch["patchHash"]["value"]]["url"] = patch["downloadUrls"][0]
 
         return file_dict, directories
@@ -552,7 +564,6 @@ class AmazonService(OnlineService):
         """Get and parse the fuel.json file"""
         headers = {
             "User-Agent": self.user_agent,
-            "UserAgent": self.user_agent
         }
 
         request = Request(fuel_url, headers=headers)
@@ -562,9 +573,19 @@ class AmazonService(OnlineService):
         except HTTPError as ex:
             logger.error("Failed http request %s", fuel_url)
             raise UnavailableGameError(_(
-                "Unable to get fuel.json file, please check your Amazon credentials and internet connectivity")) from ex
+                "Unable to get fuel.json file, please check your Amazon credentials")) from ex
 
-        res_json = request.json
+        try:
+            res_yaml_text = request.text
+            res_json = yaml.safe_load(res_yaml_text)
+        except Exception as ex:
+            # Maybe it can be parsed as plain JSON. May as well try it.
+            try:
+                logger.exception("Unparesable yaml response from %s:\n%s", fuel_url, res_yaml_text)
+                res_json = json.loads(res_yaml_text)
+            except Exception:
+                raise UnavailableGameError(_(
+                    "Invalid response from Amazon APIs")) from ex
 
         if res_json["Main"] is None or res_json["Main"]["Command"] is None:
             return None, None

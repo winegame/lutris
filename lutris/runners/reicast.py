@@ -8,7 +8,6 @@ from gettext import gettext as _
 
 # Lutris Modules
 from lutris import settings
-from lutris.gui.dialogs import NoticeDialog
 from lutris.runners.runner import Runner
 from lutris.util import joypad, system
 
@@ -19,7 +18,7 @@ class reicast(Runner):
     platforms = [_("Sega Dreamcast")]
     runner_executable = "reicast/reicast.elf"
     entry_point_option = "iso"
-
+    flatpak_id = "org.flycast.Flycast"
     joypads = None
 
     game_options = [
@@ -45,6 +44,7 @@ class reicast(Runner):
             {
                 "option": "device_id_1",
                 "type": "choice",
+                "section": _("Gamepads"),
                 "label": _("Gamepad 1"),
                 "choices": self.get_joypads,
                 "default": "-1",
@@ -52,6 +52,7 @@ class reicast(Runner):
             {
                 "option": "device_id_2",
                 "type": "choice",
+                "section": _("Gamepads"),
                 "label": _("Gamepad 2"),
                 "choices": self.get_joypads,
                 "default": "-1",
@@ -59,6 +60,7 @@ class reicast(Runner):
             {
                 "option": "device_id_3",
                 "type": "choice",
+                "section": _("Gamepads"),
                 "label": _("Gamepad 3"),
                 "choices": self.get_joypads,
                 "default": "-1",
@@ -66,24 +68,21 @@ class reicast(Runner):
             {
                 "option": "device_id_4",
                 "type": "choice",
+                "section": _("Gamepads"),
                 "label": _("Gamepad 4"),
                 "choices": self.get_joypads,
                 "default": "-1",
             },
         ]
 
-    def install(self, version=None, downloader=None, callback=None):
-
+    def install(self, install_ui_delegate, version=None, callback=None):
         def on_runner_installed(*args):
             mapping_path = system.create_folder("~/.reicast/mappings")
             mapping_source = os.path.join(settings.RUNNER_DIR, "reicast/mappings")
             for mapping_file in os.listdir(mapping_source):
                 shutil.copy(os.path.join(mapping_source, mapping_file), mapping_path)
-
             system.create_folder("~/.reicast/data")
-            NoticeDialog(_("You have to copy valid BIOS files to ~/.reicast/data before playing"))
-
-        super().install(version, downloader, on_runner_installed)
+        super().install(install_ui_delegate, version, on_runner_installed)
 
     def get_joypads(self):
         """Return list of joypad in a format usable in the options"""
@@ -155,5 +154,6 @@ class reicast(Runner):
         self.write_config(reicast_config)
 
         iso = self.game_config.get("iso")
-        command = [self.get_executable(), "-config", "config:image={}".format(iso)]
-        return {"command": command}
+        return {
+            "command": self.get_command() + ["-config", f"config:image={iso}"]
+        }

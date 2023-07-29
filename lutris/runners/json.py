@@ -31,10 +31,12 @@ class JsonRunner(Runner):
         self.system_options_override = self._json_data.get("system_options_override", [])
         self.entry_point_option = self._json_data.get("entry_point_option", "main_file")
         self.download_url = self._json_data.get("download_url")
+        self.runnable_alone = self._json_data.get("runnable_alone")
+        self.flatpak_id = self._json_data.get("flatpak_id")
 
     def play(self):
         """Return a launchable command constructed from the options"""
-        arguments = [self.get_executable()]
+        arguments = self.get_command()
         for option in self.runner_options:
             if option["option"] not in self.runner_config:
                 continue
@@ -45,6 +47,9 @@ class JsonRunner(Runner):
                 if self.runner_config.get(option["option"]) != "off":
                     arguments.append(option["argument"])
                     arguments.append(self.runner_config.get(option["option"]))
+            elif option["type"] == "string":
+                arguments.append(option["argument"])
+                arguments.append(self.runner_config.get(option["option"]))
             else:
                 raise RuntimeError("Unhandled type %s" % option["type"])
         main_file = self.game_config.get(self.entry_point_option)

@@ -38,10 +38,13 @@ def get_default_dpi():
     """Computes the DPI to use for the primary monitor
     which we pass to WINE."""
     display = Gdk.Display.get_default()
-    monitor = display.get_primary_monitor()
-    scale = monitor.get_scale_factor()
-    dpi = 96 * scale
-    return int(dpi)
+    if display:
+        monitor = display.get_primary_monitor()
+        if monitor:
+            scale = monitor.get_scale_factor()
+            dpi = 96 * scale
+            return int(dpi)
+    return 96
 
 
 def restore_gamma():
@@ -152,9 +155,9 @@ def get_display_manager():
         except DBusException as ex:
             logger.debug("Mutter DBus service not reachable: %s", ex)
         except Exception as ex:  # pylint: disable=broad-except
-            logger.exception("Failed to instanciate MutterDisplayConfig. Please report with exception: %s", ex)
+            logger.exception("Failed to instantiate MutterDisplayConfig. Please report with exception: %s", ex)
     else:
-        logger.error("DBus is not available, lutris was not properly installed.")
+        logger.error("DBus is not available, Lutris was not properly installed.")
     if LIB_GNOME_DESKTOP_AVAILABLE:
         try:
             return DisplayManager()
@@ -389,7 +392,7 @@ def _get_screen_saver_inhibitor():
             inhibitor.set_dbus_iface(name, path, interface)
         except GLib.Error as err:
             logger.warning("Failed to set up a DBus proxy for name %s, path %s, "
-                           "interface %s: %s", name, path, interface, str(err))
+                           "interface %s: %s", name, path, interface, err)
 
     return inhibitor
 

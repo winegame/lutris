@@ -54,7 +54,7 @@ class LutrisStatusIcon:
             self.icon.set_visible(value)
 
     def get_menu(self):
-        """Instanciates the menu attached to the tray icon"""
+        """Instantiates the menu attached to the tray icon"""
         menu = Gtk.Menu()
         installed_games = self.add_games()
         number_of_games_in_menu = 10
@@ -62,11 +62,11 @@ class LutrisStatusIcon:
             menu.append(self._make_menu_item_for_game(game))
         menu.append(Gtk.SeparatorMenuItem())
 
-        present_menu = Gtk.ImageMenuItem()
-        present_menu.set_image(Gtk.Image.new_from_icon_name("net.winegame.client", Gtk.IconSize.MENU))
-        present_menu.set_label(_("Show WineGame"))
-        present_menu.connect("activate", self.on_activate)
-        menu.append(present_menu)
+        self.present_menu = Gtk.ImageMenuItem()
+        self.present_menu.set_image(Gtk.Image.new_from_icon_name("net.winegame.client", Gtk.IconSize.MENU))
+        self.present_menu.set_label(_("Show WineGame"))
+        self.present_menu.connect("activate", self.on_activate)
+        menu.append(self.present_menu)
 
         quit_menu = Gtk.MenuItem()
         quit_menu.set_label(_("Quit"))
@@ -75,15 +75,23 @@ class LutrisStatusIcon:
         menu.show_all()
         return menu
 
+    def update_present_menu(self):
+        app_window = self.application.window
+        if app_window:
+            if app_window.get_visible():
+                self.present_menu.set_label(_("Hide WineGame"))
+            else:
+                self.present_menu.set_label(_("Show WineGame"))
+
     def on_activate(self, _status_icon, _event=None):
         """Callback to show or hide the window"""
         app_window = self.application.window
         if app_window.get_visible():
-            # If the wndow has any transients, hiding it will hide them too
+            # If the window has any transients, hiding it will hide them too
             # never to be shown again, which is broken. So we don't allow that.
             windows = Gtk.Window.list_toplevels()
             for w in windows:
-                if w.get_transient_for() == app_window:
+                if w.get_visible() and w.get_transient_for() == app_window:
                     return
 
             app_window.hide()
@@ -96,7 +104,7 @@ class LutrisStatusIcon:
 
     def on_quit_application(self, _widget):
         """Callback to quit the program"""
-        self.application.do_shutdown()
+        self.application.quit()
 
     def _make_menu_item_for_game(self, game):
         menu_item = Gtk.MenuItem()
@@ -115,7 +123,8 @@ class LutrisStatusIcon:
         return installed_games
 
     def on_game_selected(self, _widget, game_id):
-        Game(game_id).launch()
+        launch_ui_delegate = self.application.get_launch_ui_delegate()
+        Game(game_id).launch(launch_ui_delegate)
 
 
 class LutrisTray(Gtk.StatusIcon):

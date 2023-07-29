@@ -5,6 +5,7 @@ from gettext import gettext as _
 
 from lutris.config import LutrisConfig, write_game_config
 from lutris.database.games import add_or_update, get_game_by_field
+from lutris.exceptions import UnavailableGameError
 from lutris.installer import AUTO_ELF_EXE, AUTO_WIN32_EXE
 from lutris.installer.errors import ScriptingError
 from lutris.installer.installer_file import InstallerFile
@@ -14,6 +15,8 @@ from lutris.services import SERVICES
 from lutris.util.game_finder import find_linux_game_executable, find_windows_game_executable
 from lutris.util.gog import convert_gog_config_to_lutris, get_gog_config_from_path, get_gog_game_path
 from lutris.util.log import logger
+from lutris.util.moddb import ModDB, is_moddb_url
+from lutris.util.system import fix_path_case
 
 
 class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
@@ -33,11 +36,12 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
         self.service = self.get_service(initial=service)
         self.service_appid = self.get_appid(installer, initial=appid)
         self.variables = self.script.get("variables", {})
-        self.files = [
+        self.script_files = [
             InstallerFile(self.game_slug, file_id, file_meta)
             for file_desc in self.script.get("files", [])
             for file_id, file_meta in file_desc.items()
         ]
+        self.files = []
         self.requires = self.script.get("requires")
         self.extends = self.script.get("extends")
         self.game_id = self.get_game_id()
@@ -54,6 +58,8 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
             return SERVICES["humblebundle"]()
         if "gog" in version and "gog" in SERVICES:
             return SERVICES["gog"]()
+        if "itch.io" in version and "itchio" in SERVICES:
+            return SERVICES["itchio"]()
 
     def get_appid(self, installer, initial=None):
         if installer.get("is_dlc"):
@@ -62,13 +68,19 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
             return initial
         if not self.service:
             return
+        service_id = None
         if self.service.id == "steam":
-            return installer.get("steamid") or installer.get("service_id")
+            service_id = installer.get("steamid") or installer.get("service_id")
         game_config = self.script.get("game", {})
         if self.service.id == "gog":
-            return game_config.get("gogid") or installer.get("gogid") or installer.get("service_id")
+            service_id = game_config.get("gogid") or installer.get("gogid") or installer.get("service_id")
         if self.service.id == "humblebundle":
-            return game_config.get("humbleid") or installer.get("humblestoreid") or installer.get("service_id")
+            service_id = game_config.get("humbleid") or installer.get("humblestoreid") or installer.get("service_id")
+        if self.service.id == "itchio":
+            service_id = game_config.get("itchid") or installer.get("itchid") or installer.get("service_id")
+        if service_id:
+            return service_id
+        return
 
     @property
     def script_pretty(self):
@@ -92,14 +104,18 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
         if self.runner == "steam":
             # Steam games installs in their steamapps directory
             return False
+        if not self.script.get("installer"):
+            # No command can affect files
+            return False
         if (
-                self.files
-                or self.script.get("game", {}).get("gog")
-                or self.script.get("game", {}).get("prefix")
+            self.script_files
+            or self.script.get("game", {}).get("gog")
+            or self.script.get("game", {}).get("prefix")
         ):
             return True
-        command_names = [list(c.keys())[0] for c in self.script.get("installer", [])]
-        if "insert-disc" in command_names:
+        command_names = [self.interpreter._get_command_name_and_params(c)[0]
+                         for c in self.script.get("installer", [])]
+        if "insert_disc" in command_names:
             return True
         return False
 
@@ -131,44 +147,51 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
             errors.append("Scripts can't have both extends and requires")
         return errors
 
-    def pop_user_provided_file(self):
-        """Return and remove the first user provided file, which is used for game stores"""
-        for index, file in enumerate(self.files):
-            if file.url.startswith("N/A"):
-                self.files.pop(index)
-                return file.id
-
     def prepare_game_files(self, patch_version=None):
         """Gathers necessary files before iterating through them."""
-        if not self.files:
+        if not self.script_files:
             return
-        if not self.service:
-            return
-        if self.service.online and not self.service.is_connected():
-            logger.info("Not authenticated to %s", self.service.id)
-            return
-        installer_file_id = self.pop_user_provided_file()
-        if not installer_file_id:
-            logger.warning("Could not find a file for this service")
-            return
-        logger.info("Getting files for %s", installer_file_id)
-        if self.service.has_extras:
-            logger.info("Adding selected extras to downloads")
-            self.service.selected_extras = self.interpreter.extras
-        if patch_version:
-            # If a patch version is given download the patch files instead of the installer
-            installer_files = self.service.get_patch_files(self, installer_file_id)
-        else:
-            installer_files = self.service.get_installer_files(self, installer_file_id)
-        for installer_file in installer_files:
-            self.files.append(installer_file)
-        if not installer_files:
-            # Failed to get the service game, put back a user provided file
-            logger.debug("Unable to get files from service. Setting %s to manual.", installer_file_id)
-            self.files.insert(0, InstallerFile(self.game_slug, installer_file_id, {
-                "url": "N/A: Provider installer file",
-                "filename": ""
-            }))
+
+        installer_file_id = None
+        installer_file_url = None
+        if self.service:
+            for file in self.script_files:
+                if file.url.startswith("N/A"):
+                    installer_file_id = file.id
+                    installer_file_url = file.url
+        self.files = [file.copy() for file in self.script_files if file.id != installer_file_id]
+
+        # Run variable substitution on the URLs from the script
+        for file in self.files:
+            file.set_url(self.interpreter._substitute(file.url))
+            if is_moddb_url(file.url):
+                file.set_url(ModDB().transform_url(file.url))
+
+        if installer_file_id and self.service:
+            logger.info("Getting files for %s", installer_file_id)
+            if self.service.has_extras:
+                logger.info("Adding selected extras to downloads")
+                self.service.selected_extras = self.interpreter.extras
+            try:
+                if patch_version:
+                    # If a patch version is given download the patch files instead of the installer
+                    installer_files = self.service.get_patch_files(self, installer_file_id)
+                else:
+                    installer_files = self.service.get_installer_files(self, installer_file_id, self.interpreter.extras)
+            except UnavailableGameError as ex:
+                logger.error("Game not available: %s", ex)
+                installer_files = None
+
+            if installer_files:
+                for installer_file in installer_files:
+                    self.files.append(installer_file)
+            else:
+                # Failed to get the service game, put back a user provided file
+                logger.debug("Unable to get files from service. Setting %s to manual.", installer_file_id)
+                self.files.insert(0, InstallerFile(self.game_slug, installer_file_id, {
+                    "url": installer_file_url,
+                    "filename": ""
+                }))
 
     def _substitute_config(self, script_config):
         """Substitute values such as $GAMEDIR in a config dict."""
@@ -232,6 +255,11 @@ class LutrisInstaller:  # pylint: disable=too-many-instance-attributes
                                                                    make_executable=True)
             elif AUTO_WIN32_EXE in config["game"].get("exe", ""):
                 config["game"]["exe"] = find_windows_game_executable(self.interpreter.target_path)
+
+            # Fix possible case differences
+            for key in ("iso", "rom", "main_file", "exe"):
+                if config["game"].get(key):
+                    config["game"][key] = fix_path_case(config["game"][key])
         config["name"] = self.game_name
         config["script"] = self.script
         config["variables"] = self.variables

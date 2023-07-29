@@ -46,8 +46,38 @@ net.winegame.client (0.5.10.1) impish; urgency=medium
 
  -- SwimmingTiger <hu60.cn@qq.com>  Sun, 1 May 2022 01:52:35 +0800
 
+lutris (0.5.13) jammy; urgency=medium
+
+  * Add support for Proton
+  * Add drag and drop on the main window. Dropped files will be matched
+    No-Intro, Redump and TOSEC checksums.
+  * Add support for ModDB links in installers (moddb python module required)
+  * Added "Missing" sidebar option for games whose directory is missing
+  * Re-style the configuration, preferences, installer and add-games windows
+  * Group configuration options into sections
+  * Added checkbox to stop asking for the launch config for a game
+  * Added checkbox to sort installed games first
+  * Support for launch-configs in shortcuts and the command line
+  * Show platform badges on banners and cover-art
+  * Installing games from setup files can now use different presets (Win98, 3DFX, ...)
+  * Add filter field to runner list
+  * Show game count in search bar
+  * Workaround Humble Bundle authentication issues by allowing importing
+    cookies from Firefox
+  * Add Itch.io integration
+  * Add Battle.net integration (protobuf dependency required)
+  * Improve detection of DOSBox games on GOG
+  * Added "Unspecified" Vulkan ICD option
+  * Removed ResidualVM (now merged into ScummVM)
+  * Detect obsolete Vulkan drivers and default to DXVK 1.x for them
+  * Improved High-DPI support for custom media
+  * Performance improvements
+
+ -- Mathieu Comandon <mathieucomandon@gmail.com>  Fri, 16 May 2023 13:15:40 -0800
+
 lutris (0.5.12) jammy; urgency=medium
 
+  * Add support for Xbox games with the xemu runner
   * Fix authentication issue with Origin
   * Fix authentication issue with EGS
   * Fix authentication issue with Ubisoft Connect when 2FA is enabled

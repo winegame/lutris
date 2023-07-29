@@ -1,4 +1,5 @@
 """Functions to interact with the Lutris REST API"""
+import functools
 import json
 import os
 import re
@@ -12,6 +13,8 @@ import requests
 
 from lutris import settings
 from lutris.util import http, system
+from lutris.util.http import Request, HTTPError
+from lutris.util.linux import LINUX_SYSTEM
 from lutris.util.log import logger
 
 API_KEY_FILE_PATH = os.path.join(settings.CACHE_DIR, "auth-token")
@@ -89,6 +92,62 @@ def get_runners(runner_name):
     session.headers = headers
     response = session.get(api_url, headers=headers)
     return response.json()
+
+
+@functools.lru_cache()
+def get_default_runner_version(runner_name, version=None):
+    """Get the appropriate version for a runner
+
+    Params:
+        version (str): Optional version to lookup, will return this one if found
+
+    Returns:
+        dict: Dict containing version, architecture and url for the runner, None
+        if the data can't be retrieved. If a pseudo-version is accepted, may be
+        a dict containing only the version itself.
+    """
+    logger.info(
+        "Getting runner information for %s%s",
+        runner_name,
+        " (version: %s)" % version if version else "",
+    )
+
+    try:
+        request = Request("{}/api/runners/{}".format(settings.SITE_URL, runner_name))
+        runner_info = request.get().json
+
+        if not runner_info:
+            logger.error("Failed to get runner information")
+    except HTTPError as ex:
+        logger.error("Unable to get runner information: %s", ex)
+        runner_info = None
+
+    if not runner_info:
+        return
+
+    versions = runner_info.get("versions") or []
+    arch = LINUX_SYSTEM.arch
+    if version:
+        if version.endswith("-i386") or version.endswith("-x86_64"):
+            version, arch = version.rsplit("-", 1)
+        versions = [v for v in versions if v["version"] == version]
+    versions_for_arch = [v for v in versions if v["architecture"] == arch]
+    if len(versions_for_arch) == 1:
+        return versions_for_arch[0]
+
+    if len(versions_for_arch) > 1:
+        default_version = [v for v in versions_for_arch if v["default"] is True]
+        if default_version:
+            return default_version[0]
+    elif len(versions) == 1 and LINUX_SYSTEM.is_64_bit:
+        return versions[0]
+    elif len(versions) > 1 and LINUX_SYSTEM.is_64_bit:
+        default_version = [v for v in versions if v["default"] is True]
+        if default_version:
+            return default_version[0]
+    # If we didn't find a proper version yet, return the first available.
+    if len(versions_for_arch) >= 1:
+        return versions_for_arch[0]
 
 
 def get_http_post_response(url, payload):
@@ -183,6 +242,17 @@ def get_game_installers(game_slug, revision=None):
     return [normalize_installer(i) for i in installers]
 
 
+def get_game_details(slug):
+    url = settings.SITE_URL + "/api/games/%s" % slug
+    request = http.Request(url)
+    try:
+        response = request.get()
+    except http.HTTPError as ex:
+        logger.debug("Unable to load %s: %s", slug, ex)
+        return {}
+    return response.json
+
+
 def normalize_installer(installer):
     """Adjusts an installer dict so it is in the correct form, with values
     of the expected types."""
@@ -214,24 +284,12 @@ def search_games(query):
     return response.json
 
 
-def get_bundle(bundle):
-    """Retrieve a lutris bundle from the API"""
-    url = "/api/bundles/%s" % bundle
-    response = http.Request(settings.SITE_URL + url, headers={"Content-Type": "application/json"})
-    try:
-        response.get()
-    except http.HTTPError as ex:
-        logger.error("Unable to get bundle from API: %s", ex)
-        return None
-    response_data = response.json
-    return response_data.get("games", [])
-
-
 def parse_installer_url(url):
     """
     Parses `winegame:` urls, extracting any info necessary to install or run a game.
     """
     action = None
+    launch_config_name = None
     try:
         parsed_url = urllib.parse.urlparse(url, scheme="winegame")
     except Exception:  # pylint: disable=broad-except
@@ -247,8 +305,12 @@ def parse_installer_url(url):
     if url_path.startswith("winegame:"):
         url_path = url_path[7:]
 
-    url_parts = url_path.split("/")
-    if len(url_parts) == 2:
+    url_parts = [urllib.parse.unquote(part) for part in url_path.split("/")]
+    if len(url_parts) == 3:
+        action = url_parts[0]
+        game_slug = url_parts[1]
+        launch_config_name = url_parts[2]
+    elif len(url_parts) == 2:
         action = url_parts[0]
         game_slug = url_parts[1]
     elif len(url_parts) == 1:
@@ -271,5 +333,45 @@ def parse_installer_url(url):
         "revision": revision,
         "action": action,
         "service": service,
-        "appid": appid
+        "appid": appid,
+        "launch_config_name": launch_config_name
     }
+
+
+def format_installer_url(installer_info):
+    """
+    Generates 'lutris:' urls, given the same dictionary that
+    parse_intaller_url returns.
+    """
+
+    game_slug = installer_info.get("game_slug")
+    revision = installer_info.get("revision")
+    action = installer_info.get("action")
+    service = installer_info.get("service")
+    appid = installer_info.get("appid")
+    launch_config_name = installer_info.get("launch_config_name")
+    parts = []
+
+    if action:
+        parts.append(action)
+    elif not launch_config_name:
+        raise ValueError("A 'lutris:' URL can contain a launch configuration name only if it has an action.")
+
+    if game_slug:
+        parts.append(game_slug)
+    else:
+        parts.append(service + ":" + appid)
+
+    if launch_config_name:
+        parts.append(launch_config_name)
+
+    parts = [urllib.parse.quote(str(part)) for part in parts]
+    path = "/".join(parts)
+
+    if revision:
+        query = urllib.parse.urlencode({"revision": str(revision)})
+    else:
+        query = ""
+
+    url = urllib.parse.urlunparse(("lutris", "", path, "", query, None))
+    return url

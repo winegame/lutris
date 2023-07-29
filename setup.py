@@ -22,7 +22,7 @@ setup(
     version=VERSION,
     license='GPL-3',
     author='Mathieu Comandon',
-    author_email='strider@strycore.com',
+    author_email='mathieucomandon@gmail.com',
     packages=[
         'lutris',
         'lutris.database',
@@ -40,6 +40,7 @@ setup(
         'lutris.services',
         'lutris.util',
         'lutris.util.amazon',
+        'lutris.util.battlenet',
         'lutris.util.discord',
         'lutris.util.dolphin',
         'lutris.util.egs',
@@ -65,7 +66,8 @@ setup(
         'pypresence',
         'PyYAML',
         'requests',
-        'pypresence'
+        'protobuf',
+        'moddb >= 0.8.1'
     ],
     url='https://winegame.net',
     description='Video game preservation platform',

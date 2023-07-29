@@ -3,18 +3,15 @@ import os
 import signal
 from gettext import gettext as _
 
-from gi.repository import Gtk
-
 from lutris import runtime, settings
+from lutris.api import get_default_runner_version
 from lutris.command import MonitoredCommand
 from lutris.config import LutrisConfig
 from lutris.database.games import get_game_by_field
-from lutris.exceptions import UnavailableLibrariesError
-from lutris.gui import dialogs
+from lutris.exceptions import GameConfigError, UnavailableLibrariesError
 from lutris.runners import RunnerInstallationError
-from lutris.util import system
+from lutris.util import flatpak, strings, system
 from lutris.util.extract import ExtractFailure, extract_archive
-from lutris.util.http import HTTPError, Request
 from lutris.util.linux import LINUX_SYSTEM
 from lutris.util.log import logger
 
@@ -35,6 +32,7 @@ class Runner:  # pylint: disable=too-many-public-methods
     entry_point_option = "main_file"
     download_url = None
     arch = None  # If the runner is only available for an architecture that isn't x86_64
+    flatpak_id = None
 
     def __init__(self, config=None):
         """Initialize runner."""
@@ -177,6 +175,14 @@ class Runner:  # pylint: disable=too-many-public-methods
             raise ValueError("runner_executable not set for {}".format(self.name))
         return os.path.join(settings.RUNNER_DIR, self.runner_executable)
 
+    def get_command(self):
+        exe = self.get_executable()
+        if system.path_exists(exe):
+            return [exe]
+        if flatpak.is_app_installed(self.flatpak_id):
+            return flatpak.get_run_command(self.flatpak_id)
+        return []
+
     def get_env(self, os_env=False, disable_runtime=False):
         """Return environment variables used for a game."""
         env = {}
@@ -250,6 +256,93 @@ class Runner:  # pylint: disable=too-many-public-methods
         """
         return runtime.get_env(prefer_system_libs=self.system_config.get("prefer_system_libs", True))
 
+    def apply_launch_config(self, gameplay_info, launch_config):
+        """Updates the gameplay_info to reflect a launch_config section. Called only
+        if a non-default config is chosen."""
+        gameplay_info["command"] = self.get_launch_config_command(gameplay_info, launch_config)
+
+        config_working_dir = self.get_launch_config_working_dir(launch_config)
+
+        if config_working_dir:
+            gameplay_info["working_dir"] = config_working_dir
+
+    def get_launch_config_command(self, gameplay_info, launch_config):
+        """Generates a new command for the gameplay_info, to implement the launch_config.
+        Returns a new list of strings; the caller can modify it further.
+
+        If launch_config has no command, this builds one from the gameplay_info command
+        and the 'exe' value in the launch_config.
+
+        Runners override this when required to control the command used."""
+
+        if "command" in launch_config:
+            command = strings.split_arguments(launch_config["command"])
+        elif "command" in gameplay_info:
+            command = [gameplay_info["command"][0]]
+        else:
+            logger.debug("No command in %s", gameplay_info)
+            logger.debug(launch_config)
+            # The 'file' sort of gameplay_info cannot be made to use a configuration
+            raise GameConfigError(_("The runner could not find a command to apply the configuration to."))
+
+        exe = self.get_launch_config_exe(launch_config)
+        if exe:
+            command.append(exe)
+
+        if launch_config.get("args"):
+            command += strings.split_arguments(launch_config["args"])
+
+        return command
+
+    def get_launch_config_exe(self, launch_config):
+        """Locates the "exe" of the launch config. If it appears
+        to be relative to the game's working_dir, this will try to
+        adjust it to be relative to the config's instead.
+        """
+        exe = launch_config.get("exe")
+        config_working_dir = self.get_launch_config_working_dir(launch_config)
+
+        if exe and config_working_dir and not os.path.isabs(exe):
+            exe_from_config = self.resolve_config_path(exe, config_working_dir)
+            exe_from_game = self.resolve_config_path(exe)
+
+            if os.path.exists(exe_from_game) and not os.path.exists(exe_from_config):
+                relative = os.path.relpath(exe_from_game, start=config_working_dir)
+                if not relative.startswith("../"):
+                    return relative
+
+        return exe
+
+    def get_launch_config_working_dir(self, launch_config):
+        """Extracts the "working_dir" from the config, and resolves this relative
+        to the game's working directory, so that an absolute path results.
+
+        This returns None if no working_dir is present, or if it found to be missing.
+        """
+        config_working_dir = launch_config.get("working_dir")
+        if config_working_dir:
+            config_working_dir = self.resolve_config_path(config_working_dir)
+            if os.path.isdir(config_working_dir):
+                return config_working_dir
+
+        return None
+
+    def resolve_config_path(self, path, relative_to=None):
+        """Interpret a path taken from the launch_config relative to
+        a working directory, using the game's working_dir if that is omitted.
+
+        This is provided as a method so the WINE runner can try to convert
+        Windows-style paths to usable paths.
+        """
+        if not os.path.isabs(path):
+            if not relative_to:
+                relative_to = self.working_dir
+
+            if relative_to:
+                return os.path.join(relative_to, path)
+
+        return path
+
     def prelaunch(self):
         """Run actions before running the game, override this method in runners; raise an
         exception if prelaunch fails, and it will be reported to the user, and
@@ -270,14 +363,14 @@ class Runner:  # pylint: disable=too-many-public-methods
         """Return dict with command (exe & args list) and env vars (dict).
 
         Reimplement in derived runner if need be."""
-        return {"command": [self.get_executable()], "env": self.get_env()}
+        return {"command": self.get_command(), "env": self.get_env()}
 
-    def run(self, *args):
+    def run(self, ui_delegate):
         """Run the runner alone."""
         if not self.runnable_alone:
             return
         if not self.is_installed():
-            if not self.install_dialog():
+            if not self.install_dialog(ui_delegate):
                 logger.info("Runner install cancelled")
                 return
 
@@ -285,8 +378,7 @@ class Runner:  # pylint: disable=too-many-public-methods
         command = command_data.get("command")
         env = (command_data.get("env") or {}).copy()
 
-        if hasattr(self, "prelaunch"):
-            self.prelaunch()
+        self.prelaunch()
 
         command_runner = MonitoredCommand(command, runner=self, env=env)
         command_runner.start()
@@ -300,109 +392,52 @@ class Runner:  # pylint: disable=too-many-public-methods
             return False
         return True
 
-    def install_dialog(self):
+    def install_dialog(self, ui_delegate):
         """Ask the user if they want to install the runner.
 
         Return success of runner installation.
         """
-        dialog = dialogs.QuestionDialog(
-            {
-                "question": _("The required runner is not installed.\n"
-                              "Do you wish to install it now?"),
-                "title": _("Required runner unavailable"),
-            }
-        )
-        if Gtk.ResponseType.YES == dialog.result:
 
-            from lutris.gui.dialogs import ErrorDialog
-            from lutris.gui.dialogs.download import simple_downloader
-            try:
-                if hasattr(self, "get_version"):
-                    version = self.get_version(use_default=False)  # pylint: disable=no-member
-                    self.install(downloader=simple_downloader, version=version)
-                else:
-                    self.install(downloader=simple_downloader)
-            except RunnerInstallationError as ex:
-                ErrorDialog(ex.message)
+        if ui_delegate.show_install_yesno_inquiry(
+            question=_("The required runner is not installed.\n"
+                       "Do you wish to install it now?"),
+            title=_("Required runner unavailable"),
+        ):
+            if hasattr(self, "get_version"):
+                version = self.get_version(use_default=False)  # pylint: disable=no-member
+                self.install(ui_delegate, version=version)
+            else:
+                self.install(ui_delegate)
 
             return self.is_installed()
         return False
 
     def is_installed(self):
         """Return whether the runner is installed"""
-        return system.path_exists(self.get_executable())
+        if system.path_exists(self.get_executable()):
+            return True
+        return self.flatpak_id and flatpak.is_app_installed(self.flatpak_id)
 
-    def get_runner_version(self, version=None):
-        """Get the appropriate version for a runner
+    def get_runner_version(self, version=None, lutris_only=False):
+        """Get the appropriate version for a runner, as with get_default_runner_version(),
+        but this method allows the runner to apply its configuration."""
+        return get_default_runner_version(self.name, version)
 
-        Params:
-            version (str): Optional version to lookup, will return this one if found
-
-        Returns:
-            dict: Dict containing version, architecture and url for the runner, None
-            if the data can't be retrieved.
-        """
-        logger.info(
-            "Getting runner information for %s%s",
-            self.name,
-            " (version: %s)" % version if version else "",
-        )
-
-        try:
-            request = Request("{}/api/runners/{}".format(settings.SITE_URL, self.name))
-            runner_info = request.get().json
-
-            if not runner_info:
-                logger.error("Failed to get runner information")
-        except HTTPError as ex:
-            logger.error("Unable to get runner information: %s", ex)
-            runner_info = None
-
-        if not runner_info:
-            return
-
-        versions = runner_info.get("versions") or []
-        arch = LINUX_SYSTEM.arch
-        if version:
-            if version.endswith("-i386") or version.endswith("-x86_64") or version.endswith("-aarch64") or version.endswith("-armv7") or version.endswith("-loongarch64"):
-                version, arch = version.rsplit("-", 1)
-            versions = [v for v in versions if v["version"] == version]
-        versions_for_arch = [v for v in versions if v["architecture"] == arch]
-        if len(versions_for_arch) == 1:
-            return versions_for_arch[0]
-
-        if len(versions_for_arch) > 1:
-            default_version = [v for v in versions_for_arch if v["default"] is True]
-            if default_version:
-                return default_version[0]
-        elif len(versions) == 1 and LINUX_SYSTEM.is_64_bit:
-            return versions[0]
-        elif len(versions) > 1 and LINUX_SYSTEM.is_64_bit:
-            default_version = [v for v in versions if v["default"] is True]
-            if default_version:
-                return default_version[0]
-        # If we didn't find a proper version yet, return the first available.
-        if len(versions_for_arch) >= 1:
-            return versions_for_arch[0]
-
-    def install(self, version=None, downloader=None, callback=None):
+    def install(self, install_ui_delegate, version=None, callback=None):
         """Install runner using package management systems."""
         logger.debug(
-            "Installing %s (version=%s, downloader=%s, callback=%s)",
+            "Installing %s (version=%s, callback=%s)",
             self.name,
             version,
-            downloader,
             callback,
         )
-        opts = {"downloader": downloader, "callback": callback}
+        opts = {"install_ui_delegate": install_ui_delegate, "callback": callback}
         if self.download_url:
             opts["dest"] = self.directory
             return self.download_and_extract(self.download_url, **opts)
-        runner = self.get_runner_version(version)
+        runner = self.get_runner_version(version, lutris_only=True)
         if not runner:
             raise RunnerInstallationError(_("Failed to retrieve {} ({}) information").format(self.name, version))
-        if not downloader:
-            raise RuntimeError("Missing mandatory downloader for runner %s" % self)
 
         if "wine" in self.name:
             opts["merge_single"] = True
@@ -416,21 +451,16 @@ class Runner:  # pylint: disable=too-many-public-methods
         self.download_and_extract(runner["url"], **opts)
 
     def download_and_extract(self, url, dest=None, **opts):
-        downloader = opts["downloader"]
+        install_ui_delegate = opts["install_ui_delegate"]
         merge_single = opts.get("merge_single", False)
         callback = opts.get("callback")
         tarball_filename = os.path.basename(url)
         runner_archive = os.path.join(settings.CACHE_DIR, tarball_filename)
         if not dest:
             dest = settings.RUNNER_DIR
-        downloader(
-            url, runner_archive, self.extract, {
-                "archive": runner_archive,
-                "dest": dest,
-                "merge_single": merge_single,
-                "callback": callback,
-            }
-        )
+
+        install_ui_delegate.download_install_file(url, runner_archive)
+        self.extract(archive=runner_archive, dest=dest, merge_single=merge_single, callback=callback)
 
     def extract(self, archive=None, dest=None, merge_single=None, callback=None):
         if not system.path_exists(archive):
@@ -481,3 +511,8 @@ class Runner:  # pylint: disable=too-many-public-methods
         """Stop the running game. If this leaves any game processes running,
         the caller will SIGKILL them (after a delay)."""
         game.kill_processes(signal.SIGTERM)
+
+    def extract_icon(self, game_slug):
+        """The config UI calls this to extract the game icon. Most runners do not
+        support this and do nothing. This is not called if a custom icon is installed
+        for the game."""

@@ -4,8 +4,11 @@ import json
 import os
 from gettext import gettext as _
 
+from gi.repository import Gtk
+
 from lutris import settings
 from lutris.exceptions import UnavailableGameError
+from lutris.gui.dialogs import HumbleBundleCookiesDialog, QuestionDialog
 from lutris.installer import AUTO_ELF_EXE, AUTO_WIN32_EXE
 from lutris.installer.installer_file import InstallerFile
 from lutris.services.base import OnlineService
@@ -75,7 +78,26 @@ class HumbleBundleService(OnlineService):
     cache_path = os.path.join(settings.CACHE_DIR, "humblebundle/library/")
 
     supported_platforms = ("linux", "windows")
-    is_loading = False
+
+    def login(self, parent=None):
+        dialog = QuestionDialog({
+            "title": _("Workaround for Humble Bundle authentication"),
+            "question": _("Humble Bundle is restricting API calls from software like Lutris and GameHub.\n"
+                          "Authentication to the service will likely fail.\n"
+                          "There is a workaround involving copying cookies "
+                          "from Firefox, do you want to do this instead?"),
+            "parent": parent
+        })
+        if dialog.result == Gtk.ResponseType.YES:
+            dialog = HumbleBundleCookiesDialog()
+            if dialog.cookies_content:
+                with open(self.cookies_path, "w", encoding="utf-8") as cookies_file:
+                    cookies_file.write(dialog.cookies_content)
+                self.login_callback(None)
+            else:
+                self.logout()
+        else:
+            return super().login(parent=parent)
 
     def login_callback(self, url):
         """Called after the user has logged in successfully"""
@@ -89,16 +111,10 @@ class HumbleBundleService(OnlineService):
 
     def load(self):
         """Load the user's Humble Bundle library"""
-        if self.is_loading:
-            logger.warning("Humble bundle games are already loading")
-            return
-
-        self.is_loading = True
         try:
             library = self.get_library()
-        except ValueError:
-            logger.error("Failed to get Humble Bundle library. Try logging out and back-in.")
-            return
+        except ValueError as ex:
+            raise RuntimeError("Failed to get Humble Bundle library. Try logging out and back-in.") from ex
         humble_games = []
         seen = set()
         for game in library:
@@ -108,7 +124,6 @@ class HumbleBundleService(OnlineService):
             seen.add(game["human_name"])
         for game in humble_games:
             game.save()
-        self.is_loading = False
         return humble_games
 
     def make_api_request(self, url):
@@ -118,7 +133,7 @@ class HumbleBundleService(OnlineService):
             request.get()
         except HTTPError:
             logger.error(
-                "Failed to request %s, check your Humble Bundle credentials and internet connectivity",
+                "Failed to request %s, check your Humble Bundle credentials",
                 url,
             )
             return
@@ -215,7 +230,7 @@ class HumbleBundleService(OnlineService):
                 download_links.append(download)
         return download_links
 
-    def get_installer_files(self, installer, installer_file_id):
+    def get_installer_files(self, installer, installer_file_id, _selected_extras):
         """Replace the user provided file with download links from Humble Bundle"""
         try:
             link = get_humble_download_link(installer.service_appid, installer.runner)

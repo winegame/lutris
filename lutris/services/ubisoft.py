@@ -9,7 +9,7 @@ from gi.repository import Gio
 
 from lutris import settings
 from lutris.config import LutrisConfig, write_game_config
-from lutris.database.games import add_game, get_game_by_field
+from lutris.database.games import add_game, get_game_by_field, update_existing
 from lutris.database.services import ServiceGameCollection
 from lutris.game import Game
 from lutris.installer import get_installers
@@ -104,7 +104,6 @@ class UbisoftConnectService(OnlineService):
         "cover": UbisoftCover,
     }
     default_format = "cover"
-    is_loading = False
 
     def __init__(self):
         super().__init__()
@@ -136,12 +135,13 @@ class UbisoftConnectService(OnlineService):
             "drive_c/Program Files (x86)/Ubisoft/Ubisoft Game Launcher/"
             "cache/configuration/configurations"
         )
+        if not os.path.exists(configurations_path):
+            return
         with open(configurations_path, "rb") as config_file:
             content = config_file.read()
         return content
 
     def load(self):
-        self.is_loading = True
         self.client.authorise_with_stored_credentials(self.load_credentials())
         response = self.client.get_club_titles()
         games = response['data']['viewer']['ownedGames'].get('nodes', [])
@@ -160,12 +160,10 @@ class UbisoftConnectService(OnlineService):
             ubi_games.append(ubi_game)
         configuration_data = self.get_configurations()
         config_parser = UbisoftParser()
-        games = []
         for game in config_parser.parse_games(configuration_data):
             ubi_game = UbisoftGame.new_from_api(game)
             ubi_game.save()
             ubi_games.append(ubi_game)
-        self.is_loading = False
         return ubi_games
 
     def store_credentials(self, credentials):
@@ -182,13 +180,29 @@ class UbisoftConnectService(OnlineService):
 
         lutris_game_id = slugify(game["name"]) + "-" + self.id
         existing_game = get_game_by_field(lutris_game_id, "installer_slug")
-        if existing_game:
+        if existing_game and existing_game["installed"] == 1:
             logger.debug("Ubisoft Connect game %s is already installed", app_name)
             return
         logger.debug("Installing Ubisoft Connect game %s", app_name)
         game_config = LutrisConfig(game_config_id=ubisoft_connect["configpath"]).game_level
-        game_config["game"]["args"] = f"uplay://launch/{game['appid']}"
+        details = json.loads(game["details"])
+        launch_id = details.get("launchId") or details.get("installId") or details.get("spaceId")
+        game_config["game"]["args"] = f"uplay://launch/{launch_id}"
         configpath = write_game_config(lutris_game_id, game_config)
+        if existing_game:
+            update_existing(
+                id=existing_game["id"],
+                name=game["name"],
+                runner=self.runner,
+                slug=slugify(game["name"]),
+                directory=ubisoft_connect["directory"],
+                installed=1,
+                installer_slug=lutris_game_id,
+                configpath=configpath,
+                service=self.id,
+                service_id=game["appid"],
+            )
+            return existing_game["id"]
         game_id = add_game(
             name=game["name"],
             runner=self.runner,
@@ -221,6 +235,9 @@ class UbisoftConnectService(OnlineService):
         uc_exe = ubisoft_connect.config.game_config["exe"]
         if not os.path.isabs(uc_exe):
             uc_exe = os.path.join(ubisoft_connect.config.game_config["prefix"], uc_exe)
+        details = json.loads(db_game["details"])
+        launch_id = details.get("launchId") or details.get("installId") or details.get("spaceId")
+        install_id = details.get("installId") or details.get("launchId") or details.get("spaceId")
         return {
             "name": db_game["name"],
             "version": self.name,
@@ -231,13 +248,13 @@ class UbisoftConnectService(OnlineService):
             "script": {
                 "requires": self.client_installer,
                 "game": {
-                    "args": f"uplay://launch/{db_game['appid']}",
+                    "args": f"uplay://launch/{launch_id}",
                 },
                 "installer": [
                     {"task": {
                         "name": "wineexec",
                         "executable": uc_exe,
-                        "args": f"uplay://install/{db_game['appid']}",
+                        "args": f"uplay://install/{install_id}",
                         "prefix": ubisoft_connect.config.game_config["prefix"],
                         "description": (
                             "Ubisoft will now open and install %s. "

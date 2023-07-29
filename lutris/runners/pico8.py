@@ -35,12 +35,14 @@ class pico8(Runner):
         {
             "option": "fullscreen",
             "type": "bool",
+            "section": _("Graphics"),
             "label": _("Fullscreen"),
             "default": True,
             "help": _("Launch in fullscreen."),
         },
         {
             "option": "window_size",
+            "section": _("Graphics"),
             "label": _("Window size"),
             "type": "string",
             "default": "640x512",
@@ -81,16 +83,13 @@ class pico8(Runner):
     def __repr__(self):
         return _("PICO-8 runner (%s)") % self.config
 
-    def install(self, version=None, downloader=None, callback=None):
+    def install(self, install_ui_delegate, version=None, callback=None):
         opts = {}
+        opts["install_ui_delegate"] = install_ui_delegate
         if callback:
             opts["callback"] = callback
         opts["dest"] = settings.RUNNER_DIR + "/pico8"
         opts["merge_single"] = True
-        if downloader:
-            opts["downloader"] = downloader
-        else:
-            raise RuntimeError("Unsupported download for this runner")
         self.download_and_extract(DOWNLOAD_URL, **opts)
 
     @property
@@ -147,7 +146,7 @@ class pico8(Runner):
     def get_run_data(self):
         return {"command": self.launch_args, "env": self.get_env(os_env=False)}
 
-    def is_installed(self, version=None, fallback=True, min_version=None):
+    def is_installed(self, version=None, fallback=True):
         """Checks if pico8 runner is installed and if the pico8 executable available.
         """
         if self.is_native and system.path_exists(self.runner_config.get("runner_executable")):
@@ -168,7 +167,7 @@ class pico8(Runner):
                 if not self.game_config.get("main_file").startswith("http"):
                     pid = int(self.game_config.get("main_file"))
                     num = math.floor(pid / 10000)
-                    downloadUrl = ("https://www.lexaloffle.com/bbs/cposts/" + str(num) + "/" + str(pid) + ".p8.png")
+                    downloadUrl = "https://www.lexaloffle.com/bbs/cposts/" + str(num) + "/" + str(pid) + ".p8.png"
                 else:
                     downloadUrl = self.game_config.get("main_file")
                 cartPath = self.cart_path
@@ -208,24 +207,11 @@ class pico8(Runner):
                 self.runner_config.get("engine") + ".js",
             )
             if not os.path.exists(enginePath):
-                downloadUrl = ("https://www.lexaloffle.com/bbs/" + self.runner_config.get("engine") + ".js")
+                downloadUrl = "https://www.lexaloffle.com/bbs/" + self.runner_config.get("engine") + ".js"
                 system.create_folder(os.path.dirname(enginePath))
-                downloadCompleted = False
-
-                def on_downloaded_engine():
-                    nonlocal downloadCompleted
-                    downloadCompleted = True
-
-                dl = Downloader(downloadUrl, enginePath, True, callback=on_downloaded_engine)
+                dl = Downloader(downloadUrl, enginePath, True)
                 dl.start()
-                dl.thread.join()  # Doesn't actually wait until finished
-
-                # Waits for download to complete
-                while not os.path.exists(enginePath):
-                    if downloadCompleted or dl.state == Downloader.ERROR:
-                        logger.error("Could not download engine from %s", downloadUrl)
-                        return False
-                    sleep(0.1)
+                dl.join()
 
     def play(self):
         launch_info = {}

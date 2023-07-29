@@ -8,34 +8,40 @@ from gi.repository import Gdk, Gtk, Pango
 # Lutris Modules
 from lutris import settings
 from lutris.gui.views import (
-    COL_ICON, COL_INSTALLED_AT, COL_INSTALLED_AT_TEXT, COL_LASTPLAYED, COL_LASTPLAYED_TEXT, COL_NAME, COL_PLATFORM,
-    COL_PLAYTIME, COL_PLAYTIME_TEXT, COL_RUNNER_HUMAN_NAME, COL_YEAR, COLUMN_NAMES
+    COL_INSTALLED, COL_INSTALLED_AT, COL_INSTALLED_AT_TEXT, COL_LASTPLAYED, COL_LASTPLAYED_TEXT, COL_MEDIA_PATH,
+    COL_NAME, COL_PLATFORM, COL_PLAYTIME, COL_PLAYTIME_TEXT, COL_RUNNER_HUMAN_NAME, COL_YEAR, COLUMN_NAMES
 )
 from lutris.gui.views.base import GameView
 from lutris.gui.views.store import sort_func
+from lutris.gui.widgets.cellrenderers import GridViewCellRendererImage
 
 
 class GameListView(Gtk.TreeView, GameView):
-
     """Show the main list of games."""
 
     __gsignals__ = GameView.__gsignals__
 
-    def __init__(self, store, service_media):
-        self.game_store = store
-        self.service_media = service_media
-        self.model = self.game_store.store
-        super().__init__(model=self.model)
-        GameView.__init__(self)
+    def __init__(self, store):
+        Gtk.TreeView.__init__(self)
+        GameView.__init__(self, store.service)
+
         self.set_rules_hint(True)
 
-        # Icon column
+        # Image column
         if settings.SHOW_MEDIA:
-            image_cell = Gtk.CellRendererPixbuf()
-            column = Gtk.TreeViewColumn("", image_cell, pixbuf=COL_ICON)
-            column.set_reorderable(True)
-            column.set_sort_indicator(False)
-            self.append_column(column)
+            self.image_renderer = GridViewCellRendererImage()
+            self.media_column = Gtk.TreeViewColumn("", self.image_renderer,
+                                                   media_path=COL_MEDIA_PATH,
+                                                   is_installed=COL_INSTALLED)
+            self.media_column.set_reorderable(True)
+            self.media_column.set_sort_indicator(False)
+            self.media_column.set_sizing(Gtk.TreeViewColumnSizing.FIXED)
+            self.append_column(self.media_column)
+        else:
+            self.image_renderer = None
+            self.media_column = None
+
+        self.set_game_store(store)
 
         # Text columns
         default_text_cell = self.set_text_cell()
@@ -47,17 +53,33 @@ class GameListView(Gtk.TreeView, GameView):
         self.set_column(default_text_cell, _("Runner"), COL_RUNNER_HUMAN_NAME, 120)
         self.set_column(default_text_cell, _("Platform"), COL_PLATFORM, 120)
         self.set_column(default_text_cell, _("Last Played"), COL_LASTPLAYED_TEXT, 120)
-        self.set_sort_with_column(COL_LASTPLAYED_TEXT, COL_LASTPLAYED)
-        self.set_column(default_text_cell, _("Installed At"), COL_INSTALLED_AT_TEXT, 120)
-        self.set_sort_with_column(COL_INSTALLED_AT_TEXT, COL_INSTALLED_AT)
         self.set_column(default_text_cell, _("Play Time"), COL_PLAYTIME_TEXT, 100)
-        self.set_sort_with_column(COL_PLAYTIME_TEXT, COL_PLAYTIME)
+        self.set_column(default_text_cell, _("Installed At"), COL_INSTALLED_AT_TEXT, 120)
 
         self.get_selection().set_mode(Gtk.SelectionMode.SINGLE)
 
         self.connect_signals()
         self.connect("row-activated", self.on_row_activated)
         self.get_selection().connect("changed", self.on_cursor_changed)
+
+    def set_game_store(self, game_store):
+        self.game_store = game_store
+        self.service_media = game_store.service_media
+        self.model = game_store.store
+        self.set_model(self.model)
+        self.set_sort_with_column(COL_LASTPLAYED_TEXT, COL_LASTPLAYED)
+        self.set_sort_with_column(COL_INSTALLED_AT_TEXT, COL_INSTALLED_AT)
+        self.set_sort_with_column(COL_PLAYTIME_TEXT, COL_PLAYTIME)
+
+        size = game_store.service_media.size
+
+        if self.image_renderer:
+            self.image_renderer.media_width = size[0]
+            self.image_renderer.media_height = size[1]
+
+        if self.media_column:
+            media_width = size[0]
+            self.media_column.set_fixed_width(media_width)
 
     @staticmethod
     def set_text_cell():

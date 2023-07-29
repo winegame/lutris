@@ -146,7 +146,7 @@ def create_prefix(  # noqa: C901
         if loop_index == 60:
             logger.warning("Wine prefix creation is taking longer than expected...")
     if not os.path.exists(os.path.join(prefix, "user.reg")):
-        logger.error("No user.reg found after prefix creation. " "Prefix might not be valid")
+        logger.error("No user.reg found after prefix creation. Prefix might not be valid")
         return
     logger.info("%s Prefix created in %s", arch, prefix)
     prefix_manager = WinePrefixManager(prefix)
@@ -245,7 +245,7 @@ def wineexec(  # noqa: C901
         exclude_processes = shlex.split(exclude_processes)
 
     if not runner:
-        runner = import_runner("wine")()
+        runner = import_runner("wine")(prefix=prefix, working_dir=working_dir, wine_arch=arch)
 
     if not wine_path:
         wine_path = runner.get_executable()
@@ -324,6 +324,29 @@ def wineexec(  # noqa: C901
 # pragma pylint: enable=too-many-locals
 
 
+def find_winetricks(env=None, system_winetricks=False):
+    """Find winetricks path."""
+    winetricks_path = os.path.join(settings.RUNTIME_DIR, "winetricks/winetricks")
+    if system_winetricks or not system.path_exists(winetricks_path):
+        winetricks_path = system.find_executable("winetricks")
+        working_dir = None
+        if not winetricks_path:
+            raise RuntimeError("No installation of winetricks found")
+    else:
+        # We will use our own zenity if available, which is here, and it
+        # also needs a data file in this directory. We have to set the
+        # working_dir, so it will find the data file.
+        working_dir = os.path.join(settings.RUNTIME_DIR, "winetricks")
+
+        if not env:
+            env = {}
+
+        path = env.get("PATH", os.environ["PATH"])
+        env["PATH"] = "%s:%s" % (working_dir, path)
+
+    return (winetricks_path, working_dir, env)
+
+
 def winetricks(
     app,
     prefix=None,
@@ -337,11 +360,8 @@ def winetricks(
     runner=None
 ):
     """Execute winetricks."""
-    winetricks_path = os.path.join(settings.RUNTIME_DIR, "winetricks/winetricks")
-    if system_winetricks or not system.path_exists(winetricks_path):
-        winetricks_path = system.find_executable("winetricks")
-        if not winetricks_path:
-            raise RuntimeError("No installation of winetricks found")
+    winetricks_path, working_dir, env = find_winetricks(env, system_winetricks)
+
     if wine_path:
         winetricks_wine = wine_path
     else:
@@ -353,11 +373,13 @@ def winetricks(
     args = app
     if str(silent).lower() in ("yes", "on", "true"):
         args = "--unattended " + args
+
     return wineexec(
         None,
         prefix=prefix,
         winetricks_wine=winetricks_wine,
         wine_path=winetricks_path,
+        working_dir=working_dir,
         arch=arch,
         args=args,
         config=config,
@@ -402,14 +424,22 @@ def install_cab_component(cabfile, component, wine_path=None, prefix=None, arch=
     cab_installer.cleanup()
 
 
-def open_wine_terminal(terminal, wine_path, prefix, env):
+def open_wine_terminal(terminal, wine_path, prefix, env, system_winetricks):
+    winetricks_path, _working_dir, env = find_winetricks(env, system_winetricks)
     aliases = {
         "wine": wine_path,
         "winecfg": wine_path + "cfg",
         "wineserver": wine_path + "server",
         "wineboot": wine_path + "boot",
+        "winetricks": winetricks_path,
     }
     env["WINEPREFIX"] = prefix
+    # Ensure scripts you run see the desired version of WINE too
+    # by putting it on the PATH.
+    wine_directory = os.path.split(wine_path)[0]
+    if wine_directory:
+        path = env.get("PATH", os.environ["PATH"])
+        env["PATH"] = "%s:%s" % (wine_directory, path)
     shell_command = get_shell_command(prefix, env, aliases)
     terminal = terminal or linux.get_default_terminal()
     system.execute([terminal, "-e", shell_command])

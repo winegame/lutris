@@ -3,8 +3,9 @@ import os
 
 from lutris import settings
 from lutris.services.amazon import AmazonService
-from lutris.services.battlenet import BattleNetService
+from lutris.services.battlenet import BNET_ENABLED, BattleNetService
 from lutris.services.dolphin import DolphinService
+from lutris.services.ea_app import EAAppService
 from lutris.services.egs import EpicGamesStoreService
 from lutris.services.flathub import FlathubService
 from lutris.services.gog import GOGService
@@ -31,10 +32,14 @@ def get_services():
         "gog": GOGService,
         "humblebundle": HumbleBundleService,
         "egs": EpicGamesStoreService,
+        "itchio": ItchIoService,
         "origin": OriginService,
         "ubisoft": UbisoftConnectService,
-        "amazon": AmazonService
+        "amazon": AmazonService,
+        "flathub": FlathubService
     }
+    if BNET_ENABLED:
+        _services["battlenet"] = BattleNetService
     if not LINUX_SYSTEM.is_flatpak:
         _services["xdg"] = XDGService
     if LINUX_SYSTEM.has_steam:
@@ -50,10 +55,8 @@ SERVICES = get_services()
 
 # Those services are not yet ready to be used
 WIP_SERVICES = {
-    "battlenet": BattleNetService,
-    "itchio": ItchIoService,
     "mame": MAMEService,
-    "flathub": FlathubService
+    "ea_app": EAAppService,
 }
 
 if os.environ.get("LUTRIS_ENABLE_ALL_SERVICES"):

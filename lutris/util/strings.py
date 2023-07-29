@@ -5,6 +5,7 @@ import re
 import shlex
 import unicodedata
 import uuid
+from gettext import gettext as _
 
 # Lutris Modules
 from lutris.util.log import logger
@@ -77,19 +78,6 @@ def parse_version(version):
     return [int(p) for p in version_number.split(".")], suffix, prefix
 
 
-def version_sort(versions, reverse=False):
-
-    def version_key(version):
-        version_list, prefix, suffix = parse_version(version)
-        # Normalize the length of sub-versions
-        sort_key = version_list + [0] * (10 - len(version_list))
-        sort_key.append(prefix)
-        sort_key.append(suffix)
-        return sort_key
-
-    return sorted(versions, key=version_key, reverse=reverse)
-
-
 def unpack_dependencies(string):
     """Parse a string to allow for complex dependencies
     Works in a similar fashion as Debian dependencies, separate dependencies
@@ -128,14 +116,18 @@ def get_formatted_playtime(playtime):
         return NO_PLAYTIME
 
     hours = math.floor(playtime)
-    if hours:
-        hours_text = "%d hour%s" % (hours, "s" if hours > 1 else "")
+    if hours == 1:
+        hours_text = _("1 hour")
+    elif hours > 1:
+        hours_text = _("%d hours") % hours
     else:
         hours_text = ""
 
     minutes = int((playtime - hours) * 60)
-    if minutes:
-        minutes_text = "%d minute%s" % (minutes, "s" if minutes > 1 else "")
+    if minutes == 1:
+        minutes_text = _("1 minute")
+    elif minutes > 1:
+        minutes_text = _("%d minutes") % minutes
     else:
         minutes_text = ""
 

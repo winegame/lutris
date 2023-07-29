@@ -4,14 +4,17 @@ from gettext import gettext as _
 from gi.repository import GObject, Gtk, Pango
 
 from lutris import runners, services
-from lutris.database.games import get_game_by_field, get_game_for_service
+from lutris.database.games import get_game_for_service
+from lutris.exceptions import watch_errors
 from lutris.game import Game
-from lutris.gui.widgets.utils import get_link_button
+from lutris.game_actions import GameActions
+from lutris.gui.dialogs import ErrorDialog
+from lutris.gui.widgets.contextual_menu import update_action_widget_visibility
 from lutris.util.strings import gtk_safe
 
 
 class GameBar(Gtk.Box):
-    def __init__(self, db_game, game_actions, application):
+    def __init__(self, db_game, application, window):
         """Create the game bar with a database row"""
         super().__init__(orientation=Gtk.Orientation.VERTICAL, visible=True,
                          margin_top=12,
@@ -19,6 +22,10 @@ class GameBar(Gtk.Box):
                          margin_bottom=12,
                          margin_right=12,
                          spacing=6)
+
+        self.application = application
+        self.window = window
+
         self.game_start_hook_id = GObject.add_emission_hook(Game, "game-start", self.on_game_state_changed)
         self.game_started_hook_id = GObject.add_emission_hook(Game, "game-started", self.on_game_state_changed)
         self.game_stopped_hook_id = GObject.add_emission_hook(Game, "game-stopped", self.on_game_state_changed)
@@ -28,7 +35,6 @@ class GameBar(Gtk.Box):
         self.connect("destroy", self.on_destroy)
 
         self.set_margin_bottom(12)
-        self.game_actions = game_actions
         self.db_game = db_game
         self.service = None
         if db_game.get("service"):
@@ -43,21 +49,13 @@ class GameBar(Gtk.Box):
             game_id = db_game["id"]
         elif self.service:
             self.appid = db_game["appid"]
-            if self.service.id == "lutris":
-                game = get_game_by_field(self.appid, field="slug")
-            else:
-                game = get_game_for_service(self.service.id, self.appid)
+            game = get_game_for_service(self.service.id, self.appid)
             if game:
                 game_id = game["id"]
         if game_id:
-            self.game = application.get_game_by_id(game_id) or Game(game_id)
+            self.game = application.get_running_game_by_id(game_id) or Game(game_id)
         else:
-            self.game = Game()
-            self.game.name = db_game["name"]
-            self.game.slug = db_game["slug"]
-            self.game.appid = self.appid
-            self.game.service = self.service.id if self.service else None
-        game_actions.set_game(self.game)
+            self.game = Game.create_empty_service_game(db_game, self.service)
         self.update_view()
 
     def on_destroy(self, widget):
@@ -76,6 +74,8 @@ class GameBar(Gtk.Box):
 
     def update_view(self):
         """Populate the view with widgets"""
+        game_actions = GameActions(self.game, window=self.window, application=self.application)
+
         game_label = self.get_game_name_label()
         game_label.set_halign(Gtk.Align.START)
         self.pack_start(game_label, False, False, 0)
@@ -83,7 +83,7 @@ class GameBar(Gtk.Box):
         hbox = Gtk.Box(Gtk.Orientation.HORIZONTAL, spacing=6)
         self.pack_start(hbox, False, False, 0)
 
-        self.play_button = self.get_play_button()
+        self.play_button = self.get_play_button(game_actions)
         hbox.pack_start(self.play_button, False, False, 0)
 
         if self.game.is_installed:
@@ -95,20 +95,59 @@ class GameBar(Gtk.Box):
             hbox.pack_start(self.get_playtime_label(), False, False, 0)
         hbox.show_all()
 
-    def get_popover(self, buttons, parent):
-        """Return the popover widget containing a list of link buttons"""
-        if not buttons:
-            return None
-        popover = Gtk.Popover()
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, visible=True)
+    @staticmethod
+    def get_popover_box(primary_button, popover_buttons, primary_opens_popover=False):
+        """Creates a box that contains a primary button and a second button that
+        opens a popover with the popover_buttons in it; these have a linked
+        style so this looks like a single button.
 
-        for action in buttons:
-            vbox.pack_end(buttons[action], False, False, 1)
-        popover.add(vbox)
-        popover.set_position(Gtk.PositionType.TOP)
-        popover.set_constrain_to(Gtk.PopoverConstraint.NONE)
-        popover.set_relative_to(parent)
-        return popover
+        If primary_opens_popover is true, this method also handled the 'clicked' signal
+        of the primary button to trigger the popover as well."""
+
+        def get_popover(parent):
+            # Creates the popover widget containing the list of link buttons
+            pop = Gtk.Popover()
+            vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, visible=True)
+            vbox.set_border_width(9)
+            vbox.set_spacing(3)
+
+            for button in popover_buttons:
+                vbox.pack_end(button, False, False, 0)
+
+            pop.add(vbox)
+            pop.set_position(Gtk.PositionType.TOP)
+            pop.set_constrain_to(Gtk.PopoverConstraint.NONE)
+            pop.set_relative_to(parent)
+            return pop
+
+        box = Gtk.HBox(visible=True)
+        style_context = box.get_style_context()
+        style_context.add_class("linked")
+
+        box.pack_start(primary_button, False, False, 0)
+
+        if popover_buttons:
+            popover_button = Gtk.MenuButton(direction=Gtk.ArrowType.UP, visible=True)
+            popover_button.set_size_request(32, 32)
+            popover = get_popover(popover_button)
+            popover_button.set_popover(popover)
+            box.pack_start(popover_button, False, False, 0)
+
+            if primary_opens_popover:
+                primary_button.connect("clicked", lambda _x: popover_button.emit("clicked"))
+
+        return box
+
+    def get_link_button(self, text, callback=None):
+        """Return a suitable button for a menu popover; this must be
+        a ModelButton to be styled correctly."""
+        if text == "-":
+            return Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL, visible=True)
+
+        button = Gtk.ModelButton(text, visible=True, xalign=0.0)
+        if callback:
+            button.connect("clicked", self.on_link_button_clicked, callback)
+        return button
 
     def get_game_name_label(self):
         """Return the label with the game's title"""
@@ -120,26 +159,14 @@ class GameBar(Gtk.Box):
     def get_runner_button(self):
         icon_name = self.game.runner.name + "-symbolic"
         runner_icon = Gtk.Image.new_from_icon_name(icon_name, Gtk.IconSize.MENU)
-        runner_icon.show()
-        box = Gtk.HBox(visible=True)
-        runner_button = Gtk.Button(visible=True)
-        popover = self.get_popover(self.get_runner_buttons(), runner_button)
-        if popover:
-            runner_button.set_image(runner_icon)
-            popover_button = Gtk.MenuButton(visible=True)
-            popover_button.set_size_request(32, 32)
-            popover_button.props.direction = Gtk.ArrowType.UP
-            popover_button.set_popover(popover)
-            runner_button.connect("clicked", lambda _x: popover_button.emit("clicked"))
-            box.add(runner_button)
-            box.add(popover_button)
-            style_context = box.get_style_context()
-            style_context.add_class("linked")
-        else:
-            runner_icon.set_margin_left(49)
-            runner_icon.set_margin_right(6)
-            box.add(runner_icon)
-        return box
+        runner_popover_buttons = self.get_runner_buttons()
+        if runner_popover_buttons:
+            runner_button = Gtk.Button(image=runner_icon, visible=True)
+            return GameBar.get_popover_box(runner_button, runner_popover_buttons, primary_opens_popover=True)
+
+        runner_icon.set_margin_left(49)
+        runner_icon.set_margin_right(6)
+        return runner_icon
 
     def get_platform_label(self):
         platform_label = Gtk.Label(visible=True)
@@ -168,114 +195,95 @@ class GameBar(Gtk.Box):
         last_played_label.set_markup(_("Last played:\n<b>%s</b>") % lastplayed.strftime("%b %-d %Y"))
         return last_played_label
 
-    def get_popover_button(self):
-        """Return the popover button+menu for the Play button"""
-        popover_button = Gtk.MenuButton(visible=True)
-        popover_button.set_size_request(32, 32)
-        popover_button.props.direction = Gtk.ArrowType.UP
-
-        return popover_button
-
-    def get_popover_box(self):
-        """Return a container for a button + a popover button attached to it"""
-        box = Gtk.HBox(visible=True)
-        style_context = box.get_style_context()
-        style_context.add_class("linked")
-        return box
-
-    def get_locate_installed_game_button(self):
+    def get_locate_installed_game_button(self, game_actions):
         """Return a button to locate an existing install"""
-        button = get_link_button("Locate installed game")
-        button.show()
-        button.connect("clicked", self.game_actions.on_locate_installed_game, self.game)
-        return {"locate": button}
+        button = self.get_link_button(_("Locate installed game"))
+        button.connect("clicked", game_actions.on_locate_installed_game, self.game)
+        return button
 
-    def get_play_button(self):
+    def get_play_button(self, game_actions):
         """Return the widget for install/play/stop and game config"""
         button = Gtk.Button(visible=True)
         button.set_size_request(120, 32)
-        box = self.get_popover_box()
-        popover_button = self.get_popover_button()
+        game_buttons = None
+
         if self.game.is_installed:
+            game_buttons = self.get_game_buttons(game_actions)
             if self.game.state == self.game.STATE_STOPPED:
                 button.set_label(_("Play"))
-                button.connect("clicked", self.game_actions.on_game_launch)
+                button.connect("clicked", game_actions.on_game_launch)
             elif self.game.state == self.game.STATE_LAUNCHING:
                 button.set_label(_("Launching"))
                 button.set_sensitive(False)
             else:
                 button.set_label(_("Stop"))
-                button.connect("clicked", self.game_actions.on_game_stop)
+                button.connect("clicked", game_actions.on_game_stop)
         else:
             button.set_label(_("Install"))
-            button.connect("clicked", self.game_actions.on_install_clicked)
+            button.connect("clicked", game_actions.on_install_clicked)
             if self.service:
                 if self.service.local:
                     # Local services don't show an install dialog, they can be launched directly
                     button.set_label(_("Play"))
                 if self.service.drm_free:
-                    button.set_size_request(84, 32)
-                    box.add(button)
-                    popover = self.get_popover(self.get_locate_installed_game_button(), popover_button)
-                    popover_button.set_popover(popover)
-                    box.add(popover_button)
-                    return box
-                return button
-        button.set_size_request(84, 32)
-        box.add(button)
-        popover = self.get_popover(self.get_game_buttons(), popover_button)
-        popover_button.set_popover(popover)
-        box.add(popover_button)
-        return box
+                    game_buttons = [self.get_locate_installed_game_button(game_actions)]
 
-    def get_game_buttons(self):
-        """Return a dictionary of buttons to use in the panel"""
-        displayed = self.game_actions.get_displayed_entries()
-        buttons = {}
-        for action in self.game_actions.get_game_actions():
-            action_id, label, callback = action
+        if game_buttons:
+            button.set_size_request(84, 32)
+            box = GameBar.get_popover_box(button, game_buttons)
+            return box
+        return button
+
+    def get_game_buttons(self, game_actions):
+        """Return a list of buttons to use in the panel"""
+        displayed = game_actions.get_displayed_entries()
+        buttons = []
+        button_visibility = {}
+        for action_id, label, callback in game_actions.get_game_actions():
             if action_id in ("play", "stop", "install"):
                 continue
-            button = get_link_button(label)
-            if displayed.get(action_id):
-                button.show()
-            else:
-                button.hide()
-            buttons[action_id] = button
-            button.connect("clicked", self.on_link_button_clicked, callback)
+            button = self.get_link_button(label, callback)
+            if action_id:
+                button_visibility[button] = displayed.get(action_id, True)
+            buttons.append(button)
+
+        update_action_widget_visibility(buttons, lambda w: button_visibility.get(w, None))
         return buttons
 
     def get_runner_buttons(self):
-        buttons = {}
+        buttons = []
         if self.game.runner_name and self.game.is_installed:
             runner = runners.import_runner(self.game.runner_name)(self.game.config)
-            for entry in runner.context_menu_entries:
-                name, label, callback = entry
-                button = get_link_button(label)
-                button.show()
-                button.connect("clicked", self.on_link_button_clicked, callback)
-                buttons[name] = button
+            for _name, label, callback in runner.context_menu_entries:
+                button = self.get_link_button(label, callback)
+                buttons.append(button)
         return buttons
 
+    @watch_errors()
     def on_link_button_clicked(self, button, callback):
         """Callback for link buttons. Closes the popover then runs the actual action"""
         popover = button.get_parent().get_parent()
         popover.popdown()
         callback(button)
 
+    @watch_errors()
     def on_install_clicked(self, button):
         """Handler for installing service games"""
         self.service.install(self.db_game)
 
+    @watch_errors()
     def on_game_state_changed(self, game):
         """Handler called when the game has changed state"""
         if (
-            game.id == self.game.id
+            (self.game.is_db_stored and game.id == self.game.id)
             or (self.appid and game.appid == self.appid)
         ):
             self.game = game
-        else:
+        elif self.game != game:
             return True
         self.clear_view()
         self.update_view()
         return True
+
+    def on_watched_error(self, error):
+        ErrorDialog(error, parent=self.get_toplevel())

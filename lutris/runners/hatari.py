@@ -5,7 +5,6 @@ from gettext import gettext as _
 
 # Lutris Modules
 from lutris.config import LutrisConfig
-from lutris.gui.dialogs import FileDialog, QuestionDialog
 from lutris.runners.runner import Runner
 from lutris.util import system
 
@@ -15,17 +14,15 @@ class hatari(Runner):
     description = _("Atari ST computers emulator")
     platforms = [_("Atari ST")]
     runnable_alone = True
+    flatpak_id = "org.tuxfamily.hatari"
     runner_executable = "hatari/bin/hatari"
     entry_point_option = "disk-a"
 
     game_options = [
         {
-            "option":
-            "disk-a",
-            "type":
-            "file",
-            "label":
-            _("Floppy Disk A"),
+            "option": "disk-a",
+            "type": "file",
+            "label": _("Floppy Disk A"),
             "help": _(
                 "Hatari supports floppy disk images in the following "
                 "formats: ST, DIM, MSA, STX, IPF, RAW and CRT. The last "
@@ -34,12 +31,9 @@ class hatari(Runner):
             ),
         },
         {
-            "option":
-            "disk-b",
-            "type":
-            "file",
-            "label":
-            _("Floppy Disk B"),
+            "option": "disk-b",
+            "type": "file",
+            "label": _("Floppy Disk B"),
             "help": _(
                 "Hatari supports floppy disk images in the following "
                 "formats: ST, DIM, MSA, STX, IPF, RAW and CRT. The last "
@@ -53,12 +47,9 @@ class hatari(Runner):
 
     runner_options = [
         {
-            "option":
-            "bios_file",
-            "type":
-            "file",
-            "label":
-            _("Bios file (TOS)"),
+            "option": "bios_file",
+            "type": "file",
+            "label": _("Bios file (TOS)"),
             "help": _(
                 "TOS is the operating system of the Atari ST "
                 "and is necessary to run applications with the best "
@@ -69,25 +60,24 @@ class hatari(Runner):
         {
             "option": "fullscreen",
             "type": "bool",
+            "section": _("Graphics"),
             "label": _("Fullscreen"),
             "default": False,
         },
         {
             "option": "zoom",
             "type": "bool",
+            "section": _("Graphics"),
             "label": _("Scale up display by 2 (Atari ST/STE)"),
             "default": True,
             "help": _("Double the screen size in windowed mode."),
         },
         {
-            "option":
-            "borders",
-            "type":
-            "bool",
-            "label":
-            _("Add borders to display"),
-            "default":
-            False,
+            "option": "borders",
+            "type": "bool",
+            "section": _("Graphics"),
+            "label": _("Add borders to display"),
+            "default": False,
             "help": _(
                 "Useful for some games and demos using the overscan "
                 "technique. The Atari ST displayed borders around the "
@@ -98,14 +88,11 @@ class hatari(Runner):
             ),
         },
         {
-            "option":
-            "status",
-            "type":
-            "bool",
-            "label":
-            _("Display status bar"),
-            "default":
-            False,
+            "option": "status",
+            "type": "bool",
+            "section": _("Graphics"),
+            "label": _("Display status bar"),
+            "default": False,
             "help": _(
                 "Displays a status bar with some useful information, "
                 "like green leds lighting up when the floppy disks are "
@@ -115,34 +102,32 @@ class hatari(Runner):
         {
             "option": "joy0",
             "type": "choice",
-            "label": _("Joystick 1"),
+            "section": _("Joysticks"),
+            "label": _("Joystick 0"),
             "choices": joystick_choices,
             "default": "none",
         },
         {
             "option": "joy1",
             "type": "choice",
-            "label": _("Joystick 2"),
+            "section": _("Joysticks"),
+            "label": _("Joystick 1"),
             "choices": joystick_choices,
-            "default": "none",
+            "default": "real",
         },
     ]
 
-    def install(self, version=None, downloader=None, callback=None):
+    def install(self, install_ui_delegate, version=None, callback=None):
 
         def on_runner_installed(*args):
             bios_path = system.create_folder("~/.hatari/bios")
-            dlg = QuestionDialog(
-                {
-                    "question": _("Do you want to select an Atari ST BIOS file?"),
-                    "title": _("Use BIOS file?"),
-                }
-            )
-            if dlg.result == dlg.YES:
-                bios_dlg = FileDialog(_("Select a BIOS file"))
-                bios_filename = bios_dlg.filename
-                if not bios_filename:
-                    return
+
+            bios_filename = install_ui_delegate.show_install_file_inquiry(
+                question=_("Do you want to select an Atari ST BIOS file?"),
+                title=_("Use BIOS file?"),
+                message=_("Select a BIOS file"))
+
+            if bios_filename:
                 shutil.copy(bios_filename, bios_path)
                 bios_path = os.path.join(bios_path, os.path.basename(bios_filename))
                 config = LutrisConfig(runner_slug="hatari")
@@ -151,10 +136,10 @@ class hatari(Runner):
             if callback:
                 callback()
 
-        super().install(version=version, downloader=downloader, callback=on_runner_installed)
+        super().install(install_ui_delegate, version=version, callback=on_runner_installed)
 
     def play(self):  # pylint: disable=too-many-branches
-        params = [self.get_executable()]
+        params = self.get_command()
         if self.runner_config.get("fullscreen"):
             params.append("--fullscreen")
         else:
@@ -196,5 +181,9 @@ class hatari(Runner):
             return {"error": "FILE_NOT_FOUND", "file": diska}
         params.append("--disk-a")
         params.append(diska)
+
+        diskb = self.game_config.get("disk-b")
+        params.append("--disk-b")
+        params.append(diskb)
 
         return {"command": params}

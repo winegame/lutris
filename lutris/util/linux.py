@@ -25,22 +25,24 @@ SYSTEM_COMPONENTS = {
         "fuser",
         "glxinfo",
         "vulkaninfo",
+        "fuser",
+        "7z",
+        "gtk-update-icon-cache",
+        "lspci",
+        "ldconfig",
+        "wine",
+        "fluidsynth",
+    ],
+    "OPTIONAL_COMMANDS": [
         "optirun",
         "primusrun",
         "pvkrun",
         "pulseaudio",
         "lsi-steam",
-        "fuser",
-        "7z",
-        "gtk-update-icon-cache",
-        "lspci",
-        "xgamma",
-        "ldconfig",
-        "strangle",
         "Xephyr",
         "nvidia-smi",
-        "wine",
-        "fluidsynth",
+        "strangle",
+        "xgamma",
     ],
     "TERMINALS": [
         "xterm",
@@ -107,7 +109,7 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
     optional_components = ["WINE", "GAMEMODE"]
 
     def __init__(self):
-        for key in ("COMMANDS", "TERMINALS"):
+        for key in ("COMMANDS", "OPTIONAL_COMMANDS", "TERMINALS"):
             self._cache[key] = {}
             for command in SYSTEM_COMPONENTS[key]:
                 command_path = shutil.which(command)
@@ -115,9 +117,11 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
                     command_path = self.get_sbin_path(command)
                 if command_path:
                     self._cache[key][command] = command_path
+                elif key == "COMMANDS":
+                    logger.warning("Command '%s' not found on your system", command)
 
         # Detect if system is 64bit capable
-        self.is_64_bit = sys.maxsize > 2**32
+        self.is_64_bit = sys.maxsize > 2 ** 32
         self.arch = self.get_arch()
         self.shared_libraries = self.get_shared_libraries()
         self.populate_libraries()
@@ -226,17 +230,22 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
 
         # 515.43.04 was the first driver to support
         # VK_EXT_image_drm_format_modifier, required by gamescope.
-        minimum_nvidia_version_supported = 515
-        driver_info = drivers.get_nvidia_driver_info()
-        driver_version = driver_info["nvrm"]["version"]
-        major_version = int(driver_version.split(".")[0])
-        return major_version >= minimum_nvidia_version_supported
+        try:
+            minimum_nvidia_version_supported = 515
+            driver_info = drivers.get_nvidia_driver_info()
+            driver_version = driver_info["nvrm"]["version"]
+            major_version = int(driver_version.split(".")[0])
+            return major_version >= minimum_nvidia_version_supported
+        except Exception as ex:
+            logger.exception("Unable to determine NVidia version: %s", ex)
+            return False
 
     @property
     def has_steam(self):
         """Return whether Steam is installed locally"""
         return (
             bool(system.find_executable("steam"))
+            or bool(system.find_executable("com.valvesoftware.Steam"))
             or os.path.exists(os.path.expanduser("~/.steam/steam/ubuntu12_32/steam"))
         )
 
@@ -271,11 +280,15 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
 
     def get_fs_type_for_path(self, path):
         """Return the filesystem type a given path uses"""
-        path_drive = system.get_drive_for_path(path)
-        for drive in self.get_drives():
-            for partition in drive.get("children", []):
-                if "/dev/%s" % partition["name"] == path_drive:
-                    return partition["fstype"]
+        mount_point = system.find_mount_point(path)
+        devices = list(self.get_drives())
+        while devices:
+            device = devices.pop()
+            devices.extend(device.get("children", []))
+            if (mount_point in device.get("mountpoints", [])
+                    or mount_point == device.get("mountpoint")):
+                return device["fstype"]
+        return None
 
     def get_glxinfo(self):
         """Return a GlxInfo instance if the gfxinfo tool is available"""
@@ -387,6 +400,15 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
         """Return a dictionary of missing libraries"""
         return {req: self.get_missing_requirement_libs(req) for req in self.requirements}
 
+    def get_missing_lib_arch(self, requirement):
+        """Returns a list of architectures that are missing a library for a specific
+        requirement."""
+        missing_arch = []
+        for index, arch in enumerate(self.runtime_architectures):
+            if self.get_missing_requirement_libs(requirement)[index]:
+                missing_arch.append(arch)
+        return missing_arch
+
     def is_feature_supported(self, feature):
         """Return whether the system has the necessary libs to support a feature"""
         if feature == "ACO":
@@ -396,6 +418,9 @@ class LinuxSystem:  # pylint: disable=too-many-public-methods
             except AttributeError:
                 return False
         return not self.get_missing_requirement_libs(feature)[0]
+
+    def is_vulkan_supported(self):
+        return not LINUX_SYSTEM.get_missing_lib_arch("VULKAN") and vkquery.is_vulkan_supported()
 
 
 class SharedLibrary:
@@ -508,7 +533,13 @@ def gather_system_info_str():
         graphics_dict["Vendor"] = "Unable to obtain glxinfo"
     # check Vulkan support
     if vkquery.is_vulkan_supported():
-        graphics_dict["Vulkan"] = "Supported"
+        graphics_dict["Vulkan Version"] = vkquery.format_version(vkquery.get_vulkan_api_version())
+
+        graphics_dict["Vulkan Drivers"] = ", ".join({
+            "%s (%s)" % (name, vkquery.format_version(version))
+            for name, version
+            in vkquery.get_device_info()
+        })
     else:
         graphics_dict["Vulkan"] = "Not Supported"
     system_info_readable["Graphics"] = graphics_dict

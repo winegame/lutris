@@ -1,6 +1,6 @@
 """System utilities"""
+import glob
 import hashlib
-import inspect
 import os
 import re
 import shutil
@@ -8,12 +8,16 @@ import signal
 import stat
 import string
 import subprocess
+import zipfile
+from collections import defaultdict
+from functools import lru_cache
 from gettext import gettext as _
 from pathlib import Path
 
 from gi.repository import Gio, GLib
 
 from lutris import settings
+from lutris.util.jobs import AsyncCall
 from lutris.util.log import logger
 
 # Home folders that should never get deleted.
@@ -27,6 +31,19 @@ PROTECTED_HOME_FOLDERS = (
     _("Projects"),
     _("Games")
 )
+
+# vulkan dirs used by distros or containers that aren't from:
+# https://github.com/KhronosGroup/Vulkan-Loader/blob/v1.3.235/docs/LoaderDriverInterface.md#driver-discovery-on-linux
+# don't include the /vulkan suffix
+FALLBACK_VULKAN_DATA_DIRS = [
+    "/usr/local/etc",  # standard site-local location
+    "/usr/local/share",  # standard site-local location
+    "/etc",  # standard location
+    "/usr/share",  # standard location
+    "/usr/lib/x86_64-linux-gnu/GL",  # Flatpak GL extension
+    "/usr/lib/i386-linux-gnu/GL",  # Flatpak GL32 extension
+    "/opt/amdgpu-pro/etc"  # AMD GPU Pro - TkG
+]
 
 
 def execute(command, env=None, cwd=None, log_errors=False, quiet=False, shell=False, timeout=None):
@@ -86,6 +103,52 @@ def execute(command, env=None, cwd=None, log_errors=False, quiet=False, shell=Fa
     return stdout.strip()
 
 
+def spawn(command, env=None, cwd=None, quiet=False, shell=False):
+    """
+        Execute a system command but discard its results and do not wait
+        for it to complete.
+
+        Params:
+            command (list): A list containing an executable and its parameters
+            env (dict): Dict of values to add to the current environment
+            cwd (str): Working directory
+            quiet (bool): Do not display log messages
+    """
+
+    # Check if the executable exists
+    if not command:
+        logger.error("No executable provided!")
+        return
+    if os.path.isabs(command[0]) and not path_exists(command[0]):
+        logger.error("No executable found in %s", command)
+        return
+
+    if not quiet:
+        logger.debug("Spawning %s", " ".join([str(i) for i in command]))
+
+    # Set up environment
+    existing_env = os.environ.copy()
+    if env:
+        if not quiet:
+            logger.debug(" ".join("{}={}".format(k, v) for k, v in env.items()))
+        env = {k: v for k, v in env.items() if v is not None}
+        existing_env.update(env)
+
+    # Piping stderr can cause slowness in the programs, use carefully
+    # (especially when using regedit with wine)
+    try:
+        subprocess.Popen(  # pylint: disable=consider-using-with
+            command,
+            shell=shell,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            env=existing_env,
+            cwd=cwd
+        )
+    except (OSError, TypeError) as ex:
+        logger.error("Could not run command %s (env: %s): %s", command, env, ex)
+
+
 def read_process_output(command, timeout=5):
     """Return the output of a command as a string"""
     try:
@@ -100,16 +163,32 @@ def read_process_output(command, timeout=5):
         return ""
 
 
+def get_md5_in_zip(filename):
+    """Return the md5 hash of a file in a zip"""
+    with zipfile.ZipFile(filename, 'r') as archive:
+        files = archive.namelist()
+        if len(files) > 1:
+            logger.warning("More than 1 file in archive %s, reading 1st one: %s", filename, files[0])
+        with archive.open(files[0]) as file_in_zip:
+            _hash = read_file_md5(file_in_zip)
+    return _hash
+
+
 def get_md5_hash(filename):
     """Return the md5 hash of a file."""
-    md5 = hashlib.md5()
     try:
         with open(filename, "rb") as _file:
-            for chunk in iter(lambda: _file.read(8192), b""):
-                md5.update(chunk)
+            _hash = read_file_md5(_file)
     except IOError:
         logger.warning("Error reading %s", filename)
         return False
+    return _hash
+
+
+def read_file_md5(filedesc):
+    md5 = hashlib.md5()
+    for chunk in iter(lambda: filedesc.read(8192), b""):
+        md5.update(chunk)
     return md5.hexdigest()
 
 
@@ -210,27 +289,24 @@ def substitute(string_template, variables):
 def merge_folders(source, destination):
     """Merges the content of source to destination"""
     logger.debug("Merging %s into %s", source, destination)
-    # Check if dirs_exist_ok is defined ( Python >= 3.8)
-    sig = inspect.signature(shutil.copytree)
-    if "dirs_exist_ok" in sig.parameters:
-        shutil.copytree(source, destination, symlinks=False, ignore_dangling_symlinks=True, dirs_exist_ok=True)
-    else:
-        source = os.path.abspath(source)
-        for (dirpath, dirnames, filenames) in os.walk(source):
-            source_relpath = dirpath[len(source):].strip("/")
-            dst_abspath = os.path.join(destination, source_relpath)
-            for dirname in dirnames:
-                new_dir = os.path.join(dst_abspath, dirname)
-                logger.debug("creating dir: %s", new_dir)
-                try:
-                    os.mkdir(new_dir)
-                except OSError:
-                    pass
-            for filename in filenames:
-                # logger.debug("Copying %s", filename)
-                if not os.path.exists(dst_abspath):
-                    os.makedirs(dst_abspath)
-                shutil.copy(os.path.join(dirpath, filename), os.path.join(dst_abspath, filename), follow_symlinks=False)
+    # We do not use shutil.copytree() here because that would copy
+    # the file permissions, and we do not want them.
+    source = os.path.abspath(source)
+    for (dirpath, dirnames, filenames) in os.walk(source):
+        source_relpath = dirpath[len(source):].strip("/")
+        dst_abspath = os.path.join(destination, source_relpath)
+        for dirname in dirnames:
+            new_dir = os.path.join(dst_abspath, dirname)
+            logger.debug("creating dir: %s", new_dir)
+            try:
+                os.mkdir(new_dir)
+            except OSError:
+                pass
+        for filename in filenames:
+            # logger.debug("Copying %s", filename)
+            if not os.path.exists(dst_abspath):
+                os.makedirs(dst_abspath)
+            shutil.copy(os.path.join(dirpath, filename), os.path.join(dst_abspath, filename), follow_symlinks=False)
 
 
 def remove_folder(path):
@@ -299,7 +375,7 @@ def is_removeable(path, system_config):
 def fix_path_case(path):
     """Do a case insensitive check, return the real path with correct case. If the path is
     not for a real file, this corrects as many components as do exist."""
-    if not path or os.path.exists(path):
+    if not path or os.path.exists(path) or not path.startswith("/"):
         # If a path isn't provided or it exists as is, return it.
         return path
     parts = path.strip("/").split("/")
@@ -321,6 +397,8 @@ def fix_path_case(path):
     # Only return the path if we got the same number of elements
     if len(parts) == len(current_path.strip("/").split("/")):
         return current_path
+    # otherwise return original path
+    return path
 
 
 def get_pids_using_file(path):
@@ -419,11 +497,11 @@ def get_disk_size(path):
     """Return the disk size in bytes of a folder"""
     total_size = 0
     for base, _dirs, files in os.walk(path):
-        total_size += sum([
+        total_size += sum(
             os.stat(os.path.join(base, f)).st_size
             for f in files
             if os.path.isfile(os.path.join(base, f))
-        ])
+        )
     return total_size
 
 
@@ -476,23 +554,6 @@ def find_mount_point(path):
     return path
 
 
-def get_mountpoint_drives():
-    """Return a mapping of mount points with their corresponding drives"""
-    mounts = read_process_output(["mount", "-v"]).split("\n")
-    mount_map = []
-    for mount in mounts:
-        mount_parts = mount.split()
-        if len(mount_parts) < 3:
-            continue
-        mount_map.append((mount_parts[2], mount_parts[0]))
-    return dict(mount_map)
-
-
-def get_drive_for_path(path):
-    """Return the physical drive a file is located on"""
-    return get_mountpoint_drives().get(find_mount_point(path))
-
-
 def set_keyboard_layout(layout):
     setxkbmap_command = ["setxkbmap", "-model", "pc101", layout, "-print"]
     xkbcomp_command = ["xkbcomp", "-", os.environ.get("DISPLAY", ":0")]
@@ -500,3 +561,136 @@ def set_keyboard_layout(layout):
         with subprocess.Popen(setxkbmap_command, env=os.environ, stdout=xkbcomp.stdin) as setxkbmap:
             setxkbmap.communicate()
             xkbcomp.communicate()
+
+
+def preload_vulkan_gpu_names(use_dri_prime):
+    """Runs threads to load the GPU data from vulkan info for each ICD file set,
+    and one for the default 'unspecified' info. The results are cached by @lru_cache,
+    so we can just ignore them here."""
+
+    try:
+        all_files = [":".join(fs) for fs in get_vk_icd_file_sets().values()]
+        all_files.append("")
+        for files in all_files:
+            # ignore any errors from get_vulkan_gpu_name
+            AsyncCall(get_vulkan_gpu_name, None, files, use_dri_prime, daemon=True)
+    except Exception as ex:
+        logger.exception("Failed to preload Vulkan GPU Names: %s", ex)
+
+
+# cache this to avoid calling vulkaninfo repeatedly, shouldn't change at runtime
+@lru_cache()
+def get_vulkan_gpu_name(icd_files, use_dri_prime):
+    """Runs vulkaninfo to determine the default and DRI_PRIME gpu if available,
+    returns 'Not Found' if the GPU is not found or 'Unknown GPU' if vulkaninfo
+    is not available."""
+
+    def fetch_vulkan_gpu_name(prime):
+        """Runs vulkaninfo to find the primary GPU"""
+        subprocess_env = dict(os.environ)
+        if icd_files:
+            subprocess_env["VK_DRIVER_FILES"] = icd_files
+            subprocess_env["VK_ICD_FILENAMES"] = icd_files
+        if prime:
+            subprocess_env["DRI_PRIME"] = "1"
+
+        infocmd = "vulkaninfo --summary | grep deviceName | head -n 1 | tr -s '[:blank:]' | cut -d ' ' -f 3-"
+        with subprocess.Popen(infocmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                              env=subprocess_env) as infoget:
+            result = infoget.communicate()[0].decode("utf-8").strip()
+
+        if "Failed to detect any valid GPUs" in result or "ERROR: [Loader Message]" in result:
+            return "No GPU"
+
+        # Shorten result to just the friendly name of the GPU
+        # vulkaninfo returns Vendor Friendly Name (Chip Developer Name)
+        # AMD Radeon Pro W6800 (RADV NAVI21) -> AMD Radeon Pro W6800
+        return re.sub(r"\s*\(.*?\)", "", result)
+
+    if not shutil.which("vulkaninfo"):
+        logger.warning("vulkaninfo not available, unable to list GPUs")
+        return "Unknown GPU"
+
+    gpu = fetch_vulkan_gpu_name(False)
+
+    if use_dri_prime:
+        prime_gpu = fetch_vulkan_gpu_name(True)
+        if prime_gpu != gpu:
+            gpu += f" (Discrete GPU: {prime_gpu})"
+
+    return gpu or "Not Found"
+
+
+def get_vk_icd_file_sets():
+    """Returns the vulkan ICD files in a default-dict of lists; the keys are the separate
+    drivers, 'intel', 'amdradv', 'amdvlkpro', 'amdvlk', 'nvidia', and 'unknown'."""
+
+    def get_vk_icd_files():
+        """Returns available vulkan ICD files in the same search order as vulkan-loader,
+        but in a single list"""
+        all_icd_search_paths = []
+
+        def add_icd_search_path(paths):
+            if paths:
+                # unixy env vars with multiple paths are : delimited
+                for path in paths.split(":"):
+                    path = os.path.join(path, "vulkan")
+                    if os.path.exists(path) and path not in all_icd_search_paths:
+                        all_icd_search_paths.append(path)
+
+        # Must match behavior of
+        # https://github.com/KhronosGroup/Vulkan-Loader/blob/v1.3.235/docs/LoaderDriverInterface.md#driver-discovery-on-linux
+        # (or a newer version of the same standard)
+
+        # 1.a XDG_CONFIG_HOME or ~/.config if unset
+        add_icd_search_path(os.getenv("XDG_CONFIG_HOME") or (f"{os.getenv('HOME')}/.config"))
+        # 1.b XDG_CONFIG_DIRS
+        add_icd_search_path(os.getenv("XDG_CONFIG_DIRS") or "/etc/xdg")
+
+        # 2, 3 SYSCONFDIR and EXTRASYSCONFDIR
+        # Compiled in default has both the same
+        add_icd_search_path("/etc")
+
+        # 4 XDG_DATA_HOME
+        add_icd_search_path(os.getenv("XDG_DATA_HOME") or (f"{os.getenv('HOME')}/.local/share"))
+
+        # 5 XDG_DATA_DIRS or fall back to /usr/local/share and /usr/share
+        add_icd_search_path(os.getenv("XDG_DATA_DIRS") or "/usr/local/share:/usr/share")
+
+        # FALLBACK
+        # dirs that aren't from the loader spec are searched last
+        for fallback_dir in FALLBACK_VULKAN_DATA_DIRS:
+            add_icd_search_path(fallback_dir)
+
+        all_icd_files = []
+
+        for data_dir in all_icd_search_paths:
+            path = os.path.join(data_dir, "icd.d", "*.json")
+            # sort here as directory enumeration order is not guaranteed in linux
+            # so it's consistent every time
+            icd_files = sorted(glob.glob(path))
+            if icd_files:
+                all_icd_files += icd_files
+
+        return all_icd_files
+
+    sets = defaultdict(list)
+    all_icd_files = get_vk_icd_files()
+
+    # Add loaders for each vendor
+    for loader in all_icd_files:
+        if "intel" in loader:
+            sets["intel"].append(loader)
+        elif "radeon" in loader:
+            sets["amdradv"].append(loader)
+        elif "nvidia" in loader:
+            sets["nvidia"].append(loader)
+        elif "amd" in loader:
+            if "pro" in loader:
+                sets["amdvlkpro"].append(loader)
+            else:
+                sets["amdvlk"].append(loader)
+        else:
+            sets["unknown"].append(loader)
+
+    return sets

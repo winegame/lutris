@@ -19,6 +19,7 @@ class snes9x(Runner):
     platforms = [_("Nintendo SNES")]
     runnable_alone = True
     runner_executable = "snes9x/bin/snes9x-gtk"
+    flatpak_id = "com.snes9x.Snes9x"
     game_options = [
         {
             "option": "main_file",
@@ -33,18 +34,16 @@ class snes9x(Runner):
         {
             "option": "fullscreen",
             "type": "bool",
+            "section": _("Graphics"),
             "label": _("Fullscreen"),
             "default": "1"
         },
         {
-            "option":
-            "maintain_aspect_ratio",
-            "type":
-            "bool",
-            "label":
-            _("Maintain aspect ratio (4:3)"),
-            "default":
-            "1",
+            "option": "maintain_aspect_ratio",
+            "type": "bool",
+            "section": _("Graphics"),
+            "label": _("Maintain aspect ratio (4:3)"),
+            "default": "1",
             "help": _(
                 "Super Nintendo games were made for 4:3 "
                 "screens with rectangular pixels, but modern screens "
@@ -66,7 +65,7 @@ class snes9x(Runner):
     def set_option(self, option, value):
         config_file = os.path.expanduser("~/.snes9x/snes9x.xml")
         if not system.path_exists(config_file):
-            with subprocess.Popen([self.get_executable(), "-help"]) as snes9x_process:
+            with subprocess.Popen(self.get_command() + ["-help"]) as snes9x_process:
                 snes9x_process.communicate()
         if not system.path_exists(config_file):
             logger.error("Snes9x config file creation failed")
@@ -85,4 +84,4 @@ class snes9x(Runner):
         rom = self.game_config.get("main_file") or ""
         if not system.path_exists(rom):
             return {"error": "FILE_NOT_FOUND", "file": rom}
-        return {"command": [self.get_executable(), rom]}
+        return {"command": self.get_command() + [rom]}

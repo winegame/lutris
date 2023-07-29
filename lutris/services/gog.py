@@ -89,11 +89,8 @@ class GOGService(OnlineService):
     token_path = os.path.join(settings.CACHE_DIR, ".gog.token")
     cache_path = os.path.join(settings.CACHE_DIR, "gog-library.json")
 
-    is_loading = False
-
     def __init__(self):
         super().__init__()
-        self.selected_extras = None
 
         gog_locales = {
             "en": "en-US",
@@ -133,18 +130,13 @@ class GOGService(OnlineService):
 
     def load(self):
         """Load the user game library from the GOG API"""
-        if self.is_loading:
-            logger.warning("GOG games are already loading")
-            return
         if not self.is_connected():
             logger.error("User not connected to GOG")
             return
-        self.is_loading = True
         games = [GOGGame.new_from_gog_game(game) for game in self.get_library()]
         for game in games:
             game.save()
         self.match_games()
-        self.is_loading = False
         return games
 
     def login_callback(self, url):
@@ -234,7 +226,7 @@ class GOGService(OnlineService):
             request.get()
         except HTTPError:
             logger.error(
-                "Failed to request %s, check your GOG credentials and internet connectivity",
+                "Failed to request %s, check your GOG credentials",
                 url,
             )
             return
@@ -402,10 +394,10 @@ class GOGService(OnlineService):
                 })
         return download_links
 
-    def get_extra_files(self, downloads, installer):
+    def get_extra_files(self, downloads, installer, selected_extras):
         extra_files = []
         for extra in downloads["bonus_content"]:
-            if str(extra["id"]) not in self.selected_extras:
+            if str(extra["id"]) not in selected_extras:
                 continue
             links = self.query_download_links(extra)
             for link in links:
@@ -481,7 +473,7 @@ class GOGService(OnlineService):
             raise UnavailableGameError(_("Unable to determine correct file to launch installer"))
         return files
 
-    def get_installer_files(self, installer, installer_file_id):
+    def get_installer_files(self, installer, installer_file_id, selected_extras):
         try:
             downloads = self.get_downloads(installer.service_appid)
         except HTTPError as err:
@@ -491,8 +483,8 @@ class GOGService(OnlineService):
             files = self._format_links(installer, installer_file_id, links)
         else:
             files = []
-        if self.selected_extras:
-            for extra_file in self.get_extra_files(downloads, installer):
+        if selected_extras:
+            for extra_file in self.get_extra_files(downloads, installer, selected_extras):
                 files.append(extra_file)
         return files
 
@@ -627,7 +619,7 @@ class GOGService(OnlineService):
         patch_installers = []
         for version in patch_versions:
             patch = patch_versions[version]
-            size = human_size(sum([part["total_size"] for part in patch]))
+            size = human_size(sum(part["total_size"] for part in patch))
             patch_id = "gogpatch-%s" % slugify(patch[0]["version"])
             installer = {
                 "name": db_game["name"],
@@ -648,3 +640,11 @@ class GOGService(OnlineService):
             }
             patch_installers.append(installer)
         return patch_installers
+
+    def get_game_platforms(self, db_game):
+        details = db_game.get("details")
+        if details:
+            worksOn = json.loads(details).get("worksOn")
+            if worksOn is not None:
+                return [name for name, works in worksOn.items() if works]
+        return None

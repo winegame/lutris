@@ -1,7 +1,7 @@
 """Configuration dialog for client and system options"""
 from gettext import gettext as _
 
-from gi.repository import Gtk
+from gi.repository import GObject, Gtk
 
 from lutris.config import LutrisConfig
 from lutris.gui.config.boxes import SystemBox
@@ -14,11 +14,19 @@ from lutris.gui.config.sysinfo_box import SysInfoBox
 
 # pylint: disable=no-member
 class PreferencesDialog(GameDialogCommon):
+    __gsignals__ = {
+        "settings-changed": (GObject.SIGNAL_RUN_LAST, None, (str, )),
+    }
+
     def __init__(self, parent=None):
-        super().__init__(_("WineGame settings"), parent=parent, use_header_bar=False)
+        super().__init__(_("WineGame settings"), parent=parent)
         self.set_border_width(0)
         self.set_default_size(1010, 600)
         self.lutris_config = LutrisConfig()
+        self.page_generators = {}
+
+        self.accelerators = Gtk.AccelGroup()
+        self.add_accel_group(self.accelerators)
 
         hbox = Gtk.HBox(visible=True)
         sidebar = Gtk.ListBox(visible=True)
@@ -36,34 +44,47 @@ class PreferencesDialog(GameDialogCommon):
         self.vbox.pack_start(hbox, True, True, 0)
         self.vbox.set_border_width(0)  # keep everything flush with the window edge
         self.stack.add_named(
-            self.build_scrolled_window(PreferencesBox()),
+            self.build_scrolled_window(PreferencesBox(self.accelerators)),
             "prefs-stack"
         )
+
+        runners_box = RunnersBox()
+        self.page_generators["runners-stack"] = runners_box.populate_runners
         self.stack.add_named(
-            self.build_scrolled_window(RunnersBox()),
+            self.build_scrolled_window(runners_box),
             "runners-stack"
         )
         self.stack.add_named(
             self.build_scrolled_window(ServicesBox()),
             "services-stack"
         )
+
+        sysinfo_box = SysInfoBox()
+        self.page_generators["sysinfo-stack"] = sysinfo_box.populate
         self.stack.add_named(
-            self.build_scrolled_window(SysInfoBox()),
+            self.build_scrolled_window(sysinfo_box),
             "sysinfo-stack"
         )
+
         self.system_box = SystemBox(self.lutris_config)
-        self.system_box.show_all()
+        self.page_generators["system-stack"] = self.system_box.generate_widgets
         self.stack.add_named(
             self.build_scrolled_window(self.system_box),
             "system-stack"
         )
-        self.build_action_area(self.on_save)
 
     def on_sidebar_activated(self, _listbox, row):
-        if row.get_children()[0].stack_id == "system-stack":
-            self.action_area.show_all()
-        else:
-            self.action_area.hide()
+        stack_id = row.get_children()[0].stack_id
+
+        generator = self.page_generators.get(stack_id)
+
+        if generator:
+            del self.page_generators[stack_id]
+            generator()
+
+        show_actions = stack_id == "system-stack"
+        self.set_header_bar_widgets_visbility(show_actions)
+        self.get_header_bar().set_show_close_button(not show_actions)
         self.stack.set_visible_child_name(row.get_children()[0].stack_id)
 
     def get_sidebar_button(self, stack_id, text, icon_name):
