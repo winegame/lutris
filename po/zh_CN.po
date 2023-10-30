@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: lutris\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-29 14:40+0800\n"
-"PO-Revision-Date: 2023-07-29 17:39+0800\n"
+"PO-Revision-Date: 2023-10-30 14:11+0800\n"
 "Last-Translator: Yidaozhan Ya <yidaozhan_ya@outlook.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
 "Language: zh_CN\n"
@@ -150,9 +150,8 @@ msgid "Zoom "
 msgstr "缩放 "
 
 #: share/lutris/ui/lutris-window.ui:334
-#, fuzzy
 msgid "Sort Installed First"
-msgstr "安装时间"
+msgstr "已安装优先"
 
 #: share/lutris/ui/lutris-window.ui:348
 msgid "Sort Ascending"
@@ -270,9 +269,8 @@ msgid "Unhide game from library"
 msgstr "取消隐藏"
 
 #: lutris/game_actions.py:63
-#, fuzzy
 msgid "Update shader cache"
-msgstr "使用缓存"
+msgstr "更新着色器缓存"
 
 #: lutris/game_actions.py:65 lutris/gui/dialogs/runner_install.py:217
 #: lutris/gui/installer/script_box.py:62 lutris/gui/widgets/game_bar.py:222
@@ -328,7 +326,7 @@ msgid "Remove"
 msgstr "卸载"
 
 #: lutris/game_actions.py:202
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Do you wish to duplicate %s?\n"
 "The configuration will be duplicated, but the games files will <b>not be "
@@ -336,7 +334,8 @@ msgid ""
 "Please enter the new name for the copy:"
 msgstr ""
 "您要复制 %s 吗？\n"
-"配置文件会被复制，但游戏安装文件夹<b>不会被复制</b>。"
+"配置文件会被复制，但游戏安装文件夹<b>不会被复制</b>。\n"
+"请输入复制后的游戏名称："
 
 #: lutris/game_actions.py:206
 msgid "Duplicate game?"
@@ -357,9 +356,8 @@ msgstr ""
 
 #. use primary configuration
 #: lutris/game_actions.py:320
-#, fuzzy
 msgid "Select shortcut target"
-msgstr "删除 Steam 快捷方式"
+msgstr "选择快捷方式目标"
 
 #: lutris/game.py:281
 msgid "Error the runner is not installed"
@@ -455,9 +453,8 @@ msgid "Scan a folder for games installed from a previous Lutris installation"
 msgstr "扫描文件夹，查找以前通过Wine游戏助手安装的游戏"
 
 #: lutris/gui/addgameswindow.py:40
-#, fuzzy
 msgid "Install a Windows game from an executable"
-msgstr "从安装包安装 Windows 游戏"
+msgstr "从 EXE 安装 Windows 游戏"
 
 #: lutris/gui/addgameswindow.py:41
 msgid "Launch a Windows executable (.exe) installer"
@@ -472,9 +469,8 @@ msgid "Run a YAML install script"
 msgstr "运行本地 YAML 安装脚本"
 
 #: lutris/gui/addgameswindow.py:54
-#, fuzzy
 msgid "Import a ROM"
-msgstr "导入游戏"
+msgstr "导入游戏 ROM"
 
 #: lutris/gui/addgameswindow.py:55
 msgid "Import a ROM that is known to Lutris"
@@ -516,14 +512,12 @@ msgid "Select folder"
 msgstr "选择目录"
 
 #: lutris/gui/addgameswindow.py:130
-#, fuzzy
 msgid "Select script"
-msgstr "执行维护脚本"
+msgstr "选择脚本"
 
 #: lutris/gui/addgameswindow.py:134
-#, fuzzy
 msgid "Select ROM file"
-msgstr "选择文件"
+msgstr "选择 ROM 文件"
 
 #: lutris/gui/addgameswindow.py:220
 msgid ""
@@ -535,7 +529,6 @@ msgid ""
 msgstr "在 WineGame.net 中搜索游戏，请输入搜索关键字。"
 
 #: lutris/gui/addgameswindow.py:241
-#, fuzzy
 msgid "<b>Search WineGame.net</b>"
 msgstr "<b>在 WineGame.net 上搜索</b>"
 
@@ -554,9 +547,8 @@ msgid "<b>{total_count}</b> results, only displaying first {count}"
 msgstr "<b>共 {total_count}</b> 条结果，仅显示前 {count} 条"
 
 #: lutris/gui/addgameswindow.py:314
-#, fuzzy
 msgid "Folder to scan"
-msgstr "选择要扫描的目录"
+msgstr "要扫描的目录"
 
 #: lutris/gui/addgameswindow.py:320
 msgid ""
@@ -575,9 +567,8 @@ msgstr ""
 "单击“继续”开始扫描并导入游戏"
 
 #: lutris/gui/addgameswindow.py:338
-#, fuzzy
 msgid "You must select a folder to scan for games."
-msgstr "选择要扫描的目录"
+msgstr "未选择要扫描的目录。"
 
 #: lutris/gui/addgameswindow.py:340
 #, python-format
@@ -585,14 +576,12 @@ msgid "No folder exists at '%s'."
 msgstr "文件夹 '%s' 不存在。"
 
 #: lutris/gui/addgameswindow.py:364
-#, fuzzy
 msgid "<b>Games found</b>"
-msgstr "未找到游戏"
+msgstr "<b>找到的游戏</b>"
 
 #: lutris/gui/addgameswindow.py:366
-#, fuzzy
 msgid "<b>No games found</b>"
-msgstr "未找到游戏"
+msgstr "<b>未找到游戏</b>"
 
 #: lutris/gui/addgameswindow.py:370 lutris/gui/installerwindow.py:957
 msgid "_Close"
@@ -624,18 +613,16 @@ msgstr ""
 "载游戏对应的图标。"
 
 #: lutris/gui/addgameswindow.py:441
-#, fuzzy
 msgid "Installer preset:"
-msgstr "安装时间"
+msgstr "预设安装脚本："
 
 #: lutris/gui/addgameswindow.py:444
 msgid "Windows 10 64-bit (Default)"
 msgstr "Windows 10 64位（默认）"
 
 #: lutris/gui/addgameswindow.py:445
-#, fuzzy
 msgid "Windows 7 64-bit"
-msgstr "Windows"
+msgstr "64位 Windows 7"
 
 #: lutris/gui/addgameswindow.py:446
 msgid "Windows XP 32-bit"
@@ -675,9 +662,8 @@ msgid "Select the setup file"
 msgstr "请选择安装包"
 
 #: lutris/gui/addgameswindow.py:535
-#, fuzzy
 msgid "Script file"
-msgstr "选择文件"
+msgstr "脚本文件"
 
 #: lutris/gui/addgameswindow.py:541
 msgid ""
@@ -764,9 +750,8 @@ msgid "Install a game from a yml file"
 msgstr "从 yml 文件安装游戏"
 
 #: lutris/gui/application.py:145
-#, fuzzy
 msgid "Force updates"
-msgstr "未找到更新"
+msgstr "强制更新"
 
 #: lutris/gui/application.py:153
 msgid "Generate a bash script to run a game without the client"
@@ -1087,9 +1072,9 @@ msgid "Configure %s"
 msgstr "配置 %s"
 
 #: lutris/gui/config/edit_category_games.py:67
-#, fuzzy, python-format
+#, python-format
 msgid "Do you want to delete the category '%s'?"
-msgstr "是否取消下载？"
+msgstr "确认删除分类“%s”？"
 
 #: lutris/gui/config/edit_category_games.py:69
 msgid ""
@@ -1120,9 +1105,8 @@ msgid "Categories - %s"
 msgstr "类别 - %s"
 
 #: lutris/gui/config/edit_game_categories.py:74
-#, fuzzy
 msgid "Add Category"
-msgstr "添加游戏"
+msgstr "添加分类"
 
 #: lutris/gui/config/edit_game_categories.py:76
 msgid "Adds the category to the list."
@@ -1211,9 +1195,9 @@ msgstr "找不到匹配的运行环境"
 
 #. pretty sure there will always be many runners, so assume plural
 #: lutris/gui/config/runners_box.py:43
-#, fuzzy, python-format
+#, python-format
 msgid "Search %s runners"
-msgstr "翻新运行环境"
+msgstr "搜索 %s 运行环境"
 
 #: lutris/gui/config/services_box.py:18
 msgid "Enable integrations with game sources"
@@ -1226,9 +1210,8 @@ msgid ""
 msgstr "将各个不同来源的游戏库整合显示在Wine游戏助手中（重启软件生效）"
 
 #: lutris/gui/config/sysinfo_box.py:13
-#, fuzzy
 msgid "Hide badges on icons"
-msgstr "隐藏图标下方文字"
+msgstr "隐藏图标上的系统徽章"
 
 #: lutris/gui/config/sysinfo_box.py:40
 msgid "Copy to clipboard"
@@ -1239,9 +1222,8 @@ msgid "<b>System information</b>"
 msgstr "<b>系统信息</b>"
 
 #: lutris/gui/dialogs/cache.py:13
-#, fuzzy
 msgid "Download cache configuration"
-msgstr "缓存配置"
+msgstr "配置下载缓存"
 
 #: lutris/gui/dialogs/cache.py:40
 msgid "Cache path"
@@ -1275,38 +1257,33 @@ msgid "Downloading %s"
 msgstr "正在下载 %s"
 
 #: lutris/gui/dialogs/game_import.py:101
-#, fuzzy
 msgid "Launch"
-msgstr "启动 (_L)"
+msgstr "启动"
 
 #: lutris/gui/dialogs/game_import.py:135
 msgid "Calculating checksum..."
 msgstr "MD5 计算中……"
 
 #: lutris/gui/dialogs/game_import.py:144
-#, fuzzy
 msgid "Looking up checksum on WineGame.net..."
-msgstr "在 winegame.net 上查看"
+msgstr "在 WineGame.net 上查找校验和"
 
 #: lutris/gui/dialogs/game_import.py:147
-#, fuzzy
 msgid "This ROM could not be identified."
-msgstr "找不到文件 {}"
+msgstr "无法识别该 ROM。"
 
 #: lutris/gui/dialogs/game_import.py:156
-#, fuzzy
 msgid "Looking for installed game..."
-msgstr "正在卸载游戏..."
+msgstr "正在搜索已安装游戏…"
 
 #: lutris/gui/dialogs/game_import.py:205
-#, fuzzy, python-format
+#, python-format
 msgid "Failed to import a ROM: %s"
-msgstr "无法下载 %s"
+msgstr "无法导入 ROM：%s"
 
 #: lutris/gui/dialogs/game_import.py:224
-#, fuzzy
 msgid "Game already installed in Lutris"
-msgstr "%s 已安装"
+msgstr "游戏已安装"
 
 #: lutris/gui/dialogs/game_import.py:246
 #, python-format
@@ -1314,9 +1291,9 @@ msgid "The platform '%s' is unknown to Lutris."
 msgstr "未知的平台 '%s'"
 
 #: lutris/gui/dialogs/game_import.py:256
-#, fuzzy, python-format
+#, python-format
 msgid "Lutris does not have a default installer for the '%s' platform."
-msgstr "Wine游戏助手没有安装到以下路径所需的权限："
+msgstr "找不到“%s”平台的默认安装脚本。"
 
 #: lutris/gui/dialogs/__init__.py:90
 msgid "Save"
@@ -1349,9 +1326,8 @@ msgid "Install the game again"
 msgstr "再次安装游戏"
 
 #: lutris/gui/dialogs/__init__.py:420
-#, fuzzy
 msgid "Do not ask again for this game."
-msgstr "请先为该游戏选择内核"
+msgstr "该游戏不再询问。"
 
 #: lutris/gui/dialogs/__init__.py:479
 msgid "Login failed"
@@ -1366,7 +1342,6 @@ msgid "Wine is not installed on your system."
 msgstr "您需要将 Wine 安装到您的系统中。"
 
 #: lutris/gui/dialogs/__init__.py:535
-#, fuzzy
 msgid ""
 "Having Wine installed on your system guarantees that Wine builds from Lutris "
 "will have all required dependencies.\n"
@@ -1374,10 +1349,10 @@ msgid ""
 "Please follow the instructions given in the <a href='https://github.com/"
 "lutris/docs/blob/master/WineDependencies.md'>Lutris Wiki</a> to install Wine."
 msgstr ""
-"在系统中安装 Wine 可以确保从 Lutris 下载的 Wine 具备运行所需的依赖包。\n"
+"在系统中安装 Wine 可以确保从助手下载的 Wine 具备运行所需的依赖包。\n"
 "\n"
 "请按照<a href='https://hu60.cn/q.php/bbs.topic.102999.html#nav'>依赖安装教程"
-"</a>中给出的说明安装 Wine。"
+"</a>安装 Wine。"
 
 #: lutris/gui/dialogs/__init__.py:560
 #, python-format
@@ -1524,9 +1499,9 @@ msgid "<i>Calculating size…</i>"
 msgstr "<i>正在计算文件大小...</i>"
 
 #: lutris/gui/dialogs/uninstall_game.py:51
-#, fuzzy, python-format
+#, python-format
 msgid "%s does not exist."
-msgstr "%s 不存在"
+msgstr "%s 不存在。"
 
 #: lutris/gui/dialogs/uninstall_game.py:55
 #, python-format
@@ -1610,18 +1585,16 @@ msgid "Source:"
 msgstr "来源："
 
 #: lutris/gui/installerwindow.py:115
-#, fuzzy
 msgid "Configure download cache"
-msgstr "配置运行环境"
+msgstr "配置下载缓存"
 
 #: lutris/gui/installerwindow.py:118
 msgid "Change where Lutris downloads game installer files."
 msgstr "更改Wine游戏助手下载游戏安装包的位置。"
 
 #: lutris/gui/installerwindow.py:120
-#, fuzzy
 msgid "View installer source"
-msgstr "查看来源 (_V)"
+msgstr "查看安装脚本源代码"
 
 #: lutris/gui/installerwindow.py:215
 msgid "Remove game files"
@@ -1636,9 +1609,9 @@ msgid "Cancel installation?"
 msgstr "是否取消安装？"
 
 #: lutris/gui/installerwindow.py:319
-#, fuzzy, python-format
+#, python-format
 msgid "Install %s"
-msgstr "安装"
+msgstr "安装 %s"
 
 #: lutris/gui/installerwindow.py:342
 #, python-format
@@ -1650,9 +1623,8 @@ msgid "Missing dependency"
 msgstr "缺少依赖"
 
 #: lutris/gui/installerwindow.py:352
-#, fuzzy
 msgid "Installing {}"
-msgstr "<b>安装 {}</b>"
+msgstr "安装 {}"
 
 #: lutris/gui/installerwindow.py:358
 msgid "No installer available"
@@ -1686,9 +1658,8 @@ msgid ""
 msgstr "请检查安装所需的文件，然后点击“继续”"
 
 #: lutris/gui/installerwindow.py:609
-#, fuzzy
 msgid "Downloading game data"
-msgstr "安装游戏数据..."
+msgstr "正在下载游戏数据"
 
 #: lutris/gui/installerwindow.py:628
 #, python-format
@@ -1708,9 +1679,8 @@ msgid "Browse…"
 msgstr "浏览..."
 
 #: lutris/gui/installerwindow.py:797
-#, fuzzy
 msgid "Eject"
-msgstr "弹出 (_E)"
+msgstr "弹出"
 
 #: lutris/gui/installerwindow.py:810
 msgid "Select the folder where the disc is mounted"
