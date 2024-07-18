@@ -1,3 +1,11 @@
+net.winegame.client (0.5.12.5) jammy; urgency=medium
+
+  * 改善wine版本的排序。
+  * wine版本管理界面增加一个搜索框。
+  * 修复 set_regedit_file 等命令无法正确执行（会设置到 ~/.wine 里）的问题。
+
+ -- SwimmingTiger <hu60.cn@gmail.com>  Thu, 18 Jul 2024 13:50:01 +0800
+
 net.winegame.client (0.5.12.1) jammy; urgency=medium
 
   * Vulkan ICD加载器里添加一个“不指定（使用系统默认值）”的选项
