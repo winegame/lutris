@@ -9,7 +9,7 @@ class DXVKManager(DLLManager):
     component = "DXVK"
     base_dir = os.path.join(RUNTIME_DIR, "dxvk")
     versions_path = os.path.join(base_dir, "dxvk_versions.json")
-    managed_dlls = ("dxgi", "d3d11", "d3d10core", "d3d9", )
+    managed_dlls = ("dxgi", "d3d11", "d3d10_1", "d3d10core", "d3d10", "d3d9", "d3d8")
     releases_url = "https://hu60.cn/q.php/lutris.release.dxvk.json"
 
     @staticmethod
