@@ -1,3 +1,10 @@
+net.winegame.client (0.5.12.6) jammy; urgency=medium
+
+  * 把 d3d12core.dll 加入 VKD3D DLL 列表，实现与新版 VKD3D 兼容。
+  * 把 d3d8/d3d10/d3d10_1.dll 加入 DXVK DLL 列表，实现与所有版本 DXVK 兼容。
+
+ -- SwimmingTiger <hu60.cn@gmail.com>  Sun, 09 Mar 2025 15:18:10 +0800
+
 net.winegame.client (0.5.12.5) jammy; urgency=medium
 
   * 改善wine版本的排序。
