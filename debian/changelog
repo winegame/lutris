@@ -1,3 +1,11 @@
+net.winegame.client (0.5.12.7) jammy; urgency=medium
+
+  * 修复wow64/x32x64版wine被错误视为32位的问题。
+  * 默认不指定Vulkan ICD加载器，避免双显卡用户（特别是双显卡笔记本用户）无法正常使用DXVK/VKD3D，也让支持游戏内切换显卡的游戏能正常切换显卡。
+  * 注意：如果此前已选择某个Vulkan ICD加载器，则需要手动改回“不指定”。
+
+ -- 彭逸豪 <pengyihao@linzhuotech.com>  Fri, 29 Aug 2025 14:38:01 +0800
+
 net.winegame.client (0.5.12.6) jammy; urgency=medium
 
   * 把 d3d12core.dll 加入 VKD3D DLL 列表，实现与新版 VKD3D 兼容。
