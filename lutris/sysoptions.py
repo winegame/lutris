@@ -162,7 +162,10 @@ def get_vk_icd_choices():
             choices.append(("AMDVLK Open source", amdvlk_files))
     if amdvlkpro_files:
         choices.append(("AMDGPU-PRO Proprietary", amdvlkpro_files))
-    choices.append((_("Unspecified (Use System Default)"), ""))
+
+    # 把未指定放到最开头，作为默认值（未指定总是最好的选择，特别是对双显卡笔记本用户）
+    choices.insert(0, (_("Unspecified (Use System Default)"), ""))
+
     return choices
 
 
