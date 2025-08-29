@@ -63,8 +63,14 @@ def detect_arch(prefix_path=None, wine_path=None):
     arch = detect_prefix_arch(prefix_path)
     if arch:
         return arch
-    if wine_path and system.path_exists(wine_path + "64"):
-        return "win64"
+    if wine_path:
+        if system.path_exists(wine_path + "64"):
+            return "win64"
+        base_dir = os.path.dirname(os.path.dirname(wine_path))
+        if system.path_exists(base_dir  + "/lib/wine/x86_64-windows"):
+            return "win64"
+        if system.path_exists(base_dir + "/lib/wine/aarch64-windows"):
+            return "win64"
     return "win32"
 
 

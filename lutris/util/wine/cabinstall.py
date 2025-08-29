@@ -38,7 +38,7 @@ class CabInstaller:
 
     def get_winebin(self, arch):
         wine_path = self.wine_path or "wine"
-        return wine_path if arch in ("win32", "wow64") else wine_path + "64"
+        return wine_path if arch in ("win32", "wow64") or not system.path_exists(wine_path + "64") else wine_path + "64"
 
     @staticmethod
     def get_arch_from_dll(dll_path):
