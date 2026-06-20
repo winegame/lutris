@@ -550,7 +550,9 @@ class CommandsMixin:
 
     def _killable_process(self, func, *args, **kwargs):
         """Run function `func` in a separate, killable process."""
-        with multiprocessing.Pool(1) as process:
+        # use fork to fix error on Ubuntu 26.04: FileNotFoundError(2, 'No such file or directory')
+        ctx = multiprocessing.get_context("fork")
+        with ctx.Pool(1) as process:
             result_obj = process.apply_async(func, args, kwargs)
             self.abort_current_task = process.terminate
             result = result_obj.get()  # Wait process end & re-raise exceptions
