@@ -1,3 +1,9 @@
+net.winegame.client (0.5.12.8) jammy; urgency=medium
+
+  * 修复在 Ubuntu 26.04 上报错：FileNotFoundError(2, '没有那个文件或目录')
+
+ -- SwimmingTiger <hu60.cn@gmail.com>  Sat, 20 Jun 2026 12:59:52 +0800
+
 net.winegame.client (0.5.12.7) jammy; urgency=medium
 
   * 修复wow64/x32x64版wine被错误视为32位的问题。
